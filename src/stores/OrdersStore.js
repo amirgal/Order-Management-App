@@ -3,10 +3,13 @@ import axios from 'axios'
 
 
 export default class OrdersStore{
-    @observable orders = []
+    @observable orders = [{progress:1,name:'111'},{progress:2,name:'222',inProcess:true},
+    {progress:3,name:'33333'},{progress:4,name:'444',inProcess:true},
+    {progress:5,name:'555',inProcess:true},{progress:6,name:'666'},{progress:7,name:'777'}]
     @observable employees = []
     @observable products = []
     @observable showDetailsWindow = false
+    @observable detailsWindowOrder
 
     @action toggleDetailsWindow = () => {
         this.showDetailsWindow = !this.showDetailsWindow

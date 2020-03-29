@@ -1,9 +1,9 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import {ExpansionPanelSummary, Typography, ExpansionPanelDetails,ExpansionPanel} from '@material-ui/core'
+import {ExpansionPanelSummary, Typography, ExpansionPanelDetails,ExpansionPanel, Button} from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const OrderCard = inject('store')(observer((props) => {
+const OrderCard = inject('ordersStore')(observer((props) => {
     
     const openDetailsWindow = () => {
 

@@ -1,0 +1,11 @@
+#stages-container {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-gap:10px;
+    margin: 20px 10px;
+}
+
+.stage {
+    background-color: teal;
+    height: fit-content;
+}

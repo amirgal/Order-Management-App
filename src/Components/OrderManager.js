@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { inject, observer } from 'mobx-react';
 import Stage from './Stage';
+import StageDetailsWindow from './StageDetailsWindow';
 
 const OrderManager = inject('ordersStore')(observer((props) => {
     const [stages,setStages] = useState([])
     const [numStages,setNumStages] = useState(7)
-    
+
     useEffect(() => {
         const arr = []
         for(let i = 1 ; i <= numStages ; i++){
