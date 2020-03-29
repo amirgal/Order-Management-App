@@ -4,21 +4,12 @@ import OrderCard from './OrderCard';
 import {List, ListItem} from '@material-ui/core'
 
 const Stage = inject('ordersStore')(observer((props) => {
-    const [orders , setOrders] = useState([])
-
-    useEffect(() => {
-        loadStage(props.stage)
-    },[props.ordersStore.orders])
-
-    const loadStage = stage => {
-        const stageOrders = props.ordersStore.orders.filter(o => o.progress == stage)
-        setOrders(stageOrders)
-    }
-
+   
+    const filteredOrders = props.ordersStore.orders.filter(o => o.progress == props.stage)
     return (
         <div className='stage'>
             <List>
-            {orders.map((o,i) => 
+            {filteredOrders.map((o,i) => 
                 <ListItem>
                     <OrderCard key={i} order={o}/>
                 </ListItem>
