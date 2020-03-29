@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { inject, observer } from 'mobx-react';
 import OrderCard from './OrderCard';
+import {List, ListItem} from '@material-ui/core'
 
 const Stage = inject('ordersStore')(observer((props) => {
     const [orders , setOrders] = useState([])
@@ -16,7 +17,13 @@ const Stage = inject('ordersStore')(observer((props) => {
 
     return (
         <div className='stage'>
-            {orders.map(o => <OrderCard />)}
+            <List>
+            {orders.map((o,i) => 
+                <ListItem>
+                    <OrderCard key={i} order={o}/>
+                </ListItem>
+            )}
+            </List>
         </div>
     )
 }))
