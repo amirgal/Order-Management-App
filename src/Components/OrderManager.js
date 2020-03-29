@@ -9,13 +9,15 @@ const OrderManager = inject('ordersStore','detailsWindowStore')(observer((props)
 
     useEffect(() => {
         props.ordersStore.getOrders() // dummy data right now
-        
+    },[]) 
+
+    useEffect(() => {
         const arr = []
         for(let i = 1 ; i <= numStages ; i++){
             arr.push(<Stage stage={i}/>)
         }
         setStages(arr)
-    },[])
+    },[props.ordersStore.orders])
 
     return (
         <div id="order-manager-page">

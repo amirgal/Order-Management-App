@@ -8,7 +8,7 @@ const Stage = inject('ordersStore')(observer((props) => {
 
     useEffect(() => {
         loadStage(props.stage)
-    },[])
+    },[props.ordersStore.orders])
 
     const loadStage = stage => {
         const stageOrders = props.ordersStore.orders.filter(o => o.progress == stage)

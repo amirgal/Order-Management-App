@@ -29,6 +29,7 @@ export default class SingleOrder {
     }
     
     @action advanceStage = () => {
+        debugger
         this.progress++
         this.inProcess = false
         // axios.put("http://localhost:4000/order",this)
