@@ -16,16 +16,16 @@ export class SingleOrder {
     
     constructor(order){
      this.id = order.id   
-     this.id = order.shopifyDd   
-     this.id = order.costumerid   
-     this.id = order.price   
-     this.id = order.product   
-     this.id = order.attributes   
-     this.id = order.graphics   
-     this.id = order.comment   
-     this.id = order.progress   
-     this.id = order.inProcess   
-     this.id = order.stageEmployee   
+     this.shopifyDd = order.shopifyDd   
+     this.costumerid = order.costumerid   
+     this.price = order.price   
+     this.product = order.product   
+     this.attributes = order.attributes   
+     this.graphics = order.graphics   
+     this.comment = order.comment   
+     this.progress = order.progress   
+     this.inProcess = order.inProcess   
+     this.stageEmployee = {1 : null}   
     }
     
     @action advanceStage = () => {
