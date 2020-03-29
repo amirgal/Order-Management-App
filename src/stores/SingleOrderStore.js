@@ -31,7 +31,6 @@ export default class SingleOrder {
     @action claimStage = (employeeName) => {
         this.stageEmployees[this.progress] = employeeName
         this.inProcess = true
-        console.log(this.stageEmployee)
         // axios.put("http://localhost:4000/order",this)
     }
     
