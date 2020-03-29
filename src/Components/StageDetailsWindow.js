@@ -1,10 +1,16 @@
 import React, {useState} from 'react';
 import { inject, observer } from 'mobx-react';
+import CompleteTask from './CompleteTask';
+import ClaimTask from './ClaimTask'
 
-const StageDetailsWindow = inject('ordersStore')(observer((props) => {
+const StageDetailsWindow = inject('ordersStore','detailsWindowStore')(observer((props) => {
     
     return (
-        <div>details window</div>
+        <div id="details-window">
+            <p>Task Name</p>
+            {props.detailsWindowStore.detailsWindowOrder.inProcess ?
+            <CompleteTask /> : <ClaimTask />} 
+        </div>
     )
 }))
 

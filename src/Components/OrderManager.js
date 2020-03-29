@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import Stage from './Stage';
 import StageDetailsWindow from './StageDetailsWindow';
 
-const OrderManager = inject('ordersStore')(observer((props) => {
+const OrderManager = inject('ordersStore','detailsWindowStore')(observer((props) => {
     const [stages,setStages] = useState([])
     const [numStages,setNumStages] = useState(7)
 
@@ -20,7 +20,7 @@ const OrderManager = inject('ordersStore')(observer((props) => {
             <div id="stages-container">
                 {stages}
             </div>
-            {props.ordersStore.showDetailsWindow ? <StageDetailsWindow /> : null}
+            {props.detailsWindowStore.showDetailsWindow ? <StageDetailsWindow /> : null}
         </div>
     )
 }))

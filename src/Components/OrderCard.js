@@ -3,10 +3,11 @@ import { inject, observer } from 'mobx-react';
 import {ExpansionPanelSummary, Typography, ExpansionPanelDetails,ExpansionPanel, Button} from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const OrderCard = inject('ordersStore')(observer((props) => {
+const OrderCard = inject('ordersStore','detailsWindowStore')(observer((props) => {
     
     const openDetailsWindow = () => {
-
+        props.detailsWindowStore.toggleDetailsWindow()
+        props.detailsWindowStore.setDetailsWindowOrder(props.order)
     }
 
     return (
