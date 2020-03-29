@@ -8,6 +8,7 @@ import { Provider } from 'mobx-react';
 
 const ordersStore = new OrdersStore()
 const store = {ordersStore}
+
 ReactDOM.render(<Provider {...store}><App /></Provider>, document.getElementById('root'));
 
 serviceWorker.unregister();

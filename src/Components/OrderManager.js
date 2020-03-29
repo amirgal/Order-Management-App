@@ -1,19 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { inject, observer } from 'mobx-react';
+import Stage from './Stage';
 
-const OrderManager = inject('store')(observer((props) => {
-    const [stages,setStages] = useState(7)
+const OrderManager = inject('ordersStore')(observer((props) => {
+    const [stages,setStages] = useState([])
+    const [numStages,setNumStages] = useState(7)
 
-    const loadStage = stage => {
-        
-        return 
-    }
+    useEffect(() => {
+        const arr = []
+        for(let i = 1 ; i <= numStages ; i++){
+            arr.push(<Stage stage={i}/>)
+        }
+        setStages(arr)
+    },[])
 
     return (
         <div id="stages-container">
-            {for(let i = 1 ; i <= stages; i++){
-                
-            }}
+            {stages}
         </div>
     )
 }))
