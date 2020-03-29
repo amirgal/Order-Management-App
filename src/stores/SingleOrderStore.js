@@ -9,7 +9,7 @@ export default class SingleOrder {
     
     
     constructor(order){
-     this.id = order._id   
+     this._id = order._id   
      this.shopifyId = order.shopifyId   
      this.costumerId = order.costumerId   
      this.price = order.price   
@@ -22,16 +22,15 @@ export default class SingleOrder {
     }
     
     @action advanceStage = () => {
-        debugger
         this.progress +=1
         this.inProcess = false
-        // axios.put("http://localhost:4000/order",this)
+        axios.put("http://localhost:4000/order",this)
     }
     
     @action claimStage = (employeeName) => {
         this.stageEmployees[this.progress] = employeeName
         this.inProcess = true
-        // axios.put("http://localhost:4000/order",this)
+        axios.put("http://localhost:4000/order",this)
     }
     
     

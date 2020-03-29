@@ -17,7 +17,7 @@ const OrderCard = inject('ordersStore','detailsWindowStore')(observer((props) =>
                 aria-controls="panel1a-content"
                 id="panel1a-header"
             >
-                <Typography></Typography>
+                <Typography>{props.order.shopifyId}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
                 {props.order.inProcess ? 
