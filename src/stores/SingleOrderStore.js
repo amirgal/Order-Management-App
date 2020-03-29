@@ -23,13 +23,13 @@ export default class SingleOrder {
     
     @action advanceStage = () => {
         debugger
-        this.progress++
+        this.progress +=1
         this.inProcess = false
         // axios.put("http://localhost:4000/order",this)
     }
     
     @action claimStage = (employeeName) => {
-        this.stageEmployee[this.progress] = employeeName
+        this.stageEmployees[this.progress] = employeeName
         this.inProcess = true
         console.log(this.stageEmployee)
         // axios.put("http://localhost:4000/order",this)
