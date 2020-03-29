@@ -8,6 +8,7 @@ const ClaimTask = inject('ordersStore','detailsWindowStore')(observer((props) =>
 
     const claimStage = () => {
         props.detailsWindowStore.detailsWindowOrder.claimStage(employee.name)
+        props.detailsWindowStore.toggleDetailsWindow()
     }
 
     return (

@@ -8,6 +8,8 @@ const OrderManager = inject('ordersStore','detailsWindowStore')(observer((props)
     const [numStages,setNumStages] = useState(7)
 
     useEffect(() => {
+        props.ordersStore.getOrders() // dummy data right now
+        
         const arr = []
         for(let i = 1 ; i <= numStages ; i++){
             arr.push(<Stage stage={i}/>)

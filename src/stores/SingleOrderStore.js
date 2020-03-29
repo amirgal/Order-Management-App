@@ -1,7 +1,7 @@
 import {observable,action} from 'mobx'
 import axios from 'axios'
 
-export class SingleOrder {
+export default class SingleOrder {
     @observable id
     @observable shopifyId
     @observable costumerid
@@ -15,14 +15,14 @@ export class SingleOrder {
     @observable stageEmployee 
     
     constructor(order){
-     this.id = order.id   
-     this.shopifyId = order.shopifyId   
-     this.costumerid = order.costumerid   
-     this.price = order.price   
-     this.product = order.product   
-     this.attributes = order.attributes   
-     this.graphics = order.graphics   
-     this.comment = order.comment   
+    //  this.id = order.id   
+    //  this.shopifyId = order.shopifyId   
+    //  this.costumerid = order.costumerid   
+    //  this.price = order.price   
+    //  this.product = order.product   
+    //  this.attributes = order.attributes   
+    //  this.graphics = order.graphics   
+    //  this.comment = order.comment   
      this.progress = order.progress   
      this.inProcess = order.inProcess   
      this.stageEmployee = {1 : null}   
@@ -31,7 +31,7 @@ export class SingleOrder {
     @action advanceStage = () => {
         this.progress++
         this.inProcess = false
-        axios.put("http://localhost:4000/order",this)
+        // axios.put("http://localhost:4000/order",this)
     }
     
     @action claimStage = (employeeName) => {
