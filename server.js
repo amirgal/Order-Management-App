@@ -2,10 +2,9 @@ const express = require('express')
 var bodyParser = require('body-parser')
 const api = require('./server/routes/api')
 const app = express()
+const mongoose = require('mongoose');
 
-//if we use mongodb need to npm i it
-// const mongoose = require('mongoose');
-// mongoose.connect("mongodb://localhost/Bank", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false})
+mongoose.connect("mongodb://localhost/OrderManager", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false})
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
