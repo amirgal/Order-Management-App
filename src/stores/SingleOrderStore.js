@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export class SingleOrder {
     @observable id
-    @observable shopifyDd
+    @observable shopifyId
     @observable costumerid
     @observable price
     @observable product 
@@ -16,7 +16,7 @@ export class SingleOrder {
     
     constructor(order){
      this.id = order.id   
-     this.shopifyDd = order.shopifyDd   
+     this.shopifyId = order.shopifyId   
      this.costumerid = order.costumerid   
      this.price = order.price   
      this.product = order.product   

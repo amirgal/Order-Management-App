@@ -9,3 +9,8 @@
     background-color: teal;
     height: fit-content;
 }
+
+#details-window {
+    position: absolute;
+    z-index: 2;
+}
