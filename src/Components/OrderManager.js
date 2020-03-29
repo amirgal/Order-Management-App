@@ -8,7 +8,7 @@ const OrderManager = inject('ordersStore','detailsWindowStore')(observer((props)
     const [numStages,setNumStages] = useState(7)
 
     useEffect(() => {
-        props.ordersStore.getOrders() // dummy data right now
+        props.ordersStore.initializeAll() // dummy data right now
     },[]) 
 
     useEffect(() => {
