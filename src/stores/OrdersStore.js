@@ -6,7 +6,12 @@ export default class OrdersStore{
     @observable orders = []
     @observable employees = []
     @observable products = []
-    
+    @observable showDetailsWindow = false
+
+    @action toggleDetailsWindow = () => {
+        this.showDetailsWindow = !this.showDetailsWindow
+    }
+
     @action getOrders = async () => {
         const ordersResponse = await axios.get("http://localhost:4000/orders")
         this.orders = ordersResponse
