@@ -1,15 +1,21 @@
 import {observable,action} from 'mobx'
 import axios from 'axios'
+import SingleOrderStore from './SingleOrderStore'
 
 
-export class OrdersStore{
+
+export default class OrdersStore{
     @observable orders = []
-    @observable employees = []
     @observable products = []
+    @observable employees = [{id:1,name:'nadav'},{id:2,name:'alon'},{id:3,name:'amir'}]
     
     @action getOrders = async () => {
-        const ordersResponse = await axios.get("http://localhost:4000/orders")
-        this.orders = ordersResponse
+        // const ordersResponse = await axios.get("http://localhost:4000/orders")
+        // this.orders = ordersResponse
+        const dummyOrders = [{progress:1,inProcess:false},{progress:2,inProcess:true},
+        {progress:3,inProcess:false},{progress:4,inProcess:true},{progress:2,inProcess:false},
+        {progress:5,inProcess:true},{progress:6,inProcess:false},{progress:7,inProcess:false}]
+        this.orders = dummyOrders.map(o => new SingleOrderStore(o))
     }
 
     @action getEmployees = async () => {
