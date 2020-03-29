@@ -9,6 +9,9 @@ const ordersAPI =
   "https://c899d30fc9a903416c913a2fee03110e:002c2c5df36681b94386e74fce120092@omteststore.myshopify.com/admin/api/2020-01/orders.json"
 const productsAPI =
   "https://c899d30fc9a903416c913a2fee03110e:002c2c5df36681b94386e74fce120092@omteststore.myshopify.com/admin/api/2020-01/products.json"
+const crypto = require("crypto")
+const secretKey =
+  "7c189339c715b42cc7ab928a6102bfdb36792794b3fc11497e1f19c923fa641f"
 
 const getProductsFromShopify = async url => {
   let results = await axios.get(url)
@@ -85,6 +88,19 @@ const addEmployeesToDB = async arr => {
   }
 }
 
+const validateWebhook = (req, res, next) => {
+  generated_hash = crypto
+    .createHmac("sha256", secretKey)
+    .update(Buffer.from(req.rawbody))
+    .digest("base64")
+  if (generated_hash == req.headers["x-shopify-hmac-sha256"]) {
+    next()
+  } else {
+    res.sendStatus(200)
+    console.log("Not from Shopify!")
+  }
+}
+
 router.get(`/orders/`, async (req, res) => {
   const orders = await Order.find({})
   res.send(orders)
@@ -108,6 +124,55 @@ router.put(`/order/`, async (req, res) => {
   })
 })
 
+router.post("/webhooks/orders/create", validateWebhook, async (req, res) => {
+  res.sendStatus(200)
+  console.log("🎉 We got an order!")
+
+  const result = await req.body
+  const cust = result.customer
+  const foundCustomer = await Customer.find({ shopifyId: cust.id })
+  if (foundCustomer.length == 0) {
+    let customer = new Customer({
+      shopifyId: cust.id,
+      name: cust.first_name + " " + cust.last_name,
+      email: cust.email,
+      phone: cust.default_address.phone,
+      orders: [result.id]
+    })
+    await customer.save()
+  } else {
+    updatedOrders = foundCustomer[0].orders.push(result.id)
+    await Customer.updateOne({ shopifyId: cust.id }, { orders: updatedOrders })
+  }
+
+  for (let item of result.line_items) {
+    let address = result.shipping_address
+    let order = new Order({
+      shopifyId: result.id,
+      itemId: item.id,
+      costumerId: result.customer.id,
+      price: parseInt(result.total_price),
+      product: item.product_id,
+      attributes: item.variant_title,
+      inProcess: false,
+      progress: 1,
+      stageEmployees: { 1: "" },
+      isComplete: false,
+      shippingAdress: {
+        address: address.address1,
+        city: address.city,
+        province: address.province,
+        country: address.country,
+        zip: address.zip,
+        company: address.company,
+        name: address.name,
+        phone: address.phone
+      }
+    })
+    await order.save()
+    console.log("saved")
+  }
+})
 
 // getProductsFromShopify(productsAPI)
 // getOrdersFromShopify(ordersAPI)
