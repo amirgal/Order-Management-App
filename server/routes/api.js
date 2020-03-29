@@ -90,24 +90,24 @@ router.get(`/orders/`, async (req, res) => {
   res.send(orders)
 })
 router.get(`/customers/`, async (req, res) => {
-  const orders = await Customer.find({})
-  res.send(orders)
+  const customers = await Customer.find({})
+  res.send(customers)
 })
 router.get(`/employees/`, async (req, res) => {
-  const orders = await Employee.find({})
-  res.send(orders)
+  const employees = await Employee.find({})
+  res.send(employees)
 })
 router.get(`/products/`, async (req, res) => {
-  const orders = await Product.find({})
-  res.send(orders)
+  const products = await Product.find({})
+  res.send(products)
 })
-
 router.put(`/order/`, async (req, res) => {
   const order = req.body
   await Order.updateOne({ _id: order._id }, order, {
     new: true
   })
 })
+
 
 // getProductsFromShopify(productsAPI)
 // getOrdersFromShopify(ordersAPI)
