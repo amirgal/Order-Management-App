@@ -1,6 +1,6 @@
 import {observable,action} from 'mobx'
 
-export default class SingleOrder {
+export default class DetailsWindowStore {
     @observable showDetailsWindow = false
     @observable detailsWindowOrder
 

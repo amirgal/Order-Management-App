@@ -21,8 +21,10 @@ const OrderCard = inject('ordersStore','detailsWindowStore')(observer((props) =>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
                 {props.order.inProcess ? 
-                    <Button onClick={openDetailsWindow}>Complete Task</Button> :
-                    <Button onClick={openDetailsWindow}>Claim Task</Button>}
+                    <Button variant='contained' color='primary' 
+                    onClick={openDetailsWindow}>Complete Task</Button> :
+                    <Button variant='contained' color='primary'
+                    onClick={openDetailsWindow}>Claim Task</Button>}
             </ExpansionPanelDetails>
         </ExpansionPanel>
     )

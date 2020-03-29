@@ -13,4 +13,6 @@
 #details-window {
     position: absolute;
     z-index: 2;
+    background-color: lightblue;
+    border-radius: 5px;
 }
