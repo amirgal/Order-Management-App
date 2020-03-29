@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { inject, observer } from 'mobx-react';
+import OrderCard from './OrderCard';
 
 const Stage = inject('ordersStore')(observer((props) => {
     const [orders , setOrders] = useState([])
@@ -14,7 +15,9 @@ const Stage = inject('ordersStore')(observer((props) => {
     }
 
     return (
-        <div></div>
+        <div className='stage'>
+            {orders.map(o => <OrderCard />)}
+        </div>
     )
 }))
 
