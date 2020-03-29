@@ -2,7 +2,7 @@ import {observable,action} from 'mobx'
 import axios from 'axios'
 
 
-export class OrdersStore{
+export default class OrdersStore{
     @observable orders = []
     @observable employees = []
     @observable products = []
