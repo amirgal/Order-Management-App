@@ -39,7 +39,10 @@ const getOrdersFromShopify = async url => {
         await customer.save()
       } else {
         updatedOrders = foundCustomer[0].orders.push(result.id)
-        Customer.updateOne({ shopifyId: cust.id }, { orders: updatedOrders })
+        await Customer.updateOne(
+          { shopifyId: cust.id },
+          { orders: updatedOrders }
+        )
       }
 
       for (let item of result.line_items) {
@@ -86,12 +89,26 @@ router.get(`/orders/`, async (req, res) => {
   const orders = await Order.find({})
   res.send(orders)
 })
-
-router.post(`/order/`, async (req, res) => {
-  const order = new Order({})
-  await order.save()
-  res.end()
+router.get(`/customers/`, async (req, res) => {
+  const customers = await Customer.find({})
+  res.send(customers)
 })
+router.get(`/employees/`, async (req, res) => {
+  const employees = await Employee.find({})
+  res.send(employees)
+})
+router.get(`/products/`, async (req, res) => {
+  const products = await Product.find({})
+  res.send(products)
+})
+router.put(`/order/`, async (req, res) => {
+  const order = req.body
+  await Order.updateOne({ _id: order._id }, order, {
+    new: true
+  })
+})
+
+
 // getProductsFromShopify(productsAPI)
 // getOrdersFromShopify(ordersAPI)
 // addEmployeesToDB(employees)
