@@ -40,6 +40,7 @@ router.put(`/order/`, async (req, res) => {
   await Order.updateOne({ _id: order._id }, order, {
     new: true
   })
+  res.end()
 })
 
 router.post('/employees/',async (req,res) => {

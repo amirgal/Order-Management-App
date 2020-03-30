@@ -6,6 +6,7 @@ import OrderManager from './Components/OrderManager';
 import MyAppBar from './Components/MyAppBar';
 import Settings  from './Components/Settings';
 import { StylesProvider } from "@material-ui/core/styles"
+import CompletedOrders from './Components/CompletedOrdersComponents/CompletedOrders';
 
 const App = inject('ordersStore')(observer((props) => {
    
@@ -27,6 +28,7 @@ const App = inject('ordersStore')(observer((props) => {
                 <Route path="/completed-orders" exact render={() => 
                     <Fragment>
                         <MyAppBar headline={'Completed Orders'}/>
+                        <CompletedOrders />
                     </Fragment>
                 }/>
                 <Route path="/settings" exact render={() => 
