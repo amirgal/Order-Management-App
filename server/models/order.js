@@ -6,7 +6,7 @@ const orderSchema = new Schema({
   itemId: Number,
   costumerId: Number,
   price: Number,
-  product: Number,
+  product: { type: Schema.Types.ObjectId, ref: 'Product' },
   attributes: String,
   comment: String,
   shippingAdress: Object,

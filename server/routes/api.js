@@ -18,11 +18,11 @@ const addEmployeesToDB = async arr => {
 }
 
 router.get(`/orders/`, async (req, res) => {
-  const orders = await Order.find({})
+  const orders = await Order.find({}).populate('product')
   res.send(orders)
 })
 router.get(`/customers/`, async (req, res) => {
-  const customers = await Customer.find({})
+  const customers = await Customer.find({}).populate('orders')
   res.send(customers)
 })
 router.get(`/employees/`, async (req, res) => {
@@ -40,5 +40,5 @@ router.put(`/order/`, async (req, res) => {
   })
 })
 
-addEmployeesToDB(employees)
+// addEmployeesToDB(employees)
 module.exports = router
