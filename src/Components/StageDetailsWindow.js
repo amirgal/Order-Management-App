@@ -4,11 +4,12 @@ import CompleteTask from './CompleteTask';
 import ClaimTask from './ClaimTask'
 
 const StageDetailsWindow = inject('detailsWindowStore')(observer((props) => {
-    
+    const currOrder = props.detailsWindowStore.detailsWindowOrder
+    const currStage = currOrder.progress
     return (
         <div id="details-window">
-            <p>Task Name</p>
-            {props.detailsWindowStore.detailsWindowOrder.inProcess ?
+            <h5>{currOrder.product.stages[currStage].title}</h5>
+            {currOrder.inProcess ?
             <CompleteTask /> : <ClaimTask />} 
         </div>
     )
