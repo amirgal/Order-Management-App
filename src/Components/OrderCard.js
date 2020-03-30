@@ -8,6 +8,7 @@ const OrderCard = inject('ordersStore','detailsWindowStore')(observer((props) =>
     const openDetailsWindow = () => {
         props.detailsWindowStore.toggleDetailsWindow()
         props.detailsWindowStore.setDetailsWindowOrder(props.order)
+        console.log(props.order.date)
     }
 
     return (
