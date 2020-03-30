@@ -14,9 +14,11 @@
 }
 
 .stage {
-  background-color: #6e6e76;
+  background-color: #615a62;
   height: fit-content;
   border-radius: 5px;
+  max-height: 80vh;
+  overflow: scroll;
 }
 
 #details-window {
@@ -33,6 +35,7 @@
   width: 100%;
   /* color: white; */
   background-color: #b6b6bf;
+  box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.3);
 }
 .order h3 {
   margin: 0;
@@ -57,6 +60,9 @@
 }
 .MuiToolbar-regular{
     background-color: #615a62;
+}
+.MuiIconButton-edgeStart{
+    color: white;
 }
 #details-window > h3 {
   margin-top: 10px;
@@ -107,4 +113,10 @@
 }
 .attributes{
     font-weight: bold;
+}
+.tracker_page{
+    display: grid;
+    grid-gap: 20px;
+    padding: 80px 120px;
+    text-align: center;
 }

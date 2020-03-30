@@ -6,6 +6,7 @@ import OrderManager from "./Components/OrderManager"
 import MyAppBar from "./Components/MyAppBar"
 import Settings from "./Components/Settings"
 import { StylesProvider } from "@material-ui/core/styles"
+import Tracker from "./Components/Tracker"
 
 const App = observer(props => {
   return (
@@ -28,6 +29,16 @@ const App = observer(props => {
             <Fragment>
               <MyAppBar headline={"Settings"} />
               <Settings />
+            </Fragment>
+          )}
+        />
+        <Route
+          path="/Tracking"
+          exact
+          render={() => (
+            <Fragment>
+              <MyAppBar headline={"Tracker"} />
+              <Tracker />
             </Fragment>
           )}
         />
