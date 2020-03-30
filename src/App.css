@@ -1,7 +1,7 @@
 body {
   background-color: #3b3c43;
-  height: 100vh;
 }
+
 #order-manager-page {
   padding-top: 70px;
 }
@@ -69,10 +69,11 @@ body {
 .MuiIconButton-root {
   padding: 0;
 }
-.MuiPaper-root {
-  background-color: rgba(0, 0, 0, 0);}
-.MuiInputBase-input{
-    color: white;
+.activeStep .MuiPaper-root {
+  background-color: rgba(0, 0, 0, 0);
+}
+.MuiInputBase-input {
+  color: white;
 }
 .statusLight {
   height: 22px;
@@ -82,19 +83,18 @@ body {
   box-shadow: inset 1px 1px 6px rgba(0, 0, 0, 0.6);
 }
 #settings-page {
-  padding-top: 100px;
-  padding-left: 1em;
-  background-color: #3b3c43;
-  
-
+  background-color: #615a62;
+  margin: 100px 40px;
+  padding: 30px;
+  border-radius: 10px;
 }
-.MuiInputLabel-formControl{
-position: absolute;
+.MuiInputLabel-formControl {
+  position: absolute;
 }
-.popper{
-    margin-top: 10px;
-    margin-left: 5px;
-    color: rgb(184, 226, 233);
+.popper {
+  margin-top: 15px;
+  margin-left: 60px;
+  color: rgb(184, 226, 233);
 }
 .employees-settings {
   display: grid;
@@ -105,7 +105,7 @@ position: absolute;
   margin-top: 1em;
   display: grid;
   grid-gap: 1em;
- margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 #details-window > h3 {
   margin-top: 10px;
@@ -147,7 +147,11 @@ position: absolute;
   background-color: #b6b6bf;
   box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.3);
 }
-.sync-input{
-    margin: 4px;
-    width: 250px;
+.sync-input {
+  margin: 4px;
+  width: 250px;
+}
+#storeSynced{
+    margin-left: 50px;
+    color: greenyellow;
 }

@@ -36,7 +36,7 @@ const Tracker = inject("ordersStore")(
           Track
         </Button>
         <div className="activeStep">
-          {activeStep > 0 ? <TrackingBar activeStep={activeStep} /> : null}
+          {activeStep > 0 ? <TrackingBar classes={{backgroundColor: 'red'}}activeStep={activeStep} /> : null}
         </div>
       </div>
     )
