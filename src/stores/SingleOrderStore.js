@@ -20,6 +20,7 @@ export default class SingleOrder {
      this.isComplete = order.isComplete
      this.stageEmployees = order.stageEmployees
      this.shippingAddress = order.shippingAddress  
+     this.date = new Date(order.date)
     }
     
     @action advanceStage = () => {

@@ -5,17 +5,13 @@ import {
   List,
   ListItem,
   ExpansionPanelSummary,
-  Typography,
   ExpansionPanelDetails,
   ExpansionPanel,
   Button
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
-const OrderCard = inject(
-  "ordersStore",
-  "detailsWindowStore"
-)(
+const OrderCard = inject("detailsWindowStore")(
   observer(props => {
     const openDetailsWindow = () => {
       props.detailsWindowStore.toggleDetailsWindow()
@@ -39,13 +35,13 @@ const OrderCard = inject(
           id="panel1a-header"
         >
           <div className="statusLight"></div>
-          <Typography>
-            <h3>{props.order.product.name}</h3>
-          </Typography>
+          <h3>{props.order.product.name}</h3>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <List>
-            <ListItem ><p className="attributes">{props.order.attributes}</p></ListItem>
+            <ListItem>
+              <p className="attributes">{props.order.attributes}</p>
+            </ListItem>
             {props.order.inProcess ? (
               <Fragment>
                 <ListItem>
@@ -54,24 +50,17 @@ const OrderCard = inject(
                   </p>
                 </ListItem>
                 <ListItem>
-                  <Button
-                    variant="contained"
-                    onClick={openDetailsWindow}
-                  >
+                  <Button variant="contained" onClick={openDetailsWindow}>
                     Complete Stage
                   </Button>
                 </ListItem>
               </Fragment>
             ) : (
-              <Button
-                variant="contained"
-                onClick={openDetailsWindow}
-              >
+              <Button variant="contained" onClick={openDetailsWindow}>
                 Start Stage
               </Button>
             )}
           </List>
-          {console.log(props.order)}
         </ExpansionPanelDetails>
       </ExpansionPanel>
     )
