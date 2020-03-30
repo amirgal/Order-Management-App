@@ -18,7 +18,7 @@ const ClaimTask = inject('ordersStore','detailsWindowStore')(observer((props) =>
             <Autocomplete
                 id="select-employee"
                 onChange={(e,v) => setEmployee(v)}
-                options={props.ordersStore.employees}
+                options={props.ordersStore.employees.filter(e => e.isActive)}
                 getOptionLabel={option => option.name}
                 style={{ width: 300 }}
                 renderInput={params => <TextField {...params}
