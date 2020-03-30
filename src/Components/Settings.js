@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { Button, TextField } from "@material-ui/core";
+import {
+  Button,
+  TextField,
+  Input,
+  InputAdornment,
+  IconButton,
+  Popper
+} from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-
+import { Visibility } from "@material-ui/icons";
+import HelpIcon from "@material-ui/icons/Help";
 
 const Settings = inject("ordersStore")(
   observer(props => {
@@ -14,13 +22,21 @@ const Settings = inject("ordersStore")(
     const [synced, setSynced] = useState(
       props.ordersStore.products.length > 0 ? true : false
     );
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = event => {
+      setAnchorEl(anchorEl ? null : event.currentTarget);
+    };
+
     const handleNameChange = e => {
       setName(e.target.value);
     };
     const handleChange = e => {
       e.target.name === "apiKey"
         ? setApiKey(e.target.value)
-        : e.target.name === 'password' ?  setPassword(e.target.value) : setShopName(e.target.value)
+        : e.target.name === "password"
+        ? setPassword(e.target.value)
+        : setShopName(e.target.value);
     };
 
     const addEmployee = () => {
@@ -38,10 +54,13 @@ const Settings = inject("ordersStore")(
         shopName
       });
       isSuccessfull ? setSynced(true) : alert("sync failed");
-      setApiKey('')
-      setPassword('')
-      setShopName('')
+      setApiKey("");
+      setPassword("");
+      setShopName("");
     };
+
+    const open = Boolean(anchorEl);
+    const id = open ? "simple-popper" : undefined;
 
     return (
       <div id="settings-page">
@@ -86,38 +105,62 @@ const Settings = inject("ordersStore")(
           </Button>
         </div>
         <div className="sync-shop">
-          {synced ?<div>Store synced with system - you can re-sync if you wish</div> : null}
-            <div>
-                <div className="shop-details">
-              <TextField
-                id="outlined-basic"
+          {synced ? (
+            <div>Store synced with system - you can re-sync if you wish</div>
+          ) : null}
+          <div>
+            <div className="shop-details">
+              <Input
+                type="text"
                 name="apiKey"
-                label="Add api key"
-                variant="outlined"
+                placeholder="Enter Api key"
                 value={apiKey}
                 onChange={handleChange}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleClick}>
+                      <HelpIcon />
+                    </IconButton>
+                    <Popper id={id} classes={{margin : '10px'}} open={open} anchorEl={anchorEl}>
+                      <div className="api-pop">you can find your apiKey, password and shop's name under the "App" tab in your shopify's admin page.</div>
+                    </Popper>
+                  </InputAdornment>
+                }
               />
-              <TextField
-                id="outlined-basic"
+              <Input
+                id="standard-adornment-password"
+                type="text"
                 name="password"
-                label="Add password"
-                variant="outlined"
+                placeholder="Enter shop password"
                 value={password}
                 onChange={handleChange}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleClick}>
+                      <HelpIcon />
+                    </IconButton>
+                  </InputAdornment>
+                }
               />
-              <TextField
-                id="outlined-basic"
+              <Input
+                type="text"
                 name="shopName"
-                label="Add shop name"
-                variant="outlined"
+                placeholder="Enter shop name"
                 value={shopName}
                 onChange={handleChange}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleClick}>
+                      <HelpIcon />
+                    </IconButton>
+                  </InputAdornment>
+                }
               />
               <Button onClick={makeSync} variant="contained" color="primary">
                 Make Sync
               </Button>
-              </div>
             </div>
+          </div>
         </div>
       </div>
     );
