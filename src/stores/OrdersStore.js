@@ -52,9 +52,6 @@ export default class OrdersStore{
            this.orders = response.data.orders.map(o => new SingleOrderStore(o))
            this.employees = response.data.employees
            this.products = response.data.products
-           return true
-       }else{
-           return false
        }
     }
     

@@ -44,8 +44,7 @@ export default function MyAppBar(props) {
         <Toolbar>
           <IconButton onClick={toggleDrawer()} edge="start" className={classes.menuButton} aria-label="menu">
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h6">Menu</Typography>
+          </IconButton> 
           <Typography variant="h4" className={classes.title} align="center">
             {props.headline}
           </Typography>
