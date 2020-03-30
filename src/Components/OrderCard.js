@@ -12,11 +12,8 @@ import {
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
-const OrderCard = inject(
-  "ordersStore",
-  "detailsWindowStore"
-)(
-  observer(props => {
+const OrderCard = inject('detailsWindowStore')(observer((props) => {
+    
     const openDetailsWindow = () => {
       props.detailsWindowStore.toggleDetailsWindow()
       props.detailsWindowStore.setDetailsWindowOrder(props.order)
@@ -39,9 +36,7 @@ const OrderCard = inject(
           id="panel1a-header"
         >
           <div className="statusLight"></div>
-          <Typography>
             <h3>{props.order.product.name}</h3>
-          </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <List>
@@ -71,7 +66,6 @@ const OrderCard = inject(
               </Button>
             )}
           </List>
-          {console.log(props.order)}
         </ExpansionPanelDetails>
       </ExpansionPanel>
     )

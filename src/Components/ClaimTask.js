@@ -20,26 +20,26 @@ const ClaimTask = inject('ordersStore','detailsWindowStore')(observer((props) =>
     return (
         <div id="claim-task">
             <List>
-            {steps.map((s,i) => 
-                    <ListItem key={i}>
-                       <Typography>{s}</Typography>
+                {steps.map((s,i) => 
+                        <ListItem key={i}>
+                        <Typography>{s}</Typography>
+                        </ListItem>
+                    )}
+                <ListItem>
+                    <Autocomplete
+                        id="select-employee"
+                        onChange={(e,v) => setEmployee(v)}
+                        options={props.ordersStore.employees.filter(e => e.isActive)}
+                        getOptionLabel={option => option.name}
+                        style={{ width: 300 }}
+                        renderInput={params => <TextField {...params}
+                        label="Select Employee"/>}
+                        />
                     </ListItem>
-                )}
-            <ListItem>
-            <Autocomplete
-                id="select-employee"
-                onChange={(e,v) => setEmployee(v)}
-                options={props.ordersStore.employees.filter(e => e.isActive)}
-                getOptionLabel={option => option.name}
-                style={{ width: 300 }}
-                renderInput={params => <TextField {...params}
-                label="Select Employee"/>}
-                />
-            </ListItem>
-            <ListItem>
-            <Button variant='contained' color='primary' disabled = {!isEmployeeChosen()}
-            onClick={claimStage}>Claim</Button>
-            </ListItem>
+                <ListItem>
+                    <Button variant='contained' color='primary' disabled = {!isEmployeeChosen()}
+                    onClick={claimStage}>Claim</Button>
+                </ListItem>
             </List>
         </div>
     )

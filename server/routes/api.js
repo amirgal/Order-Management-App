@@ -7,17 +7,17 @@ const Order = require("../models/Order")
 const Customer = require("../models/Customer")
 const Employee = require("../models/Employee")
 
-const employees = ["Nadav", "Amir", "Alon", "Ron"]
+// const employees = ["Nadav", "Amir", "Alon", "Ron"]
 
-const addEmployeesToDB = async arr => {
-  for (let e of arr) {
-    let employee = new Employee({
-      name: e,
-      isActive : true
-    })
-    await employee.save()
-  }
-}
+// const addEmployeesToDB = async arr => {
+//   for (let e of arr) {
+//     let employee = new Employee({
+//       name: e,
+//       isActive : true
+//     })
+//     await employee.save()
+//   }
+// }
 
 router.get(`/orders/`, async (req, res) => {
   const orders = await Order.find({}).populate('product')
