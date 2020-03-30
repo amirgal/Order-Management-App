@@ -5,7 +5,7 @@ import {List, ListItem} from '@material-ui/core'
 
 const Stage = inject('ordersStore')(observer((props) => {
    
-    const filteredOrders = props.ordersStore.orders.filter(o => o.progress == props.stage)
+    const filteredOrders = props.ordersStore.orders.filter(o => o.progress === props.stage)
     return (
         <div className='stage'>
             <List>

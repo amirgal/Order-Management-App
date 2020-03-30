@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { Button, TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-// import TextField from '@material-ui/core/TextField';
+
 
 const Settings = inject("ordersStore")(
   observer(props => {
@@ -38,6 +38,9 @@ const Settings = inject("ordersStore")(
         shopName
       });
       isSuccessfull ? setSynced(true) : alert("sync failed");
+      setApiKey('')
+      setPassword('')
+      setShopName('')
     };
 
     return (
