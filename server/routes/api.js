@@ -19,7 +19,11 @@ const getProductsFromShopify = async url => {
     let product = new Product({
       shopifyId: result.id,
       name: result.title,
-      stages: { 1: null }
+      stages: { 1: {title: "Pressing" , steps : ["Make Sure you have all materials ready before you start the layup process",
+     "Double check flex and graphic are correct",`Use mold : ${result.title ==="Atlas" ? 1 : result.title === `Aldous` ? 2 : 3}`]} ,2:{title : "CNC" , steps : [`Home the machine if it’s the first board of the day`,`Make sure you load the correct file to the controller`,`Touch off height sensor`,`Use mold : ${result.title ==="Atlas" ? 1 : result.title === `Aldous` ? 2 : 3}`] },
+    3:{title: `Sanding`,steps : [`Make sure everything is silky smooth.
+    `,`Check the wheel-wells closely`]}, 4 : {title : `Lacquer` ,steps : [`2 Layers on top`,`2 layers on bottom`]},5:{title: `Vaccum Bag` ,steps : [`Apply flex sticker`,`Place sticker pack and product booklet in bag`,`Vacuum + seal bag`]},
+  6:{title: `Shipping`, steps : [`Make sure all order items are in the box`,`Print Shipping Label -> link/button`]} }
     })
     await product.save()
   }
@@ -49,13 +53,14 @@ const getOrdersFromShopify = async url => {
       }
 
       for (let item of result.line_items) {
+        const product = await Product.find({shopifyId : item.product_id})
         let address = result.shipping_address
         let order = new Order({
           shopifyId: result.id,
           itemId: item.id,
           costumerId: result.customer.id,
           price: parseInt(result.total_price),
-          product: item.product_id,
+          product: product[0]._id,
           attributes: item.variant_title,
           inProcess: false,
           progress: 1,
@@ -102,11 +107,11 @@ const validateWebhook = (req, res, next) => {
 }
 
 router.get(`/orders/`, async (req, res) => {
-  const orders = await Order.find({})
+  const orders = await Order.find({}).populate('product')
   res.send(orders)
 })
 router.get(`/customers/`, async (req, res) => {
-  const customers = await Customer.find({})
+  const customers = await Customer.find({}).populate('orders')
   res.send(customers)
 })
 router.get(`/employees/`, async (req, res) => {
@@ -174,7 +179,7 @@ router.post("/webhooks/orders/create", validateWebhook, async (req, res) => {
   }
 })
 
-// getProductsFromShopify(productsAPI)
-// getOrdersFromShopify(ordersAPI)
-// addEmployeesToDB(employees)
+getProductsFromShopify(productsAPI)
+getOrdersFromShopify(ordersAPI)
+addEmployeesToDB(employees)
 module.exports = router

@@ -23,6 +23,7 @@ export default class OrdersStore{
         const productsResponse = await axios.get("http://localhost:4000/products")
         this.products = productsResponse.data
     }
+    
 
     @action initializeAll = () => {
         this.getOrders()

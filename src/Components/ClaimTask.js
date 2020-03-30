@@ -10,9 +10,11 @@ const ClaimTask = inject('ordersStore','detailsWindowStore')(observer((props) =>
         props.detailsWindowStore.detailsWindowOrder.claimStage(employee.name)
         props.detailsWindowStore.toggleDetailsWindow()
     }
+    
 
     return (
         <div id="claim-task">
+
             <Autocomplete
                 id="select-employee"
                 onChange={(e,v) => setEmployee(v)}

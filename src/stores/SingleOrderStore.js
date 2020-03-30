@@ -25,7 +25,7 @@ export default class SingleOrder {
     @action advanceStage = () => {
         this.progress +=1
         this.inProcess = false
-        if(this.progress > 7){this.isComplete = true}       //hardcoded stage for now
+        if(this.progress > 6){this.isComplete = true}       //hardcoded stage for now
         axios.put("http://localhost:4000/order",this)
     }
     
