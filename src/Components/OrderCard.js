@@ -1,33 +1,78 @@
-import React from 'react';
-import { inject, observer } from 'mobx-react';
-import {ExpansionPanelSummary, Typography, ExpansionPanelDetails,ExpansionPanel, Button} from '@material-ui/core'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import React from "react"
+import { Fragment } from "react"
+import { inject, observer } from "mobx-react"
+import {
+  List,
+  ListItem,
+  ExpansionPanelSummary,
+  Typography,
+  ExpansionPanelDetails,
+  ExpansionPanel,
+  Button
+} from "@material-ui/core"
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 const OrderCard = inject('detailsWindowStore')(observer((props) => {
     
     const openDetailsWindow = () => {
-        props.detailsWindowStore.toggleDetailsWindow()
-        props.detailsWindowStore.setDetailsWindowOrder(props.order)
+      props.detailsWindowStore.toggleDetailsWindow()
+      props.detailsWindowStore.setDetailsWindowOrder(props.order)
     }
 
     return (
-        <ExpansionPanel className='order' >
-            <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-            >
-                <Typography>{props.order.shopifyId}</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails >
-                {props.order.inProcess ? 
-                    <Button variant='contained' color='primary' 
-                    onClick={openDetailsWindow}>Complete Task</Button> :
-                    <Button variant='contained' color='primary'
-                    onClick={openDetailsWindow}>Claim Task</Button>}
-            </ExpansionPanelDetails>
-        </ExpansionPanel>
+      <ExpansionPanel
+        className={
+          props.order.inProcess
+            ? "order inProcess"
+            : props.order.progress == 6
+            ? "order ready"
+            : "order"
+        }
+        data-id="order"
+      >
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <div className="statusLight"></div>
+          <Typography>
+            <h3>{props.order.product.name}</h3>
+          </Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <List>
+            <ListItem ><p className="attributes">{props.order.attributes}</p></ListItem>
+            {props.order.inProcess ? (
+              <Fragment>
+                <ListItem>
+                  <p id="employeeName">
+                    Employee: {props.order.stageEmployees[props.order.progress]}
+                  </p>
+                </ListItem>
+                <ListItem>
+                  <Button
+                    variant="contained"
+                    onClick={openDetailsWindow}
+                  >
+                    Complete Stage
+                  </Button>
+                </ListItem>
+              </Fragment>
+            ) : (
+              <Button
+                variant="contained"
+                onClick={openDetailsWindow}
+              >
+                Start Stage
+              </Button>
+            )}
+          </List>
+          {console.log(props.order)}
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     )
-}))
+  })
+)
 
 export default OrderCard

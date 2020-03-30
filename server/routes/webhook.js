@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Order = require("../models/Order")
 const Customer = require("../models/Customer")
+const Product = require("../models/Product")
 const dotenv = require("dotenv")
 dotenv.config()
 const secretKey = process.env.secretKey
