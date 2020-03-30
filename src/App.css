@@ -1,26 +1,47 @@
-#order-manager-page{
-    margin-top: 80px;
+#order-manager-page {
+  margin-top: 80px;
 }
 
 #stages-container {
-    display: grid;
-    grid-template-columns: repeat(6,1fr);
-    grid-gap:10px;
-    margin: 20px 10px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+  margin: 10px;
 }
 
 .stage {
-    background-color: teal;
-    height: fit-content;
+  background-color: teal;
+  height: fit-content;
 }
 
 #details-window {
-    position: absolute;
-    z-index: 2;
-    background-color: lightblue;
-    border-radius: 5px;
-    height: 300px;
-    width: 300px;
-    top: calc(50vh - 150px);
-    left: calc(50vw - 150px);
+  position: absolute;
+  z-index: 2;
+  background-color: lightblue;
+  border-radius: 5px;
+  height: 300px;
+  width: 300px;
+  top: calc(50vh - 150px);
+  left: calc(50vw - 150px);
+}
+.order {
+  background-color: tomato;
+  text-align: center;
+  padding: 0;
+  /* display: grid; */
+}
+.order h3 {
+  margin: 0;
+  font-size: 18px;
+}
+.order p {
+  display: block;
+  margin: 0;
+  font-size: 12px;
+}
+.inProcess {
+  background-color: green;
+}
+.MuiExpansionPanelDetails-root{
+    padding: 0;
 }

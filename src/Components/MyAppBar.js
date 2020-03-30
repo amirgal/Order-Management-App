@@ -6,20 +6,20 @@ import MenuIcon from '@material-ui/icons/Menu';
 import DrawerMenu from './DrawerMenu'
 
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   menuButton: {
+//     marginRight: theme.spacing(2),
+//   },
+//   title: {
+//     flexGrow: 1,
+//   },
+// }));
 
 export default function MyAppBar(props) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const history = useHistory()
   const [state, setState] = React.useState({
     left: false,
@@ -39,13 +39,13 @@ export default function MyAppBar(props) {
   // }
   
   return (
-    <div className={classes.root}>
+    <div>
       <AppBar position="fixed">
         <Toolbar>
-          <IconButton onClick={toggleDrawer()} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton onClick={toggleDrawer()} edge="start" color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title} align="center">
+          <Typography variant="h6" align="center">
             {props.headline}
           </Typography>
           {/* <Button color="inherit" onClick={logOut}>LOGOUT</Button> */}
