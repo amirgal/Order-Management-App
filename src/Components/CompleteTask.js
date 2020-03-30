@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { inject, observer } from 'mobx-react';
-import {Button, FormGroup, FormControlLabel, Checkbox, List, ListItem} from '@material-ui/core'
+import {Button, FormControlLabel, Checkbox, List, ListItem} from '@material-ui/core'
 
 const CompleteTask = inject('ordersStore','detailsWindowStore')(observer((props) => {
     const currOrder = props.detailsWindowStore.detailsWindowOrder

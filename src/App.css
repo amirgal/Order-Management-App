@@ -24,3 +24,8 @@
     top: calc(50vh - 150px);
     left: calc(50vw - 150px);
 }
+
+#details-window > h3{
+    margin-top: 10px;
+    text-align: center;
+}

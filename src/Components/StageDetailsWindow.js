@@ -8,7 +8,11 @@ const StageDetailsWindow = inject('detailsWindowStore')(observer((props) => {
     const currStage = currOrder.progress
     return (
         <div id="details-window">
-            <h5>{currOrder.product.stages[currStage].title}</h5>
+            <h3>{currOrder.product.stages[currStage].title}</h3>
+            <div id="product-details">
+                <p>Product Name: {currOrder.product.name}</p>
+                <p>Attributes: {currOrder.attributes}</p>
+            </div>
             {currOrder.inProcess ?
             <CompleteTask /> : <ClaimTask />} 
         </div>
