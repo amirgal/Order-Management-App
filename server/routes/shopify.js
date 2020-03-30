@@ -9,6 +9,10 @@ dotenv.config()
 const ordersAPI = process.env.ordersAPI
 const productsAPI = process.env.productsAPI
 
+
+const shopify = function(){
+
+
 const getProductsFromShopify = async url => {
   let results = await axios.get(url)
   for (result of results.data.products) {
@@ -79,7 +83,8 @@ const getOrdersFromShopify = async url => {
     }
   }
 }
-
-// getProductsFromShopify(productsAPI)
-// getOrdersFromShopify(ordersAPI)
-module.exports = router
+return {getOrdersFromShopify,getProductsFromShopify}
+}
+//getProductsFromShopify(productsAPI)
+//  getOrdersFromShopify(ordersAPI)
+module.exports = shopify
