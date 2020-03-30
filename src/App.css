@@ -19,8 +19,8 @@
     z-index: 2;
     background-color: lightblue;
     border-radius: 5px;
-    height: 300px;
-    width: 300px;
+    /* height: 300px;
+    width: 300px; */
     top: calc(50vh - 150px);
     left: calc(50vw - 150px);
 }
