@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     color: "white",
     height: 48,
     padding: "0 30px",
-    backgroundColor: "#3b3c43"
+    // backgroundColor: "#3b3c43"
   }
 });
 
@@ -136,7 +136,7 @@ const Settings = inject("ordersStore")(
         </div>
         <div className="sync-shop">
           {synced ? (
-            <div>Store synced with system - you can re-sync if you wish</div>
+            <div id="storeSynced">Store already synced - you can re-sync if you wish</div>
           ) : null}
           <div>
             <div className="shop-details">

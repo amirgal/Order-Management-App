@@ -1,8 +1,7 @@
-#root{
-    background-color: #3b3c43;
-    height: 100vh;
-    color: aliceblue;
+body {
+  background-color: #3b3c43;
 }
+
 #order-manager-page {
   padding-top: 70px;
 }
@@ -15,9 +14,11 @@
 }
 
 .stage {
-  background-color: #6e6e76;
+  background-color: #615a62;
   height: fit-content;
   border-radius: 5px;
+  max-height: 80vh;
+  overflow: scroll;
 }
 
 #details-window {
@@ -27,13 +28,6 @@
   border-radius: 5px;
   top: calc(50vh - 150px);
   left: calc(50vw - 150px);
-}
-.order {
-  text-align: center;
-  padding: 0;
-  width: 100%;
-  /* color: white; */
-  background-color: #b6b6bf;
 }
 .order h3 {
   margin: 0;
@@ -56,8 +50,11 @@
 .MuiExpansionPanelDetails-root {
   padding: 0;
 }
-.MuiToolbar-regular{
-    background-color: #615a62;
+.MuiToolbar-regular {
+  background-color: #615a62;
+}
+.MuiIconButton-edgeStart {
+  color: white;
 }
 #details-window > h3 {
   margin-top: 10px;
@@ -72,8 +69,11 @@
 .MuiIconButton-root {
   padding: 0;
 }
-.MuiInputBase-input{
-    color: white;
+.activeStep .MuiPaper-root {
+  background-color: rgba(0, 0, 0, 0);
+}
+.MuiInputBase-input {
+  color: white;
 }
 .statusLight {
   height: 22px;
@@ -83,19 +83,18 @@
   box-shadow: inset 1px 1px 6px rgba(0, 0, 0, 0.6);
 }
 #settings-page {
-  padding-top: 100px;
-  padding-left: 1em;
-  background-color: #3b3c43;
-  
-
+  background-color: #615a62;
+  margin: 100px 40px;
+  padding: 30px;
+  border-radius: 10px;
 }
-.MuiInputLabel-formControl{
-position: absolute;
+.MuiInputLabel-formControl {
+  position: absolute;
 }
-.popper{
-    margin-top: 10px;
-    margin-left: 5px;
-    color: rgb(184, 226, 233);
+.popper {
+  margin-top: 15px;
+  margin-left: 60px;
+  color: rgb(184, 226, 233);
 }
 .employees-settings {
   display: grid;
@@ -106,20 +105,53 @@ position: absolute;
   margin-top: 1em;
   display: grid;
   grid-gap: 1em;
- margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 #details-window > h3 {
   margin-top: 10px;
   text-align: center;
-} 
-#employeeName{
-    font-weight: bold;
-    font-size: 14px;
 }
-.attributes{
-    font-weight: bold;
+#employeeName {
+  font-weight: bold;
+  font-size: 14px;
 }
-.sync-input{
-    margin: 4px;
-    width: 250px;
+.attributes {
+  font-weight: bold;
+}
+.tracker_page {
+  display: grid;
+  grid-gap: 20px;
+  padding: 100px;
+  margin: 100px 120px;
+  text-align: center;
+  background-color: #615a62;
+  border-radius: 10px;
+}
+#trackButton {
+  width: 300px;
+  margin: 0 auto;
+}
+.trackInput {
+  width: 300px;
+  margin: 0 auto;
+  /* text-align: center; */
+}
+.MuiStepLabel-label.MuiStepLabel-active {
+  color: white;
+}
+.order {
+  text-align: center;
+  padding: 0;
+  width: 100%;
+  /* color: white; */
+  background-color: #b6b6bf;
+  box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.3);
+}
+.sync-input {
+  margin: 4px;
+  width: 250px;
+}
+#storeSynced{
+    margin-left: 50px;
+    color: greenyellow;
 }
