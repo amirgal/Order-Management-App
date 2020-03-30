@@ -36,9 +36,7 @@ const OrderCard = inject('detailsWindowStore')(observer((props) => {
           id="panel1a-header"
         >
           <div className="statusLight"></div>
-          <Typography>
             <h3>{props.order.product.name}</h3>
-          </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <List>
@@ -68,7 +66,6 @@ const OrderCard = inject('detailsWindowStore')(observer((props) => {
               </Button>
             )}
           </List>
-          {console.log(props.order)}
         </ExpansionPanelDetails>
       </ExpansionPanel>
     )
