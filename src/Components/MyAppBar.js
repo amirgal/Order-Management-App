@@ -42,7 +42,7 @@ export default function MyAppBar(props) {
     <div className={classes.root}>
       <AppBar position="fixed">
         <Toolbar>
-          <IconButton onClick={toggleDrawer()} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton onClick={toggleDrawer()} edge="start" className={classes.menuButton} aria-label="menu">
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title} align="center">

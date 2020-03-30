@@ -18,13 +18,19 @@ const OrderCard = inject(
 )(
   observer(props => {
     const openDetailsWindow = () => {
-        props.detailsWindowStore.toggleDetailsWindow()
-        props.detailsWindowStore.setDetailsWindowOrder(props.order)
+      props.detailsWindowStore.toggleDetailsWindow()
+      props.detailsWindowStore.setDetailsWindowOrder(props.order)
     }
 
     return (
       <ExpansionPanel
-        className={props.order.inProcess ? "order inProcess" : "order"}
+        className={
+          props.order.inProcess
+            ? "order inProcess"
+            : props.order.progress == 6
+            ? "order ready"
+            : "order"
+        }
         data-id="order"
       >
         <ExpansionPanelSummary
@@ -32,38 +38,36 @@ const OrderCard = inject(
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-        <div className="statusLight"></div>
+          <div className="statusLight"></div>
           <Typography>
             <h3>{props.order.product.name}</h3>
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <List>
-            <ListItem>{props.order.attributes}</ListItem>
+            <ListItem ><p className="attributes">{props.order.attributes}</p></ListItem>
             {props.order.inProcess ? (
               <Fragment>
                 <ListItem>
-                  <p>
+                  <p id="employeeName">
                     Employee: {props.order.stageEmployees[props.order.progress]}
                   </p>
                 </ListItem>
                 <ListItem>
                   <Button
                     variant="contained"
-                    color="primary"
                     onClick={openDetailsWindow}
                   >
-                    Complete Task
+                    Complete Stage
                   </Button>
                 </ListItem>
               </Fragment>
             ) : (
               <Button
                 variant="contained"
-                color="primary"
                 onClick={openDetailsWindow}
               >
-                Claim Task
+                Start Stage
               </Button>
             )}
           </List>

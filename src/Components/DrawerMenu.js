@@ -16,7 +16,7 @@ import {Create as CreateIcon, CallSplit as CallSplitIcon, AccountBalance as Acco
 export default function DrawerMenu(props) {
   // const classes = useStyles();
   const menuItems = [
-    {text:'Transactions', link:'/transactions', icon:<AccountBalanceIcon />},
+    {text:'Settings', link:'/settings', icon:<AccountBalanceIcon />},
     {text:'Operations', link:'/operations', icon:<CreateIcon />},
     {text:'Breakdown', link:'/breakdown', icon:<CallSplitIcon />}
   ]

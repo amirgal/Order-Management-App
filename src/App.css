@@ -1,5 +1,9 @@
+#root{
+    background-color: #3b3c43;
+    height: 100vh;
+}
 #order-manager-page {
-  margin-top: 80px;
+  padding-top: 70px;
 }
 
 #stages-container {
@@ -10,7 +14,7 @@
 }
 
 .stage {
-  background-color: lightgrey;
+  background-color: #6e6e76;
   height: fit-content;
   border-radius: 5px;
 }
@@ -18,16 +22,17 @@
 #details-window {
   position: absolute;
   z-index: 2;
-  background-color: lightblue;
+  background-color: lightgrey;
   border-radius: 5px;
   top: calc(50vh - 150px);
   left: calc(50vw - 150px);
 }
 .order {
-  /* background-color: tomato; */
   text-align: center;
   padding: 0;
-  /* display: flex; */
+  width: 100%;
+  /* color: white; */
+  background-color: #b6b6bf;
 }
 .order h3 {
   margin: 0;
@@ -36,7 +41,7 @@
 .order p {
   display: block;
   margin: 0;
-  font-size: 12px;
+  /* font-size: 12px; */
 }
 .order .statusLight {
   background-color: yellow;
@@ -44,22 +49,62 @@
 .inProcess .statusLight {
   background-color: orange;
 }
-/* .inProcess {
-  background-color: green;
-} */
+.ready .statusLight {
+  background-color: greenyellow;
+}
 .MuiExpansionPanelDetails-root {
   padding: 0;
+}
+.MuiToolbar-regular{
+    background-color: #615a62;
 }
 #details-window > h3 {
   margin-top: 10px;
   text-align: center;
 }
-.MuiDrawer-paperAnchorLeft{
-    width: 200px;
+.MuiDrawer-paperAnchorLeft {
+  width: 200px;
 }
-.statusLight{
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-    margin-right: 5px;
+.MuiExpansionPanelSummary-content {
+  align-items: center;
+}
+.MuiIconButton-root {
+  padding: 0;
+}
+.statusLight {
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  margin-right: 15px;
+  box-shadow: inset 1px 1px 6px rgba(0, 0, 0, 0.6);
+}
+#settings-page {
+  display: grid;
+  grid-template-rows: auto;
+  margin-top: 6em;
+  margin-left: 1em;
+}
+.employees-settings {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+
+  width: 600px;
+  grid-gap: 1em;
+}
+.sync-shop {
+  margin-top: 1em;
+  display: grid;
+  grid-gap: 1em;
+  padding: 10px;
+}
+#details-window > h3 {
+  margin-top: 10px;
+  text-align: center;
+}
+#employeeName{
+    font-weight: bold;
+    font-size: 14px;
+}
+.attributes{
+    font-weight: bold;
 }
