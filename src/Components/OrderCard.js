@@ -18,9 +18,8 @@ const OrderCard = inject(
 )(
   observer(props => {
     const openDetailsWindow = () => {
-      props.detailsWindowStore.toggleDetailsWindow()
-      props.detailsWindowStore.setDetailsWindowOrder(props.order)
-      console.log(props.ordersStore.orders[0].product)
+        props.detailsWindowStore.toggleDetailsWindow()
+        props.detailsWindowStore.setDetailsWindowOrder(props.order)
     }
 
     return (
@@ -33,6 +32,7 @@ const OrderCard = inject(
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
+        <div className="statusLight"></div>
           <Typography>
             <h3>{props.order.product.name}</h3>
           </Typography>

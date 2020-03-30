@@ -4,17 +4,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Drawer, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import {Create as CreateIcon, CallSplit as CallSplitIcon, AccountBalance as AccountBalanceIcon} from '@material-ui/icons';
 
-const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
-});
+// const useStyles = makeStyles({
+//   list: {
+//     width: 250,
+//   },
+//   fullList: {
+//     width: 'auto',
+//   },
+// });
 
 export default function DrawerMenu(props) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const menuItems = [
     {text:'Transactions', link:'/transactions', icon:<AccountBalanceIcon />},
     {text:'Operations', link:'/operations', icon:<CreateIcon />},
@@ -22,7 +22,7 @@ export default function DrawerMenu(props) {
   ]
   const sideList = () => (
     <div
-      className={classes.list}
+      // className={classes.list}
       role="presentation"
       onClick={props.toggleDrawer()}
       onKeyDown={props.toggleDrawer()}
