@@ -1,8 +1,13 @@
 const express = require("express")
 var bodyParser = require("body-parser")
 const api = require("./server/routes/api")
+const shopify = require("./server/routes/shopify")
+const webhook = require("./server/routes/webhook")
 const app = express()
 const mongoose = require("mongoose")
+const dotenv = require("dotenv")
+dotenv.config()
+const port = process.env.port || 4000
 
 mongoose.connect("mongodb://localhost/OrderManager", {
   useNewUrlParser: true,
@@ -22,18 +27,19 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(
-    bodyParser.json({
-      verify: function(req, res, buf) {
-        if (req.url.startsWith("/webhooks")) {
-          req.rawbody = buf
-        }
+  bodyParser.json({
+    verify: function(req, res, buf) {
+      if (req.url.startsWith("/webhook")) {
+        req.rawbody = buf
       }
-    })
-  )
+    }
+  })
+)
 
-app.use("/", api)
+app.use("/api", api)
+app.use("/shopify", shopify)
+app.use("/webhook", webhook)
 
-const port = 4000
 app.listen(port, function() {
   console.log(`Running server on port ${port}`)
 })

@@ -13,7 +13,8 @@ const orderSchema = new Schema({
   inProcess: Boolean,
   progress: Number,
   stageEmployees: Object,
-  isComplete: Boolean
+  isComplete: Boolean,
+  date: Date
 })
 
 const Customer = mongoose.model("Order", orderSchema)
