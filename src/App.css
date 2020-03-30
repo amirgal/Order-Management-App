@@ -20,39 +20,6 @@
 }
 
 #details-window {
-<<<<<<< HEAD
-    position: absolute;
-    z-index: 2;
-    background-color: lightblue;
-    border-radius: 5px;
-    /* height: 300px;
-    width: 300px; */
-    top: calc(50vh - 150px);
-    left: calc(50vw - 150px);
-}
-#settings-page{
-    /* display: grid;
-    grid-template-rows: auto; */
-    margin-top: 6em;
-    margin-left: 1em;
-}
-/* .employees-settings{
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    
-    width: 600px;
-    grid-gap: 1em;
-} */
-.sync-shop{
-    margin-top: 1em;
-    display: grid;
-    grid-gap:1em;
-    padding: 10px;
-}
-#details-window > h3{
-    margin-top: 10px;
-    text-align: center;
-=======
   position: absolute;
   z-index: 2;
   background-color: lightgrey;
@@ -140,5 +107,4 @@
 }
 .attributes{
     font-weight: bold;
->>>>>>> master
 }

@@ -1,12 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
 import {useHistory} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import {Drawer, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import {Create as CreateIcon, CallSplit as CallSplitIcon, AccountBalance as AccountBalanceIcon} from '@material-ui/icons';
 
+const useStyles = makeStyles({
+  list: {
+    width: 'auto',
+  },
+});
+
 export default function DrawerMenu(props) {
   const history = useHistory()
+  const classes = useStyles();
 
   const menuItems = [
     {text:'Order Manager', link:'/order-manager', icon:<CreateIcon />},
@@ -17,8 +23,10 @@ export default function DrawerMenu(props) {
   const changeRoute = route => {
     history.push(route)
   }
+
   const sideList = () => (
     <div
+      className={classes.list}
       role="presentation"
       onClick={props.toggleDrawer()}
       onKeyDown={props.toggleDrawer()}
