@@ -25,18 +25,18 @@
     left: calc(50vw - 150px);
 }
 #settings-page{
-    display: grid;
-    grid-template-rows: auto;
+    /* display: grid;
+    grid-template-rows: auto; */
     margin-top: 6em;
     margin-left: 1em;
 }
-.employees-settings{
+/* .employees-settings{
     display: grid;
     grid-template-rows: 1fr 1fr;
     
     width: 600px;
     grid-gap: 1em;
-}
+} */
 .sync-shop{
     margin-top: 1em;
     display: grid;
