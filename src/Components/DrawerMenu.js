@@ -2,8 +2,7 @@ import React from 'react';
 import {useHistory} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import {Drawer, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
-import {Create as CreateIcon, CallSplit as CallSplitIcon, AccountBalance as AccountBalanceIcon} from '@material-ui/icons';
-
+import {ViewList as ViewListIcon, DoneOutline as DoneOutlineIcon, Settings as SettingsIcon} from '@material-ui/icons';
 const useStyles = makeStyles({
   list: {
     width: 'auto',
@@ -15,9 +14,9 @@ export default function DrawerMenu(props) {
   const classes = useStyles();
 
   const menuItems = [
-    {text:'Order Manager', link:'/order-manager', icon:<CreateIcon />},
-    {text:'Completed Orders', link:'/completed-orders', icon:<CallSplitIcon />},
-    {text:'Settings', link:'/settings', icon:<AccountBalanceIcon />}
+    {text:'Order Manager', link:'/order-manager', icon:<ViewListIcon />},
+    {text:'Completed Orders', link:'/completed-orders', icon:<DoneOutlineIcon />},
+    {text:'Settings', link:'/settings', icon:<SettingsIcon />}
   ]
 
   const changeRoute = route => {
