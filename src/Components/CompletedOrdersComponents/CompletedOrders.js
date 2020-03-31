@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import CompletedOrder from "./CompletedOrder";
 import SearchBar from "./SearchBar";
 import Header from './Header';
-
+import {Paper} from '@material-ui/core'
 const CompletedOrders = inject("ordersStore")(observer(props => {
     
     const relevantOrders = props.ordersStore.orders.filter(o => o.isComplete)
@@ -16,7 +16,7 @@ const CompletedOrders = inject("ordersStore")(observer(props => {
         <div id="completed-orders-page">
             <SearchBar handleSearch={handleSearch}/>
             <div id="completed-orders-table">
-                <Header />  
+                {/* <Header /> */}
                 {relevantOrders.map((o,i) => <CompletedOrder key={i} order={o}/>)}
             </div>
         </div>

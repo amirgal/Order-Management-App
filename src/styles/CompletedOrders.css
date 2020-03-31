@@ -13,16 +13,27 @@
 }
 
 #completed-orders-table{
-    width: 100%;
+    width: 90%;
 }
 
 #order-rows-header{
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    background-color: red;
 }
 
 .order-row {
     display: grid;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #a09fa0de;
+    transition: 0.3s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.335);
     grid-template-columns: repeat(7,1fr);
-    /* width: 100%; */
+    width: 100%;
     text-align: center;
+}
+
+.order-row:hover {
+    background-color: white;
 }
