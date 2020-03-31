@@ -1,6 +1,6 @@
-import { observable, action } from "mobx";
-import axios from "axios";
-import SingleOrderStore from "./SingleOrderStore";
+import {observable,action, computed} from 'mobx'
+import axios from 'axios'
+import SingleOrderStore from './SingleOrderStore'
 
 export default class OrdersStore {
   @observable orders = [];
@@ -115,9 +115,13 @@ export default class OrdersStore {
     for (let key of objKeys) {
       toReturn.push({ name: key, amount: objByEmployee[key] });
     }
-
     return toReturn;
-  };
+    };
+    
+    @computed get completedOrders() {
+        return this.orders.filter(o => o.isComplete)
+    }
+
 
   @action getOrdersPerProduct = () => {
     const toReturn = [];
