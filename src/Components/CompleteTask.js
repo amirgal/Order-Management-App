@@ -36,7 +36,7 @@ const CompleteTask = inject('ordersStore','detailsWindowStore')(observer((props)
                     <ListItem key={i}>
                         <FormControlLabel
                             control={<Checkbox checked={state[`step_${i}`]} 
-                            onChange={handleChange} name={`step_${i}`} />}
+                            onChange={handleChange} name={`step_${i}`} color="primary" />}
                             label={s}
                         />
                     </ListItem>

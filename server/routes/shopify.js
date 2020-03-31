@@ -101,7 +101,7 @@ const shopify = function() {
             date: result.created_at,
             shopifyId: result.id,
             itemId: item.id,
-            costumerId: result.customer.id,
+            customerId: result.customer.id,
             price: parseInt(result.total_price),
             product: product[0]._id,
             attributes: item.variant_title,
@@ -109,7 +109,7 @@ const shopify = function() {
             progress: 1,
             stageEmployees: { 1: "" },
             isComplete: false,
-            shippingAdress: {
+            shippingAddress: {
               address: address.address1,
               city: address.city,
               province: address.province,

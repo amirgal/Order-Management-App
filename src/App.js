@@ -6,6 +6,7 @@ import OrderManager from "./Components/OrderManager"
 import MyAppBar from "./Components/MyAppBar"
 import Settings from "./Components/Settings"
 import { StylesProvider } from "@material-ui/core/styles"
+import CompletedOrders from './Components/CompletedOrdersComponents/CompletedOrders';
 import Tracker from "./Components/Tracker"
 import Analytics from "./Components/AnalyticsComponents/Analytics"
 
@@ -39,6 +40,7 @@ const App = inject("ordersStore")(
             render={() => (
               <Fragment>
                 <MyAppBar headline={"Completed Orders"} />
+                <CompletedOrders />
               </Fragment>
             )}
           />
@@ -53,7 +55,7 @@ const App = inject("ordersStore")(
             )}
           />
           <Route
-            path="/Tracking"
+            path="/tracking"
             exact
             render={() => (
               <Fragment>
