@@ -12,6 +12,11 @@
     margin: 15px 0;
 }
 
+#search-bar-filter{
+    width:200px;
+    margin-left: 20px;
+}
+
 #completed-orders-table{
     width: 90%;
 }
@@ -25,4 +30,23 @@
     grid-template-columns: repeat(4,1fr);
     width: -webkit-fill-available;
     text-align: center;
+}
+
+p {
+    margin: 0;
+}
+
+.panel-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.panel-details > div {
+    display: flex;
+}
+
+.order-workflow{
+    margin: 10px 0 ;
 }

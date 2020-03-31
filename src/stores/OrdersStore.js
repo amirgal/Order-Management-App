@@ -1,4 +1,4 @@
-import {observable,action} from 'mobx'
+import {observable,action, computed} from 'mobx'
 import axios from 'axios'
 import SingleOrderStore from './SingleOrderStore'
 
@@ -56,6 +56,9 @@ export default class OrdersStore{
        }
     }
     
+    @computed get completedOrders() {
+        return this.orders.filter(o => o.isComplete)
+    }
 
     @action initializeAll = () => {
         this.getOrders()
