@@ -54,11 +54,10 @@ const App = inject("ordersStore")(
             )}
           />
           <Route
-            path="/Tracking"
+            path="/tracking"
             exact
             render={() => (
               <Fragment>
-                <MyAppBar headline={"Tracker"} />
                 <Tracker />
               </Fragment>
             )}

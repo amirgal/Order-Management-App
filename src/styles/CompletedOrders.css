@@ -1,0 +1,11 @@
+#completed-orders-page {
+    background-color: #615a62;
+    margin: 100px 40px;
+    border-radius:10px;
+    min-height: 80%;
+    padding-top: 15px;
+}
+
+#completed-search-bar{
+    margin-left:300px
+}

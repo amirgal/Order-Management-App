@@ -1,12 +1,11 @@
+import '../../styles/CompletedOrders.css'
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import CompletedOrder from "./CompletedOrder";
 import SearchBar from "./SearchBar";
 
 const CompletedOrders = inject("ordersStore")(observer(props => {
-    // const [relevantOrders, setRelevantOrders] = useState(
-    //   props.ordersStore.orders.filter(o => o.isComplete)
-    // );
+    
     const relevantOrders = props.ordersStore.orders.filter(o => o.isComplete)
     const handleSearch = (input) => {
 
