@@ -15,9 +15,9 @@ import { inject, observer } from "mobx-react";
     
       return (
         <div>
-            <div>Orders Per Product</div>
-        <PieChart width={500} height={300}>
-        <Pie dataKey="number" isAnimationActive={false} data={props.data} cx={200} cy={200} outerRadius={80} fill="#82ca9d" /> 
+            <p>Orders Per Product</p>
+        <PieChart width={500} height={400}>
+        <Pie dataKey="number" isAnimationActive={false} data={props.data} cx={200} cy={200} outerRadius={90} margin={{top: 5, right: 30, left: 0, bottom: 5,}} fill="#884d8" /> 
         <Tooltip />
         </PieChart>
         </div>

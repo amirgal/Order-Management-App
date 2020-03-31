@@ -7,18 +7,18 @@ import { inject, observer } from "mobx-react";
   
   
   
-    const TaskTimeChart = inject("ordersStore")(
+    const ProductTimeChart = inject("ordersStore")(
       observer(props => {
       
       return (
         <div>
-          <p>Average Minutes per Task</p>
+          <p>Average Hours per Product</p>
         <BarChart
           width={500}
           height={300}
           data={props.data}
           margin={{
-            top: 5, right: 30, left: 20, bottom: 5,
+            top: 5, right: 30, left: 0, bottom: 5,
           }}
         >
           <CartesianGrid strokeDasharray="2 2" />
@@ -32,6 +32,6 @@ import { inject, observer } from "mobx-react";
         </div>
       );
     }))
-    export default TaskTimeChart
+    export default ProductTimeChart
   
   

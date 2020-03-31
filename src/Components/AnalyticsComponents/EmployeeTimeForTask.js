@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import TaskTimeChart from "./TaskTimeChart";
 
-const EmploeeTimeForTask = inject("ordersStore")(
+const EmployeeTimeForTask = inject("ordersStore")(
   observer(props => {
     const [averageTime, setAverageTime] = useState([]);
     
@@ -24,4 +24,4 @@ const EmploeeTimeForTask = inject("ordersStore")(
     );
   })
 );
-export default EmploeeTimeForTask;
+export default EmployeeTimeForTask;

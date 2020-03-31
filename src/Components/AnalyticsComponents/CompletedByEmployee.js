@@ -14,7 +14,6 @@ const CompletedByEmployee = inject("ordersStore")(
     
     return (
       <div>
-          <div>Completed Tasks By Employee</div>
         {perEmployee.length> 0 ? (
           <CompletedByChart data ={perEmployee}/>
         ) : (

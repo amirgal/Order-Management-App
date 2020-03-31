@@ -68,6 +68,7 @@ const App = inject("ordersStore")(
             exact
             render={() => (
               <Fragment>
+                <MyAppBar headline={"Analytics"} />
                 <Analytics />
               </Fragment>
             )}

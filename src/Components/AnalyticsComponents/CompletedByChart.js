@@ -12,7 +12,7 @@ import { inject, observer } from "mobx-react";
     
       return (
         <div>
-        <div>Tasks Completed By Employee</div>
+        <p>Tasks Completed By Employee</p>
         <BarChart 
         width={600} 
         height={300} 
@@ -20,12 +20,12 @@ import { inject, observer } from "mobx-react";
         layout="vertical"
         margin={{top: 5, right: 30, left: 20, bottom: 5}}
       >
-        <YAxis type="category" dataKey="name" fill="#82ca9d"/>
+        <YAxis type="category" dataKey="name" fill="#884d8"/>
         <XAxis type="number" dataKey="amount"/>
         <CartesianGrid />
         <Tooltip/>
         <Legend />
-        <Bar dataKey="amount" fill="#82ca9d" />
+        <Bar dataKey="amount" fill="#884d8" />
       </BarChart>
       </div>
       );
