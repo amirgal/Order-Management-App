@@ -8,6 +8,7 @@ import Settings from "./Components/Settings"
 import { StylesProvider } from "@material-ui/core/styles"
 import CompletedOrders from './Components/CompletedOrdersComponents/CompletedOrders';
 import Tracker from "./Components/Tracker"
+import Analytics from "./Components/AnalyticsComponents/Analytics"
 
 const App = inject("ordersStore")(
   observer(props => {
@@ -59,6 +60,16 @@ const App = inject("ordersStore")(
             render={() => (
               <Fragment>
                 <Tracker />
+              </Fragment>
+            )}
+          />
+          <Route
+            path="/analytics"
+            exact
+            render={() => (
+              <Fragment>
+                <MyAppBar headline={"Analytics"} />
+                <Analytics />
               </Fragment>
             )}
           />
