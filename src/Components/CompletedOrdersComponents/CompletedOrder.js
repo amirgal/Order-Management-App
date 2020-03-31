@@ -19,17 +19,24 @@ const CompletedOrder = inject("ordersStore")(observer(props => {
           expandIcon={<ExpandMoreIcon />}
         >
             <div className={'panel-header'}>
-                <div>ID: {props.order.shopifyId}</div>
-                <div>Product: {props.order.product.name}</div>
-                <div>Name: {customer.name}</div>
-                <div>Email: {customer.email}</div>
+                <p>ID: {props.order.shopifyId}</p>
+                <p>Product: {props.order.product.name}</p>
+                <p>Name: {customer.name}</p>
+                <p>Email: {customer.email}</p>
             </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
             <div className="panel-details">
-                <div>{props.order.price}</div>
-                <div>{props.order.date.toDateString()}</div>
-                <div>{props.order.endDate.toDateString()}</div>
+                <div className="order-info">
+                    <p>Price: {props.order.price}</p>
+                    <p>Order Date: {props.order.date.toDateString()}</p>
+                    <p>Shipping Date: {props.order.endDate.toDateString()}</p>
+                </div>
+                <div className="order-workflow">
+                    {Object.keys(props.order.stageEmployees).map(s => 
+                        <p>{s} : {props.order.stageEmployees[s]}</p>    
+                    )}
+                </div>
              </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
