@@ -57,7 +57,7 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
       progress: 1,
       stageEmployees: { 1: "" },
       isComplete: false,
-      shippingAdress: {
+      shippingAddress: {
         address: address.address1,
         city: address.city,
         province: address.province,

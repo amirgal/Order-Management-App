@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import CompletedOrder from "./CompletedOrder";
 import SearchBar from "./SearchBar";
+import Header from './Header';
 
 const CompletedOrders = inject("ordersStore")(observer(props => {
     
@@ -15,6 +16,7 @@ const CompletedOrders = inject("ordersStore")(observer(props => {
         <div id="completed-orders-page">
             <SearchBar handleSearch={handleSearch}/>
             <div id="completed-orders-table">
+                <Header />  
                 {relevantOrders.map((o,i) => <CompletedOrder key={i} order={o}/>)}
             </div>
         </div>

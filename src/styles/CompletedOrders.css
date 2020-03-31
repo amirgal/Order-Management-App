@@ -1,11 +1,28 @@
 #completed-orders-page {
     background-color: #615a62;
     margin: 100px 40px;
-    border-radius:10px;
-    min-height: 80%;
-    padding-top: 15px;
+    border-radius: 10px;
+    min-height: 65vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #completed-search-bar{
-    margin-left:300px
+    margin: 15px 0;
+}
+
+#completed-orders-table{
+    width: 100%;
+}
+
+#order-rows-header{
+    margin-bottom: 5px;
+}
+
+.order-row {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    /* width: 100%; */
+    text-align: center;
 }

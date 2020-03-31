@@ -9,12 +9,13 @@ const orderSchema = new Schema({
   product: { type: Schema.Types.ObjectId, ref: 'Product' },
   attributes: String,
   comment: String,
-  shippingAdress: Object,
+  shippingAddress: Object,
   inProcess: Boolean,
   progress: Number,
   stageEmployees: Object,
   isComplete: Boolean,
-  date: Date
+  date: Date,
+  endDate:Date
 })
 
 const Customer = mongoose.model("Order", orderSchema)
