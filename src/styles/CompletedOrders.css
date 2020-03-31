@@ -15,25 +15,14 @@
 #completed-orders-table{
     width: 90%;
 }
-
-#order-rows-header{
-    margin-bottom: 10px;
-    background-color: red;
+.completed-order-panel{
+    margin: 5px 0;
+    box-shadow: 0 4px 8px 0 #00000073;
 }
 
-.order-row {
+.panel-header {
     display: grid;
-    margin-bottom: 5px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #a09fa0de;
-    transition: 0.3s;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.335);
-    grid-template-columns: repeat(7,1fr);
-    width: 100%;
+    grid-template-columns: repeat(4,1fr);
+    width: -webkit-fill-available;
     text-align: center;
-}
-
-.order-row:hover {
-    background-color: white;
 }

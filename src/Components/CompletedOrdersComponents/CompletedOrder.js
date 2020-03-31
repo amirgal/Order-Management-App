@@ -1,75 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
+import {ExpansionPanel, ExpansionPanelDetails,
+        ExpansionPanelSummary} from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-const CompletedOrder = inject("ordersStore")(
-  observer(props => {
-    console.log(props.order);
-    const costumer = props.ordersStore.customers.find(
-      c => c.shopifyId === props.order.costumerId
+
+const CompletedOrder = inject("ordersStore")(observer(props => {
+
+    const customer = props.ordersStore.customers.find(
+        c => c.shopifyId === props.order.customerId
     );
+
     return (
-      <div className="order-row">
-        <div className="order-row-item">{props.order.shopifyId}</div>
-        <div className="order-row-item">{props.order.product.name}</div>
-        <div className="order-row-item">{props.order.price}</div>
-        <div className="order-row-item">{costumer.name}</div>
-        <div className="order-row-item">{costumer.email}</div>
-        <div className="order-row-item">{props.order.date.toDateString()}</div>
-        <div className="order-row-item">{props.order.endDate.toDateString()}</div>
-      </div>
+    <div className={'completed-order-panel'}>
+      <ExpansionPanel expanded={props.expanded === props.order._id}
+        onChange={props.handleChange(props.order._id)}>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+        >
+            <div className={'panel-header'}>
+                <div>ID: {props.order.shopifyId}</div>
+                <div>Product: {props.order.product.name}</div>
+                <div>Name: {customer.name}</div>
+                <div>Email: {customer.email}</div>
+            </div>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+            <div className="panel-details">
+                <div>{props.order.price}</div>
+                <div>{props.order.date.toDateString()}</div>
+                <div>{props.order.endDate.toDateString()}</div>
+             </div>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    </div>
     );
   })
 );
 
 export default CompletedOrder;
-
-import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
-    flexShrink: 0,
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
-  },
-}));
-
-export default function ControlledExpansionPanels() {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
-
-  return (
-    <div className={classes.root}>
-      <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography className={classes.heading}>General settings</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-            maximus est, id dignissim quam.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
-  );
-}

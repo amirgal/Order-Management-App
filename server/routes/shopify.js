@@ -101,7 +101,7 @@ const shopify = function() {
             date: result.created_at,
             shopifyId: result.id,
             itemId: item.id,
-            costumerId: result.customer.id,
+            customerId: result.customer.id,
             price: parseInt(result.total_price),
             product: product[0]._id,
             attributes: item.variant_title,

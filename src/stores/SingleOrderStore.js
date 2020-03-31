@@ -11,7 +11,7 @@ export default class SingleOrder {
     constructor(order){
      this._id = order._id   
      this.shopifyId = order.shopifyId   
-     this.costumerId = order.costumerId   
+     this.customerId = order.customerId   
      this.price = order.price   
      this.product = order.product   
      this.attributes = order.attributes    
