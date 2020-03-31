@@ -46,7 +46,7 @@ const OrderCard = inject("detailsWindowStore")(
               <Fragment>
                 <ListItem>
                   <p id="employeeName">
-                    Employee: {props.order.stageEmployees[props.order.progress]}
+                    Employee: {props.order.stageEmployees[props.order.progress.name]}
                   </p>
                 </ListItem>
                 <ListItem>

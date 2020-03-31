@@ -52,7 +52,74 @@ export default class OrdersStore{
            this.orders = response.data.orders.map(o => new SingleOrderStore(o))
            this.employees = response.data.employees
            this.products = response.data.products
+           
        }
+    }
+
+    @action getAverageTimeForTask = () => {
+        const objByEmployee = {}
+        const toReturn = []
+        console.log(this.orders.length);
+        
+         this.orders.forEach(o => {
+            for(let i =1; i < o.progress;i++ ){
+                console.log(o.stageEmployee);
+                if(o.stageEmployees[i]['endDate']){
+                    if(!objByEmployee[o.stageEmployees[i].name]){
+                        objByEmployee[[o.stageEmployees[i].name]] ={sum : 0 ,num : 0}
+                    }
+                    objByEmployee[o.stageEmployees[i].name].sum += ((o.stageEmployees[i].endDate - o.stageEmployees[i].startDate) / 60000 )      
+                    objByEmployee[o.stageEmployees[i].name].num += 1              
+                }
+
+            }
+            
+        })
+        const objKeys = Object.keys(objByEmployee)
+        for(let key of objKeys){
+            const num = (objByEmployee[key].sum / objByEmployee[key].num)
+            toReturn.push({name : key, average : (Math.round(num * 100) / 100).toFixed(2)})
+        }
+        
+        return toReturn
+    }
+    @action getCompletedByEmployee = () => {
+        const objByEmployee = {}
+        const toReturn = []
+        this.orders.forEach(o => {
+            for(let i = 1; i< o.progress;i++){
+                if(o.stageEmployees[i]['endDate']){
+                    if(!objByEmployee[o.stageEmployees[i].name]){
+                        objByEmployee[o.stageEmployees[i].name] = 1
+                    }else{
+                        objByEmployee[o.stageEmployees[i].name] += 1
+                    }
+                }
+            }
+        })
+        const objKeys = Object.keys(objByEmployee)
+        for(let key of objKeys){
+            toReturn.push({name : key , amount : objByEmployee[key]})
+        }
+
+        return toReturn
+    }
+
+    @action getOrdersPerProduct = () => {
+        const toReturn = []
+        const objByProduct = {}
+        this.orders.forEach(o => {
+            if(!objByProduct[o.product.name]){
+                objByProduct[o.product.name] = 1
+            }else{
+                objByProduct[o.product.name] +=1
+            }
+        })
+        const objKeys = Object.keys(objByProduct)
+        for(let key of objKeys){
+            toReturn.push({name : key, number : objByProduct[key]})
+        }
+        return toReturn
     }
     
 

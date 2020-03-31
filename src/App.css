@@ -1,6 +1,9 @@
 body {
   background-color: #3b3c43;
 }
+.stage::-webkit-scrollbar {
+    display: none;
+  }
 
 #order-manager-page {
   padding-top: 70px;
