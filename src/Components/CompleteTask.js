@@ -42,7 +42,7 @@ const CompleteTask = inject('ordersStore','detailsWindowStore')(observer((props)
                     </ListItem>
                 )}
                 <ListItem>
-                    <Button variant='contained' color='primary' disabled={!checkCompletion()}
+                    <Button variant='contained' disabled={!checkCompletion()}
                     onClick={completeStage}>Complete</Button>
                 </ListItem>
             </List>

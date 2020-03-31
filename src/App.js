@@ -55,7 +55,7 @@ const App = inject("ordersStore")(
             )}
           />
           <Route
-            path="/tracking"
+            path="/tracking/:id?"
             exact
             render={() => (
               <Fragment>

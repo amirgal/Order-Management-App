@@ -3,8 +3,6 @@ import { makeStyles } from "@material-ui/core/styles"
 import Stepper from "@material-ui/core/Stepper"
 import Step from "@material-ui/core/Step"
 import StepLabel from "@material-ui/core/StepLabel"
-import Button from "@material-ui/core/Button"
-import Typography from "@material-ui/core/Typography"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,15 +22,18 @@ const steps = [
   "Your board is on the CNC",
   "Your board is being sanded",
   "Your board is getting lacquered",
-  "You board is being packaged",
-  "You board will ship shortly",
+  "Your board is being packaged",
+  "Your board will ship shortly",
   "Your board has been shipped"
 ]
 const TrackingBar = props => {
   const classes = useStyles()
   return (
-    <div >
-      <Stepper activeStep={props.activeStep -1} alternativeLabel>
+    <div>
+      {/* <h3>{props.customer.name}</h3>
+      <h4>{props.customer.email}</h4>
+      <h4>Order no: {props.order.shopifyId}</h4> */}
+      <Stepper activeStep={props.activeStep - 1} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
