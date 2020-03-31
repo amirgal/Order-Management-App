@@ -4,17 +4,18 @@ const Schema = mongoose.Schema
 const orderSchema = new Schema({
   shopifyId: Number,
   itemId: Number,
-  costumerId: Number,
+  customerId: Number,
   price: Number,
   product: { type: Schema.Types.ObjectId, ref: 'Product' },
   attributes: String,
   comment: String,
-  shippingAdress: Object,
+  shippingAddress: Object,
   inProcess: Boolean,
   progress: Number,
   stageEmployees: Object,
   isComplete: Boolean,
-  date: Date
+  date: Date,
+  endDate:Date
 })
 
 const Customer = mongoose.model("Order", orderSchema)

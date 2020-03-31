@@ -3,22 +3,26 @@ body {
 }
 
 #order-manager-page {
-  padding-top: 70px;
+    padding-top: 70px;
 }
 
 #stages-container {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-gap: 10px;
-  margin: 10px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px;
+    margin: 10px;
 }
 
 .stage {
-  background-color: #615a62;
-  height: fit-content;
-  border-radius: 5px;
-  max-height: 80vh;
-  overflow: scroll;
+    background-color: #615a62;
+    height: fit-content;
+    border-radius: 5px;
+    max-height: 80vh;
+    overflow: scroll;
+}
+
+.stage::-webkit-scrollbar {
+    display: none;
 }
 
 #details-window {

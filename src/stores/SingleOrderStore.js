@@ -11,7 +11,7 @@ export default class SingleOrder {
     constructor(order){
      this._id = order._id   
      this.shopifyId = order.shopifyId   
-     this.costumerId = order.costumerId   
+     this.customerId = order.customerId   
      this.price = order.price   
      this.product = order.product   
      this.attributes = order.attributes    
@@ -21,20 +21,22 @@ export default class SingleOrder {
      this.stageEmployees = order.stageEmployees
      this.shippingAddress = order.shippingAddress  
      this.date = new Date(order.date)
+     this.endDate = new Date(order.endDate)
     }
     
-    @action advanceStage = () => {
+    @action advanceStage = async () => {
         this.progress +=1
         this.inProcess = false
-        if(this.progress > 6){this.isComplete = true}       //hardcoded stage for now
-        axios.put("http://localhost:4000/api/order",this)
+        if(this.progress > 6){           //hardcoded stage for now
+            this.isComplete = true
+            this.endDate = new Date()
+        }      
+        await axios.put("http://localhost:4000/api/order",this)
     }
     
-    @action claimStage = (employeeName) => {
+    @action claimStage = async (employeeName) => {
         this.stageEmployees[this.progress] = employeeName
         this.inProcess = true
-        axios.put("http://localhost:4000/api/order",this)
+        await axios.put("http://localhost:4000/api/order",this)
     }
-    
-    
 }
