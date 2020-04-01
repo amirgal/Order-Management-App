@@ -14,9 +14,9 @@ const OrderManager = inject('generalStore','detailsWindowStore')(observer((props
   
     return (
         <div id="order-manager-page">
-            <div id="stages-container">
+            {/* <div id="stages-container">
                 {stages.map(s => <Stage key={s} stage={s}/>)}
-            </div>
+            </div> */}
             {props.detailsWindowStore.showDetailsWindow ? <StageDetailsModal /> : null}
         </div>
     )
