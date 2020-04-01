@@ -4,7 +4,7 @@ import SingleOrderStore from "./SingleOrderStore";
 import BoardStore from "./BoardStore";
 
 export default class GeneralStore {
-  @observable orders = [];
+  @observable completedOrders = [];
   @observable products = [];
   @observable employees = [];
   @observable customers = [];
@@ -22,10 +22,10 @@ export default class GeneralStore {
     
   };
 
-  @action getOrders = async () => {
+  @action getCompletedOrders = async () => {
     debugger;
-    const ordersResponse = await axios.get("http://localhost:4000/api/orders");
-    this.orders = ordersResponse.data.map(o => new SingleOrderStore(o));
+    const ordersResponse = await axios.get("http://localhost:4000/api/completed");
+    this.completedOrders = ordersResponse.data.map(o => new SingleOrderStore(o));
   };
 
   @action getEmployees = async () => {
@@ -88,7 +88,7 @@ export default class GeneralStore {
       ordersUrl
     });
     if (response.data.products) {
-      this.orders = response.data.orders.map(o => new SingleOrderStore(o));
+      this.completedOrders = response.data.orders.filter(o => o.isComplete).map(o => new SingleOrderStore(o));
       this.employees = response.data.employees;
       this.products = response.data.products;
       return true;

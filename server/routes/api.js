@@ -42,8 +42,8 @@ router.put('/board',async (req,res) => {
   res.send(response)
 })
 
-router.get(`/orders/`, async (req, res) => {
-  const orders = await Order.find({}).populate("product")
+router.get(`/completed/`, async (req, res) => {
+  const orders = await Order.find({isComplete : true}).populate("product")
   res.send(orders)
 }) 
 
