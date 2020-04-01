@@ -1,24 +1,29 @@
-import {observable,action, computed} from 'mobx'
-import axios from 'axios'
-import SingleOrderStore from './SingleOrderStore'
+import { observable, action, computed } from "mobx";
+import axios from "axios";
+import SingleOrderStore from "./SingleOrderStore";
+import BoardStore from "./BoardStore";
 
 export default class GeneralStore {
   @observable orders = [];
   @observable products = [];
   @observable employees = [];
   @observable customers = [];
-  @observable boards = []
+  @observable boards = [];
 
   @action getBoards = async () => {
-      const boards = axios.get("http://localhost:4000/api/boards")
-      boards.forEach(board => {
-          board.orders = board.orders.map(o => new SingleOrderStore(o, board.stages.length))
-      });
-      this.boards = boards
-  }
+    const boards = await axios.get("http://localhost:4000/api/boards");
+    boards.data.forEach(board => {
+      board.orders = board.orders.map(
+        o => new SingleOrderStore(o, board.stages.length)
+      );
+    });
+    this.boards = boards;
+    console.log(this.boards);
+    
+  };
 
   @action getOrders = async () => {
-    debugger
+    debugger;
     const ordersResponse = await axios.get("http://localhost:4000/api/orders");
     this.orders = ordersResponse.data.map(o => new SingleOrderStore(o));
   };
@@ -42,6 +47,17 @@ export default class GeneralStore {
       "http://localhost:4000/api/customers"
     );
     this.customers = customersResponse.data;
+  };
+
+  @action createBoard = async board => {
+    const savedBoard = await axios.post(
+      "http://localhost:4000/api/board",
+      board
+    );
+    savedBoard.data.orders.map(
+      o => new SingleOrderStore(o, board.stages.length)
+    );
+    this.boards.push(new BoardStore(savedBoard.data));
   };
 
   @action addEmployee = async name => {
@@ -126,12 +142,11 @@ export default class GeneralStore {
       toReturn.push({ name: key, amount: objByEmployee[key] });
     }
     return toReturn;
-    };
-    
-    @computed get completedOrders() {
-        return this.orders.filter(o => o.isComplete)
-    }
+  };
 
+  @computed get completedOrders() {
+    return this.orders.filter(o => o.isComplete);
+  }
 
   @action getOrdersPerProduct = () => {
     const toReturn = [];
@@ -179,5 +194,6 @@ export default class GeneralStore {
     this.getEmployees();
     this.getProducts();
     this.getCustomers();
+    this.getBoards()
   };
 }
