@@ -37,7 +37,7 @@ const ClaimTask = inject('ordersStore','detailsWindowStore')(observer((props) =>
                         />
                     </ListItem>
                 <ListItem>
-                    <Button variant='contained' color='primary' disabled = {!isEmployeeChosen()}
+                    <Button variant='contained' disabled = {!isEmployeeChosen()}
                     onClick={claimStage}>Claim</Button>
                 </ListItem>
             </List>

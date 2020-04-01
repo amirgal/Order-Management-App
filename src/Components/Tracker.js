@@ -2,25 +2,39 @@ import React, { useState, useEffect } from "react"
 import { inject, observer } from "mobx-react"
 import { Button, TextField } from "@material-ui/core"
 import TrackingBar from "./OrderTracker"
+import { useParams } from "react-router"
 
 const Tracker = inject("ordersStore")(
   observer(props => {
-    const [orderId, setOrderId] = useState("")
+    const { id } = useParams()
+    const [orderId, setOrderId] = useState(id ? id : "")
     const [activeStep, setActiveStep] = useState(0)
+    const [orderObj, setOrderObj] = useState(null)
+    const [customer, setCustomer] = useState(null)
     const handleChange = e => {
       setOrderId(e.target.value)
     }
-    const orders = props.ordersStore.orders
+    const customers = props.ordersStore.customers
     const findOrder = () => {
+      const orders = props.ordersStore.orders
       let order = orders.find(o => o.shopifyId == orderId)
       if (order) {
+        let foundCustomer = customers.find(c => c.shopifyId == order.customerId)
+        setCustomer(foundCustomer)
+        setOrderObj(order)
         setActiveStep(order.progress)
         setOrderId("")
       } else {
         setOrderId("")
+        alert("Invalid Order Number")
       }
-      return order
     }
+
+    // useEffect(() => {
+    //   if (id) {
+    //     findOrder()
+    //   }
+    // }, [])
 
     return (
       <div className="tracker_page">
@@ -33,10 +47,16 @@ const Tracker = inject("ordersStore")(
           onChange={handleChange}
         />
         <Button id="trackButton" onClick={findOrder} variant="contained">
-          Track
+          Track Order
         </Button>
         <div className="activeStep">
-          {activeStep > 0 ? <TrackingBar classes={{backgroundColor: 'red'}}activeStep={activeStep} /> : null}
+          {activeStep > 0 ? (
+            <TrackingBar
+              activeStep={activeStep}
+              order={orderObj}
+              customer={customer}
+            />
+          ) : null}
         </div>
       </div>
     )
