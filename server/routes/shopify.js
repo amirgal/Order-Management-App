@@ -15,57 +15,7 @@ const shopify = function() {
     for (result of results.data.products) {
       let product = new Product({
         shopifyId: result.id,
-        name: result.title,
-        stages: {
-          1: {
-            title: "Pressing",
-            steps: [
-              "Make Sure you have all materials ready before you start the layup process",
-              "Double check flex and graphic are correct",
-              `Use mold : ${
-                result.title === "Atlas" ? 1 : result.title === `Aldous` ? 2 : 3
-              }`
-            ]
-          },
-          2: {
-            title: "CNC",
-            steps: [
-              `Home the machine if it’s the first board of the day`,
-              `Make sure you load the correct file to the controller`,
-              `Touch off height sensor`,
-              `Use mold : ${
-                result.title === "Atlas" ? 1 : result.title === `Aldous` ? 2 : 3
-              }`
-            ]
-          },
-          3: {
-            title: `Sanding`,
-            steps: [
-              `Make sure everything is silky smooth.
-    `,
-              `Check the wheel-wells closely`
-            ]
-          },
-          4: {
-            title: `Lacquer`,
-            steps: [`2 Layers on top`, `2 layers on bottom`]
-          },
-          5: {
-            title: `Vaccum Bag`,
-            steps: [
-              `Apply flex sticker`,
-              `Place sticker pack and product booklet in bag`,
-              `Vacuum + seal bag`
-            ]
-          },
-          6: {
-            title: `Shipping`,
-            steps: [
-              `Make sure all order items are in the box`,
-              `Print Shipping Label -> link/button`
-            ]
-          }
-        }
+        name: result.title
       })
       await product.save()
     }

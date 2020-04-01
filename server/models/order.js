@@ -5,6 +5,7 @@ const orderSchema = new Schema({
   shopifyId: Number,
   itemId: Number,
   customerId: Number,
+  boardId:String,
   price: Number,
   product: { type: Schema.Types.ObjectId, ref: 'Product' },
   attributes: String,
@@ -18,5 +19,5 @@ const orderSchema = new Schema({
   endDate:Date
 })
 
-const Customer = mongoose.model("Order", orderSchema)
-module.exports = Customer
+const Order = mongoose.model("Order", orderSchema)
+module.exports = Order

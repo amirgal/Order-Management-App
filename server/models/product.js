@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const productSchema = new Schema({
     shopifyId: Number,
     name : String,
-    stages : Object
+    boardId: String
 })
 
 const Product = mongoose.model("Product", productSchema)

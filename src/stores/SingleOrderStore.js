@@ -8,7 +8,7 @@ export default class SingleOrder {
     @observable stageEmployees 
     @observable isComplete
     
-    constructor(order){
+    constructor(order,numStages){
      this._id = order._id   
      this.shopifyId = order.shopifyId   
      this.customerId = order.customerId   
@@ -22,6 +22,7 @@ export default class SingleOrder {
      this.shippingAddress = order.shippingAddress  
      this.date = new Date(order.date)
      this.endDate = new Date(order.endDate)
+     this.numStages = numStages
     }
     
     @action advanceStage = async () => {

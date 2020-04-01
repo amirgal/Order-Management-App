@@ -5,24 +5,40 @@ const shopify = require("./shopify")()
 const Product = require("../models/Product")
 const Order = require("../models/Order")
 const Customer = require("../models/Customer")
-const Employee = require("../models/Employee")
+const Employee = require("../models/employee")
+const Board = require('../models/board');
 
-// const employees = ["Nadav", "Amir", "Alon", "Ron"]
+router.get(`/boards/`, async (req, res) => {
+  const boards = await Board.find({}).populate({
+    path:'orders',
+    populate:{
+      path:'product'
+    }
+  })
+  res.send(boards)
+})
 
-// const addEmployeesToDB = async arr => {
-//   for (let e of arr) {
-//     let employee = new Employee({
-//       name: e,
-//       isActive : true
-//     })
-//     await employee.save()
-//   }
-// }
+router.post('/board', async(req,res) => {
+  const newBoard = req.body   //{name, productIds:[],stages:[{}]}
+  const board = new Board(newBoard)
+  console.log(board)
+  let orders = []
+  for(let prodId of board.products){
+    await Product.updateOne({_id:prodId}, {boardId:board._id})
+    const prodOrdersIds = await Order.find({product: prodId}).select('_id')
+    orders = [...orders,...prodOrdersIds]
+  }
+
+  board.orders = orders
+  await board.save()
+  res.send(board)
+})
 
 router.get(`/orders/`, async (req, res) => {
   const orders = await Order.find({}).populate("product")
   res.send(orders)
-})
+}) 
+
 router.get(`/customers/`, async (req, res) => {
   const customers = await Customer.find({})
   res.send(customers)
@@ -72,9 +88,9 @@ router.post("/sync/", async (req, res) => {
   await shopify.getOrdersFromShopify(ordersUrl)
   const products = await Product.find({})
   const orders = await Order.find({})
+  const boards = await Board.find({})
   const employees = await Employee.find({})
   res.send({ products, orders, employees })
 })
 
-// addEmployeesToDB(employees)
 module.exports = router
