@@ -18,12 +18,12 @@ export default class GeneralStore {
       );
     });
     this.boards = boards;
-    console.log(this.boards);
+    // console.log(this.boards);
     
   };
 
   @action getOrders = async () => {
-    debugger;
+    // debugger;
     const ordersResponse = await axios.get("http://localhost:4000/api/orders");
     this.orders = ordersResponse.data.map(o => new SingleOrderStore(o));
   };

@@ -6,9 +6,10 @@ import OrderManager from "./Components/OrderManager"
 import MyAppBar from "./Components/MyAppBar"
 import Settings from "./Components/Settings"
 import { StylesProvider } from "@material-ui/core/styles"
-import CompletedOrders from './Components/CompletedOrdersComponents/CompletedOrders';
+import CompletedOrders from "./Components/CompletedOrdersComponents/CompletedOrders"
 import Tracker from "./Components/Tracker"
 import Analytics from "./Components/AnalyticsComponents/Analytics"
+import CreateBoard from "./Components/BoardComponents/CreateBoard"
 
 const App = inject("generalStore")(
   observer(props => {
@@ -60,6 +61,15 @@ const App = inject("generalStore")(
             render={() => (
               <Fragment>
                 <Tracker />
+              </Fragment>
+            )}
+          />
+          <Route
+            path="/createboard"
+            exact
+            render={() => (
+              <Fragment>
+                <CreateBoard />
               </Fragment>
             )}
           />
