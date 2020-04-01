@@ -77,6 +77,5 @@ const shopify = function() {
   }
   return { getOrdersFromShopify, getProductsFromShopify }
 }
-//getProductsFromShopify(productsAPI)
-//  getOrdersFromShopify(ordersAPI)
+
 module.exports = shopify

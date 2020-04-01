@@ -13,9 +13,10 @@ import BoardTabsBar from "./Components/OrderManagerComponents/BoardTabsBar"
 
 const App = inject("generalStore")(
   observer(props => {
-    // useEffect(() => {
-    //   props.generalStore.initializeAll()
-    // }, [])
+    
+    useEffect(() => {
+      props.generalStore.initializeAll()
+    }, [])
 
     return (
       <StylesProvider injectFirst>

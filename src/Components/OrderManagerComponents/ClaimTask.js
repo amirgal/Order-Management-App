@@ -6,7 +6,7 @@ import {Autocomplete} from '@material-ui/lab'
 const ClaimTask = inject('generalStore','detailsWindowStore')(observer((props) => {
     const [employee, setEmployee] = useState(null)
     const currOrder = props.detailsWindowStore.detailsWindowOrder
-    const steps = currOrder.product.stages[currOrder.progress].steps
+    const steps = props.generalStore.boards.find(b => b.products.includes(p => p === currOrder.product._id)).stages[currOrder.progress].steps
 
     const claimStage = () => {
         props.detailsWindowStore.detailsWindowOrder.claimStage(employee.name)
