@@ -10,10 +10,10 @@ import CompletedOrders from './Components/CompletedOrdersComponents/CompletedOrd
 import Tracker from "./Components/Tracker"
 import Analytics from "./Components/AnalyticsComponents/Analytics"
 
-const App = inject("ordersStore")(
+const App = inject("generalStore")(
   observer(props => {
     useEffect(() => {
-      props.ordersStore.initializeAll()
+      props.generalStore.initializeAll()
     }, [])
 
     return (
