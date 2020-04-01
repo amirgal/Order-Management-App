@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import {Button, TextField, Typography, List, ListItem} from '@material-ui/core'
 import {Autocomplete} from '@material-ui/lab'
 
-const ClaimTask = inject('ordersStore','detailsWindowStore')(observer((props) => {
+const ClaimTask = inject('generalStore','detailsWindowStore')(observer((props) => {
     const [employee, setEmployee] = useState(null)
     const currOrder = props.detailsWindowStore.detailsWindowOrder
     const steps = currOrder.product.stages[currOrder.progress].steps
@@ -29,7 +29,7 @@ const ClaimTask = inject('ordersStore','detailsWindowStore')(observer((props) =>
                     <Autocomplete
                         id="select-employee"
                         onChange={(e,v) => setEmployee(v)}
-                        options={props.ordersStore.employees.filter(e => e.isActive)}
+                        options={props.generalStore.employees.filter(e => e.isActive)}
                         getOptionLabel={option => option.name}
                         style={{ width: 300 }}
                         renderInput={params => <TextField {...params}

@@ -4,7 +4,7 @@ import { Button, TextField } from "@material-ui/core"
 import TrackingBar from "./OrderTracker"
 import { useParams } from "react-router"
 
-const Tracker = inject("ordersStore")(
+const Tracker = inject("generalStore")(
   observer(props => {
     const { id } = useParams()
     const [orderId, setOrderId] = useState(id ? id : "")
@@ -14,9 +14,9 @@ const Tracker = inject("ordersStore")(
     const handleChange = e => {
       setOrderId(e.target.value)
     }
-    const customers = props.ordersStore.customers
+    const customers = props.generalStore.customers
     const findOrder = () => {
-      const orders = props.ordersStore.orders
+      const orders = props.generalStore.orders
       let order = orders.find(o => o.shopifyId == orderId)
       if (order) {
         let foundCustomer = customers.find(c => c.shopifyId == order.customerId)

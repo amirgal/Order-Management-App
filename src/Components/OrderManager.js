@@ -4,11 +4,11 @@ import Stage from './Stage';
 import StageDetailsWindow from './StageDetailsWindow';
 import StageDetailsModal from './StageDetailsModal'
 
-const OrderManager = inject('ordersStore','detailsWindowStore')(observer((props) => {
+const OrderManager = inject('generalStore','detailsWindowStore')(observer((props) => {
     const stages = [1,2,3,4,5,6]
 
     // useEffect(() => {
-    //     props.ordersStore.initializeAll() 
+    //     props.generalStore.initializeAll() 
         
     // },[]) 
   

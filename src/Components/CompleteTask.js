@@ -2,7 +2,7 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import {Button, FormControlLabel, Checkbox, List, ListItem} from '@material-ui/core'
 
-const CompleteTask = inject('ordersStore','detailsWindowStore')(observer((props) => {
+const CompleteTask = inject('generalStore','detailsWindowStore')(observer((props) => {
     const currOrder = props.detailsWindowStore.detailsWindowOrder
     const steps = currOrder.product.stages[currOrder.progress].steps
     

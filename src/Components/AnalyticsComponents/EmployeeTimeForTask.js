@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import TaskTimeChart from "./TaskTimeChart";
 
-const EmployeeTimeForTask = inject("ordersStore")(
+const EmployeeTimeForTask = inject("generalStore")(
   observer(props => {
     const [averageTime, setAverageTime] = useState([]);
     
     useEffect(() => {
-      if (props.ordersStore.orders.length > 0) {
-        const avgTImeArr = props.ordersStore.getAverageTimeForTask();
+      if (props.generalStore.orders.length > 0) {
+        const avgTImeArr = props.generalStore.getAverageTimeForTask();
         setAverageTime(avgTImeArr);
-      }}, [props.ordersStore.orders]);
+      }}, [props.generalStore.orders]);
     
     return (
       <div>

@@ -5,9 +5,9 @@ import {ExpansionPanel, ExpansionPanelDetails,
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 
-const CompletedOrder = inject("ordersStore")(observer(props => {
+const CompletedOrder = inject("generalStore")(observer(props => {
 
-    const customer = props.ordersStore.customers.find(
+    const customer = props.generalStore.customers.find(
         c => c.shopifyId === props.order.customerId
     );
 

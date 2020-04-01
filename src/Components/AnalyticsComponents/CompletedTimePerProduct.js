@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import ProductTimeChart from "./ProductTimeChart";
 
-const CompletedTimePerProduct = inject("ordersStore")(
+const CompletedTimePerProduct = inject("generalStore")(
   observer(props => {
     const [timePerProduct, setTimePerProduct] = useState([]);
     
     useEffect(() => {
-      if (props.ordersStore.orders.length > 0) {
-        const tempTimePerProduct = props.ordersStore.getTimePerProduct();        
+      if (props.generalStore.orders.length > 0) {
+        const tempTimePerProduct = props.generalStore.getTimePerProduct();        
         setTimePerProduct(tempTimePerProduct);
-      }}, [props.ordersStore.orders]);
+      }}, [props.generalStore.orders]);
     
     return (
       <div>

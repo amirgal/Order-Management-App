@@ -7,7 +7,7 @@ import OrdersPerProduct from './OrdersPerProduct';
 import CompletedByEmployee from './CompletedByEmployee';
 import CompletedTimePerProduct from './CompletedTimePerProduct';
 
-const Analytics = inject('ordersStore')(observer((props) => {
+const Analytics = inject('generalStore')(observer((props) => {
 
 
 return(
