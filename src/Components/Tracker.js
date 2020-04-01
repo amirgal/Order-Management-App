@@ -7,7 +7,7 @@ import { useParams } from "react-router"
 const Tracker = inject("ordersStore")(
   observer(props => {
     const { id } = useParams()
-    const [orderId, setOrderId] = useState(id ? parseInt(id) : "")
+    const [orderId, setOrderId] = useState(id ? id : "")
     const [activeStep, setActiveStep] = useState(0)
     const [orderObj, setOrderObj] = useState(null)
     const [customer, setCustomer] = useState(null)
@@ -24,18 +24,17 @@ const Tracker = inject("ordersStore")(
         setOrderObj(order)
         setActiveStep(order.progress)
         setOrderId("")
-        console.log(customer)
       } else {
         setOrderId("")
-        alert('Invalid Order Number')
+        alert("Invalid Order Number")
       }
     }
-    useEffect(() => {
-      if (id) {
-        findOrder()
-        console.log(id)
-      }
-    }, [])
+
+    // useEffect(() => {
+    //   if (id) {
+    //     findOrder()
+    //   }
+    // }, [])
 
     return (
       <div className="tracker_page">
@@ -48,7 +47,7 @@ const Tracker = inject("ordersStore")(
           onChange={handleChange}
         />
         <Button id="trackButton" onClick={findOrder} variant="contained">
-          Track
+          Track Order
         </Button>
         <div className="activeStep">
           {activeStep > 0 ? (
