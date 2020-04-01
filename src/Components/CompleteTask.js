@@ -4,8 +4,7 @@ import {Button, FormControlLabel, Checkbox, List, ListItem} from '@material-ui/c
 
 const CompleteTask = inject('generalStore','detailsWindowStore')(observer((props) => {
     const currOrder = props.detailsWindowStore.detailsWindowOrder
-    const steps = currOrder.product.stages[currOrder.progress].steps
-    
+    const steps = props.generalStore.boards.find(b => b.products.includes(p => p === currOrder.product._id)).stages[currOrder.progress].steps
     const createCheckedState = () => {
         const newState = {}
         for(let i in steps){
