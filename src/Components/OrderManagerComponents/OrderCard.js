@@ -23,7 +23,7 @@ const OrderCard = inject("detailsWindowStore")(
         className={
           props.order.inProcess
             ? "order inProcess"
-            : props.order.progress == 6
+            : props.order.progress === 6
             ? "order ready"
             : "order"
         }

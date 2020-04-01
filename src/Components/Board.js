@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { inject, observer } from 'mobx-react';
+import React from 'react';
+import { observer } from 'mobx-react';
 import Stage from './OrderManagerComponents/Stage';
 
 const Board = observer((props) => {

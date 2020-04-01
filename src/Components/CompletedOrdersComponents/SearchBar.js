@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { TextField, InputLabel, MenuItem, FormControl, FormHelperText, Select } from '@material-ui/core';
+import { TextField, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
 
 const SearchBar = (props) => {
     const [input,setInput] = useState('')

@@ -79,8 +79,8 @@ const BoardTabsBar = inject('generalStore')(observer((props) => {
             onChangeIndex={handleChangeIndex}
             >
             {boards.map((b,i) => 
-                <TabPanel value={value} index ={i} dir={theme.direction}>
-                    <Board key={i} board={b}/>
+                <TabPanel key={i} value={value} index ={i} dir={theme.direction}>
+                    <Board board={b}/>
                 </TabPanel>
             )}
             <TabPanel value={value} index ={boards.length} dir={theme.direction}>

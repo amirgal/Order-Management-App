@@ -10,8 +10,8 @@ const Stage = inject('generalStore')(observer((props) => {
         <div className='stage'>
             <List>
             {filteredOrders.map((o,i) => 
-                <ListItem>
-                    <OrderCard key={i} order={o}/>
+                <ListItem key={i}>
+                    <OrderCard order={o}/>
                 </ListItem>
             )}
             </List>
