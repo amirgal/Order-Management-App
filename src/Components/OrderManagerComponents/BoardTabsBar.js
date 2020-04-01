@@ -49,6 +49,7 @@ const BoardTabsBar = inject('generalStore')(observer((props) => {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
     const boards = props.generalStore.boards
+    
     const handleChange = (event, newValue) => {
     setValue(newValue);
     };
@@ -56,7 +57,9 @@ const BoardTabsBar = inject('generalStore')(observer((props) => {
     const handleChangeIndex = (index) => {
     setValue(index);
     };
-
+    // if(boards.length === 0 || !boards[0]){
+    //     return null
+    // }else{
     return (
     <div className={classes.root}>
         <AppBar position="static" color="default">
@@ -68,7 +71,7 @@ const BoardTabsBar = inject('generalStore')(observer((props) => {
             variant="fullWidth"
             aria-label="full width tabs example"
         >
-            {boards.map((b,i) => <Tab label={`${b.name}`} {...a11yProps(i)}/>)}
+            {boards.map((b,i) => <Tab key={i} label={`${b.name}`} {...a11yProps(i)}/>)}
             <Tab label={<AddIcon/>} {...a11yProps(boards.length)}/>
         </Tabs>
         </AppBar>
@@ -79,7 +82,7 @@ const BoardTabsBar = inject('generalStore')(observer((props) => {
         >
         {boards.map((b,i) => 
             <TabPanel value={value} index ={i} dir={theme.direction}>
-                <Board board={b}/>
+                <Board key={i} board={b}/>
             </TabPanel>
         )}
         <TabPanel value={value} index ={boards.length} dir={theme.direction}>
@@ -88,6 +91,7 @@ const BoardTabsBar = inject('generalStore')(observer((props) => {
         </SwipeableViews>
     </div>
     );
+    // }
 }))
 
 export default BoardTabsBar
