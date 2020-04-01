@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import PerProductChart from "./PerProductChart";
 
-const OrdersPerProduct = inject("ordersStore")(
+const OrdersPerProduct = inject("generalStore")(
   observer(props => {
     const [perProduct, setPerProduct] = useState([]);
     
     useEffect(() => {
-      if (props.ordersStore.orders.length > 0) {
-        const tempPerProduct = props.ordersStore.getOrdersPerProduct();
+      if (props.generalStore.orders.length > 0) {
+        const tempPerProduct = props.generalStore.getOrdersPerProduct();
         setPerProduct(tempPerProduct);
-      }}, [props.ordersStore.orders]);
+      }}, [props.generalStore.orders]);
     
     return (
       <div>

@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Settings = inject("ordersStore")(
+const Settings = inject("generalStore")(
   observer(props => {
     const [name, setName] = useState("");
     const [employee, setEmployee] = useState("");
@@ -33,12 +33,12 @@ const Settings = inject("ordersStore")(
     const [shopName, setShopName] = useState("");
     const [password, setPassword] = useState("");
     const [synced, setSynced] = useState(
-      props.ordersStore.orders.length > 0 ? true : false
+      props.generalStore.orders.length > 0 ? true : false
     );
 
     useEffect(() => {
-        props.ordersStore.orders.length > 0 ? setSynced(true) : setSynced(false)
-    },[props.ordersStore.orders])
+        props.generalStore.orders.length > 0 ? setSynced(true) : setSynced(false)
+    },[props.generalStore.orders])
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = event => {
@@ -57,16 +57,16 @@ const Settings = inject("ordersStore")(
     };
 
     const addEmployee = () => {
-      props.ordersStore.addEmployee(name);
+      props.generalStore.addEmployee(name);
       setName("");
     };
     const modifyEmployee = () => {
-      props.ordersStore.modifyEmployee(employee);
+      props.generalStore.modifyEmployee(employee);
       setEmployee("");
     };
     const makeSync = async () => {
       if (apiKey.length > 8 && password.length > 8 && shopName.length > 1) {
-        const isSuccessfull = await props.ordersStore.makeSync({
+        const isSuccessfull = await props.generalStore.makeSync({
           apiKey,
           password,
           shopName
@@ -103,7 +103,7 @@ const Settings = inject("ordersStore")(
               <Autocomplete
                 classes={classes}
                 onChange={(e, v) => setEmployee(v)}
-                options={props.ordersStore.employees.filter(e => e.isActive)}
+                options={props.generalStore.employees.filter(e => e.isActive)}
                 getOptionLabel={option => option.name}
                 style={{ width: 300 }}
                 renderInput={params => (
@@ -121,7 +121,7 @@ const Settings = inject("ordersStore")(
               <Autocomplete
                 classes={classes}
                 onChange={(e, v) => setEmployee(v)}
-                options={props.ordersStore.employees.filter(e => !e.isActive)}
+                options={props.generalStore.employees.filter(e => !e.isActive)}
                 getOptionLabel={option => option.name}
                 style={{ width: 300 }}
                 renderInput={params => (

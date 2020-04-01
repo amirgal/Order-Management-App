@@ -4,24 +4,24 @@ import { inject, observer } from "mobx-react";
 import CompletedOrder from "./CompletedOrder";
 import SearchBar from "./SearchBar";
 
-const CompletedOrders = inject("ordersStore")(observer(props => {
+const CompletedOrders = inject("generalStore")(observer(props => {
     const [expanded, setExpanded] = useState(false);
-    const [relevantOrders, setRelevantOrders] = useState(props.ordersStore.completedOrders)
+    const [relevantOrders, setRelevantOrders] = useState(props.generalStore.completedOrders)
 
     useEffect(()=>{
-        setRelevantOrders(props.ordersStore.completedOrders)
-    },[props.ordersStore.completedOrders])
+        setRelevantOrders(props.generalStore.completedOrders)
+    },[props.generalStore.completedOrders])
   
     const handleChange = (panel) => (event, isExpanded) => {
       setExpanded(isExpanded ? panel : false);
     };
     const handleSearch = (input, searchParam) => {
         if(searchParam === 'shopifyId'){
-            const relOrders = props.ordersStore.completedOrders
+            const relOrders = props.generalStore.completedOrders
             .filter(o => o[searchParam].toString().includes(input))
             setRelevantOrders(relOrders)
         } else if(searchParam === 'product'){
-            const relOrders = props.ordersStore.completedOrders
+            const relOrders = props.generalStore.completedOrders
             .filter(o => o[searchParam].name.toLowerCase().includes(input))
             setRelevantOrders(relOrders)
         }
