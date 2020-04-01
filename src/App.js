@@ -9,12 +9,13 @@ import { StylesProvider } from "@material-ui/core/styles"
 import CompletedOrders from './Components/CompletedOrdersComponents/CompletedOrders';
 import Tracker from "./Components/TrackerComponents/Tracker"
 import Analytics from "./Components/AnalyticsComponents/Analytics"
+import BoardTabsBar from "./Components/OrderManagerComponents/BoardTabsBar"
 
 const App = inject("generalStore")(
   observer(props => {
-    useEffect(() => {
-      props.generalStore.initializeAll()
-    }, [])
+    // useEffect(() => {
+    //   props.generalStore.initializeAll()
+    // }, [])
 
     return (
       <StylesProvider injectFirst>
@@ -31,6 +32,7 @@ const App = inject("generalStore")(
               <Fragment>
                 <MyAppBar headline={"Order Manager"} />
                 <OrderManager />
+                <BoardTabsBar />
               </Fragment>
             )}
           />

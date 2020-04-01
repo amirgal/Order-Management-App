@@ -7,7 +7,7 @@ export default class GeneralStore {
   @observable products = [];
   @observable employees = [];
   @observable customers = [];
-  @observable boards = []
+  @observable boards = [{name:'board 1'},{name:'board 2'}, {name: 'board 3'}]
 
   @action getBoards = async () => {
       const boards = axios.get("http://localhost:4000/api/boards")
@@ -18,7 +18,6 @@ export default class GeneralStore {
   }
 
   @action getOrders = async () => {
-    debugger
     const ordersResponse = await axios.get("http://localhost:4000/api/orders");
     this.orders = ordersResponse.data.map(o => new SingleOrderStore(o));
   };
