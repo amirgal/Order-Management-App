@@ -51,47 +51,44 @@ const BoardTabsBar = inject('generalStore')(observer((props) => {
     const boards = props.generalStore.boards
     
     const handleChange = (event, newValue) => {
-    setValue(newValue);
+        setValue(newValue);
     };
 
     const handleChangeIndex = (index) => {
-    setValue(index);
+        setValue(index);
     };
-    // if(boards.length === 0 || !boards[0]){
-    //     return null
-    // }else{
+   
     return (
     <div className={classes.root}>
         <AppBar position="static" color="default">
-        <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="fullWidth"
-            aria-label="full width tabs example"
-        >
-            {boards.map((b,i) => <Tab key={i} label={`${b.name}`} {...a11yProps(i)}/>)}
-            <Tab label={<AddIcon/>} {...a11yProps(boards.length)}/>
-        </Tabs>
+            <Tabs
+                value={value}
+                onChange={handleChange}
+                indicatorColor="primary"
+                textColor="primary"
+                variant="fullWidth"
+                aria-label="full width tabs example"
+            >
+                {boards.map((b,i) => <Tab key={i} label={`${b.name}`} {...a11yProps(i)}/>)}
+                <Tab label={<AddIcon/>} {...a11yProps(boards.length)}/>
+            </Tabs>
         </AppBar>
         <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-        >
-        {boards.map((b,i) => 
-            <TabPanel value={value} index ={i} dir={theme.direction}>
-                <Board key={i} board={b}/>
+            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+            index={value}
+            onChangeIndex={handleChangeIndex}
+            >
+            {boards.map((b,i) => 
+                <TabPanel value={value} index ={i} dir={theme.direction}>
+                    <Board key={i} board={b}/>
+                </TabPanel>
+            )}
+            <TabPanel value={value} index ={boards.length} dir={theme.direction}>
+                create board
             </TabPanel>
-        )}
-        <TabPanel value={value} index ={boards.length} dir={theme.direction}>
-            create board
-        </TabPanel>
         </SwipeableViews>
     </div>
     );
-    // }
 }))
 
 export default BoardTabsBar
