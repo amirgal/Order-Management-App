@@ -1,7 +1,7 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
-import {AppBar, Toolbar, Typography, Button, IconButton} from '@material-ui/core'
+import {AppBar, Toolbar, Typography, Button, IconButton, Tabs, Tab} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 import DrawerMenu from './DrawerMenu'
 
@@ -24,7 +24,12 @@ export default function MyAppBar(props) {
   const [state, setState] = React.useState({
     left: false,
   });
-
+  //tabs
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+      setValue(newValue);
+  };
+  //tabs
   const toggleDrawer = () => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -45,6 +50,16 @@ export default function MyAppBar(props) {
           <IconButton onClick={toggleDrawer()} edge="start" className={classes.menuButton} aria-label="menu">
             <MenuIcon />
           </IconButton> 
+          <Tabs
+                value={value}
+                onChange={handleChange}
+                indicatorColor="primary"
+                textColor="primary"
+            >
+            <Tab label="Clients" onClick={() => history.push('/clients')}/>
+            <Tab label="Actions" onClick={() => history.push('/actions')}/>
+            <Tab label="Analytics" onClick={() => history.push('/analytics')}/>
+          </Tabs>
           <Typography variant="h4" className={classes.title} align="center">
             {props.headline}
           </Typography>
