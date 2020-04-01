@@ -1,13 +1,11 @@
 import React from 'react';
+import { observer , inject} from 'mobx-react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import { observer , inject} from 'mobx-react';
+import {AppBar, Tabs, Tab, Typography, Box} from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add';
+import Board from '../Board';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -70,11 +68,8 @@ const BoardTabsBar = inject('generalStore')(observer((props) => {
             variant="fullWidth"
             aria-label="full width tabs example"
         >
-            {/* <Tab label="Item One" {...a11yProps(0)} />
-            <Tab label="Item Two" {...a11yProps(1)} />
-            <Tab label="Item Three" {...a11yProps(2)} /> */}
             {boards.map((b,i) => <Tab label={`${b.name}`} {...a11yProps(i)}/>)}
-            <Tab label='+' {...a11yProps(boards.length)}/>
+            <Tab label={<AddIcon/>} {...a11yProps(boards.length)}/>
         </Tabs>
         </AppBar>
         <SwipeableViews
@@ -84,21 +79,12 @@ const BoardTabsBar = inject('generalStore')(observer((props) => {
         >
         {boards.map((b,i) => 
             <TabPanel value={value} index ={i} dir={theme.direction}>
-                board
+                <Board board={b}/>
             </TabPanel>
         )}
         <TabPanel value={value} index ={boards.length} dir={theme.direction}>
             create board
         </TabPanel>
-        {/* <TabPanel value={value} index={0} dir={theme.direction}>
-            item one
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-            Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-            Item Three
-        </TabPanel> */}
         </SwipeableViews>
     </div>
     );
