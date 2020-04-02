@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { inject, observer } from "mobx-react"
-import {
-  Button,
-  TextField,
-  Typography,
-  List,
-  ListItem
-} from "@material-ui/core"
-import { Autocomplete } from "@material-ui/lab"
+import { Button, TextField, List, ListItem } from "@material-ui/core"
 
 const NewStage = observer(props => {
   const [stageName, setStageName] = useState("")
@@ -20,12 +13,6 @@ const NewStage = observer(props => {
     props.addNewStage({ name: stageName, notes: notes, validate: validations })
     toggleModal()
   }
-  //   const handleNameChange = e => {
-  //     setStageName(e.target.value)
-  //   }
-  //   const handleNameChange = e => {
-  //     setStageName(e.target.value)
-  //   }
   const handleChange = e => {
     e.target.id === "stageNameInput"
       ? setStageName(e.target.value)
@@ -62,6 +49,9 @@ const NewStage = observer(props => {
           />
           <Button onClick={addNote}>Add Note</Button>
         </ListItem>
+        {notes.map(note => (
+          <ListItem>{note}</ListItem>
+        ))}
         <ListItem>
           <TextField
             id="validationInput"
@@ -71,6 +61,9 @@ const NewStage = observer(props => {
           />
           <Button onClick={addValidation}>Add Validation</Button>
         </ListItem>
+        {validations.map(validation => (
+          <ListItem>{validation}</ListItem>
+        ))}
         <ListItem>
           <Button onClick={addNewStage}>Save</Button>
         </ListItem>
