@@ -1,0 +1,19 @@
+.order-item{
+    display: flex;
+    padding:10px 15px;
+    margin-right: 15px;
+}
+
+.statusLight {
+    
+    background-color: #f34627;
+    margin-right: 10px;
+}
+
+.ready .statusLight {
+    background-color: greenyellow;
+}
+
+.order-item > h3 {
+    margin : 0;
+}

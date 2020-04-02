@@ -200,6 +200,22 @@ export default class GeneralStore {
     return toReturn;
   };
 
+  @computed get rdyToShipOrdersById(){
+    const shippingOrdersByID = {}
+    
+    this.orders.forEach(o => {
+      if(o.isReadyToShip){
+        shippingOrdersByID[o.shopifyId] = []
+      }
+    })
+    this.orders.forEach(o => {
+      if(shippingOrdersByID[o.shopifyId]){
+        shippingOrdersByID[o.shopifyId].push(o)
+      }
+    })
+    return shippingOrdersByID
+  }
+
   @action initializeAll = () => {
     // this.getCompletedOrders();
     this.getEmployees();
