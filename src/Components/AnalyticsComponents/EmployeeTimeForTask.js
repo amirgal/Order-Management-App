@@ -7,10 +7,10 @@ const EmployeeTimeForTask = inject("generalStore")(
     const [averageTime, setAverageTime] = useState([]);
     
     useEffect(() => {
-      if (averageTime.length > 0) {
+      if (props.generalStore.orders.length > 0 ) {
         const avgTImeArr = props.generalStore.getAverageTimeForTask();
         setAverageTime(avgTImeArr);
-      }}, [props.generalStore.boards,props.generalStore.completedOrders]);
+      }}, [props.generalStore.orders]);
     
     return (
       <div>

@@ -20,12 +20,12 @@ const CompletedByChart = inject("generalStore")(
     layout="vertical"
     margin={{top: 5, right: 30, left: 20, bottom: 5}}
   >
-    <YAxis type="category" dataKey="name" fill="#884d8"/>
+    <YAxis type="category" dataKey="name" fill="#808000"/>
     <XAxis type="number" dataKey="amount"/>
     <CartesianGrid />
     <Tooltip/>
     <Legend />
-    <Bar dataKey="amount" fill="#884d8" />
+    <Bar dataKey="amount" fill="#808000" />
   </BarChart>
   </div>
   );

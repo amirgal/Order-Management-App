@@ -7,10 +7,10 @@ const CompletedTimePerProduct = inject("generalStore")(
     const [timePerProduct, setTimePerProduct] = useState([]);
     
     useEffect(() => {
-      if (timePerProduct.length > 0) {
+      if (props.generalStore.orders.length > 0) {
         const tempTimePerProduct = props.generalStore.getTimePerProduct();        
         setTimePerProduct(tempTimePerProduct);
-      }}, [props.generalStore.completedOrders]);
+      }}, [props.generalStore.orders]);
     
     return (
       <div>
