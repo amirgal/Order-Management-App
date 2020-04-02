@@ -21,7 +21,7 @@ export default class SingleOrder {
      this.stageEmployees = order.stageEmployees
      this.shippingAddress = order.shippingAddress  
      this.date = new Date(order.date)
-     this.endDate = new Date(order.endDate)
+     this.endDate = order.endDate ? new Date(order.endDate) : null
      this.numStages = numStages
      this.isReadyToShip = order.isReadyToShip
     }

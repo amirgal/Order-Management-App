@@ -4,23 +4,30 @@ import SingleOrderStore from "./SingleOrderStore";
 import BoardStore from "./BoardStore";
 
 export default class GeneralStore {
-  @observable completedOrders = [];
+  @observable boards = [];
+  // @observable completedOrders = [];
+  // @observable readyToShipOrders = []
   @observable products = [];
   @observable employees = [];
   @observable customers = [];
-  @observable boards = [];
+  @observable orders = []
 
   @action getBoards = async () => {
     const boards = await axios.get("http://localhost:4000/api/boards");
-    this.boards = boards.data.map(board => 
-      new BoardStore(board)
-    );
+    this.boards = boards.data.map(board => {
+      return new BoardStore(board)
+    });
+
+    for(let board of this.boards) {
+      this.orders = [...this.orders,...board.orders]
+    }
   };
 
-  @action getCompletedOrders = async () => {
-    const ordersResponse = await axios.get("http://localhost:4000/api/completed");
-    this.completedOrders = ordersResponse.data;
-  };
+
+  // @action getCompletedOrders = async () => {
+  //   const ordersResponse = await axios.get("http://localhost:4000/api/completed");
+  //   this.completedOrders = ordersResponse.data;
+  // };
 
   @action getEmployees = async () => {
     const employeesResponse = await axios.get(
@@ -48,7 +55,6 @@ export default class GeneralStore {
       "http://localhost:4000/api/board",
       board
     );
-    debugger
     savedBoard.data.orders.map(
       o => new SingleOrderStore(o, board.stages.length)
     );
@@ -190,7 +196,7 @@ export default class GeneralStore {
   };
 
   @action initializeAll = () => {
-    this.getCompletedOrders();
+    // this.getCompletedOrders();
     this.getEmployees();
     this.getProducts();
     this.getCustomers();
