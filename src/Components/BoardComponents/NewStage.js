@@ -20,12 +20,6 @@ const NewStage = observer(props => {
     props.addNewStage({ name: stageName, notes: notes, validate: validations })
     toggleModal()
   }
-  //   const handleNameChange = e => {
-  //     setStageName(e.target.value)
-  //   }
-  //   const handleNameChange = e => {
-  //     setStageName(e.target.value)
-  //   }
   const handleChange = e => {
     e.target.id === "stageNameInput"
       ? setStageName(e.target.value)
