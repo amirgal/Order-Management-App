@@ -5,7 +5,7 @@ import {ExpansionPanel, ExpansionPanelDetails,
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 
-const CompletedOrder = inject("generalStore")(observer(props => {
+const ShippingOrder = inject("generalStore")(observer(props => {
 
     const customer = props.generalStore.customers.find(
         c => c.shopifyId === props.order.customerId
@@ -30,7 +30,6 @@ const CompletedOrder = inject("generalStore")(observer(props => {
                 <div className="order-info">
                     <p>Price: {props.order.price}</p>
                     <p>Order Date: {props.order.date.toDateString()}</p>
-                    <p>Shipping Date: {props.order.endDate.toDateString()}</p>
                 </div>
                 <div className="order-workflow">
                     {Object.keys(props.order.stageEmployees).map(s => 
@@ -45,4 +44,4 @@ const CompletedOrder = inject("generalStore")(observer(props => {
   })
 );
 
-export default CompletedOrder;
+export default ShippingOrder;

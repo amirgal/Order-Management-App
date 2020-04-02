@@ -10,6 +10,7 @@ import CompletedOrders from "./Components/CompletedOrdersComponents/CompletedOrd
 import Tracker from "./Components/TrackerComponents/Tracker"
 import Analytics from "./Components/AnalyticsComponents/Analytics"
 import BoardTabsBar from "./Components/OrderManagerComponents/BoardTabsBar"
+import ShippingOrders from "./Components/ShippingComponents/ShippingOrders"
 
 const App = inject("generalStore")(
   observer(props => {
@@ -52,6 +53,7 @@ const App = inject("generalStore")(
             render={() => (
               <Fragment>
                 <MyAppBar headline={"Shipping"} />
+                <ShippingOrders />
               </Fragment>
             )}
           />
