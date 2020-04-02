@@ -190,3 +190,6 @@ body {
   color: black;
   width: 500px;
 }
+#addStages{
+  display: grid;
+}

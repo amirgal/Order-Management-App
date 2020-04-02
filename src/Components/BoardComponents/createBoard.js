@@ -22,60 +22,81 @@ import {
   CheckBox as CheckBoxIcon,
   CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon
 } from "@material-ui/icons"
+import AddStages from "./AddStages"
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />
 const checkedIcon = <CheckBoxIcon fontSize="small" />
 
 const CreateBoard = inject("generalStore")(
   observer(props => {
     const [name, setName] = useState("")
-    const [selectedProductIds, setSelectedProductIds] = useState([])
+    const [productIds, setProductIds] = useState([])
     const products = props.generalStore.products.filter(o => !o.boardId)
+    const [step, setStep] = useState(1)
 
     const handleNameChange = e => {
       setName(e.target.value)
     }
+    const nextStep = () => {
+      setStep(step + 1)
+    }
+    const prevStep = () => {
+      setStep(step - 1)
+    }
 
-    return (
-      <div id="createBoard">
-        <List>
-          <ListItem>
-            <TextField className="boardNameInput"
-              placeholder="Board Name"
-              value={name}
-              onChange={handleNameChange}
-            />
-          </ListItem>
-          <ListItem>
-            <Autocomplete
-              multiple
-              onChange={(e, v) => setSelectedProductIds(v.map(p => p.id))}
-              id="selectedProducts"
-              options={products}
-              disableCloseOnSelect
-              getOptionLabel={option => option.name}
-              renderOption={(option, { selected }) => (
-                <React.Fragment>
-                  <Checkbox
-                    icon={icon}
-                    checkedIcon={checkedIcon}
-                    checked={selected}
-                  />
-                  {option.name}
-                </React.Fragment>
-              )}
-              style={{ width: 500 }}
-              renderInput={params => (
+    switch (step) {
+      case 1:
+        return (
+          <div id="createBoard">
+            <List>
+              <ListItem>
                 <TextField
-                  {...params}
-                  variant="outlined"
-                  label="Select Products"
+                  className="boardNameInput"
+                  placeholder="Board Name"
+                  value={name}
+                  onChange={handleNameChange}
                 />
-              )}
-            />
-          </ListItem>
-        </List>
-      </div>
-    )
+              </ListItem>
+              <ListItem>
+                <Autocomplete
+                  multiple
+                  onChange={(e, v) => setProductIds(v.map(p => p.id))}
+                  id="products"
+                  options={products}
+                  disableCloseOnSelect
+                  getOptionLabel={option => option.name}
+                  renderOption={(option, { selected }) => (
+                    <React.Fragment>
+                      <Checkbox
+                        icon={icon}
+                        checkedIcon={checkedIcon}
+                        checked={selected}
+                      />
+                      {option.name}
+                    </React.Fragment>
+                  )}
+                  style={{ width: 500 }}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      label="Select Products"
+                    />
+                  )}
+                />
+              </ListItem>
+              <ListItem>
+                <Button onClick={nextStep} variant="contained">
+                  Next
+                </Button>
+              </ListItem>
+            </List>
+          </div>
+        )
+      case 2:
+        return (
+          <AddStages name={name} productIds={productIds} prevStep={prevStep} />
+        )
+    }
   })
 )
 
