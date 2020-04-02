@@ -7,10 +7,10 @@ const CompletedByEmployee = inject("generalStore")(
     const [perEmployee, setPerEmployee] = useState([]);
     
     useEffect(() => {
-      if (perEmployee.length > 0) {
-        const tempPerEmployee = props.generalStore.getCompletedByEmployee();
+      if (props.generalStore.orders.length > 0) {
+        const tempPerEmployee = props.generalStore.getCompletedByEmployee(); 
         setPerEmployee(tempPerEmployee);
-      }}, [props.generalStore.boards,props.generalStore.completedOrders]);
+      }}, [props.generalStore.orders]);
     
     return (
       <div>
