@@ -9,21 +9,20 @@ export default class GeneralStore {
   @observable employees = [];
   @observable customers = [];
   @observable boards = [];
+//   @observable boards = [{"name":"board1","stages":[{"name":"stage1","notes":["do this","now do that" ,"dont forget to do that as well"],"validate":["u sure bro?" ,"did u not do the arab job thing","exetra (this is not the way to spell it though)"]},{"name":"stage2","notes":["legalize stuff","rest and don't work too hard" ,"dont forget the bird is the word"],"validate":["u sure homes?" ,"did u not do the stuff man?","stuffffff"]},{"name":"stage3","notes":["do this","tiny rick rules!" ,"ive got ants in my eyes"],"validate":["existence is pain ? " ,"u gotta shove them wayy up there","stage 3 modafuckaaa"]},{"name":"stage4","notes":["waba laba somthing else","dont worry bro we got your back dog" ,"but you cant hide beacth"],"validate":["dont judge" ,"slavery with extra steps","no more references"]}],"products":["5e848d6228e8254ad07cca63","5e848d6228e8254ad07cca64"]}
+// ,{"name":"board2","stages":[{"name":"stage1","notes":["do this","now do that" ,"dont forget to do that as well"],"validate":["u sure bro?" ,"did u not do the arab job thing","exetra (this is not the way to spell it though)"]},{"name":"stage2","notes":["legalize stuff","rest and don't work too hard" ,"dont forget the bird is the word"],"validate":["u sure homes?" ,"did u not do the stuff man?","stuffffff"]},{"name":"stage3","notes":["do this","tiny rick rules!" ,"ive got ants in my eyes"],"validate":["existence is pain ? " ,"u gotta shove them wayy up there","stage 3 modafuckaaa"]},{"name":"stage4","notes":["waba laba somthing else","dont worry bro we got your back dog" ,"but you cant hide beacth"],"validate":["dont judge" ,"slavery with extra steps","no more references"]}],"products":["5e848d6228e8254ad07cca63","5e848d6228e8254ad07cca64"]}
+// ,{"name":"board3","stages":[{"name":"stage1","notes":["do this","now do that" ,"dont forget to do that as well"],"validate":["u sure bro?" ,"did u not do the arab job thing","exetra (this is not the way to spell it though)"]},{"name":"stage2","notes":["legalize stuff","rest and don't work too hard" ,"dont forget the bird is the word"],"validate":["u sure homes?" ,"did u not do the stuff man?","stuffffff"]},{"name":"stage3","notes":["do this","tiny rick rules!" ,"ive got ants in my eyes"],"validate":["existence is pain ? " ,"u gotta shove them wayy up there","stage 3 modafuckaaa"]},{"name":"stage4","notes":["waba laba somthing else","dont worry bro we got your back dog" ,"but you cant hide beacth"],"validate":["dont judge" ,"slavery with extra steps","no more references"]}],"products":["5e848d6228e8254ad07cca63","5e848d6228e8254ad07cca64"]}]
 
   @action getBoards = async () => {
     const boards = await axios.get("http://localhost:4000/api/boards");
-    boards.data.forEach(board => {
-      board.orders = board.orders.map(
-        o => new SingleOrderStore(o, board.stages.length)
-      );
-    });
-    this.boards = boards;
-    // console.log(this.boards);
     
+    this.boards = boards.data.map(board => 
+      new BoardStore(board)
+    );
+    console.log(this.boards);
   };
 
   @action getOrders = async () => {
-    // debugger;
     const ordersResponse = await axios.get("http://localhost:4000/api/orders");
     this.orders = ordersResponse.data.map(o => new SingleOrderStore(o));
   };

@@ -14,9 +14,9 @@ body {
 
 #stages-container {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    /* grid-template-columns: repeat(6, 1fr); */
     grid-gap: 10px;
-    margin: 10px;
+    /* margin: 10px; */
 }
 
 .stage {
@@ -181,4 +181,12 @@ body {
   width: 33%;
   padding: 50px;
   background-color: var(--light-grey);
+}
+#createBoard .MuiListItem-root{
+  display: grid;
+  justify-content: center;
+}
+#createBoard .MuiInputBase-input{
+  color: black;
+  width: 500px;
 }

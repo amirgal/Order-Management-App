@@ -2,14 +2,14 @@ import React, { Fragment, useEffect } from "react"
 import "./App.css"
 import { observer, inject } from "mobx-react"
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
-import OrderManager from "./Components/OrderManager"
-import MyAppBar from "./Components/MyAppBar"
-import Settings from "./Components/Settings"
+import OrderManager from "./Components/OrderManagerComponents/OrderManager"
+import MyAppBar from "./Components/AppBarComponents/MyAppBar"
+import Settings from "./Components/SettingsComponents/Settings"
 import { StylesProvider } from "@material-ui/core/styles"
 import CompletedOrders from "./Components/CompletedOrdersComponents/CompletedOrders"
-import Tracker from "./Components/Tracker"
+import Tracker from "./Components/TrackerComponents/Tracker"
 import Analytics from "./Components/AnalyticsComponents/Analytics"
-import CreateBoard from "./Components/BoardComponents/CreateBoard"
+import BoardTabsBar from "./Components/OrderManagerComponents/BoardTabsBar"
 
 const App = inject("generalStore")(
   observer(props => {
@@ -32,6 +32,7 @@ const App = inject("generalStore")(
               <Fragment>
                 <MyAppBar headline={"Order Manager"} />
                 <OrderManager />
+                <BoardTabsBar />
               </Fragment>
             )}
           />
@@ -61,15 +62,6 @@ const App = inject("generalStore")(
             render={() => (
               <Fragment>
                 <Tracker />
-              </Fragment>
-            )}
-          />
-          <Route
-            path="/createboard"
-            exact
-            render={() => (
-              <Fragment>
-                <CreateBoard />
               </Fragment>
             )}
           />

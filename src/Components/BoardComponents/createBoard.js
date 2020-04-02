@@ -25,7 +25,7 @@ import {
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />
 const checkedIcon = <CheckBoxIcon fontSize="small" />
 
-const createBoard = inject("generalStore")(
+const CreateBoard = inject("generalStore")(
   observer(props => {
     const [name, setName] = useState("")
     const [selectedProductIds, setSelectedProductIds] = useState([])
@@ -39,8 +39,7 @@ const createBoard = inject("generalStore")(
       <div id="createBoard">
         <List>
           <ListItem>
-            <TextField
-              style={{ width: 300 }}
+            <TextField className="boardNameInput"
               placeholder="Board Name"
               value={name}
               onChange={handleNameChange}
@@ -50,7 +49,7 @@ const createBoard = inject("generalStore")(
             <Autocomplete
               multiple
               onChange={(e, v) => setSelectedProductIds(v.map(p => p.id))}
-              id="chosen-clients"
+              id="selectedProducts"
               options={products}
               disableCloseOnSelect
               getOptionLabel={option => option.name}
@@ -59,7 +58,6 @@ const createBoard = inject("generalStore")(
                   <Checkbox
                     icon={icon}
                     checkedIcon={checkedIcon}
-                    style={{ marginRight: 8 }}
                     checked={selected}
                   />
                   {option.name}
@@ -81,4 +79,4 @@ const createBoard = inject("generalStore")(
   })
 )
 
-export default createBoard
+export default CreateBoard
