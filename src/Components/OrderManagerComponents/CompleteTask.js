@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import {Button, FormControlLabel, Checkbox, List, ListItem} from '@material-ui/core'
 
 const CompleteTask = inject('generalStore','detailsWindowStore')(observer((props) => {
-    // const currOrder = props.detailsWindowStore.detailsWindowOrder
+    const currOrder = props.detailsWindowStore.detailsWindowOrder
     const steps = props.detailsWindowStore.detailsWindowStage.validate
     
     const createCheckedState = () => {
@@ -21,7 +21,7 @@ const CompleteTask = inject('generalStore','detailsWindowStore')(observer((props
       };
 
     const completeStage = () => {
-        props.detailsWindowStore.detailsWindowOrder.advanceStage()
+        currOrder.advanceStage()
         props.detailsWindowStore.toggleDetailsWindow()
     }
 
