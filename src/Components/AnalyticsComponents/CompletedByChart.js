@@ -1,5 +1,5 @@
 import {
-    BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+    BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   } from 'recharts';
 import React, { Component } from 'react';
 import { inject, observer } from "mobx-react";
@@ -14,18 +14,19 @@ const CompletedByChart = inject("generalStore")(
     <div>
     <p>Tasks Completed By Employee</p>
     <BarChart 
-    width={600} 
-    height={300} 
+    width={350} 
+    height={200} 
     data={props.data} 
     layout="vertical"
     margin={{top: 5, right: 30, left: 20, bottom: 5}}
+    stackOffset="wiggle"
   >
-    <YAxis type="category" dataKey="name" fill="#808000"/>
-    <XAxis type="number" dataKey="amount"/>
-    <CartesianGrid />
-    <Tooltip/>
+    <CartesianGrid stroke="#808000" strokeDasharray="5 5"/>
+    <YAxis type="category" dataKey="name" />
+    <XAxis type="number" dataKey="amount"  />
+  <Tooltip />
     <Legend />
-    <Bar dataKey="amount" fill="#808000" />
+    <Bar type="monotone"  dataKey="amount" fill="#776274" barSize={30}/>
   </BarChart>
   </div>
   );

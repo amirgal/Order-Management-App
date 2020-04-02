@@ -12,21 +12,20 @@ const TaskTimeChart = inject("generalStore")(
   
   return (
     <div>
-      <p>Average Minutes per Task</p>
     <BarChart
-      width={500}
-      height={300}
+      width={350}
+      height={175}
       data={props.data}
       margin={{
         top: 5, right: 30, left: 20, bottom: 5,
       }}
     >
       <CartesianGrid strokeDasharray="2 2" />
-      <XAxis dataKey="name"/>
+      <XAxis dataKey="name" />
       <YAxis dataKey="average"  />
-      <Tooltip />
-      <Legend label="what"/>
-      <Bar dataKey="average" fill="#884d8" />
+      <Tooltip/>
+      <Legend type/>
+      <Bar type="monotone" dataKey="average" fill="#55828B" barSize={20} />
       
     </BarChart>
     </div>

@@ -1,5 +1,5 @@
 import {
-     Tooltip,PieChart, Pie,
+     Tooltip,PieChart, Pie, Legend,
   } from 'recharts';
   
 import React from 'react';
@@ -15,10 +15,10 @@ const PerProductChart = inject("generalStore")(
 
   return (
     <div>
-        <p>Orders Per Product</p>
-    <PieChart width={500} height={400}>
-    <Pie dataKey="number" isAnimationActive={false} data={props.data} cx={200} cy={200} outerRadius={90} margin={{top: 5, right: 30, left: 0, bottom: 5,}} fill="#884d8" /> 
+    <PieChart width={350} height={175}>
+    <Pie dataKey="number" isAnimationActive={true} data={props.data}  cx="50%" cy="50%" outerRadius={75} innerRadius={25} margin={{top: 0, right: 5, left: 20, bottom: 5,}} fill="#889E86" /> 
     <Tooltip />
+    <Legend/>
     </PieChart>
     </div>
   );
