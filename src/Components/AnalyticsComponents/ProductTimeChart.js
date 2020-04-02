@@ -25,7 +25,7 @@ const ProductTimeChart = inject("generalStore")(
       <YAxis dataKey="average"  />
       <Tooltip />
       <Legend label="what"/>
-      <Bar type="monotone" dataKey="average" fill="#EDD0C5" />
+      <Bar barSize={20} type="monotone" dataKey="average" fill="#EDD0C5" />
       
     </BarChart>
     </div>
