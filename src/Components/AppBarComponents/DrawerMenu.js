@@ -2,7 +2,9 @@ import React from 'react';
 import {useHistory} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import {Drawer, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
-import {ViewList as ViewListIcon, DoneOutline as DoneOutlineIcon, Settings as SettingsIcon ,Equalizer as EqualizerIcon} from '@material-ui/icons';
+import {ViewList as ViewListIcon, DoneOutline as DoneOutlineIcon, Settings as SettingsIcon,
+  Equalizer as EqualizerIcon, LocalShipping as LocalShippingIcon} from '@material-ui/icons';
+
 const useStyles = makeStyles({
   list: {
     width: 'auto',
@@ -15,9 +17,10 @@ export default function DrawerMenu(props) {
 
   const menuItems = [
     {text:'Order Manager', link:'/order-manager', icon:<ViewListIcon />},
+    {text:'Shipping',link:'/shipping',icon :<LocalShippingIcon/> },
     {text:'Completed Orders', link:'/completed-orders', icon:<DoneOutlineIcon />},
-    {text:'Settings', link:'/settings', icon:<SettingsIcon />},
-    {text:'Analytics',link:'/analytics',icon :<EqualizerIcon/> }
+    {text:'Analytics',link:'/analytics',icon :<EqualizerIcon/> },
+    {text:'Settings', link:'/settings', icon:<SettingsIcon />}
   ]
 
   const changeRoute = route => {
