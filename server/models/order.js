@@ -14,6 +14,7 @@ const orderSchema = new Schema({
   inProcess: Boolean,
   progress: Number,
   stageEmployees: Object,
+  isReadyToShip: Boolean,
   isComplete: Boolean,
   date: Date,
   endDate:Date
