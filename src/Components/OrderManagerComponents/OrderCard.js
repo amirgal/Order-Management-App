@@ -16,6 +16,7 @@ const OrderCard = inject("detailsWindowStore")(
     const openDetailsWindow = () => {
       props.detailsWindowStore.toggleDetailsWindow()
       props.detailsWindowStore.setDetailsWindowOrder(props.order)
+      props.detailsWindowStore.setDetailsWindowStage(props.stage)
     }
 
     return (
@@ -23,7 +24,7 @@ const OrderCard = inject("detailsWindowStore")(
         className={
           props.order.inProcess
             ? "order inProcess"
-            : props.order.progress == 6
+            : props.order.isReadyToShip
             ? "order ready"
             : "order"
         }
