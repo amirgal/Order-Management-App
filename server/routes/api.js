@@ -98,10 +98,12 @@ router.post("/sync/", async (req, res) => {
   await shopify.getProductsFromShopify(productsUrl)
   await shopify.getOrdersFromShopify(ordersUrl)
   const products = await Product.find({})
-  const orders = await Order.find({})
-  const boards = await Board.find({})
+  const boards = await Board.find({}).populate({ path:'orders',
+  populate:{
+    path:'product'
+  }})
   const employees = await Employee.find({})
-  res.send({ products, orders, employees })
+  res.send({ products, employees ,boards})
 })
 
 module.exports = router
