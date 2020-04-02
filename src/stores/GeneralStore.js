@@ -12,20 +12,16 @@ export default class GeneralStore {
 
   @action getBoards = async () => {
     const boards = await axios.get("http://localhost:4000/api/boards");
-    boards.data.forEach(board => {
-      board.orders = board.orders.map(
-        o => new SingleOrderStore(o, board.stages.length)
-      );
-    });
-    this.boards = boards;
-    console.log(this.boards);
     
+    this.boards = boards.data.map(board => 
+      new BoardStore(board)
+    );
   };
 
   @action getCompletedOrders = async () => {
     debugger;
     const ordersResponse = await axios.get("http://localhost:4000/api/completed");
-    this.completedOrders = ordersResponse.data.map(o => new SingleOrderStore(o));
+    this.completedOrders = ordersResponse.data;
   };
 
   @action getEmployees = async () => {
@@ -98,8 +94,8 @@ export default class GeneralStore {
   @action getAverageTimeForTask = () => {
     const objByEmployee = {};
     const toReturn = [];
-
-    this.orders.forEach(o => {
+    const combained = this.getCombinedOrders()
+    combained.forEach(o => {
       for (let i = 1; i < o.progress; i++) {
         if (!objByEmployee[o.stageEmployees[i].name]) {
           objByEmployee[[o.stageEmployees[i].name]] = { sum: 0, num: 0 };
@@ -126,7 +122,8 @@ export default class GeneralStore {
   @action getCompletedByEmployee = () => {
     const objByEmployee = {};
     const toReturn = [];
-    this.orders.forEach(o => {
+    const combained = this.getCombinedOrders()
+    combained.forEach(o => {
       for (let i = 1; i < o.progress; i++) {
         if (o.stageEmployees[i]["endDate"]) {
           if (!objByEmployee[o.stageEmployees[i].name]) {
@@ -143,15 +140,19 @@ export default class GeneralStore {
     }
     return toReturn;
   };
-
-  @computed get completedOrders() {
-    return this.orders.filter(o => o.isComplete);
+  getCombinedOrders = () => {
+    let combained = []
+    this.boards.forEach(b => combained = combained.concat(b.orders))
+    combained.concat(this.completedOrders)
+    return combained
   }
+
 
   @action getOrdersPerProduct = () => {
     const toReturn = [];
     const objByProduct = {};
-    this.orders.forEach(o => {
+    const combinedOrders = this.getCombinedOrders()
+    combinedOrders.forEach(o => {
       if (!objByProduct[o.product.name]) {
         objByProduct[o.product.name] = 1;
       } else {
@@ -168,7 +169,7 @@ export default class GeneralStore {
   @action getTimePerProduct = () => {
     const toReturn = [];
     const objTimePerProduct = {};
-    this.orders.forEach(o => {
+    this.completedOrders.forEach(o => {
       if (o.isComplete) {
         if (!objTimePerProduct[o.product.name]) {
           objTimePerProduct[o.product.name] = { sum: 0, num: 0 };
@@ -190,7 +191,7 @@ export default class GeneralStore {
   };
 
   @action initializeAll = () => {
-    this.getOrders();
+    this.getCompletedOrders();
     this.getEmployees();
     this.getProducts();
     this.getCustomers();

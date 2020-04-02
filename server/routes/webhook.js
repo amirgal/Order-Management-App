@@ -3,6 +3,7 @@ const router = express.Router()
 const Order = require("../models/Order")
 const Customer = require("../models/Customer")
 const Product = require("../models/Product")
+const Board = require("../models/board")
 const dotenv = require("dotenv")
 dotenv.config()
 const secretKey = process.env.secretKey
@@ -45,6 +46,7 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
   for (let item of result.line_items) {
     let address = result.shipping_address
     const product = await Product.find({shopifyId : item.product_id})
+    const board = await Board.find({products : product[0]._id})
     let order = new Order({
       date: result.created_at,
       shopifyId: result.id,
@@ -69,7 +71,9 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
       }
     })
     await order.save()
-    console.log("Saved to DB")
+    if(board.length > 0){
+      await Board.updateOne({_id : board[0]._id},{$push : {orders : order._id}})
+    }
   }
 })
 

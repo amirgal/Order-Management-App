@@ -7,10 +7,11 @@ const OrdersPerProduct = inject("generalStore")(
     const [perProduct, setPerProduct] = useState([]);
     
     useEffect(() => {
-      if (props.generalStore.orders.length > 0) {
-        const tempPerProduct = props.generalStore.getOrdersPerProduct();
-        setPerProduct(tempPerProduct);
-      }}, [props.generalStore.orders]);
+        if(props.generalStore.boards.length > 0 || props.generalStore.completedOrders.length > 0){
+          const tempPerProduct = props.generalStore.getOrdersPerProduct();
+          setPerProduct(tempPerProduct);
+        }
+      }, [props.generalStore.boards,props.generalStore.completedOrders]);
     
     return (
       <div>
