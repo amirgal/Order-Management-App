@@ -47,6 +47,15 @@ const App = inject("generalStore")(
             )}
           />
           <Route
+            path="/shipping"
+            exact
+            render={() => (
+              <Fragment>
+                <MyAppBar headline={"Shipping"} />
+              </Fragment>
+            )}
+          />
+          <Route
             path="/settings"
             exact
             render={() => (
