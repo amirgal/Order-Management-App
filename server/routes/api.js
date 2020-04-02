@@ -30,7 +30,13 @@ router.post('/board', async(req,res) => {
   }
   board.orders = orders
   await board.save()
-  res.send(board)
+  const savedBoard = await Board.findOne({_id: board._id}).populate({
+    path:'orders',
+    populate:{
+      path:'product'
+    }
+  })
+  res.send(savedBoard)
 })
 
 router.put('/board',async (req,res) => {

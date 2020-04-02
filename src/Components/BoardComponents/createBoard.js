@@ -59,7 +59,7 @@ const CreateBoard = inject("generalStore")(
               <ListItem>
                 <Autocomplete
                   multiple
-                  onChange={(e, v) => setProductIds(v.map(p => p.id))}
+                  onChange={(e, v) => setProductIds(v.map(p => p._id))}
                   id="products"
                   options={products}
                   disableCloseOnSelect

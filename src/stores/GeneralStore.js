@@ -48,6 +48,7 @@ export default class GeneralStore {
       "http://localhost:4000/api/board",
       board
     );
+    debugger
     savedBoard.data.orders.map(
       o => new SingleOrderStore(o, board.stages.length)
     );

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { observer, inject } from "mobx-react"
 import PropTypes from "prop-types"
 import SwipeableViews from "react-swipeable-views"
@@ -50,7 +50,11 @@ const BoardTabsBar = inject("generalStore")(
     const classes = useStyles()
     const theme = useTheme()
     const [value, setValue] = React.useState(0)
-    const boards = props.generalStore.boards
+    // const boards= useState(props.generalStore.boards)
+
+    // useEffect(() => {
+    //   setBoards(props.generalStore.boards)
+    // }, [props.generalStore.boards])
 
     const handleChange = (event, newValue) => {
       setValue(newValue)
@@ -71,10 +75,10 @@ const BoardTabsBar = inject("generalStore")(
             variant="fullWidth"
             aria-label="full width tabs example"
           >
-            {boards.map((b, i) => (
+            {props.generalStore.boards.map((b, i) => (
               <Tab key={i} label={`${b.name}`} {...a11yProps(i)} />
             ))}
-            <Tab label={<AddIcon />} {...a11yProps(boards.length)} />
+            <Tab label={<AddIcon />} {...a11yProps(props.generalStore.boards.length)} />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -82,12 +86,12 @@ const BoardTabsBar = inject("generalStore")(
           index={value}
           onChangeIndex={handleChangeIndex}
         >
-          {boards.map((b, i) => (
+          {props.generalStore.boards.map((b, i) => (
             <TabPanel key={i} value={value} index={i} dir={theme.direction}>
               <Board key={i} board={b} />
             </TabPanel>
           ))}
-          <TabPanel value={value} index={boards.length} dir={theme.direction}>
+          <TabPanel value={value} index={props.generalStore.boards.length} dir={theme.direction}>
             <CreateBoard />
           </TabPanel>
         </SwipeableViews>
