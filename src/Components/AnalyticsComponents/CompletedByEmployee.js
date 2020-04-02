@@ -7,17 +7,17 @@ const CompletedByEmployee = inject("generalStore")(
     const [perEmployee, setPerEmployee] = useState([]);
     
     useEffect(() => {
-      if (props.generalStore.orders.length > 0) {
+      if (perEmployee.length > 0) {
         const tempPerEmployee = props.generalStore.getCompletedByEmployee();
         setPerEmployee(tempPerEmployee);
-      }}, [props.generalStore.orders]);
+      }}, [props.generalStore.boards,props.generalStore.completedOrders]);
     
     return (
       <div>
         {perEmployee.length> 0 ? (
           <CompletedByChart data ={perEmployee}/>
         ) : (
-          null
+          <div>No completed Tasks yet</div>
         )}
       </div>
     );
