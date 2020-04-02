@@ -18,7 +18,6 @@ export default class GeneralStore {
   };
 
   @action getCompletedOrders = async () => {
-    debugger;
     const ordersResponse = await axios.get("http://localhost:4000/api/completed");
     this.completedOrders = ordersResponse.data;
   };
