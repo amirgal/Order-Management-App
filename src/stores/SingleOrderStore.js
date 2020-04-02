@@ -23,13 +23,16 @@ export default class SingleOrder {
      this.date = new Date(order.date)
      this.endDate = new Date(order.endDate)
      this.numStages = numStages
+     this.isReadyToShip = order.isReadyToShip
     }
     
     @action advanceStage = async () => {
         this.stageEmployees[this.progress].endDate= new Date()
         this.progress +=1
         this.inProcess = false
-        if(this.progress > 6){           //hardcoded stage for now
+        if(this.progress === this.numStages + 1){          
+            this.isReadyToShip = true
+        } else if(this.progress > this.numStages + 1){          
             this.isComplete = true
             this.endDate = new Date()
         }      

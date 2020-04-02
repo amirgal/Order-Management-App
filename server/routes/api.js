@@ -19,18 +19,15 @@ router.get(`/boards/`, async (req, res) => {
 })
 
 router.post('/board', async(req,res) => {
-  const newBoard = req.body   //{name, productIds:[],stages:[{}]}
+  const newBoard = req.body 
   const board = new Board(newBoard)
   let orders = []
-  console.log(board);
+
   for(let prodId of board.products){
     await Product.updateOne({_id:prodId}, {boardId:board._id})
     const prodOrdersIds = await Order.find({product: prodId}).select('_id')
     orders = [...orders,...prodOrdersIds]
-    console.log('here' );
-    
   }
-
   board.orders = orders
   await board.save()
   res.send(board)

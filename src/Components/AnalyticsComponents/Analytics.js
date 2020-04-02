@@ -1,4 +1,4 @@
-import React, {useState , useEffect} from 'react';
+import React from 'react';
 import '../../styles/Analytics.css'
 
 import { inject, observer } from 'mobx-react';

@@ -5,7 +5,6 @@ import {
   Button,
   TextField,
   Input,
-  InputAdornment,
   IconButton,
   Popper,
   List,

@@ -24,7 +24,7 @@ export default class BoardStore {
     }
 
     @action updateStage = async (stage,index) => {
-        if(index =this.stages.length){
+        if(index === this.stages.length){
             this.stages.push(stage)
         }else{
             this.stages[index] = stage

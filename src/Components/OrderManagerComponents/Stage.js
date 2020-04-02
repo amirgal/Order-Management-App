@@ -6,12 +6,13 @@ import {List, ListItem} from '@material-ui/core'
 const Stage = inject('generalStore')(observer((props) => {
     const filteredOrders = props.orders.sort((a,b) => a.date - b.date)
         
+    
     return (
         <div className='stage'>
             <List>
             {filteredOrders.map((o,i) => 
-                <ListItem>
-                    <OrderCard key={i} order={o}/>
+                <ListItem key={i}>
+                    <OrderCard stage={props.stage} order={o}/>
                 </ListItem>
             )}
             </List>

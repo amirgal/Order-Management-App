@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { inject, observer } from "mobx-react"
 import { Button, TextField } from "@material-ui/core"
 import TrackingBar from "./OrderTracker"
@@ -17,9 +17,9 @@ const Tracker = inject("generalStore")(
     const customers = props.generalStore.customers
     const findOrder = () => {
       const orders = props.generalStore.orders
-      let order = orders.find(o => o.shopifyId == orderId)
+      let order = orders.find(o => o.shopifyId === orderId)
       if (order) {
-        let foundCustomer = customers.find(c => c.shopifyId == order.customerId)
+        let foundCustomer = customers.find(c => c.shopifyId === order.customerId)
         setCustomer(foundCustomer)
         setOrderObj(order)
         setActiveStep(order.progress)

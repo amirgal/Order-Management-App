@@ -21,9 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 const StageDetailsModal = inject('detailsWindowStore')(observer((props) => {
     const classes = useStyles();
-    
     const currOrder = props.detailsWindowStore.detailsWindowOrder
-    const currStage = currOrder.progress
     
     const toggleModal = () => {
         props.detailsWindowStore.toggleDetailsWindow()
@@ -45,7 +43,7 @@ const StageDetailsModal = inject('detailsWindowStore')(observer((props) => {
             >
             <Fade in={props.detailsWindowStore.showDetailsWindow}>
                 <div id="details-window">
-                    <h3>{currOrder.product.stages[currStage].title}</h3>
+                    <h3>{props.detailsWindowStore.detailsWindowStage.name}</h3>
                     <div id="product-details">
                         <p>Product Name: {currOrder.product.name}</p>
                         <p>Attributes: {currOrder.attributes}</p>

@@ -12,7 +12,6 @@ export default class GeneralStore {
 
   @action getBoards = async () => {
     const boards = await axios.get("http://localhost:4000/api/boards");
-    
     this.boards = boards.data.map(board => 
       new BoardStore(board)
     );
