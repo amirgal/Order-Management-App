@@ -14,9 +14,7 @@ body {
 
 #stages-container {
   display: grid;
-  /* grid-template-columns: repeat(6, 1fr); */
   grid-gap: 10px;
-  /* margin: 10px; */
 }
 
 .stage {
@@ -45,7 +43,6 @@ body {
 .order p {
   display: block;
   margin: 0;
-  /* font-size: 12px; */
 }
 .order .statusLight {
   background-color: orange;
@@ -145,7 +142,6 @@ body {
 .trackInput {
   width: 300px;
   margin: 0 auto;
-  /* text-align: center; */
 }
 .MuiStepLabel-label.MuiStepLabel-active {
   color: white;
@@ -192,16 +188,13 @@ body {
 }
 #addStagesContainer {
   display: grid;
-  /* grid-template-rows: 5fr, 1fr; */
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   margin: 0 auto;
 }
-#addNewStage {
-  margin: 0 auto;
-}
 .navButtons {
+  height: fit-content;
+  justify-self: center;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
 }
 #saveBoard {
   width: 150px;
@@ -213,22 +206,60 @@ body {
 .newBoardContainer {
   display: grid;
   grid-gap: 10px;
+  height: 8;
+}
+#addNewStage {
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+  color: var(--light-grey);
+  box-shadow: none;
+  text-align: center;
+  cursor: pointer;
 }
 .makeStyles-root-111 {
   background-color: transparent;
 }
 #createBoard {
-  background-color: var(--medium-grey);
+  background-color: var(--light-grey);
   border-radius: 10px;
   box-shadow: 2px 2px 20px var(--box-shadow);
 }
-.MuiTabs-flexContainer{
+.MuiTabs-flexContainer {
   background-color: var(--dark-grey);
 }
-.MuiTab-textColorPrimary.Mui-selected{
+.MuiTab-textColorPrimary.Mui-selected {
   color: white;
-  /* background-color: var(--medium-grey); */
 }
-.PrivateTabIndicator-colorPrimary-134{
-  background-color: orange;
+.PrivateTabIndicator-colorPrimary-134 {
+  background-color: var(--light-grey);
+}
+.MuiInput-underline:after {
+  border-bottom: 2px solid var(--medium-grey);
+}
+.MuiExpansionPanelDetails-root {
+  display: grid;
+}
+.stageBox {
+  background-color: var(--light-grey);
+  text-align: center;
+  padding: 0;
+  width: 100%;
+  background-color: var(--light-grey);
+  box-shadow: 2px 5px 5px var(--box-shadow);
+  border-radius: 5px;
+  height: fit-content;
+}
+#newStage {
+  background-color: var(--medium-grey);
+  padding: 100px;
+  border-radius: 10px;
+}
+.newStagesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 10px;
+}
+.MuiExpansionPanel-root.Mui-expanded {
+  margin: 0;
 }

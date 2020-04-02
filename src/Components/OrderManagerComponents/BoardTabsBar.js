@@ -50,12 +50,6 @@ const BoardTabsBar = inject("generalStore")(
     const classes = useStyles()
     const theme = useTheme()
     const [value, setValue] = React.useState(0)
-    // const boards= useState(props.generalStore.boards)
-
-    // useEffect(() => {
-    //   setBoards(props.generalStore.boards)
-    // }, [props.generalStore.boards])
-
     const handleChange = (event, newValue) => {
       setValue(newValue)
     }
@@ -78,7 +72,10 @@ const BoardTabsBar = inject("generalStore")(
             {props.generalStore.boards.map((b, i) => (
               <Tab key={i} label={`${b.name}`} {...a11yProps(i)} />
             ))}
-            <Tab label={<AddIcon />} {...a11yProps(props.generalStore.boards.length)} />
+            <Tab
+              label={<AddIcon />}
+              {...a11yProps(props.generalStore.boards.length)}
+            />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -91,13 +88,16 @@ const BoardTabsBar = inject("generalStore")(
               <Board key={i} board={b} />
             </TabPanel>
           ))}
-          <TabPanel value={value} index={props.generalStore.boards.length} dir={theme.direction}>
+          <TabPanel
+            value={value}
+            index={props.generalStore.boards.length}
+            dir={theme.direction}
+          >
             <CreateBoard />
           </TabPanel>
         </SwipeableViews>
       </div>
     )
-    // }
   })
 )
 

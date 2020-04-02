@@ -20,9 +20,6 @@ const useStyles = makeStyles(theme => ({
 
 const AddStageModal = observer(props => {
   const classes = useStyles()
-//   const [stageName, setStageName] = useState("")
-//   const [notes, setNotes] = useState([])
-//   const [validations, setValidations] = useState([])
   const [showModal, setShowModal] = useState(props.showModal)
   const addNewStage = newStage => {
     props.addNewStage(newStage)
@@ -49,12 +46,7 @@ const AddStageModal = observer(props => {
       >
         <Fade in={true}>
           <div id="addStageModal">
-            <NewStage toggleModal = {toggleModal}
-              addNewStage={addNewStage}
-            //   stageName={stageName}
-            //   notes={notes}
-            //   validations={validations}
-            />
+            <NewStage toggleModal={toggleModal} addNewStage={addNewStage} />
           </div>
         </Fade>
       </Modal>
