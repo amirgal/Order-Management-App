@@ -45,15 +45,15 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
 
   for (let item of result.line_items) {
     let address = result.shipping_address
-    const product = await Product.find({shopifyId : item.product_id})
-    const board = await Board.find({products : product[0]._id})
+    const product = await Product.findOne({shopifyId : item.product_id})
+    const board = await Board.findOne({products : {$in : [`${product._id}`]}})
     let order = new Order({
       date: result.created_at,
       shopifyId: result.id,
       itemId: item.id,
       customerId: result.customer.id,
       price: parseInt(result.total_price),
-      product: product[0]._id,
+      product: product._id,
       attributes: item.variant_title,
       inProcess: false,
       progress: 1,
@@ -72,7 +72,7 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
       }
     })
     await order.save()
-    if(board.length > 0){
+    if(board){
       await Board.updateOne({_id : board[0]._id},{$push : {orders : order._id}})
     }
   }

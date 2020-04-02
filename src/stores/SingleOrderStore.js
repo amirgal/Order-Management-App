@@ -21,12 +21,13 @@ export default class SingleOrder {
      this.stageEmployees = order.stageEmployees
      this.shippingAddress = order.shippingAddress  
      this.date = new Date(order.date)
-     this.endDate = new Date(order.endDate)
+     this.endDate = order.endDate ? new Date(order.endDate) : null
      this.numStages = numStages
      this.isReadyToShip = order.isReadyToShip
     }
     
     @action advanceStage = async () => {
+                
         this.stageEmployees[this.progress].endDate= new Date()
         this.progress +=1
         this.inProcess = false
@@ -37,6 +38,8 @@ export default class SingleOrder {
             this.endDate = new Date()
         }      
         await axios.put("http://localhost:4000/api/order",this)
+        console.log(this.endDate);
+        
     }
     
     @action claimStage = async (employeeName) => {

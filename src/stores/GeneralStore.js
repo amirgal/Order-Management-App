@@ -119,6 +119,7 @@ export default class GeneralStore {
     return toReturn;
   };
   @action getCompletedByEmployee = () => {
+    debugger
     const objByEmployee = {};
     const toReturn = [];
     const combained = this.getCombinedOrders()

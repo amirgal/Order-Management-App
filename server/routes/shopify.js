@@ -49,8 +49,8 @@ const shopify = function() {
         }
 
         for (let item of result.line_items) {
-          const product = await Product.find({ shopifyId: item.product_id })
-          const board = await Board.find({products : product[0]._id})
+          const product = await Product.findOne({ shopifyId: item.product_id })
+          const board = await Board.findOne({products : {$in : [`${product._id}`]}})
           let address = result.shipping_address
           let order = new Order({
             date: result.created_at,
@@ -58,7 +58,7 @@ const shopify = function() {
             itemId: item.id,
             customerId: result.customer.id,
             price: parseInt(result.total_price),
-            product: product[0]._id,
+            product: product._id,
             attributes: item.variant_title,
             inProcess: false,
             progress: 1,
@@ -77,8 +77,8 @@ const shopify = function() {
             }
           })
           await order.save()
-          if(board.length > 0){
-            await Board.updateOne({_id : board[0]._id},{$push : {orders : order._id}})
+          if(board){ 
+            await Board.updateOne({_id : board._id},{$push : {orders : order._id}})
           }
         }
       }
