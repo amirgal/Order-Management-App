@@ -12,10 +12,9 @@ const ProductTimeChart = inject("generalStore")(
   
   return (
     <div>
-      <p>Average Hours per Product</p>
     <BarChart
-      width={500}
-      height={300}
+      width={350}
+      height={175}
       data={props.data}
       margin={{
         top: 5, right: 30, left: 0, bottom: 5,
@@ -26,7 +25,7 @@ const ProductTimeChart = inject("generalStore")(
       <YAxis dataKey="average"  />
       <Tooltip />
       <Legend label="what"/>
-      <Bar dataKey="average" fill="#884d8" />
+      <Bar type="monotone" dataKey="average" fill="#EDD0C5" />
       
     </BarChart>
     </div>
