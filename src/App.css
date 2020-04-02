@@ -9,14 +9,14 @@ body {
 }
 
 #order-manager-page {
-    padding-top: 70px;
+  padding-top: 70px;
 }
 
 #stages-container {
-    display: grid;
-    /* grid-template-columns: repeat(6, 1fr); */
-    grid-gap: 10px;
-    /* margin: 10px; */
+  display: grid;
+  /* grid-template-columns: repeat(6, 1fr); */
+  grid-gap: 10px;
+  /* margin: 10px; */
 }
 
 .stage {
@@ -182,14 +182,53 @@ body {
   padding: 50px;
   background-color: var(--light-grey);
 }
-#createBoard .MuiListItem-root{
+#createBoard .MuiListItem-root {
   display: grid;
   justify-content: center;
 }
-#createBoard .MuiInputBase-input{
+#createBoard .MuiInputBase-input {
   color: black;
   width: 500px;
 }
-#addStages{
+#addStagesContainer {
   display: grid;
+  /* grid-template-rows: 5fr, 1fr; */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin: 0 auto;
+}
+#addNewStage {
+  margin: 0 auto;
+}
+.navButtons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+#saveBoard {
+  width: 150px;
+  justify-self: end;
+}
+#prevStep {
+  width: 150px;
+}
+.newBoardContainer {
+  display: grid;
+  grid-gap: 10px;
+}
+.makeStyles-root-111 {
+  background-color: transparent;
+}
+#createBoard {
+  background-color: var(--medium-grey);
+  border-radius: 10px;
+  box-shadow: 2px 2px 20px var(--box-shadow);
+}
+.MuiTabs-flexContainer{
+  background-color: var(--dark-grey);
+}
+.MuiTab-textColorPrimary.Mui-selected{
+  color: white;
+  /* background-color: var(--medium-grey); */
+}
+.PrivateTabIndicator-colorPrimary-134{
+  background-color: orange;
 }

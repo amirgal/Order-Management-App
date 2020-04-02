@@ -1,3 +1,4 @@
+import "../../styles/Analytics.css"
 import React, { useState, useEffect } from "react"
 import { inject, observer } from "mobx-react"
 import {
@@ -42,6 +43,12 @@ const CreateBoard = inject("generalStore")(
     const prevStep = () => {
       setStep(step - 1)
     }
+    const nameEntered = () => {
+      return name.length > 0
+    }
+    const productsChosen = () => {
+      return productIds.length > 0
+    }
 
     switch (step) {
       case 1:
@@ -85,7 +92,11 @@ const CreateBoard = inject("generalStore")(
                 />
               </ListItem>
               <ListItem>
-                <Button onClick={nextStep} variant="contained">
+                <Button
+                  onClick={nextStep}
+                  disabled={(!nameEntered(), !productsChosen())}
+                  variant="contained"
+                >
                   Next
                 </Button>
               </ListItem>

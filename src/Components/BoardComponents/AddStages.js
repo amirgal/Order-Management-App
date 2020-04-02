@@ -1,3 +1,4 @@
+import "../../styles/Analytics.css"
 import React, { useState, useEffect } from "react"
 import { inject, observer } from "mobx-react"
 import {
@@ -25,7 +26,9 @@ const AddStages = inject("generalStore")(
     const [showModal, setShowModal] = useState(false)
     const board = { name: boardName, stages: stages, products: productIds }
 
-    const prevStep = () => props.prevStep()
+    const prevStep = () => {
+      props.prevStep()
+    }
     const addNewStage = newStage => {
       setStages([...stages, newStage])
     }
@@ -37,39 +40,40 @@ const AddStages = inject("generalStore")(
     }
 
     return (
-      <div
-        id="addStages"
-        style={{
-          gridTemplateColumns: `repeat(${stages.length + 3}, 1fr)`
-        }}
-      >
-        <Button onClick={prevStep} variant="contained">
-          Go Back
-        </Button>
-        {stages.map(s => (
-          <div>
-            <h3>{s.name}</h3>
-            {s.notes.map(n => (
-              <p>{n}</p>
-            ))}
-            {s.validate.map(n => (
-              <p>{n}</p>
-            ))}
+      <div>
+        <div className="newBoardContainer">
+          <div id="addStagesContainer">
+            <Button id="addNewStage" onClick={toggleModal} variant="contained">
+              Add Stage
+            </Button>
           </div>
-        ))}
-        <Button onClick={toggleModal} variant="contained">
-          Add Stage
-        </Button>
-        <Button onClick={saveBoard} variant="contained">
-          Save Board
-        </Button>
-        {showModal ? (
-          <AddsStageModal
-            addNewStage={addNewStage}
-            toggleModal={toggleModal}
-            showModal={showModal}
-          />
-        ) : null}
+          {stages.map(s => (
+            <div>
+              <h3>{s.name}</h3>
+              {s.notes.map(n => (
+                <p>{n}</p>
+              ))}
+              {s.validate.map(n => (
+                <p>{n}</p>
+              ))}
+            </div>
+          ))}
+          {showModal ? (
+            <AddsStageModal
+              addNewStage={addNewStage}
+              toggleModal={toggleModal}
+              showModal={showModal}
+            />
+          ) : null}
+        </div>
+        <div className="navButtons">
+          <Button id="prevStep" onClick={prevStep} variant="contained">
+            Go Back
+          </Button>
+          <Button id="saveBoard" onClick={saveBoard} variant="contained">
+            Save Board
+          </Button>
+        </div>
       </div>
     )
   })
