@@ -182,3 +182,14 @@ body {
   padding: 50px;
   background-color: var(--light-grey);
 }
+#createBoard .MuiListItem-root{
+  display: grid;
+  justify-content: center;
+}
+#createBoard .MuiInputBase-input{
+  color: black;
+  width: 500px;
+}
+#addStages{
+  display: grid;
+}

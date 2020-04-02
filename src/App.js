@@ -6,14 +6,13 @@ import OrderManager from "./Components/OrderManagerComponents/OrderManager"
 import MyAppBar from "./Components/AppBarComponents/MyAppBar"
 import Settings from "./Components/SettingsComponents/Settings"
 import { StylesProvider } from "@material-ui/core/styles"
-import CompletedOrders from './Components/CompletedOrdersComponents/CompletedOrders';
+import CompletedOrders from "./Components/CompletedOrdersComponents/CompletedOrders"
 import Tracker from "./Components/TrackerComponents/Tracker"
 import Analytics from "./Components/AnalyticsComponents/Analytics"
 import BoardTabsBar from "./Components/OrderManagerComponents/BoardTabsBar"
 
 const App = inject("generalStore")(
   observer(props => {
-    
     useEffect(() => {
       props.generalStore.initializeAll()
     }, [])
