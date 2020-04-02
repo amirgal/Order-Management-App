@@ -1,23 +1,8 @@
+import "../../styles/Analytics.css"
 import React, { useState, useEffect } from "react"
 import { inject, observer } from "mobx-react"
-import {
-  Button,
-  TextField,
-  Input,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  ListItemText,
-  Select,
-  Checkbox,
-  Chip,
-  IconButton,
-  List,
-  ListItem
-} from "@material-ui/core"
+import { Button, TextField, Checkbox, List, ListItem } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
-import clsx from "clsx"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
 import {
   CheckBox as CheckBoxIcon,
   CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon
@@ -41,6 +26,12 @@ const CreateBoard = inject("generalStore")(
     }
     const prevStep = () => {
       setStep(step - 1)
+    }
+    const nameEntered = () => {
+      return name.length > 0
+    }
+    const productsChosen = () => {
+      return productIds.length > 0
     }
 
     switch (step) {
@@ -85,7 +76,11 @@ const CreateBoard = inject("generalStore")(
                 />
               </ListItem>
               <ListItem>
-                <Button onClick={nextStep} variant="contained">
+                <Button
+                  onClick={nextStep}
+                  disabled={(!nameEntered(), !productsChosen())}
+                  variant="contained"
+                >
                   Next
                 </Button>
               </ListItem>
