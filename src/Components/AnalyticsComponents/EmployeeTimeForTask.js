@@ -7,10 +7,10 @@ const EmployeeTimeForTask = inject("generalStore")(
     const [averageTime, setAverageTime] = useState([]);
     
     useEffect(() => {
-      if (props.generalStore.orders.length > 0) {
+      if (averageTime.length > 0) {
         const avgTImeArr = props.generalStore.getAverageTimeForTask();
         setAverageTime(avgTImeArr);
-      }}, [props.generalStore.orders]);
+      }}, [props.generalStore.boards,props.generalStore.completedOrders]);
     
     return (
       <div>
@@ -18,7 +18,7 @@ const EmployeeTimeForTask = inject("generalStore")(
         {averageTime.length> 0 ? (
           <TaskTimeChart data ={averageTime}/>
         ) : (
-          null
+          <div>No completed tasks yet</div>
         )}
       </div>
     );

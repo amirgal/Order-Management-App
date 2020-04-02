@@ -1,12 +1,12 @@
-import React, {useState , useEffect} from 'react';
+import React, {useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import {Button, TextField, Typography, List, ListItem} from '@material-ui/core'
 import {Autocomplete} from '@material-ui/lab'
 
 const ClaimTask = inject('generalStore','detailsWindowStore')(observer((props) => {
     const [employee, setEmployee] = useState(null)
-    const currOrder = props.detailsWindowStore.detailsWindowOrder
-    const steps = props.generalStore.boards.find(b => b.products.includes(p => p === currOrder.product._id)).stages[currOrder.progress].steps
+    // const currOrder = props.detailsWindowStore.detailsWindowOrder
+    const notes = props.detailsWindowStore.detailsWindowStage.notes
 
     const claimStage = () => {
         props.detailsWindowStore.detailsWindowOrder.claimStage(employee.name)
@@ -20,7 +20,7 @@ const ClaimTask = inject('generalStore','detailsWindowStore')(observer((props) =
     return (
         <div id="claim-task">
             <List>
-                {steps.map((s,i) => 
+                {notes.map((s,i) => 
                         <ListItem key={i}>
                         <Typography>{s}</Typography>
                         </ListItem>

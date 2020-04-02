@@ -31,12 +31,12 @@ const Settings = inject("generalStore")(
     const [shopName, setShopName] = useState("");
     const [password, setPassword] = useState("");
     const [synced, setSynced] = useState(
-      props.generalStore.orders.length > 0 ? true : false
+      props.generalStore.products.length > 0 ? true : false
     );
 
     useEffect(() => {
-        props.generalStore.orders.length > 0 ? setSynced(true) : setSynced(false)
-    },[props.generalStore.orders])
+        props.generalStore.products.length > 0 ? setSynced(true) : setSynced(false)
+    },[props.generalStore.products])
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = event => {

@@ -48,10 +48,10 @@ body {
   /* font-size: 12px; */
 }
 .order .statusLight {
-  background-color: yellow;
+  background-color: orange;
 }
 .inProcess .statusLight {
-  background-color: orange;
+  background-color: greenyellow;
 }
 .ready .statusLight {
   background-color: greenyellow;

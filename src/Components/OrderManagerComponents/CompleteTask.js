@@ -3,8 +3,9 @@ import { inject, observer } from 'mobx-react';
 import {Button, FormControlLabel, Checkbox, List, ListItem} from '@material-ui/core'
 
 const CompleteTask = inject('generalStore','detailsWindowStore')(observer((props) => {
-    const currOrder = props.detailsWindowStore.detailsWindowOrder
-    const steps = props.generalStore.boards.find(b => b.products.includes(p => p === currOrder.product._id)).stages[currOrder.progress].steps
+    // const currOrder = props.detailsWindowStore.detailsWindowOrder
+    const steps = props.detailsWindowStore.detailsWindowStage.validate
+    
     const createCheckedState = () => {
         const newState = {}
         for(let i in steps){

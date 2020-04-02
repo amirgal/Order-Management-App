@@ -59,9 +59,7 @@ const BoardTabsBar = inject("generalStore")(
     const handleChangeIndex = index => {
       setValue(index)
     }
-    // if(boards.length === 0 || !boards[0]){
-    //     return null
-    // }else{
+
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
@@ -85,7 +83,7 @@ const BoardTabsBar = inject("generalStore")(
           onChangeIndex={handleChangeIndex}
         >
           {boards.map((b, i) => (
-            <TabPanel value={value} index={i} dir={theme.direction}>
+            <TabPanel key={i} value={value} index={i} dir={theme.direction}>
               <Board key={i} board={b} />
             </TabPanel>
           ))}

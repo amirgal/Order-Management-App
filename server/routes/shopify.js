@@ -4,6 +4,7 @@ const axios = require(`axios`)
 const Product = require("../models/Product")
 const Order = require("../models/Order")
 const Customer = require("../models/Customer")
+const Board = require("../models/board")
 const dotenv = require("dotenv")
 dotenv.config()
 const ordersAPI = process.env.ordersAPI
@@ -13,11 +14,14 @@ const shopify = function() {
   const getProductsFromShopify = async url => {
     let results = await axios.get(url)
     for (result of results.data.products) {
-      let product = new Product({
-        shopifyId: result.id,
-        name: result.title
-      })
-      await product.save()
+      const foundProduct = await Product.find({shopifyId : result.id})    
+      if(foundProduct.length === 0){
+        let product = new Product({
+          shopifyId: result.id,
+          name: result.title
+        })
+        await product.save()
+      }
     }
   }
   const getOrdersFromShopify = async url => {
@@ -46,6 +50,7 @@ const shopify = function() {
 
         for (let item of result.line_items) {
           const product = await Product.find({ shopifyId: item.product_id })
+          const board = await Board.find({products : product[0]._id})
           let address = result.shipping_address
           let order = new Order({
             date: result.created_at,
@@ -59,6 +64,7 @@ const shopify = function() {
             progress: 1,
             stageEmployees: { 1: "" },
             isComplete: false,
+            isReadyToShip:false,
             shippingAddress: {
               address: address.address1,
               city: address.city,
@@ -71,6 +77,9 @@ const shopify = function() {
             }
           })
           await order.save()
+          if(board.length > 0){
+            await Board.updateOne({_id : board[0]._id},{$push : {orders : order._id}})
+          }
         }
       }
     }

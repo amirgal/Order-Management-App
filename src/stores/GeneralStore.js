@@ -4,27 +4,22 @@ import SingleOrderStore from "./SingleOrderStore";
 import BoardStore from "./BoardStore";
 
 export default class GeneralStore {
-  @observable orders = [];
+  @observable completedOrders = [];
   @observable products = [];
   @observable employees = [];
   @observable customers = [];
   @observable boards = [];
-//   @observable boards = [{"name":"board1","stages":[{"name":"stage1","notes":["do this","now do that" ,"dont forget to do that as well"],"validate":["u sure bro?" ,"did u not do the arab job thing","exetra (this is not the way to spell it though)"]},{"name":"stage2","notes":["legalize stuff","rest and don't work too hard" ,"dont forget the bird is the word"],"validate":["u sure homes?" ,"did u not do the stuff man?","stuffffff"]},{"name":"stage3","notes":["do this","tiny rick rules!" ,"ive got ants in my eyes"],"validate":["existence is pain ? " ,"u gotta shove them wayy up there","stage 3 modafuckaaa"]},{"name":"stage4","notes":["waba laba somthing else","dont worry bro we got your back dog" ,"but you cant hide beacth"],"validate":["dont judge" ,"slavery with extra steps","no more references"]}],"products":["5e848d6228e8254ad07cca63","5e848d6228e8254ad07cca64"]}
-// ,{"name":"board2","stages":[{"name":"stage1","notes":["do this","now do that" ,"dont forget to do that as well"],"validate":["u sure bro?" ,"did u not do the arab job thing","exetra (this is not the way to spell it though)"]},{"name":"stage2","notes":["legalize stuff","rest and don't work too hard" ,"dont forget the bird is the word"],"validate":["u sure homes?" ,"did u not do the stuff man?","stuffffff"]},{"name":"stage3","notes":["do this","tiny rick rules!" ,"ive got ants in my eyes"],"validate":["existence is pain ? " ,"u gotta shove them wayy up there","stage 3 modafuckaaa"]},{"name":"stage4","notes":["waba laba somthing else","dont worry bro we got your back dog" ,"but you cant hide beacth"],"validate":["dont judge" ,"slavery with extra steps","no more references"]}],"products":["5e848d6228e8254ad07cca63","5e848d6228e8254ad07cca64"]}
-// ,{"name":"board3","stages":[{"name":"stage1","notes":["do this","now do that" ,"dont forget to do that as well"],"validate":["u sure bro?" ,"did u not do the arab job thing","exetra (this is not the way to spell it though)"]},{"name":"stage2","notes":["legalize stuff","rest and don't work too hard" ,"dont forget the bird is the word"],"validate":["u sure homes?" ,"did u not do the stuff man?","stuffffff"]},{"name":"stage3","notes":["do this","tiny rick rules!" ,"ive got ants in my eyes"],"validate":["existence is pain ? " ,"u gotta shove them wayy up there","stage 3 modafuckaaa"]},{"name":"stage4","notes":["waba laba somthing else","dont worry bro we got your back dog" ,"but you cant hide beacth"],"validate":["dont judge" ,"slavery with extra steps","no more references"]}],"products":["5e848d6228e8254ad07cca63","5e848d6228e8254ad07cca64"]}]
 
   @action getBoards = async () => {
     const boards = await axios.get("http://localhost:4000/api/boards");
-    
     this.boards = boards.data.map(board => 
       new BoardStore(board)
     );
-    console.log(this.boards);
   };
 
-  @action getOrders = async () => {
-    const ordersResponse = await axios.get("http://localhost:4000/api/orders");
-    this.orders = ordersResponse.data.map(o => new SingleOrderStore(o));
+  @action getCompletedOrders = async () => {
+    const ordersResponse = await axios.get("http://localhost:4000/api/completed");
+    this.completedOrders = ordersResponse.data;
   };
 
   @action getEmployees = async () => {
@@ -87,7 +82,7 @@ export default class GeneralStore {
       ordersUrl
     });
     if (response.data.products) {
-      this.orders = response.data.orders.map(o => new SingleOrderStore(o));
+      this.completedOrders = response.data.orders.filter(o => o.isComplete).map(o => new SingleOrderStore(o));
       this.employees = response.data.employees;
       this.products = response.data.products;
       return true;
@@ -97,8 +92,8 @@ export default class GeneralStore {
   @action getAverageTimeForTask = () => {
     const objByEmployee = {};
     const toReturn = [];
-
-    this.orders.forEach(o => {
+    const combained = this.getCombinedOrders()
+    combained.forEach(o => {
       for (let i = 1; i < o.progress; i++) {
         if (!objByEmployee[o.stageEmployees[i].name]) {
           objByEmployee[[o.stageEmployees[i].name]] = { sum: 0, num: 0 };
@@ -125,7 +120,8 @@ export default class GeneralStore {
   @action getCompletedByEmployee = () => {
     const objByEmployee = {};
     const toReturn = [];
-    this.orders.forEach(o => {
+    const combained = this.getCombinedOrders()
+    combained.forEach(o => {
       for (let i = 1; i < o.progress; i++) {
         if (o.stageEmployees[i]["endDate"]) {
           if (!objByEmployee[o.stageEmployees[i].name]) {
@@ -142,15 +138,19 @@ export default class GeneralStore {
     }
     return toReturn;
   };
-
-  @computed get completedOrders() {
-    return this.orders.filter(o => o.isComplete);
+  getCombinedOrders = () => {
+    let combained = []
+    this.boards.forEach(b => combained = combained.concat(b.orders))
+    combained.concat(this.completedOrders)
+    return combained
   }
+
 
   @action getOrdersPerProduct = () => {
     const toReturn = [];
     const objByProduct = {};
-    this.orders.forEach(o => {
+    const combinedOrders = this.getCombinedOrders()
+    combinedOrders.forEach(o => {
       if (!objByProduct[o.product.name]) {
         objByProduct[o.product.name] = 1;
       } else {
@@ -167,7 +167,7 @@ export default class GeneralStore {
   @action getTimePerProduct = () => {
     const toReturn = [];
     const objTimePerProduct = {};
-    this.orders.forEach(o => {
+    this.completedOrders.forEach(o => {
       if (o.isComplete) {
         if (!objTimePerProduct[o.product.name]) {
           objTimePerProduct[o.product.name] = { sum: 0, num: 0 };
@@ -189,7 +189,7 @@ export default class GeneralStore {
   };
 
   @action initializeAll = () => {
-    this.getOrders();
+    this.getCompletedOrders();
     this.getEmployees();
     this.getProducts();
     this.getCustomers();
