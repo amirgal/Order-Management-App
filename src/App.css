@@ -197,3 +197,9 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-gap: 10px;
 }
+.MuiStepIcon-root.MuiStepIcon-active{
+  color: rgb(14, 136, 79);
+}
+.MuiStepIcon-root.MuiStepIcon-completed{
+  color: var(--light-grey);
+}

@@ -26,6 +26,9 @@ const theme = createMuiTheme({
       primary: "#3b3c43",
       secondary: "#3b3c43",
       tabsBar: "#b6b6bf"
+    },
+    background: {
+      paper: "#b6b6bf"
     }
   }
 })

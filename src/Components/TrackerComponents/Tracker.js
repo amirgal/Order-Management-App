@@ -11,16 +11,19 @@ const Tracker = inject("generalStore")(
     const [activeStep, setActiveStep] = useState(0)
     const [orderObj, setOrderObj] = useState(null)
     const [customer, setCustomer] = useState(null)
-    const [trackingNum, setTrackingNum] = useState(null)
+    const [numStages, setNumStages] = useState(null)
+    // const [trackingNum, setTrackingNum] = useState(null)
     const handleChange = e => {
       setOrderId(e.target.value)
     }
     const customers = props.generalStore.customers
     const findOrder = () => {
       const orders = props.generalStore.orders
-      let order = orders.find(o => o.shopifyId === orderId)
+      let order = orders.find(o => o.shopifyId == orderId)
       if (order) {
-        let foundCustomer = customers.find(c => c.shopifyId === order.customerId)
+        let foundCustomer = customers.find(
+          c => c.shopifyId === order.customerId
+        )
         setCustomer(foundCustomer)
         setOrderObj(order)
         setActiveStep(order.progress)
@@ -30,12 +33,6 @@ const Tracker = inject("generalStore")(
         alert("Invalid Order Number")
       }
     }
-
-    // useEffect(() => {
-    //   if (id) {
-    //     findOrder()
-    //   }
-    // }, [])
 
     return (
       <div className="tracker_page">
@@ -56,6 +53,7 @@ const Tracker = inject("generalStore")(
               activeStep={activeStep}
               order={orderObj}
               customer={customer}
+              // trackingNum={trackingNum}
             />
           ) : null}
         </div>
