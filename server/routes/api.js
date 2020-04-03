@@ -18,6 +18,7 @@ router.get(`/boards/`, async (req, res) => {
   res.send(boards)
 })
 
+
 router.post('/board', async(req,res) => {
   const newBoard = req.body 
   const board = new Board(newBoard)
