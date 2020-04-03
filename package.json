@@ -47,6 +47,7 @@
     "mobx-react": "^6.1.8",
     "mobx-react-devtools": "^6.1.1",
     "mongoose": "^5.9.6",
+    "nodemailer": "^6.4.6",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.0",
     "postcss-flexbugs-fixes": "4.1.0",

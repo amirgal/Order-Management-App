@@ -6,6 +6,9 @@ const Order = require("../models/Order")
 const Customer = require("../models/Customer")
 const Board = require("../models/board")
 const dotenv = require("dotenv")
+  const mailer = require('./mailer')()
+
+
 dotenv.config()
 const ordersAPI = process.env.ordersAPI
 const productsAPI = process.env.productsAPI
@@ -25,7 +28,9 @@ const shopify = function() {
     }
   }
   const getOrdersFromShopify = async url => {
+    const threeDays = 259200000
     let results = await axios.get(url)
+    console.log(results.data)
     for (let result of results.data.orders) {
       const foundOrder = await Order.find({ shopifyId: result.id })
       if (foundOrder.length == 0) {
@@ -80,6 +85,9 @@ const shopify = function() {
           if(board){ 
             await Board.updateOne({_id : board._id},{$push : {orders : order._id}})
           }
+        }
+        if(result.fulfillment_status != "fullfilled" && (new Date() -  Date.parse(result.created_at) < threeDays)){
+          mailer.sendEmail(result.id)
         }
       }
     }
