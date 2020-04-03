@@ -17,8 +17,8 @@ const ShippingOrder = inject("generalStore")(observer(props => {
       return props.orders.every(o => o.isReadyToShip)
   }
 
-  const shipItems = () => {
-    props.shipItems(props.orders)
+  const openModalWithOrders = () => {
+    props.openModalWithOrders(props.orders)
   }
    
     return (
@@ -51,7 +51,7 @@ const ShippingOrder = inject("generalStore")(observer(props => {
                     Get Tracking Label
                   </Button>
                   <Button variant="contained" disabled={!checkCompletion()}
-                  onClick={shipItems}>
+                  onClick={openModalWithOrders}>
                     Ship Items
                   </Button>
                 </div>

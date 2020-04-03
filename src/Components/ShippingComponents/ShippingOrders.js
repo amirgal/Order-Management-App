@@ -9,19 +9,20 @@ const ShippingOrders = inject("generalStore")(observer(props => {
     // const shippingOrdersByID = props.generalStore.rdyToShipOrdersById
     const [shippingOrdersByID, setShippingOrdersById] = useState(props.generalStore.rdyToShipOrdersById)
     const [showModal, setShowModal] = useState(false)
+    const [modalOrders, setModalOrders] = useState([])
 
-    // const toggleModal = () => {
-    //     setShowModal(!showModal)
-    // }
-
-    const shipItems = orders => {
-        // orders.forEach(o => {
-        //     o.completeOrder()
-        // });
-        // const newShippingById = {...shippingOrdersByID}
-        // newShippingById[orders[0].shopifyId] = null
-        // setShippingOrdersById(newShippingById)
+    const openModalWithOrders = (orders) => {
+        setModalOrders(orders)
         setShowModal(true)
+    }
+
+    const shipItems = () => {
+        modalOrders.forEach(o => {
+            o.completeOrder()
+        });
+        const newShippingById = {...shippingOrdersByID}
+        newShippingById[modalOrders[0].shopifyId] = null
+        setShippingOrdersById(newShippingById)
     }
     
     const handleChange = (panel) => (event, isExpanded) => {
@@ -33,12 +34,13 @@ const ShippingOrders = inject("generalStore")(observer(props => {
             <div id="completed-orders-table">
                 {Object.keys(shippingOrdersByID).map((id,i) =>
                     shippingOrdersByID[id] ? 
-                    <ShippingOrder shipItems={shipItems} handleChange={handleChange}
+                    <ShippingOrder openModalWithOrders={openModalWithOrders} handleChange={handleChange}
                      expanded={expanded} key={i} orders={shippingOrdersByID[id]}/>
                     : null
                 )}
             </div>
-            <ShipOrdersModal showModal={showModal} setShowModal={setShowModal}/>
+            <ShipOrdersModal shipItems={shipItems}
+            showModal={showModal} setShowModal={setShowModal}/>
         </div>
     );
 }));

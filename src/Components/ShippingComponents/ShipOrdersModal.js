@@ -25,6 +25,11 @@ const ShipOrdersModal = observer(props => {
     props.setShowModal(false)
   }
 
+  const shipItems = () => {
+    props.shipItems()
+    props.setShowModal(false)
+  }
+
   return (
     <div>
       <Modal
@@ -43,7 +48,7 @@ const ShipOrdersModal = observer(props => {
           <div id="ship-orders-modal">
             <input placeholder="add tracking number" value={trackingNumber}
             onChange={(e) => setTrackingNumber(e.target.value)}></input>
-            <Button variant="contained">Ship Items</Button>
+            <Button variant="contained" onClick={shipItems}>Ship Items</Button>
           </div>
         </Fade>
       </Modal>
