@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const adminSchema = new Schema({
-  userName: String,
+  username: String,
   password: String,
   boards : [{ type: Schema.Types.ObjectId, ref: 'Board' }],
   employees : [{ type: Schema.Types.ObjectId, ref: 'Employee' }],

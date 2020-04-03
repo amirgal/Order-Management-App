@@ -15,9 +15,9 @@ import Login from "./Components/Login"
 
 const App = inject("generalStore")(
   observer(props => {
-    useEffect(() => {
-      props.generalStore.initializeAll()
-    }, [])
+    // useEffect(() => {
+    //   props.generalStore.getAdminData()
+    // }, [])
 
     return (
       <StylesProvider injectFirst>

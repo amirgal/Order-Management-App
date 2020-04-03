@@ -26,7 +26,7 @@ const validateWebhook = (req, res, next) => {
 
 router.post("/orders/create", validateWebhook, async (req, res) => {
   console.log("We got an order!")
-  
+
   const result = await req.body
   const cust = result.customer
   const foundCustomer = await Customer.find({ shopifyId: cust.id })
@@ -38,6 +38,7 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
       phone: cust.default_address.phone,
       orders: [result.id]
     })
+    await Admin.findOneAndUpdate({_id : adminId},{$push : {customers : customer._id}})
     await customer.save()
   } else {
     updatedOrders = foundCustomer[0].orders.push(result.id)

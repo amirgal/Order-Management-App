@@ -5,6 +5,7 @@ const Product = require("../models/Product")
 const Order = require("../models/Order")
 const Customer = require("../models/Customer")
 const Board = require("../models/board")
+const Admin = require("../models/admin")
 const dotenv = require("dotenv")
   const mailer = require('./mailer')()
 
@@ -25,6 +26,7 @@ const shopify = function() {
           adminId : adminId
         })
         await product.save()
+        await Admin.findOneAndUpdate({_id : adminId},{$push : {products : product._id}})
       }
     }
   }
@@ -47,6 +49,7 @@ const shopify = function() {
             adminId : adminId
           })
           await customer.save()
+          await Admin.findOneAndUpdate({_id : adminId},{$push : {customers : customer._id}})
         } else {
           updatedOrders = foundCustomer[0].orders.push(result.id)
           await Customer.updateOne(

@@ -11,6 +11,15 @@ export default class GeneralStore {
   @observable orders = [];
   @observable adminId = ""
 
+  @action getAdminData = async () => {
+    const response = await axios.get(`http://localhost:4000/api/getAdminData/${this.adminId}`)
+    this.getBoards(response.data.boards);
+    this.employees = response.data.employees;
+    this.products = response.data.products;
+    this.customers = response.data.customers;
+
+  }
+
   @action getBoards = async optionalBoards => {
     let boards = [];
     if (optionalBoards) {
@@ -33,26 +42,26 @@ export default class GeneralStore {
   //   this.completedOrders = ordersResponse.data;
   // };
 
-  @action getEmployees = async () => {
-    const employeesResponse = await axios.get(
-      "http://localhost:4000/api/employees"
-    );
-    this.employees = employeesResponse.data;
-  };
+  // @action getEmployees = async () => {
+  //   const employeesResponse = await axios.get(
+  //     "http://localhost:4000/api/employees"
+  //   );
+  //   this.employees = employeesResponse.data;
+  // };
 
-  @action getProducts = async () => {
-    const productsResponse = await axios.get(
-      "http://localhost:4000/api/products"
-    );
-    this.products = productsResponse.data;
-  };
+  // @action getProducts = async () => {
+  //   const productsResponse = await axios.get(
+  //     "http://localhost:4000/api/products"
+  //   );
+  //   this.products = productsResponse.data;
+  // };
 
-  @action getCustomers = async () => {
-    const customersResponse = await axios.get(
-      "http://localhost:4000/api/customers"
-    );
-    this.customers = customersResponse.data;
-  };
+  // @action getCustomers = async () => {
+  //   const customersResponse = await axios.get(
+  //     "http://localhost:4000/api/customers"
+  //   );
+  //   this.customers = customersResponse.data;
+  // };
 
   @action createBoard = async board => {
     board.adminId = this.adminId
@@ -69,7 +78,7 @@ export default class GeneralStore {
   @action addEmployee = async name => {
     let updatedEmployees = await axios.post(
       `http://localhost:4000/api/employees`,
-      { name, isActive: true ,adminId}
+      { name, isActive: true ,adminId : this.adminId}
     );
     if (typeof updatedEmployees.data === "string") {
       alert(updatedEmployees.data);
@@ -95,10 +104,11 @@ export default class GeneralStore {
       ordersUrl,
       adminId
     });
-    if (response.data.adminData.products) {
+    if (response.data.products) {
       this.getBoards(response.data.boards);
-      this.employees = response.data.adminData.employees;
-      this.products = response.data.adminData.products;
+      this.employees = response.data.employees;
+      this.products = response.data.products;
+      this.customers = response.data.customers;
       return true;
     } else {
       return false;
@@ -218,11 +228,11 @@ export default class GeneralStore {
     return shippingOrdersByID;
   }
 
-  @action initializeAll = () => {
+  // @action initializeAll = () => {
     
-    this.getEmployees();
-    this.getProducts();
-    this.getCustomers();
-    this.getBoards();
-  };
+  //   this.getEmployees();
+  //   this.getProducts();
+  //   this.getCustomers();
+  //   this.getBoards();
+  // };
 }

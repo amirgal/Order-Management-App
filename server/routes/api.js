@@ -76,16 +76,13 @@ router.put(`/order/`, async (req, res) => {
 })
 
 router.post("/employees/", async (req, res) => {
-  const {employee,adminId} = req.body
-  let found = await Employee.find({ name: employee.name })
+  const employee = req.body
+  let found = await Employee.find({ name: employee.name , adminId : employee.adminId })
   if (found.length === 0) {
-    let newEmployee = new Employee({
-      name: employee.name,
-      isActive: employee.isActive,
-      adminId : adminId
-    })
+    let newEmployee = new Employee(employee)
     await newEmployee.save()
-    const employees = await Employee.find({})
+    await Admin.findOneAndUpdate({_id : employee.adminId},{$push : {employees : newEmployee._id}})
+    const employees = await Employee.find({adminId : employee.adminId})
     res.send(employees)
   } else {
     res.send("Please select a different name")
@@ -99,7 +96,7 @@ router.put("/employees/", async (req, res) => {
 })
 
 const queryAdminData = async (adminId) => {
-  const adminData = await Admin.find({_id : adminId}).populate({
+  const adminData = await Admin.findOne({_id : adminId}).populate({
     path : 'boards' ,populate : {
       path : 'orders',populate : {
         path : 'product'
@@ -109,8 +106,9 @@ const queryAdminData = async (adminId) => {
   return adminData
 }
 
-router.get('/adminData/:adminId',async (req,res) => {
+router.get('/getAdminData/:adminId',async (req,res) => {
   const adminData = await queryAdminData(req.params.adminId)
+  
   res.send(adminData)
 })
 
