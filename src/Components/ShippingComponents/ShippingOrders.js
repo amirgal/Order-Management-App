@@ -2,21 +2,28 @@ import '../../styles/ShippingOrders.css'
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import ShippingOrder from "./ShippingOrder";
+import ShipOrdersModal from "./ShipOrdersModal"
 
 const ShippingOrders = inject("generalStore")(observer(props => {
     const [expanded, setExpanded] = useState(false);
     // const shippingOrdersByID = props.generalStore.rdyToShipOrdersById
     const [shippingOrdersByID, setShippingOrdersById] = useState(props.generalStore.rdyToShipOrdersById)
+    const [showModal, setShowModal] = useState(false)
+
+    // const toggleModal = () => {
+    //     setShowModal(!showModal)
+    // }
 
     const shipItems = orders => {
-        orders.forEach(o => {
-            o.completeOrder()
-        });
-        const newShippingById = {...shippingOrdersByID}
-        newShippingById[orders[0].shopifyId] = null
-        setShippingOrdersById(newShippingById)
+        // orders.forEach(o => {
+        //     o.completeOrder()
+        // });
+        // const newShippingById = {...shippingOrdersByID}
+        // newShippingById[orders[0].shopifyId] = null
+        // setShippingOrdersById(newShippingById)
+        setShowModal(true)
     }
-    console.log(shippingOrdersByID)
+    
     const handleChange = (panel) => (event, isExpanded) => {
       setExpanded(isExpanded ? panel : false);
     };
@@ -31,6 +38,7 @@ const ShippingOrders = inject("generalStore")(observer(props => {
                     : null
                 )}
             </div>
+            <ShipOrdersModal showModal={showModal} setShowModal={setShowModal}/>
         </div>
     );
 }));
