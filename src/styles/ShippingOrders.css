@@ -4,8 +4,19 @@
     margin-right: 15px;
 }
 
+.panel-header {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    width: -webkit-fill-available;
+    text-align: center;
+}
+
+.order-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .statusLight {
-    
     background-color: #f34627;
     margin-right: 10px;
 }
@@ -16,4 +27,25 @@
 
 .order-item > h3 {
     margin : 0;
+}
+
+.panel-details > h4{
+    margin: 5px;
+}
+
+.shipping-details {
+    display: grid;
+    grid-template-rows: repeat(2,1fr);
+    grid-template-columns: repeat(5,1fr);
+    text-align: center;
+}
+
+.all-order-items{
+    display: flex;
+    margin: 5px 0;
+}
+
+.buttons {
+    display: flex;
+    padding:10px 15px;
 }

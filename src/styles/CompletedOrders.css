@@ -44,7 +44,7 @@ p {
 }
 
 .panel-details > div {
-    display: flex;
+    /* display: flex; */
 }
 
 .order-workflow{

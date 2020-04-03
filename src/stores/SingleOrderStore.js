@@ -26,25 +26,26 @@ export default class SingleOrder {
      this.isReadyToShip = order.isReadyToShip
     }
     
-    @action advanceStage = async () => {
-                
+    @action advanceStage = async () => {     
         this.stageEmployees[this.progress].endDate= new Date()
         this.progress +=1
         this.inProcess = false
         if(this.progress === this.numStages + 1){          
             this.isReadyToShip = true
-        } else if(this.progress > this.numStages + 1){          
-            this.isComplete = true
-            this.endDate = new Date()
-        }      
+        } 
         await axios.put("http://localhost:4000/api/order",this)
-        console.log(this.endDate);
-        
     }
     
     @action claimStage = async (employeeName) => {
         this.stageEmployees[this.progress] = {name:employeeName, startDate : new Date(),endDate : null}
         this.inProcess = true
+        await axios.put("http://localhost:4000/api/order",this)
+    }
+
+    @action completeOrder = async () => {
+        this.isReadyToShip = false        
+        this.isComplete = true
+        this.endDate = new Date()  
         await axios.put("http://localhost:4000/api/order",this)
     }
 }

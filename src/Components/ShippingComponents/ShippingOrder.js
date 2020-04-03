@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import {ExpansionPanel, ExpansionPanelDetails,
-        ExpansionPanelSummary, Paper} from '@material-ui/core';
+        ExpansionPanelSummary, Paper, Button} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ShippingDetails from "./ShippingDetails";
 import OrderItem from "./OrderItem";
@@ -13,6 +13,14 @@ const ShippingOrder = inject("generalStore")(observer(props => {
         c => c.shopifyId === props.orders[0].customerId
     );
 
+    const checkCompletion = () => {
+      return props.orders.every(o => o.isReadyToShip)
+  }
+
+  const shipItems = () => {
+    props.shipItems(props.orders)
+  }
+   
     return (
     <div className={'completed-order-panel'}>
       <ExpansionPanel expanded={props.expanded === props.orders[0]._id}
@@ -22,7 +30,6 @@ const ShippingOrder = inject("generalStore")(observer(props => {
         >
             <div className={'panel-header'}>
                 <p>ID: {props.orders[0].shopifyId}</p>
-                {/* <p>Product: {props.orders[0].product.name}</p> */}
                 <p>Name: {customer.name}</p>
                 <p>Email: {customer.email}</p>
             </div>
@@ -36,8 +43,19 @@ const ShippingOrder = inject("generalStore")(observer(props => {
                 <div className="all-order-items">
                     {props.orders.map((o,i) => <OrderItem key={i} order={o}/>)}
                 </div>
+                <h4>Shipping Details</h4>
                 <ShippingDetails details={props.orders[0].shippingAddress}/>
-             </div>
+                <div className="buttons">
+                  <Button variant="contained" target="_blank" rel="noopener noreferrer"
+                    href="https://www.israelpost.co.il/content.nsf/pages/237">
+                    Get Tracking Label
+                  </Button>
+                  <Button variant="contained" disabled={!checkCompletion()}
+                  onClick={shipItems}>
+                    Ship Items
+                  </Button>
+                </div>
+            </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>

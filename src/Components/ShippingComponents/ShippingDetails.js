@@ -7,7 +7,7 @@ const ShippingDetails = (props) => {
             <div className="detail">{props.details.address}</div>
             <div className="detail">{props.details.city}</div>
             <div className="detail">{props.details.zip}</div>
-            <div className="detail">{props.details.province}</div>
+            {props.details.province ? <div className="detail">{props.details.province}</div> : null}
             <div className="detail">{props.details.country}</div>
             <div className="detail">{props.details.name}</div>
             <div className="detail">{props.details.phone}</div>
