@@ -26,7 +26,7 @@ const validateWebhook = (req, res, next) => {
 
 router.post("/orders/create", validateWebhook, async (req, res) => {
   console.log("We got an order!")
-
+  
   const result = await req.body
   const cust = result.customer
   const foundCustomer = await Customer.find({ shopifyId: cust.id })

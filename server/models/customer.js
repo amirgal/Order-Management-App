@@ -6,7 +6,8 @@ const customerSchema = new Schema({
   name: String,
   email: String,
   phone: String,
-  orders: Array
+  orders: Array,
+  adminId : String
 })
 
 const Customer = mongoose.model("Customer", customerSchema)

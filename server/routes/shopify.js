@@ -14,20 +14,21 @@ const ordersAPI = process.env.ordersAPI
 const productsAPI = process.env.productsAPI
 
 const shopify = function() {
-  const getProductsFromShopify = async url => {
+  const getProductsFromShopify = async (url,adminId) => {
     let results = await axios.get(url)
     for (result of results.data.products) {
       const foundProduct = await Product.find({shopifyId : result.id})    
       if(foundProduct.length === 0){
         let product = new Product({
           shopifyId: result.id,
-          name: result.title
+          name: result.title,
+          adminId : adminId
         })
         await product.save()
       }
     }
   }
-  const getOrdersFromShopify = async url => {
+  const getOrdersFromShopify = async (url,adminId) => {
     const threeDays = 259200000
     let results = await axios.get(url)
     console.log(results.data)
@@ -42,7 +43,8 @@ const shopify = function() {
             name: cust.first_name + " " + cust.last_name,
             email: cust.email,
             phone: cust.default_address.phone,
-            orders: [result.id]
+            orders: [result.id],
+            adminId : adminId
           })
           await customer.save()
         } else {
@@ -79,7 +81,8 @@ const shopify = function() {
               company: address.company,
               name: address.name,
               phone: address.phone
-            }
+            },
+            adminId : adminId
           })
           await order.save()
           if(board){ 
