@@ -5,6 +5,7 @@ import ShippingOrder from "./ShippingOrder";
 import ShipOrdersModal from "./ShipOrdersModal"
 
 const ShippingOrders = inject("generalStore")(observer(props => {
+
     const [expanded, setExpanded] = useState(false);
     // const shippingOrdersByID = props.generalStore.rdyToShipOrdersById
     const [shippingOrdersByID, setShippingOrdersById] = useState(props.generalStore.rdyToShipOrdersById)
@@ -16,9 +17,9 @@ const ShippingOrders = inject("generalStore")(observer(props => {
         setShowModal(true)
     }
 
-    const shipItems = () => {
+    const shipItems = (trackingNumber) => {
         modalOrders.forEach(o => {
-            o.completeOrder()
+            o.completeOrder(trackingNumber)
         });
         const newShippingById = {...shippingOrdersByID}
         newShippingById[modalOrders[0].shopifyId] = null

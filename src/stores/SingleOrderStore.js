@@ -24,6 +24,7 @@ export default class SingleOrder {
      this.endDate = order.endDate ? new Date(order.endDate) : null
      this.numStages = numStages
      this.isReadyToShip = order.isReadyToShip
+     this.trackingNumber = order.trackingNumber
     }
     
     @action advanceStage = async () => {     
@@ -42,7 +43,8 @@ export default class SingleOrder {
         await axios.put("http://localhost:4000/api/order",this)
     }
 
-    @action completeOrder = async () => {
+    @action completeOrder = async trackingNumber => {
+        this.trackingNumber = trackingNumber
         this.isReadyToShip = false        
         this.isComplete = true
         this.endDate = new Date()  

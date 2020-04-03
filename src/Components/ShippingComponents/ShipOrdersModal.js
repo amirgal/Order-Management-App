@@ -26,7 +26,7 @@ const ShipOrdersModal = observer(props => {
   }
 
   const shipItems = () => {
-    props.shipItems()
+    props.shipItems(trackingNumber)
     props.setShowModal(false)
   }
 
