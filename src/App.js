@@ -37,9 +37,9 @@ const theme = createMuiTheme({
 
 const App = inject("generalStore")(
   observer(props => {
-    useEffect(() => {
-      props.generalStore.initializeAll()
-    }, [])
+    // useEffect(() => {
+    //   props.generalStore.getAdminData()
+    // }, [])
 
     return (
       <ThemeProvider theme={theme}>

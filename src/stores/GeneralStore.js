@@ -4,58 +4,68 @@ import SingleOrderStore from "./SingleOrderStore"
 import BoardStore from "./BoardStore"
 
 export default class GeneralStore {
-  @observable boards = []
-  // @observable completedOrders = [];
-  // @observable readyToShipOrders = []
-  @observable products = []
-  @observable employees = []
-  @observable customers = []
-  @observable orders = []
+  @observable boards = [];
+  @observable products = [];
+  @observable employees = [];
+  @observable customers = [];
+  @observable orders = [];
+  @observable adminId = ""
+
+  @action getAdminData = async () => {
+    const response = await axios.get(`http://localhost:4000/api/getAdminData/${this.adminId}`)
+    this.getBoards(response.data.boards);
+    this.employees = response.data.employees;
+    this.products = response.data.products;
+    this.customers = response.data.customers;
+
+  }
 
   @action getBoards = async optionalBoards => {
-    let boards = []
+    let boards = [];
     if (optionalBoards) {
-      boards = optionalBoards
+      boards = optionalBoards;
     } else {
-      boards = await axios.get("http://localhost:4000/api/boards")
-      boards = boards.data
+      boards = await axios.get("http://localhost:4000/api/boards");
+      boards = boards.data;
     }
     this.boards = boards.map(board => {
-      return new BoardStore(board)
-    })
+      return new BoardStore(board);
+    });
 
     for (let board of this.boards) {
-      this.orders = [...this.orders, ...board.orders]
+      this.orders = [...this.orders, ...board.orders];
     }
-  }
+  };
+
 
   // @action getCompletedOrders = async () => {
   //   const ordersResponse = await axios.get("http://localhost:4000/api/completed");
   //   this.completedOrders = ordersResponse.data;
   // };
 
-  @action getEmployees = async () => {
-    const employeesResponse = await axios.get(
-      "http://localhost:4000/api/employees"
-    )
-    this.employees = employeesResponse.data
-  }
+  // @action getEmployees = async () => {
+  //   const employeesResponse = await axios.get(
+  //     "http://localhost:4000/api/employees"
+  //   );
+  //   this.employees = employeesResponse.data;
+  // };
 
-  @action getProducts = async () => {
-    const productsResponse = await axios.get(
-      "http://localhost:4000/api/products"
-    )
-    this.products = productsResponse.data
-  }
+  // @action getProducts = async () => {
+  //   const productsResponse = await axios.get(
+  //     "http://localhost:4000/api/products"
+  //   );
+  //   this.products = productsResponse.data;
+  // };
 
-  @action getCustomers = async () => {
-    const customersResponse = await axios.get(
-      "http://localhost:4000/api/customers"
-    )
-    this.customers = customersResponse.data
-  }
+  // @action getCustomers = async () => {
+  //   const customersResponse = await axios.get(
+  //     "http://localhost:4000/api/customers"
+  //   );
+  //   this.customers = customersResponse.data;
+  // };
 
   @action createBoard = async board => {
+    board.adminId = this.adminId
     const savedBoard = await axios.post(
       "http://localhost:4000/api/board",
       board
@@ -69,8 +79,8 @@ export default class GeneralStore {
   @action addEmployee = async name => {
     let updatedEmployees = await axios.post(
       `http://localhost:4000/api/employees`,
-      { name, isActive: true }
-    )
+      { name, isActive: true ,adminId : this.adminId}
+    );
     if (typeof updatedEmployees.data === "string") {
       alert(updatedEmployees.data)
     } else {
@@ -87,17 +97,22 @@ export default class GeneralStore {
   }
 
   @action makeSync = async paramsObj => {
-    const ordersUrl = `https://${paramsObj.apiKey}:${paramsObj.password}@${paramsObj.shopName}.myshopify.com/admin/api/2020-01/orders.json`
-    const productsUrl = `https://${paramsObj.apiKey}:${paramsObj.password}@${paramsObj.shopName}.myshopify.com/admin/api/2020-01/products.json`
+    const ordersUrl = `https://${paramsObj.apiKey}:${paramsObj.password}@${paramsObj.shopName}.myshopify.com/admin/api/2020-01/orders.json`;
+    const productsUrl = `https://${paramsObj.apiKey}:${paramsObj.password}@${paramsObj.shopName}.myshopify.com/admin/api/2020-01/products.json`;
+    const adminId = this.adminId;
     const response = await axios.post(`http://localhost:4000/api/sync/`, {
       productsUrl,
-      ordersUrl
-    })
+      ordersUrl,
+      adminId
+    });
     if (response.data.products) {
-      this.getBoards(response.data.boards)
-      this.employees = response.data.employees
-      this.products = response.data.products
-      return true
+      this.getBoards(response.data.boards);
+      this.employees = response.data.employees;
+      this.products = response.data.products;
+      this.customers = response.data.customers;
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -129,8 +144,8 @@ export default class GeneralStore {
     return toReturn
   }
   @action getCompletedByEmployee = () => {
-    const objByEmployee = {}
-    const toReturn = []
+    const objByEmployee = {};
+    const toReturn = [];
 
     this.orders.forEach(o => {
       for (let i = 1; i < o.progress; i++) {
@@ -157,8 +172,8 @@ export default class GeneralStore {
   // }
 
   @action getOrdersPerProduct = () => {
-    const toReturn = []
-    const objByProduct = {}
+    const toReturn = [];
+    const objByProduct = {};
 
     this.orders.forEach(o => {
       if (!objByProduct[o.product.name]) {
@@ -198,27 +213,27 @@ export default class GeneralStore {
     return toReturn
   }
 
-  @computed get rdyToShipOrdersById(){
-    const shippingOrdersByID = {}
-    
+  @computed get rdyToShipOrdersById() {
+    const shippingOrdersByID = {};
+
     this.orders.forEach(o => {
-      if(o.isReadyToShip){
-        shippingOrdersByID[o.shopifyId] = []
+      if (o.isReadyToShip) {
+        shippingOrdersByID[o.shopifyId] = [];
       }
-    })
+    });
     this.orders.forEach(o => {
-      if(shippingOrdersByID[o.shopifyId]){
-        shippingOrdersByID[o.shopifyId].push(o)
+      if (shippingOrdersByID[o.shopifyId]) {
+        shippingOrdersByID[o.shopifyId].push(o);
       }
-    })
-    return shippingOrdersByID
+    });
+    return shippingOrdersByID;
   }
 
-  @action initializeAll = () => {
-    // this.getCompletedOrders();
-    this.getEmployees()
-    this.getProducts()
-    this.getCustomers()
-    this.getBoards()
-  }
+  // @action initializeAll = () => {
+    
+  //   this.getEmployees();
+  //   this.getProducts();
+  //   this.getCustomers();
+  //   this.getBoards();
+  // };
 }

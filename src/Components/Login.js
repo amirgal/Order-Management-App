@@ -1,9 +1,10 @@
 import React, { useState} from 'react';
 import {List, ListItem, Button, Divider, TextField} from '@material-ui/core';
 import {useHistory} from 'react-router-dom'
+import { inject } from 'mobx-react';
 const axios = require('axios');
 
-const Login = (props) => {
+const Login =inject('generalStore')((props) => {
     const history = useHistory()
     const [user, setUser] = useState({username:'', password:''})
 
@@ -24,6 +25,8 @@ const Login = (props) => {
           const response = await axios.post('http://localhost:4000/api/user', user)
           if(response.data.userId){
             //set store admin id to response.data.userId and initialize all from diff place
+            props.generalStore.adminId = response.data.userId
+            await props.generalStore.getAdminData()
             routeChange('/order-manager')
           }else {
             alert(response.data.message)
@@ -33,10 +36,13 @@ const Login = (props) => {
         }
       }
       
-    const signUp = async (user) => {
+    const signUp = async () => {
         try{
             const response = await axios.post(`http://localhost:4000/api/newuser`,user)
             //set store admin id to response.data  which is the new id
+            props.generalStore.adminId = response.data
+            await props.generalStore.getAdminData()
+            routeChange('/order-manager')
         }catch(err){
             console.log(err)
         }
@@ -60,6 +66,6 @@ const Login = (props) => {
         </form>
     )
     
-}
+})
 
 export default Login
