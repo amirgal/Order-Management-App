@@ -1,42 +1,47 @@
-import '../../styles/CompletedOrders.css'
+import '../../styles/ShippingOrders.css'
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import ShippingOrder from "./ShippingOrder";
-// import SearchBar from "./SearchBar";
+import ShipOrdersModal from "./ShipOrdersModal"
 
 const ShippingOrders = inject("generalStore")(observer(props => {
-    const [expanded, setExpanded] = useState(false);
-    const [relevantOrders, setRelevantOrders] = useState(props.generalStore.completedOrders)
 
-    useEffect(()=>{
-        setRelevantOrders(props.generalStore.completedOrders)
-    },[props.generalStore.completedOrders])
-  
+    const [expanded, setExpanded] = useState(false);
+    // const shippingOrdersByID = props.generalStore.rdyToShipOrdersById
+    const [shippingOrdersByID, setShippingOrdersById] = useState(props.generalStore.rdyToShipOrdersById)
+    const [showModal, setShowModal] = useState(false)
+    const [modalOrders, setModalOrders] = useState([])
+
+    const openModalWithOrders = (orders) => {
+        setModalOrders(orders)
+        setShowModal(true)
+    }
+
+    const shipItems = (trackingNumber) => {
+        modalOrders.forEach(o => {
+            o.completeOrder(trackingNumber)
+        });
+        const newShippingById = {...shippingOrdersByID}
+        newShippingById[modalOrders[0].shopifyId] = null
+        setShippingOrdersById(newShippingById)
+    }
+    
     const handleChange = (panel) => (event, isExpanded) => {
       setExpanded(isExpanded ? panel : false);
     };
-    const handleSearch = (input, searchParam) => {
-        if(searchParam === 'shopifyId'){
-            const relOrders = props.generalStore.completedOrders
-            .filter(o => o[searchParam].toString().includes(input))
-            setRelevantOrders(relOrders)
-        } else if(searchParam === 'product'){
-            const relOrders = props.generalStore.completedOrders
-            .filter(o => o[searchParam].name.toLowerCase().includes(input))
-            setRelevantOrders(relOrders)
-        }
-    }
-    
 
     return (
         <div id="completed-orders-page">
-            {/* <SearchBar handleSearch={handleSearch}/> */}
             <div id="completed-orders-table">
-                {relevantOrders.map((o,i) =>
-                    <CompletedOrder handleChange={handleChange}
-                     expanded={expanded} key={i} order={o}/>
+                {Object.keys(shippingOrdersByID).map((id,i) =>
+                    shippingOrdersByID[id] ? 
+                    <ShippingOrder openModalWithOrders={openModalWithOrders} handleChange={handleChange}
+                     expanded={expanded} key={i} orders={shippingOrdersByID[id]}/>
+                    : null
                 )}
             </div>
+            <ShipOrdersModal shipItems={shipItems}
+            showModal={showModal} setShowModal={setShowModal}/>
         </div>
     );
 }));

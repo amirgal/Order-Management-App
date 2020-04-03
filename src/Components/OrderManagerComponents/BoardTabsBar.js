@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { observer, inject } from "mobx-react"
 import PropTypes from "prop-types"
 import SwipeableViews from "react-swipeable-views"

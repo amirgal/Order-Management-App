@@ -17,7 +17,8 @@ const orderSchema = new Schema({
   isReadyToShip: Boolean,
   isComplete: Boolean,
   date: Date,
-  endDate:Date
+  endDate:Date,
+  trackingNumber: String
 })
 
 const Order = mongoose.model("Order", orderSchema)
