@@ -11,6 +11,7 @@ import Tracker from "./Components/TrackerComponents/Tracker"
 import Analytics from "./Components/AnalyticsComponents/Analytics"
 import BoardTabsBar from "./Components/OrderManagerComponents/BoardTabsBar"
 import ShippingOrders from "./Components/ShippingComponents/ShippingOrders"
+import Login from "./Components/Login"
 
 const App = inject("generalStore")(
   observer(props => {
@@ -24,7 +25,7 @@ const App = inject("generalStore")(
           <Route
             path="/"
             exact
-            render={() => <Redirect to="/order-manager" />}
+            render={() => <Login />}
           />
           <Route
             path="/order-manager"
