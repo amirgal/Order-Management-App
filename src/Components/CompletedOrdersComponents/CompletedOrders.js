@@ -6,22 +6,23 @@ import SearchBar from "./SearchBar";
 
 const CompletedOrders = inject("generalStore")(observer(props => {
     const [expanded, setExpanded] = useState(false);
-    const [relevantOrders, setRelevantOrders] = useState(props.generalStore.completedOrders)
+    const completedOrders = props.generalStore.orders.filter(o => o.isComplete)
+    const [relevantOrders, setRelevantOrders] = useState(completedOrders)
 
-    useEffect(()=>{
-        setRelevantOrders(props.generalStore.completedOrders)
-    },[props.generalStore.completedOrders])
+    // useEffect(()=>{
+    //     setRelevantOrders(props.generalStore.completedOrders)
+    // },[props.generalStore.completedOrders])
   
     const handleChange = (panel) => (event, isExpanded) => {
       setExpanded(isExpanded ? panel : false);
     };
     const handleSearch = (input, searchParam) => {
         if(searchParam === 'shopifyId'){
-            const relOrders = props.generalStore.completedOrders
+            const relOrders = completedOrders
             .filter(o => o[searchParam].toString().includes(input))
             setRelevantOrders(relOrders)
         } else if(searchParam === 'product'){
-            const relOrders = props.generalStore.completedOrders
+            const relOrders = completedOrders
             .filter(o => o[searchParam].name.toLowerCase().includes(input))
             setRelevantOrders(relOrders)
         }

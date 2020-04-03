@@ -33,8 +33,8 @@ const CompletedOrder = inject("generalStore")(observer(props => {
                     <p>Shipping Date: {props.order.endDate.toDateString()}</p>
                 </div>
                 <div className="order-workflow">
-                    {Object.keys(props.order.stageEmployees).map(s => 
-                        <p>{s} : {props.order.stageEmployees[s].name}</p>    
+                    {Object.keys(props.order.stageEmployees).map((s,i) => 
+                        <p key={i}>{s} : {props.order.stageEmployees[s].name}</p>    
                     )}
                 </div>
              </div>

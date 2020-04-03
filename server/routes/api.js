@@ -107,4 +107,25 @@ router.post("/sync/", async (req, res) => {
   res.send({ products, employees ,boards})
 })
 
+router.post('/user', async function(req,res){
+  const user = req.body
+  const response = await Admin.find({username: user.username})
+  const data = {userId:null, message:''}
+  if(response.length === 0){
+      data.message = 'Wrong username or password'
+  }else if(response[0].password === user.password){
+      data.userId = response[0]._id
+  } else {
+      data.message = 'Wrong username or password'
+  }
+  res.send(data)
+})
+
+router.post('/newuser', async function(req,res) {
+  const user = req.body  //username and pass
+  const newUser = new Admin(user)
+  await newUser.save()
+  res.send(newUser._id)
+})
+
 module.exports = router
