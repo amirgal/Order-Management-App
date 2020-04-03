@@ -65,8 +65,8 @@ const AddStages = inject("generalStore")(
               </ExpansionPanelDetails>
             </ExpansionPanel>
           ))}
-          <div id="addNewStage" onClick={toggleModal} variant="contained">
-            +
+          <div id="addNewStage" className="stageBox" onClick={toggleModal} variant="contained">
+            <h1>+</h1>
           </div>
           {showModal ? (
             <AddsStageModal
