@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { inject, observer } from "mobx-react"
 import { Button, TextField } from "@material-ui/core"
-import TrackingBar from "./OrderTracker"
 import { useParams } from "react-router"
+import TrackingBar from "./OrderTracker"
 
 const Tracker = inject("generalStore")(
   observer(props => {
@@ -11,6 +11,7 @@ const Tracker = inject("generalStore")(
     const [activeStep, setActiveStep] = useState(0)
     const [orderObj, setOrderObj] = useState(null)
     const [customer, setCustomer] = useState(null)
+    const [trackingNum, setTrackingNum] = useState(null)
     const handleChange = e => {
       setOrderId(e.target.value)
     }

@@ -23,7 +23,7 @@ function TabPanel(props) {
       {value === index && <Box p={3}>{children}</Box>}
     </Typography>
   )
-} // box p={boards.length} ?
+}
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -40,7 +40,6 @@ function a11yProps(index) {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
     width: "100vw"
   }
 }))
@@ -60,12 +59,12 @@ const BoardTabsBar = inject("generalStore")(
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
+        <AppBar position="static" color="primary">
           <Tabs
             value={value}
             onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
+            indicatorColor="secondary"
+            textColor="tabsBar"
             variant="fullWidth"
             aria-label="full width tabs example"
           >
