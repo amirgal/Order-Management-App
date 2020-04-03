@@ -4,6 +4,7 @@ const Order = require("../models/Order")
 const Customer = require("../models/Customer")
 const Product = require("../models/Product")
 const Board = require("../models/board")
+const mailer = require('./mailer')()
 const dotenv = require("dotenv")
 dotenv.config()
 const secretKey = process.env.secretKey
@@ -75,6 +76,7 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
     if(board){
       await Board.updateOne({_id : board[0]._id},{$push : {orders : order._id}})
     }
+    mailer.sendEmail(result.id)
   }
 })
 
