@@ -7,16 +7,13 @@
 body {
   background-color: var(--dark-grey);
 }
-
 #order-manager-page {
   padding-top: 70px;
 }
-
 #stages-container {
   display: grid;
   grid-gap: 10px;
 }
-
 .stage {
   background-color: var(--medium-grey);
   height: fit-content;
@@ -27,7 +24,6 @@ body {
 .stage::-webkit-scrollbar {
   display: none;
 }
-
 #details-window {
   position: absolute;
   z-index: 2;
@@ -53,33 +49,9 @@ body {
 .ready .statusLight {
   background-color: greenyellow;
 }
-.MuiExpansionPanelDetails-root {
-  padding: 0;
-}
-.MuiToolbar-regular {
-  background-color: var(--medium-grey);
-}
-.MuiIconButton-edgeStart {
-  color: white;
-}
 #details-window > h3 {
   margin-top: 10px;
   text-align: center;
-}
-.MuiDrawer-paperAnchorLeft {
-  width: 200px;
-}
-.MuiExpansionPanelSummary-content {
-  align-items: center;
-}
-.MuiIconButton-root {
-  padding: 0;
-}
-.activeStep .MuiPaper-root {
-  background-color: transparent;
-}
-.MuiInputBase-input {
-  color: white;
 }
 .statusLight {
   height: 22px;
@@ -94,9 +66,6 @@ body {
   padding: 30px;
   border-radius: 10px;
   box-shadow: 2px 2px 20px var(--box-shadow);
-}
-.MuiInputLabel-formControl {
-  position: absolute;
 }
 .popper {
   margin-top: 15px;
@@ -143,9 +112,6 @@ body {
   width: 300px;
   margin: 0 auto;
 }
-.MuiStepLabel-label.MuiStepLabel-active {
-  color: white;
-}
 .order {
   text-align: center;
   padding: 0;
@@ -160,15 +126,6 @@ body {
 #storeSynced {
   margin-left: 50px;
   color: greenyellow;
-}
-.MuiStepIcon-root.MuiStepIcon-completed {
-  color: white;
-}
-.MuiStepIcon-root.MuiStepIcon-active {
-  color: #7ea016;
-}
-.MuiFormLabel-root.Mui-focused {
-  color: black;
 }
 #details-window {
   position: fixed;
@@ -195,20 +152,15 @@ body {
   height: fit-content;
   justify-self: center;
   display: grid;
-}
-#saveBoard {
-  width: 150px;
-  justify-self: end;
-}
-#prevStep {
   width: 150px;
 }
 .newBoardContainer {
   display: grid;
   grid-gap: 10px;
   height: 8;
+  height: 50vh;
 }
-#addNewStage {
+/* #addNewStage {
   background-color: transparent;
   border: none;
   font-size: 30px;
@@ -216,39 +168,24 @@ body {
   box-shadow: none;
   text-align: center;
   cursor: pointer;
-}
-.makeStyles-root-111 {
-  background-color: transparent;
-}
+} */
 #createBoard {
   background-color: var(--light-grey);
   border-radius: 10px;
   box-shadow: 2px 2px 20px var(--box-shadow);
 }
-.MuiTabs-flexContainer {
-  background-color: var(--dark-grey);
-}
-.MuiTab-textColorPrimary.Mui-selected {
-  color: white;
-}
-.PrivateTabIndicator-colorPrimary-134 {
-  background-color: var(--light-grey);
-}
-.MuiInput-underline:after {
-  border-bottom: 2px solid var(--medium-grey);
-}
-.MuiExpansionPanelDetails-root {
-  display: grid;
-}
 .stageBox {
+  display: grid;
   background-color: var(--light-grey);
   text-align: center;
   padding: 0;
-  width: 100%;
   background-color: var(--light-grey);
   box-shadow: 2px 5px 5px var(--box-shadow);
   border-radius: 5px;
   height: fit-content;
+  min-height: 30%;
+  align-items: center;
+  cursor: pointer;
 }
 #newStage {
   background-color: var(--medium-grey);
@@ -260,6 +197,9 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-gap: 10px;
 }
-.MuiExpansionPanel-root.Mui-expanded {
-  margin: 0;
+.MuiStepIcon-root.MuiStepIcon-active{
+  color: rgb(14, 136, 79);
+}
+.MuiStepIcon-root.MuiStepIcon-completed{
+  color: var(--light-grey);
 }
