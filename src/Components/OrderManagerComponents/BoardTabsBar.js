@@ -64,7 +64,7 @@ const BoardTabsBar = inject("generalStore")(
             value={value}
             onChange={handleChange}
             indicatorColor="secondary"
-            textColor="tabsBar"
+            textColor="secondary"
             variant="fullWidth"
             aria-label="full width tabs example"
           >

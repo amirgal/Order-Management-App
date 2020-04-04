@@ -36,7 +36,7 @@ const ShippingOrder = inject("generalStore")(observer(props => {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
             <div className="panel-details">
-                <div className="order-info">
+                <div className="shipping-order-info">
                     <p>Total Price: {props.orders[0].price}</p>
                     <p>Order Date: {props.orders[0].date.toDateString()}</p>
                 </div>
