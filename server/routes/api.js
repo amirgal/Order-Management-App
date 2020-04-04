@@ -10,6 +10,7 @@ const Board = require("../models/board")
 const Admin = require("../models/admin")
 
 router.post("/board", async (req, res) => {
+  
   const newBoard = req.body
   const board = new Board(newBoard)
   let orders = []
@@ -127,8 +128,14 @@ const queryAdminData = async (adminId) => {
 }
 
 router.get("/getAdminData/:adminId", async (req, res) => {
-  const adminData = await queryAdminData(req.params.adminId)
+  const io = req.io;
+  console.log('io here',io.nsps)
+  io.on('connection',function(socket){
+    console.log('a user connected');
+    socket.emit('test',{board:'board'})
+  })
 
+  const adminData = await queryAdminData(req.params.adminId)
   res.send(adminData)
 })
 

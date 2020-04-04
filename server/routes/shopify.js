@@ -7,9 +7,7 @@ const Customer = require("../models/Customer")
 const Board = require("../models/board")
 const Admin = require("../models/admin")
 const dotenv = require("dotenv")
-  const mailer = require('./mailer')()
-
-
+const mailer = require('./mailer')()
 dotenv.config()
 // const ordersAPI = process.env.ordersAPI
 // const productsAPI = process.env.productsAPI
@@ -37,7 +35,7 @@ const shopify = function() {
     const ordersUrl = `https://${admin.apiKey}:${admin.storePassword}@${admin.storeName}.myshopify.com/admin/api/2020-01/orders.json`;
     const threeDays = 259200000
     let results = await axios.get(ordersUrl)
-    console.log(results.data)
+    
     for (let result of results.data.orders) {
       const foundOrder = await Order.find({ shopifyId: result.id })
       if (foundOrder.length == 0) {

@@ -1,5 +1,5 @@
 import "./App.css"
-import React, { Fragment, useEffect } from "react"
+import React, { Fragment } from "react"
 import { observer, inject } from "mobx-react"
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import OrderManager from "./Components/OrderManagerComponents/OrderManager"
@@ -15,6 +15,8 @@ import { createMuiTheme } from "@material-ui/core/styles"
 import { ThemeProvider } from "@material-ui/core/styles"
 import ShippingOrders from "./Components/ShippingComponents/ShippingOrders"
 import SignUp from "./Components/SignUpComponents/SignUp"
+import socketIOClient from "socket.io-client";
+
 
 const theme = createMuiTheme({
   palette: {
@@ -43,6 +45,12 @@ const App = inject("generalStore")(
     if(props.generalStore.adminId) {
       props.generalStore.getAdminData()
     }
+
+    const socket = socketIOClient("http://127.0.0.1:4000");
+    socket.on('test',function(board){
+      console.log('test worked')
+      console.log(board.board)
+    })
     return (
       <ThemeProvider theme={theme}>
         <StylesProvider injectFirst>
