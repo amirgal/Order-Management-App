@@ -9,10 +9,31 @@ export default class GeneralStore {
   @observable employees = []
   @observable customers = []
   @observable orders = []
-  // @observable singleOrder = null
-  // @observable singleCustomer = null
   @observable adminId = ""
 
+  @action getAdminData = async (optionalData) => {
+    let response
+    if(!optionalData){
+       response = await axios.get(`http://localhost:4000/api/getAdminData/${this.adminId}`)
+    }else{
+      response = optionalData
+    }
+    this.getBoards(response.data.boards);
+    this.employees = response.data.employees;
+    this.products = response.data.products;
+    this.customers = response.data.customers;
+  }
+
+  @action getBoards = async optionalBoards => {
+    let boards = optionalBoards || [];
+    this.boards = boards.map(board => {
+      return new BoardStore(board);
+    });
+    for (let board of this.boards) {
+      this.orders = [...this.orders, ...board.orders]
+    }
+  }
+  
   @action getSingleOrder = async (id) => {
     const response = await axios.get(
       `http://localhost:4000/api/singleOrder/${id}`
@@ -26,58 +47,6 @@ export default class GeneralStore {
     return response.data
   }
 
-  @action getAdminData = async () => {
-    const response = await axios.get(
-      `http://localhost:4000/api/getAdminData/${this.adminId}`
-    )
-    this.getBoards(response.data.boards)
-    this.employees = response.data.employees
-    this.products = response.data.products
-    this.customers = response.data.customers
-  }
-
-  @action getBoards = async (optionalBoards) => {
-    let boards = []
-    if (optionalBoards) {
-      boards = optionalBoards
-    } else {
-      boards = await axios.get("http://localhost:4000/api/boards")
-      boards = boards.data
-    }
-    this.boards = boards.map((board) => {
-      return new BoardStore(board)
-    })
-
-    for (let board of this.boards) {
-      this.orders = [...this.orders, ...board.orders]
-    }
-  }
-
-  // @action getCompletedOrders = async () => {
-  //   const ordersResponse = await axios.get("http://localhost:4000/api/completed");
-  //   this.completedOrders = ordersResponse.data;
-  // };
-
-  // @action getEmployees = async () => {
-  //   const employeesResponse = await axios.get(
-  //     "http://localhost:4000/api/employees"
-  //   );
-  //   this.employees = employeesResponse.data;
-  // };
-
-  // @action getProducts = async () => {
-  //   const productsResponse = await axios.get(
-  //     "http://localhost:4000/api/products"
-  //   );
-  //   this.products = productsResponse.data;
-  // };
-
-  // @action getCustomers = async () => {
-  //   const customersResponse = await axios.get(
-  //     "http://localhost:4000/api/customers"
-  //   );
-  //   this.customers = customersResponse.data;
-  // };
 
   @action createBoard = async (board) => {
     board.adminId = this.adminId
@@ -85,6 +54,13 @@ export default class GeneralStore {
       "http://localhost:4000/api/board",
       board
     )
+    const updatedProducts = [...this.products]
+    updatedProducts.forEach(p =>  { 
+      if(savedBoard.data.products.includes(p._id)){
+        p.boardId = savedBoard.data._id
+      }
+    })
+    this.products = updatedProducts
     savedBoard.data.orders.map(
       (o) => new SingleOrderStore(o, board.stages.length)
     )
@@ -179,12 +155,6 @@ export default class GeneralStore {
     }
     return toReturn
   }
-  // getCombinedOrders = () => {
-  //   let combained = []
-  //   this.boards.forEach(b => combained = combained.concat(b.orders))
-  //   combained.concat(this.completedOrders)
-  //   return combained
-  // }
 
   @action getOrdersPerProduct = () => {
     const toReturn = []
@@ -243,12 +213,4 @@ export default class GeneralStore {
     })
     return shippingOrdersByID
   }
-
-  // @action initializeAll = () => {
-
-  //   this.getEmployees();
-  //   this.getProducts();
-  //   this.getCustomers();
-  //   this.getBoards();
-  // };
 }
