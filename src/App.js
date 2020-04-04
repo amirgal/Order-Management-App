@@ -9,7 +9,6 @@ import CompletedOrders from "./Components/CompletedOrdersComponents/CompletedOrd
 import Tracker from "./Components/TrackerComponents/Tracker"
 import Analytics from "./Components/AnalyticsComponents/Analytics"
 import BoardTabsBar from "./Components/OrderManagerComponents/BoardTabsBar"
-import ShippingOrders from "./Components/ShippingComponents/ShippingOrders"
 import Login from "./Components/Login"
 import { StylesProvider } from "@material-ui/core/styles"
 import { createMuiTheme } from "@material-ui/core/styles"
@@ -19,13 +18,13 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: "#3b3c43",
-      contrastText: "#b6b6bf"
+      contrastText: "#000000"
     },
     secondary: {
       main: "#b6b6bf"
     },
     text: {
-      primary: "#3b3c43",
+      primary: "#000000",
       secondary: "#3b3c43",
       tabsBar: "#b6b6bf"
     },
@@ -45,11 +44,7 @@ const App = inject("generalStore")(
       <ThemeProvider theme={theme}>
         <StylesProvider injectFirst>
           <Router>
-            <Route
-              path="/"
-              exact
-              render={() => <Redirect to="/order-manager" />}
-            />
+            <Route path="/" exact render={() => <Login />} />
             <Route
               path="/order-manager"
               exact
@@ -71,16 +66,15 @@ const App = inject("generalStore")(
                 </Fragment>
               )}
             />
-             <Route
-            path="/shipping"
-            exact
-            render={() => (
-              <Fragment>
-                <MyAppBar headline={"Shipping"} />
-                <ShippingOrders />
-              </Fragment>
-            )}
-          />
+            <Route
+              path="/shipping"
+              exact
+              render={() => (
+                <Fragment>
+                  <MyAppBar headline={"Shipping"} />
+                </Fragment>
+              )}
+            />
             <Route
               path="/settings"
               exact
@@ -113,7 +107,6 @@ const App = inject("generalStore")(
           </Router>
         </StylesProvider>
       </ThemeProvider>
-
     )
   })
 )
