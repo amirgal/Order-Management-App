@@ -26,7 +26,6 @@ const Login =inject('generalStore')((props) => {
           if(response.data.userId){
             props.generalStore.adminId = response.data.userId
             localStorage.adminId = response.data.userId
-            debugger
             await props.generalStore.getAdminData()
             routeChange('/order-manager')
           }else {
