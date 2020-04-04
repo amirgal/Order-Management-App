@@ -11,12 +11,14 @@ const dotenv = require("dotenv")
 
 
 dotenv.config()
-const ordersAPI = process.env.ordersAPI
-const productsAPI = process.env.productsAPI
+// const ordersAPI = process.env.ordersAPI
+// const productsAPI = process.env.productsAPI
 
 const shopify = function() {
-  const getProductsFromShopify = async (url,adminId) => {
-    let results = await axios.get(url)
+  const getProductsFromShopify = async (adminId) => {
+    const admin = await Admin.findOne({_id : adminId})
+    const productsUrl = `https://${admin.apiKey}:${admin.storePassword}@${admin.storeName}.myshopify.com/admin/api/2020-01/products.json`;
+    let results = await axios.get(productsUrl)
     for (result of results.data.products) {
       const foundProduct = await Product.find({shopifyId : result.id})    
       if(foundProduct.length === 0){
@@ -30,9 +32,11 @@ const shopify = function() {
       }
     }
   }
-  const getOrdersFromShopify = async (url,adminId) => {
+  const getOrdersFromShopify = async (adminId) => {
+    const admin = await Admin.findOne({_id : adminId})
+    const ordersUrl = `https://${admin.apiKey}:${admin.storePassword}@${admin.storeName}.myshopify.com/admin/api/2020-01/orders.json`;
     const threeDays = 259200000
-    let results = await axios.get(url)
+    let results = await axios.get(ordersUrl)
     console.log(results.data)
     for (let result of results.data.orders) {
       const foundOrder = await Order.find({ shopifyId: result.id })

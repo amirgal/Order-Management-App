@@ -14,6 +14,7 @@ import { StylesProvider } from "@material-ui/core/styles"
 import { createMuiTheme } from "@material-ui/core/styles"
 import { ThemeProvider } from "@material-ui/core/styles"
 import ShippingOrders from "./Components/ShippingComponents/ShippingOrders"
+import SignUp from "./Components/SignUpComponents/SignUp"
 
 const theme = createMuiTheme({
   palette: {
@@ -27,7 +28,7 @@ const theme = createMuiTheme({
     },
     text: {
       primary: "#000000",
-      secondary: "#3b3c43",
+      secondary: "#000000",
       tabsBar: "#b6b6bf"
     },
     background: {
@@ -48,6 +49,7 @@ const App = inject("generalStore")(
           <Router>
             <Route exact path="/" render={() => <Redirect to="/order-manager" />} />
             <Route exact path="/login" render={() => <Login />} />
+            <Route exact path="/signup" render={() => <SignUp />} />
             <Route
               path="/order-manager"
               exact

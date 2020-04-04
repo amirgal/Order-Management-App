@@ -15,7 +15,7 @@ const CreateBoard = inject("generalStore")(
   observer(props => {
     const [name, setName] = useState("")
     const [productIds, setProductIds] = useState([])
-    const products = props.generalStore.products.filter(o => !o.boardId)
+    const products = props.generalStore.products.filter(p => !p.boardId)
     const [step, setStep] = useState(1)
     
     const handleNameChange = e => {
