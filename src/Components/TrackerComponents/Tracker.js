@@ -19,6 +19,7 @@ const Tracker = inject("generalStore")(
     const customers = props.generalStore.customers
     const findOrder = () => {
       const orders = props.generalStore.orders
+      console.log(orders)
       let order = orders.find(o => o.shopifyId == orderId)
       if (order) {
         let foundCustomer = customers.find(
