@@ -43,10 +43,6 @@ p {
     width: 100%;
 }
 
-.panel-details > div {
-    /* display: flex; */
-}
-
 .order-workflow{
     margin: 10px 0 ;
 }
