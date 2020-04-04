@@ -4,38 +4,54 @@ import SingleOrderStore from "./SingleOrderStore"
 import BoardStore from "./BoardStore"
 
 export default class GeneralStore {
-  @observable boards = [];
-  @observable products = [];
-  @observable employees = [];
-  @observable customers = [];
-  @observable orders = [];
+  @observable boards = []
+  @observable products = []
+  @observable employees = []
+  @observable customers = []
+  @observable orders = []
+  // @observable singleOrder = null
+  // @observable singleCustomer = null
   @observable adminId = ""
 
-  @action getAdminData = async () => {
-    const response = await axios.get(`http://localhost:4000/api/getAdminData/${this.adminId}`)
-    this.getBoards(response.data.boards);
-    this.employees = response.data.employees;
-    this.products = response.data.products;
-    this.customers = response.data.customers;
+  @action getSingleOrder = async (id) => {
+    const response = await axios.get(
+      `http://localhost:4000/api/singleOrder/${id}`
+    )
+    return response.data
+  }
+  @action getSingleCustomer = async (id) => {
+    const response = await axios.get(
+      `http://localhost:4000/api/singleCustomer/${id}`
+    )
+    return response.data
   }
 
-  @action getBoards = async optionalBoards => {
-    let boards = [];
+  @action getAdminData = async () => {
+    const response = await axios.get(
+      `http://localhost:4000/api/getAdminData/${this.adminId}`
+    )
+    this.getBoards(response.data.boards)
+    this.employees = response.data.employees
+    this.products = response.data.products
+    this.customers = response.data.customers
+  }
+
+  @action getBoards = async (optionalBoards) => {
+    let boards = []
     if (optionalBoards) {
-      boards = optionalBoards;
+      boards = optionalBoards
     } else {
-      boards = await axios.get("http://localhost:4000/api/boards");
-      boards = boards.data;
+      boards = await axios.get("http://localhost:4000/api/boards")
+      boards = boards.data
     }
-    this.boards = boards.map(board => {
-      return new BoardStore(board);
-    });
+    this.boards = boards.map((board) => {
+      return new BoardStore(board)
+    })
 
     for (let board of this.boards) {
-      this.orders = [...this.orders, ...board.orders];
+      this.orders = [...this.orders, ...board.orders]
     }
-  };
-
+  }
 
   // @action getCompletedOrders = async () => {
   //   const ordersResponse = await axios.get("http://localhost:4000/api/completed");
@@ -63,30 +79,30 @@ export default class GeneralStore {
   //   this.customers = customersResponse.data;
   // };
 
-  @action createBoard = async board => {
+  @action createBoard = async (board) => {
     board.adminId = this.adminId
     const savedBoard = await axios.post(
       "http://localhost:4000/api/board",
       board
     )
     savedBoard.data.orders.map(
-      o => new SingleOrderStore(o, board.stages.length)
+      (o) => new SingleOrderStore(o, board.stages.length)
     )
     this.boards.push(new BoardStore(savedBoard.data))
   }
 
-  @action addEmployee = async name => {
+  @action addEmployee = async (name) => {
     let updatedEmployees = await axios.post(
       `http://localhost:4000/api/employees`,
-      { name, isActive: true ,adminId : this.adminId}
-    );
+      { name, isActive: true, adminId: this.adminId }
+    )
     if (typeof updatedEmployees.data === "string") {
       alert(updatedEmployees.data)
     } else {
       this.employees = updatedEmployees.data
     }
   }
-  @action modifyEmployee = async employee => {
+  @action modifyEmployee = async (employee) => {
     employee.isActive = !employee.isActive
     let updatedEmployees = await axios.put(
       "http://localhost:4000/api/employees",
@@ -95,30 +111,30 @@ export default class GeneralStore {
     this.employees = updatedEmployees.data
   }
 
-  @action makeSync = async paramsObj => {
-    const ordersUrl = `https://${paramsObj.apiKey}:${paramsObj.password}@${paramsObj.shopName}.myshopify.com/admin/api/2020-01/orders.json`;
-    const productsUrl = `https://${paramsObj.apiKey}:${paramsObj.password}@${paramsObj.shopName}.myshopify.com/admin/api/2020-01/products.json`;
-    const adminId = this.adminId;
+  @action makeSync = async (paramsObj) => {
+    const ordersUrl = `https://${paramsObj.apiKey}:${paramsObj.password}@${paramsObj.shopName}.myshopify.com/admin/api/2020-01/orders.json`
+    const productsUrl = `https://${paramsObj.apiKey}:${paramsObj.password}@${paramsObj.shopName}.myshopify.com/admin/api/2020-01/products.json`
+    const adminId = this.adminId
     const response = await axios.post(`http://localhost:4000/api/sync/`, {
       productsUrl,
       ordersUrl,
-      adminId
-    });
+      adminId,
+    })
     if (response.data.products) {
-      this.getBoards(response.data.boards);
-      this.employees = response.data.employees;
-      this.products = response.data.products;
-      this.customers = response.data.customers;
-      return true;
+      this.getBoards(response.data.boards)
+      this.employees = response.data.employees
+      this.products = response.data.products
+      this.customers = response.data.customers
+      return true
     } else {
-      return false;
+      return false
     }
   }
 
   @action getAverageTimeForTask = () => {
     const objByEmployee = {}
     const toReturn = []
-    this.orders.forEach(o => {
+    this.orders.forEach((o) => {
       for (let i = 1; i < o.progress; i++) {
         if (!objByEmployee[o.stageEmployees[i].name]) {
           objByEmployee[[o.stageEmployees[i].name]] = { sum: 0, num: 0 }
@@ -136,17 +152,17 @@ export default class GeneralStore {
       const num = objByEmployee[key].sum / objByEmployee[key].num
       toReturn.push({
         name: key,
-        average: (Math.round(num * 100) / 100).toFixed(2)
+        average: (Math.round(num * 100) / 100).toFixed(2),
       })
     }
 
     return toReturn
   }
   @action getCompletedByEmployee = () => {
-    const objByEmployee = {};
-    const toReturn = [];
+    const objByEmployee = {}
+    const toReturn = []
 
-    this.orders.forEach(o => {
+    this.orders.forEach((o) => {
       for (let i = 1; i < o.progress; i++) {
         if (o.stageEmployees[i]["endDate"]) {
           if (!objByEmployee[o.stageEmployees[i].name]) {
@@ -171,10 +187,10 @@ export default class GeneralStore {
   // }
 
   @action getOrdersPerProduct = () => {
-    const toReturn = [];
-    const objByProduct = {};
+    const toReturn = []
+    const objByProduct = {}
 
-    this.orders.forEach(o => {
+    this.orders.forEach((o) => {
       if (!objByProduct[o.product.name]) {
         objByProduct[o.product.name] = 1
       } else {
@@ -191,7 +207,7 @@ export default class GeneralStore {
   @action getTimePerProduct = () => {
     const toReturn = []
     const objTimePerProduct = {}
-    this.orders.forEach(o => {
+    this.orders.forEach((o) => {
       if (o.isComplete) {
         if (!objTimePerProduct[o.product.name]) {
           objTimePerProduct[o.product.name] = { sum: 0, num: 0 }
@@ -206,30 +222,30 @@ export default class GeneralStore {
       const num = objTimePerProduct[key].sum / objTimePerProduct[key].num
       toReturn.push({
         name: key,
-        average: (Math.round(num * 100) / 100).toFixed(2)
+        average: (Math.round(num * 100) / 100).toFixed(2),
       })
     }
     return toReturn
   }
 
   @computed get rdyToShipOrdersById() {
-    const shippingOrdersByID = {};
+    const shippingOrdersByID = {}
 
-    this.orders.forEach(o => {
+    this.orders.forEach((o) => {
       if (o.isReadyToShip) {
-        shippingOrdersByID[o.shopifyId] = [];
+        shippingOrdersByID[o.shopifyId] = []
       }
-    });
-    this.orders.forEach(o => {
+    })
+    this.orders.forEach((o) => {
       if (shippingOrdersByID[o.shopifyId]) {
-        shippingOrdersByID[o.shopifyId].push(o);
+        shippingOrdersByID[o.shopifyId].push(o)
       }
-    });
-    return shippingOrdersByID;
+    })
+    return shippingOrdersByID
   }
 
   // @action initializeAll = () => {
-    
+
   //   this.getEmployees();
   //   this.getProducts();
   //   this.getCustomers();
