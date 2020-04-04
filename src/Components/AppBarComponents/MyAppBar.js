@@ -34,7 +34,7 @@ export default function MyAppBar(props) {
 
   const logOut = () => {
     localStorage.removeItem("adminId")
-    history.push('/')
+    history.push('/login')
   }
   
   return (
