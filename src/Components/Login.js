@@ -24,8 +24,9 @@ const Login =inject('generalStore')((props) => {
         try{
           const response = await axios.post('http://localhost:4000/api/user', user)
           if(response.data.userId){
-            //set store admin id to response.data.userId and initialize all from diff place
             props.generalStore.adminId = response.data.userId
+            localStorage.adminId = response.data.userId
+            debugger
             await props.generalStore.getAdminData()
             routeChange('/order-manager')
           }else {
@@ -39,8 +40,8 @@ const Login =inject('generalStore')((props) => {
     const signUp = async () => {
         try{
             const response = await axios.post(`http://localhost:4000/api/newuser`,user)
-            //set store admin id to response.data  which is the new id
             props.generalStore.adminId = response.data
+            localStorage.adminId = response.data
             await props.generalStore.getAdminData()
             routeChange('/order-manager')
         }catch(err){

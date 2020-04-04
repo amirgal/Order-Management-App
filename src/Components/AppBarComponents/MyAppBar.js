@@ -32,11 +32,10 @@ export default function MyAppBar(props) {
     setState({ ...state, left: !state.left });
   };
 
-  // const logOut = () => {
-  //   localStorage.userName = undefined
-  //   localStorage.userId = undefined
-  //   history.push('/')
-  // }
+  const logOut = () => {
+    localStorage.removeItem("adminId")
+    history.push('/')
+  }
   
   return (
     <div className={classes.root}>
@@ -48,7 +47,7 @@ export default function MyAppBar(props) {
           <Typography variant="h4" className={classes.title} align="center">
             {props.headline}
           </Typography>
-          {/* <Button color="inherit" onClick={logOut}>LOGOUT</Button> */}
+          <Button color="inherit" onClick={logOut}>LOGOUT</Button>
         </Toolbar>
       </AppBar>
       <DrawerMenu toggleDrawer={toggleDrawer} state={state}/>

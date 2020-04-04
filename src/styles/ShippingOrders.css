@@ -11,7 +11,7 @@
     text-align: center;
 }
 
-.order-info {
+.shipping-order-info {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }

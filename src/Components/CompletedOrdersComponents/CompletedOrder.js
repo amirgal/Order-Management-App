@@ -18,7 +18,7 @@ const CompletedOrder = inject("generalStore")(observer(props => {
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
         >
-            <div className={'panel-header'}>
+            <div className={'orders-panel-header'}>
                 <p>ID: {props.order.shopifyId}</p>
                 <p>Product: {props.order.product.name}</p>
                 <p>Name: {customer.name}</p>
@@ -28,7 +28,7 @@ const CompletedOrder = inject("generalStore")(observer(props => {
         <ExpansionPanelDetails>
             <div className="panel-details">
                 <div className="order-info">
-                    <p>Price: {props.order.price}</p>
+                    <p>Tracking: {props.order.trackingNumber}</p>
                     <p>Order Date: {props.order.date.toDateString()}</p>
                     <p>Shipping Date: {props.order.endDate.toDateString()}</p>
                 </div>

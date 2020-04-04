@@ -17,7 +17,6 @@ export default class GeneralStore {
     this.employees = response.data.employees;
     this.products = response.data.products;
     this.customers = response.data.customers;
-
   }
 
   @action getBoards = async optionalBoards => {

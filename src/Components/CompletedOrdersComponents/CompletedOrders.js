@@ -6,12 +6,13 @@ import SearchBar from "./SearchBar";
 
 const CompletedOrders = inject("generalStore")(observer(props => {
     const [expanded, setExpanded] = useState(false);
-    const completedOrders = props.generalStore.orders.filter(o => o.isComplete)
+    const [completedOrders,setCompletedOrders] = useState(props.generalStore.orders.filter(o => o.isComplete))
     const [relevantOrders, setRelevantOrders] = useState(completedOrders)
 
-    // useEffect(()=>{
-    //     setRelevantOrders(props.generalStore.completedOrders)
-    // },[props.generalStore.completedOrders])
+    useEffect(()=>{
+        setCompletedOrders(props.generalStore.orders.filter(o => o.isComplete))
+        setRelevantOrders(props.generalStore.orders.filter(o => o.isComplete))
+    },[props.generalStore.orders])
   
     const handleChange = (panel) => (event, isExpanded) => {
       setExpanded(isExpanded ? panel : false);
