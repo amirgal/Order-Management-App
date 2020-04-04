@@ -164,7 +164,10 @@ router.post("/newuser", async function (req, res) {
   const user = req.body //username and pass
   const newUser = new Admin(user)
   await newUser.save()
-  res.send(newUser._id)
+  await shopify.getProductsFromShopify(newUser._id)
+  await shopify.getOrdersFromShopify(newUser._id)
+  const admin = await queryAdminData(newUser._id)
+  res.send(admin)
 })
 
 module.exports = router

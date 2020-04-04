@@ -75,7 +75,7 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
     })
     await order.save()
     if(board){
-      await Board.updateOne({_id : board[0]._id},{$push : {orders : order._id}})
+      await Board.updateOne({_id : board._id},{$push : {orders : order._id}})
     }
     mailer.sendEmail(result.id)
   }

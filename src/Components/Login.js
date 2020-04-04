@@ -1,7 +1,8 @@
 import React, { useState} from 'react';
 import {List, ListItem, Button, Divider, TextField} from '@material-ui/core';
-import {useHistory} from 'react-router-dom'
+import {useHistory, Redirect} from 'react-router-dom'
 import { inject } from 'mobx-react';
+import SignUp from './SignUpComponents/SignUp';
 const axios = require('axios');
 
 const Login =inject('generalStore')((props) => {
@@ -36,17 +37,6 @@ const Login =inject('generalStore')((props) => {
         }
       }
       
-    const signUp = async () => {
-        try{
-            const response = await axios.post(`http://localhost:4000/api/newuser`,user)
-            props.generalStore.adminId = response.data
-            localStorage.adminId = response.data
-            await props.generalStore.getAdminData()
-            routeChange('/order-manager')
-        }catch(err){
-            console.log(err)
-        }
-    }
     
     return (
         <form autoComplete="off" noValidate className="login form" >
@@ -60,7 +50,7 @@ const Login =inject('generalStore')((props) => {
                 <Divider id="divider" />
                 <ListItem id="btns-list-item">
                     <Button color="primary" variant="contained" onClick={login}>LOGIN</Button>
-                    <Button color="primary" variant="contained" onClick={signUp}>SIGN UP</Button>
+                    <Button color="primary" variant="contained" onClick={()=> routeChange('/signup')}>SIGN UP</Button>
                 </ListItem>
             </List>
         </form>
