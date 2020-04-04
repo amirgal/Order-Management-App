@@ -11,8 +11,13 @@ export default class GeneralStore {
   @observable orders = [];
   @observable adminId = ""
 
-  @action getAdminData = async () => {
-    const response = await axios.get(`http://localhost:4000/api/getAdminData/${this.adminId}`)
+  @action getAdminData = async (optionalData) => {
+    let response
+    if(!optionalData){
+       response = await axios.get(`http://localhost:4000/api/getAdminData/${this.adminId}`)
+    }else{
+      response = optionalData
+    }
     this.getBoards(response.data.boards);
     this.employees = response.data.employees;
     this.products = response.data.products;
@@ -20,13 +25,12 @@ export default class GeneralStore {
   }
 
   @action getBoards = async optionalBoards => {
-    let boards = [];
-    if (optionalBoards) {
-      boards = optionalBoards;
-    } else {
-      boards = await axios.get("http://localhost:4000/api/boards");
-      boards = boards.data;
-    }
+    let boards = optionalBoards || [];
+    
+    
+      // boards = await axios.get("http://localhost:4000/api/boards");
+      // boards = boards.data;
+    
     this.boards = boards.map(board => {
       return new BoardStore(board);
     });
@@ -69,6 +73,13 @@ export default class GeneralStore {
       "http://localhost:4000/api/board",
       board
     )
+    const updatedProducts = [...this.products]
+    updatedProducts.forEach(p =>  { 
+      if(savedBoard.data.products.includes(p._id)){
+        p.boardId = savedBoard.data._id
+      }
+    })
+    this.products = updatedProducts
     savedBoard.data.orders.map(
       o => new SingleOrderStore(o, board.stages.length)
     )
