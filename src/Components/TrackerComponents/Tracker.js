@@ -5,7 +5,7 @@ import { useParams } from "react-router"
 import TrackingBar from "./OrderTracker"
 
 const Tracker = inject("generalStore")(
-  observer(props => {
+  observer((props) => {
     const { id } = useParams()
     const [orderId, setOrderId] = useState(id ? id : "")
     const [activeStep, setActiveStep] = useState(0)
@@ -13,19 +13,22 @@ const Tracker = inject("generalStore")(
     const [customer, setCustomer] = useState(null)
     const [numStages, setNumStages] = useState(null)
     // const [trackingNum, setTrackingNum] = useState(null)
-    const handleChange = e => {
+
+    const handleChange = (e) => {
       setOrderId(e.target.value)
     }
-    const customers = props.generalStore.customers
-    const findOrder = () => {
-      const orders = props.generalStore.orders
-      console.log(orders)
-      let order = orders.find(o => o.shopifyId == orderId)
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter") {
+        findOrder()
+      }
+    }
+    const findOrder = async () => {
+      const order = await props.generalStore.getSingleOrder(orderId)
       if (order) {
-        let foundCustomer = customers.find(
-          c => c.shopifyId === order.customerId
+        const customer = await props.generalStore.getSingleCustomer(
+          order.customerId
         )
-        setCustomer(foundCustomer)
+        setCustomer(customer)
         setOrderObj(order)
         setActiveStep(order.progress)
         setOrderId("")
@@ -44,6 +47,7 @@ const Tracker = inject("generalStore")(
           variant="outlined"
           value={orderId}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
         <Button id="trackButton" onClick={findOrder} variant="contained">
           Track Order
