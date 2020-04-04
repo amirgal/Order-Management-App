@@ -32,9 +32,20 @@ body {
   top: calc(50vh - 150px);
   left: calc(50vw - 150px);
 }
+
+.order-card-header{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.order-card-header > h3 {
+  margin-right: 10px;
+}
+
 .order h3 {
   margin: 0;
   font-size: 18px;
+  margin-right: 10px;
 }
 .order p {
   display: block;
@@ -87,11 +98,8 @@ body {
   margin-top: 10px;
   text-align: center;
 }
-#employeeName {
-  font-weight: bold;
-  font-size: 14px;
-}
-.attributes {
+
+.order-card-details{
   font-weight: bold;
 }
 .tracker_page {
