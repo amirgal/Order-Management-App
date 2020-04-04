@@ -25,7 +25,7 @@
     box-shadow: 0 4px 8px 0 #00000073;
 }
 
-.panel-header {
+.orders-panel-header {
     display: grid;
     grid-template-columns: repeat(4,1fr);
     width: -webkit-fill-available;

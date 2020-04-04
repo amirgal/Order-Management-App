@@ -11,12 +11,15 @@ const ShippingOrders = inject("generalStore")(observer(props => {
     const [shippingOrdersByID, setShippingOrdersById] = useState(props.generalStore.rdyToShipOrdersById)
     const [showModal, setShowModal] = useState(false)
     const [modalOrders, setModalOrders] = useState([])
-
+    console.log(props.generalStore)
     const openModalWithOrders = (orders) => {
         setModalOrders(orders)
         setShowModal(true)
     }
-
+    useEffect(() => {
+        setShippingOrdersById(props.generalStore.rdyToShipOrdersById)
+    },[props.generalStore.orders])
+    
     const shipItems = (trackingNumber) => {
         modalOrders.forEach(o => {
             o.completeOrder(trackingNumber)
