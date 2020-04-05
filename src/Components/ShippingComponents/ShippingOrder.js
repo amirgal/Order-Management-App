@@ -7,7 +7,7 @@ import ShippingDetails from "./ShippingDetails";
 import OrderItem from "./OrderItem";
 
 
-const ShippingOrder = inject("generalStore")(observer(props => {
+const ShippingOrder = inject("generalStore","helpers")(observer(props => {
 
     const customer = props.generalStore.customers.find(
         c => c.shopifyId === props.orders[0].customerId
@@ -37,17 +37,14 @@ const ShippingOrder = inject("generalStore")(observer(props => {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
             <div className="shipping-panel-details">
-                {/* <div className="shipping-order-info">
-                    <p>{props.orders[0].price} ₪</p>
-                    <p>{props.orders[0].date.toDateString()}</p>
-                </div> */}
+                <img src={props.helpers.couriers[props.orders[0].shippingAddress.courier].img}/>
                 <ShippingDetails price={props.orders[0].price} details={props.orders[0].shippingAddress}/> 
                 <div className="all-order-items">
                     {props.orders.map((o,i) => <OrderItem key={i} order={o}/>)}
                 </div>
                 <div className="buttons">
                   <Button variant="contained" target="_blank" rel="noopener noreferrer"
-                    href="https://www.israelpost.co.il/content.nsf/pages/237">
+                    href={props.helpers.couriers[props.orders[0].shippingAddress.courier].link}>
                     Get Tracking Label
                   </Button>
                   <Button variant="contained" disabled={!ordersReady}

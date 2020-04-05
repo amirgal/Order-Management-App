@@ -45,10 +45,14 @@
 
 .shipping-panel-details{
     display: grid;
-    grid-template-columns: 3fr 1fr 2fr;
+    grid-template-columns: repeat(4,1fr);
     justify-items: center;
     align-items: center;
     width: 100%;
+}
+
+.shipping-panel-details img {
+    max-width: 170px;
 }
 
 .panel-details > h4{
@@ -58,7 +62,6 @@
 .shipping-details {
     display: flex;
     flex-direction: column;
-    text-align: center;
     flex-wrap: wrap;
 }
 
