@@ -51,7 +51,6 @@ const SignUp =inject('generalStore')((props) => {
             localStorage.adminId = response.data._id
             props.generalStore.adminId = response.data._id
             await props.generalStore.getAdminData(response)
-            debugger
             routeChange('/order-manager')
         }catch(err){
             console.log(err)
