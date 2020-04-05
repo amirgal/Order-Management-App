@@ -4,13 +4,13 @@ const ShippingDetails = (props) => {
     
     return (
         <div className="shipping-details">
-            <div className="detail">{props.details.address}</div>
-            <div className="detail">{props.details.city}</div>
-            <div className="detail">{props.details.zip}</div>
-            {props.details.province ? <div className="detail">{props.details.province}</div> : null}
-            <div className="detail">{props.details.country}</div>
-            <div className="detail">{props.details.name}</div>
-            <div className="detail">{props.details.phone}</div>
+            <p className="detail">{props.details.address}</p>
+            <p className="detail">{props.details.city}</p>
+            <p className="detail">{props.details.zip}</p>
+            {props.details.province ? <p className="detail">{props.details.province}</p> : null}
+            <p className="detail">{props.details.country}</p>
+            <p className="detail">{props.details.name}</p>
+            <p className="detail">{props.details.phone}</p>
         </div>
     )
 }
