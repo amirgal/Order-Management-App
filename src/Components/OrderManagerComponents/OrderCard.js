@@ -18,14 +18,12 @@ const OrderCard = inject("detailsWindowStore")(
       props.detailsWindowStore.setDetailsWindowOrder(props.order)
       props.detailsWindowStore.setDetailsWindowStage(props.stage)
     }
-
+    
     return (
       <ExpansionPanel
         className={
           props.order.inProcess
             ? "order inProcess"
-            : props.order.isReadyToShip
-            ? "order ready"
             : "order"
         }
         data-id="order"
@@ -33,29 +31,31 @@ const OrderCard = inject("detailsWindowStore")(
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
-          id="panel1a-header"
         >
-          <div className="statusLight"></div>
-          <h3>{props.order.product.name}</h3>
+          <div className="order-card-header">
+            <div className="statusLight"></div> 
+              <h3>{props.order.product.name}</h3>
+              <h3>{props.order.attributes}</h3>
+          </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <List>
             <ListItem>
-              <p className="attributes">{props.order.attributes}</p>
+              <div className="order-card-details">
+                <h3> {props.order.shopifyId}</h3>
+                <h3>{props.order.date.toDateString()}</h3>
+                {props.order.inProcess ? 
+                 <h3 id="employeeName">
+                 Employee: {props.order.stageEmployees[props.order.progress].name}
+               </h3> : null}
+              </div>
             </ListItem>
             {props.order.inProcess ? (
-              <Fragment>
-                <ListItem>
-                  <p id="employeeName">
-                    Employee: {props.order.stageEmployees[props.order.progress].name}
-                  </p>
-                </ListItem>
-                <ListItem>
-                  <Button variant="contained" onClick={openDetailsWindow}>
-                    Complete Stage
-                  </Button>
-                </ListItem>
-              </Fragment>
+              <ListItem>
+                <Button variant="contained" onClick={openDetailsWindow}>
+                  Complete Stage
+                </Button>
+              </ListItem>
             ) : (
               <Button variant="contained" onClick={openDetailsWindow}>
                 Start Stage
