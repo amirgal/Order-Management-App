@@ -29,11 +29,11 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
   console.log('we got on order!')
   const io = req.io;
   const result = await req.body
-  
+  let socketData = {}
   const admin = await Admin.findOne({storeName:result.line_items[0].vendor})
   const cust = result.customer
-  const foundCustomer = await Customer.find({ shopifyId: cust.id })
-  if (foundCustomer.length == 0) {
+  const foundCustomer = await Customer.findOne({ shopifyId: cust.id })
+  if (!foundCustomer) {
     let customer = new Customer({
       shopifyId: cust.id,
       name: cust.first_name + " " + cust.last_name,
@@ -44,9 +44,13 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
     })
     await Admin.findOneAndUpdate({_id : admin._id},{$push : {customers : customer._id}})
     await customer.save()
+    socketData.customer = customer
   } else {
-    updatedOrders = foundCustomer[0].orders.push(result.id)
-    await Customer.updateOne({ shopifyId: cust.id }, { orders: updatedOrders })
+    foundCustomer.orders.push(result.id)
+    updatedOrders = foundCustomer.orders
+    const customer = await Customer.findOneAndUpdate({ shopifyId: cust.id },
+      { orders: updatedOrders }, {new: true})
+    socketData.customer = customer
   }
 
   for (let item of result.line_items) {
@@ -84,8 +88,10 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
         {_id : board._id},{$push : {orders : order._id}}
       )
       const webhookOrder = await Order.findOne({_id : order._id}).populate('product')
-      const webhook = {order: webhookOrder, boardId:board._id}
-      io.emit('webhook order',webhook)
+      // const socketData = {order: webhookOrder, boardId:board._id}
+      socketData.order = webhookOrder
+      socketData.boardId = board._id
+      io.emit('webhook order', socketData)
     }
     mailer.sendEmail(result.id)
   }

@@ -40,8 +40,8 @@ const shopify = function() {
       const foundOrder = await Order.find({ shopifyId: result.id })
       if (foundOrder.length == 0) {
         const cust = result.customer
-        const foundCustomer = await Customer.find({ shopifyId: cust.id })
-        if (foundCustomer.length == 0) {
+        const foundCustomer = await Customer.findOne({ shopifyId: cust.id })
+        if (!foundCustomer) {
           let customer = new Customer({
             shopifyId: cust.id,
             name: cust.first_name + " " + cust.last_name,
@@ -53,8 +53,9 @@ const shopify = function() {
           await customer.save()
           await Admin.findOneAndUpdate({_id : adminId},{$push : {customers : customer._id}})
         } else {
-          updatedOrders = foundCustomer[0].orders.push(result.id)
-          await Customer.updateOne(
+          foundCustomer.orders.push(result.id)
+          updatedOrders = foundCustomer.orders
+          await Customer.findOneAndUpdate(
             { shopifyId: cust.id },
             { orders: updatedOrders }
           )
