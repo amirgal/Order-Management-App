@@ -113,7 +113,7 @@ const shopify = function() {
           }
         }
   )
-  console.log(response);
+  return response.data
   
 }
 

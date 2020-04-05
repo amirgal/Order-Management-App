@@ -169,8 +169,8 @@ router.post("/newuser", async function (req, res) {
 
 router.post('/fulfill',async function(req,res){
   const {adminId,shopifyId} =  req.body
-  shopify.fulfill(adminId,shopifyId)
-  res.send('did it')
+  const result = await shopify.fulfill(adminId,shopifyId)
+  res.send(result.fulfillment.status)
 })
 
 module.exports = router
