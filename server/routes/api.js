@@ -136,15 +136,9 @@ router.get("/getAdminData/:adminId", async (req, res) => {
 })
 
 router.post("/sync/", async (req, res) => {
-  const { ordersUrl, productsUrl, adminId } = req.body
-  await shopify.getProductsFromShopify(productsUrl, adminId)
-  await shopify.getOrdersFromShopify(ordersUrl, adminId)
-  // const products = await Product.find({})
-  // const boards = await Board.find({}).populate({ path:'orders',
-  // populate:{
-  //   path:'product'
-  // }})
-  // const employees = await Employee.find({})
+  const { adminId } = req.body
+  await shopify.getProductsFromShopify(adminId)
+  await shopify.getOrdersFromShopify(adminId)
   const adminData = await queryAdminData(adminId)
   res.send(adminData)
 })

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { inject, observer } from "mobx-react"
+import React, {useState} from "react"
+import {observer} from "mobx-react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Modal, Backdrop, Fade } from "@material-ui/core"
 import NewStage from "./NewStage"

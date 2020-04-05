@@ -1,5 +1,5 @@
 import "../../styles/Analytics.css"
-import React, { useState, useEffect } from "react"
+import React, { useState} from "react"
 import { inject, observer } from "mobx-react"
 import {
   Button,
@@ -20,9 +20,9 @@ const AddStages = inject("generalStore")(
     const [showModal, setShowModal] = useState(false)
     const board = { name: boardName, stages: stages, products: productIds }
 
-    const prevStep = () => {
-      props.prevStep()
-    }
+    // const prevStep = () => {
+    //   props.prevStep()
+    // }
     const addNewStage = newStage => {
       setStages([...stages, newStage])
     }
@@ -37,7 +37,7 @@ const AddStages = inject("generalStore")(
       <div className="newBoardContainer">
         <div className="newStagesContainer">
           {stages.map(s => (
-            <ExpansionPanel className="stageBox">
+            <ExpansionPanel className="stageBox" key={s.name}>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -48,16 +48,16 @@ const AddStages = inject("generalStore")(
               <ExpansionPanelDetails>
                 <List>
                   {s.notes.length > 0 ? <h3>Notes:</h3> : null}
-                  {s.notes.map(note => (
-                    <ListItem>
+                  {s.notes.map((note,i) => (
+                    <ListItem key={i}>
                       <p>{note}</p>
                     </ListItem>
                   ))}
                 </List>
                 <List>
                   {s.validate.length > 0 ? <h3>Validations:</h3> : null}
-                  {s.validate.map(validation => (
-                    <ListItem>
+                  {s.validate.map((validation,i) => (
+                    <ListItem key={i}>
                       <p>{validation}</p>
                     </ListItem>
                   ))}
