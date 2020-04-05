@@ -17,8 +17,8 @@ const ShippingOrders = inject("generalStore")(observer(props => {
         setShowModal(true)
     }
     useEffect(() => {
-        setShippingOrdersById(props.generalStore.rdyToShipOrdersById)
-    },[props.generalStore.orders])
+        setShippingOrdersById({...props.generalStore.rdyToShipOrdersById})
+    },[props.generalStore.rdyToShipOrdersById])
     
     const shipItems = (trackingNumber) => {
         modalOrders.forEach(o => {

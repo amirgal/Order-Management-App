@@ -1,5 +1,5 @@
 import "../../styles/Analytics.css"
-import React, { useState, useEffect } from "react"
+import React, { useState} from "react"
 import { inject, observer } from "mobx-react"
 import { Button, TextField, Checkbox, List, ListItem } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
@@ -96,6 +96,7 @@ const CreateBoard = inject("generalStore")(
         return (
           <AddStages name={name} productIds={productIds} prevStep={prevStep} />
         )
+      default: return null  
     }
   })
 )

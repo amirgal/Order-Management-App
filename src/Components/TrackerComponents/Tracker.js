@@ -11,7 +11,6 @@ const Tracker = inject("generalStore")(
     const [activeStep, setActiveStep] = useState(0)
     const [orderObj, setOrderObj] = useState(null)
     const [customer, setCustomer] = useState(null)
-    const [numStages, setNumStages] = useState(null)
     // const [trackingNum, setTrackingNum] = useState(null)
 
     const handleChange = (e) => {

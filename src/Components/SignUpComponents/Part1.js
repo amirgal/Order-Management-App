@@ -1,8 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import {List, ListItem, Button, Divider, TextField} from '@material-ui/core';
-import {useHistory} from 'react-router-dom'
+
 import { inject } from 'mobx-react';
-const axios = require('axios');
 
 const Part1 =inject('generalStore','helpers')((props) => {
     const [buttunStatus,setButtonStatus] = useState(true)
@@ -29,7 +28,7 @@ const Part1 =inject('generalStore','helpers')((props) => {
 
     const nextStep = async () => {
         const message = validateStep()
-        if(message != 'continue'){
+        if(message !== 'continue'){
             alert(message)
         }else{
             props.nextStep()

@@ -1,7 +1,7 @@
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   } from 'recharts';
-import React, { Component } from 'react';
+import React from 'react';
 import { inject, observer } from "mobx-react";
 
   

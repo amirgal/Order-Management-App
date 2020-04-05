@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import {ExpansionPanel, ExpansionPanelDetails,
-        ExpansionPanelSummary, Paper, Button} from '@material-ui/core';
+        ExpansionPanelSummary, Button} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ShippingDetails from "./ShippingDetails";
 import OrderItem from "./OrderItem";
