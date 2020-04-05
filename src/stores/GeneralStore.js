@@ -3,18 +3,14 @@ import axios from "axios"
 import SingleOrderStore from "./SingleOrderStore"
 import BoardStore from "./BoardStore"
 
-
-
 export default class GeneralStore {
   @observable boards = []
   @observable products = []
   @observable employees = []
   @observable customers = []
   @observable orders = []
-  @observable adminId = ""
+  @observable adminId = ""  
   
-  
-
   @action getAdminData = async (optionalData) => {
     let response
     if(!optionalData){

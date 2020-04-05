@@ -21,7 +21,6 @@ const Login =inject('generalStore')((props) => {
     }
 
     const login = async () => {
-        debugger
         try{
           const response = await axios.post('http://localhost:4000/api/user', user)
           if(response.data.userId){
