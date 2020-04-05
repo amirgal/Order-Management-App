@@ -86,7 +86,8 @@ const shopify = function() {
               zip: address.zip,
               company: address.company,
               name: address.name,
-              phone: address.phone
+              phone: address.phone,
+              courier:result.shipping_lines[0].title
             },
             adminId : adminId
           })

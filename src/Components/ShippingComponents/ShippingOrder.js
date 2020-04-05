@@ -45,7 +45,6 @@ const ShippingOrder = inject("generalStore")(observer(props => {
                 <div className="all-order-items">
                     {props.orders.map((o,i) => <OrderItem key={i} order={o}/>)}
                 </div>
-                {/* <h4>Shipping Details</h4> */}
                 <div className="buttons">
                   <Button variant="contained" target="_blank" rel="noopener noreferrer"
                     href="https://www.israelpost.co.il/content.nsf/pages/237">
