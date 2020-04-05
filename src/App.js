@@ -15,111 +15,125 @@ import { createMuiTheme } from "@material-ui/core/styles"
 import { ThemeProvider } from "@material-ui/core/styles"
 import ShippingOrders from "./Components/ShippingComponents/ShippingOrders"
 import SignUp from "./Components/SignUpComponents/SignUp"
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#3b3c43",
-      contrastText: "#000000"
-    },
-    secondary: {
-      main: "#b6b6bf",
-      contrastText: "#000000"
-    },
-    text: {
-      primary: "#000000",
-      secondary: "#000000",
-      tabsBar: "#b6b6bf"
-    },
-    background: {
-      paper: "#b6b6bf"
-    }
-  }
-})
+import muiTheme from "./styles/muiTheme"
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: {
+//       main: "#3b3c43",
+//       contrastText: "#000000"
+//     },
+//     secondary: {
+//       main: "#b6b6bf",
+//       contrastText: "#000000"
+//     },
+//     text: {
+//       primary: "#000000",
+//       secondary: "#000000",
+//       tabsBar: "#b6b6bf"
+//     },
+//     background: {
+//       paper: "#b6b6bf"
+//     }
+//   }
+// })
 
 const App = inject("generalStore")(
-  observer(props => {
+  observer((props) => {
     props.generalStore.adminId = localStorage.adminId
-    if(props.generalStore.adminId) {
+    if (props.generalStore.adminId) {
       props.generalStore.getAdminData()
     }
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={muiTheme}>
         <StylesProvider injectFirst>
           <Router>
-            <Route exact path="/" render={() => <Redirect to="/order-manager" />} />
+            <Route
+              exact
+              path="/"
+              render={() => <Redirect to="/order-manager" />}
+            />
             <Route exact path="/login" render={() => <Login />} />
             <Route exact path="/signup" render={() => <SignUp />} />
             <Route
               path="/order-manager"
               exact
-              render={() => (
-                props.generalStore.adminId ?
-                <Fragment>
-                  <MyAppBar headline={"Order Manager"} />
-                  <OrderManager />
-                  <BoardTabsBar />
-                </Fragment>
-                : <Redirect to="/login"/>
-              )}
+              render={() =>
+                props.generalStore.adminId ? (
+                  <Fragment>
+                    <MyAppBar headline={"Order Manager"} />
+                    <OrderManager />
+                    <BoardTabsBar />
+                  </Fragment>
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
             />
-              <Route
-                path="/shipping"
-                exact
-                render={() => (
-                  props.generalStore.adminId ? 
+            <Route
+              path="/shipping"
+              exact
+              render={() =>
+                props.generalStore.adminId ? (
                   <Fragment>
                     <MyAppBar headline={"Shipping"} />
                     <ShippingOrders />
                   </Fragment>
-                  : <Redirect to="/login"/>
-                )}
-              />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            />
             <Route
               path="/completed-orders"
               exact
-              render={() => (
-                props.generalStore.adminId ? 
-                <Fragment>
-                  <MyAppBar headline={"Completed Orders"} />
-                  <CompletedOrders />
-                </Fragment>
-                : <Redirect to="/login"/>
-              )}
+              render={() =>
+                props.generalStore.adminId ? (
+                  <Fragment>
+                    <MyAppBar headline={"Completed Orders"} />
+                    <CompletedOrders />
+                  </Fragment>
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
             />
-              <Route
-                path="/analytics"
-                exact
-                render={() => (
-                  props.generalStore.adminId ?
+            <Route
+              path="/analytics"
+              exact
+              render={() =>
+                props.generalStore.adminId ? (
                   <Fragment>
                     <MyAppBar headline={"Analytics"} />
                     <Analytics />
                   </Fragment>
-                  : <Redirect to="/login"/>
-                )}
-                />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            />
             <Route
               path="/settings"
               exact
+              render={() =>
+                props.generalStore.adminId ? (
+                  <Fragment>
+                    <MyAppBar headline={"Settings"} />
+                    <Settings />
+                  </Fragment>
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/tracking/:id?"
               render={() => (
-                props.generalStore.adminId ?
                 <Fragment>
-                  <MyAppBar headline={"Settings"} />
-                  <Settings />
+                  <Tracker />
                 </Fragment>
-                : <Redirect to="/login"/>
               )}
             />
-              <Route
-                exact
-                path="/tracking/:id?"
-                render={() => (
-                  <Fragment>
-                    <Tracker />
-                  </Fragment>
-                )}
-              />
           </Router>
         </StylesProvider>
       </ThemeProvider>

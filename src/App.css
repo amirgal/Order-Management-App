@@ -5,7 +5,7 @@
   --box-shadow: rgba(0, 0, 0, 0.3);
 }
 body {
-  background-color: var(--dark-grey);
+  /* background-color: var(--dark-grey); */
 }
 #order-manager-page {
   padding-top: 70px;
@@ -15,7 +15,7 @@ body {
   grid-gap: 10px;
 }
 .stage {
-  background-color: var(--medium-grey);
+  /* background-color: var(--medium-grey); */
   height: fit-content;
   border-radius: 5px;
   max-height: 80vh;
@@ -27,7 +27,7 @@ body {
 #details-window {
   position: absolute;
   z-index: 2;
-  background-color: var(--light-grey);
+  /* background-color: var(--light-grey); */
   border-radius: 5px;
   top: calc(50vh - 150px);
   left: calc(50vw - 150px);
@@ -58,14 +58,14 @@ body {
   width: 22px;
   border-radius: 50%;
   margin-right: 15px;
-  box-shadow: inset 1px 1px 6px var(--box-shadow);
+  /* box-shadow: inset 1px 1px 6px var(--box-shadow); */
 }
 #settings-page {
-  background-color: var(--medium-grey);
+  /* background-color: var(--medium-grey); */
   margin: 100px 40px;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 2px 2px 20px var(--box-shadow);
+  /* box-shadow: 2px 2px 20px var(--box-shadow); */
 }
 .popper {
   margin-top: 15px;
@@ -100,9 +100,9 @@ body {
   padding: 70px;
   margin: 100px 120px;
   text-align: center;
-  background-color: var(--medium-grey);
+  /* background-color: var(--medium-grey); */
   border-radius: 10px;
-  box-shadow: 2px 2px 20px var(--box-shadow);
+  /* box-shadow: 2px 2px 20px var(--box-shadow); */
 }
 #trackButton {
   width: 300px;
@@ -116,8 +116,8 @@ body {
   text-align: center;
   padding: 0;
   width: 100%;
-  background-color: var(--light-grey);
-  box-shadow: 2px 5px 5px var(--box-shadow);
+  /* background-color: var(--light-grey); */
+  /* box-shadow: 2px 5px 5px var(--box-shadow); */
 }
 .sync-input {
   margin: 4px;
@@ -133,7 +133,7 @@ body {
   top: 15%;
   width: 33%;
   padding: 50px;
-  background-color: var(--light-grey);
+  /* background-color: var(--light-grey); */
 }
 #createBoard .MuiListItem-root {
   display: grid;
@@ -170,17 +170,17 @@ body {
   cursor: pointer;
 } */
 #createBoard {
-  background-color: var(--light-grey);
+  /* background-color: var(--light-grey); */
   border-radius: 10px;
-  box-shadow: 2px 2px 20px var(--box-shadow);
+  /* box-shadow: 2px 2px 20px var(--box-shadow); */
 }
 .stageBox {
   display: grid;
-  background-color: var(--light-grey);
+  /* background-color: var(--light-grey); */
   text-align: center;
   padding: 0;
-  background-color: var(--light-grey);
-  box-shadow: 2px 5px 5px var(--box-shadow);
+  /* background-color: var(--light-grey); */
+  /* box-shadow: 2px 5px 5px var(--box-shadow); */
   border-radius: 5px;
   height: fit-content;
   min-height: 30%;
@@ -188,7 +188,7 @@ body {
   cursor: pointer;
 }
 #newStage {
-  background-color: var(--medium-grey);
+  /* background-color: var(--medium-grey); */
   padding: 100px;
   border-radius: 10px;
 }
@@ -201,5 +201,5 @@ body {
   color: rgb(14, 136, 79);
 }
 .MuiStepIcon-root.MuiStepIcon-completed{
-  color: var(--light-grey);
+  /* color: var(--light-grey); */
 }
