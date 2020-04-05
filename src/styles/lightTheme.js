@@ -1,11 +1,21 @@
 import { createMuiTheme } from "@material-ui/core/styles"
 
+
 const theme = createMuiTheme({
-  //   palette: {
+  palette: {
+    background: {
+      default: "#b6b6bf",
+    },
+    text: {
+      primary: "#000",
+    },
+  },
+  // root: {background: 'black'},  
+  // palette: {
   //     primary: {
   //       main: "#3b3c43",
   //       contrastText: "#000000",
-  //     },
+  //     }
   // secondary: {
   //   main: "#b6b6bf",
   //   contrastText: "#000000",
@@ -39,7 +49,7 @@ const theme = createMuiTheme({
   //         },
   //       },
   //     },
-  //   },
+    // },
 })
 
 export default theme

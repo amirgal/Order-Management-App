@@ -15,7 +15,10 @@ import { createMuiTheme } from "@material-ui/core/styles"
 import { ThemeProvider } from "@material-ui/core/styles"
 import ShippingOrders from "./Components/ShippingComponents/ShippingOrders"
 import SignUp from "./Components/SignUpComponents/SignUp"
-import muiTheme from "./styles/muiTheme"
+import darkTheme from "./styles/darkTheme"
+import lightTheme from "./styles/lightTheme"
+import CssBaseline from "@material-ui/core/CssBaseline"
+
 // const theme = createMuiTheme({
 //   palette: {
 //     primary: {
@@ -44,7 +47,8 @@ const App = inject("generalStore")(
       props.generalStore.getAdminData()
     }
     return (
-      <ThemeProvider theme={muiTheme}>
+      <ThemeProvider theme={lightTheme}>
+        <CssBaseline />
         <StylesProvider injectFirst>
           <Router>
             <Route
