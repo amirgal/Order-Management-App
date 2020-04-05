@@ -21,6 +21,7 @@ const ShippingOrders = inject("generalStore")(observer(props => {
     },[props.generalStore.rdyToShipOrdersById])
     
     const shipItems = (trackingNumber) => {
+        props.generalStore.fulfill(modalOrders[0].shopifyId)
         modalOrders.forEach(o => {
             o.completeOrder(trackingNumber)
         });

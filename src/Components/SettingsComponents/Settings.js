@@ -8,7 +8,6 @@ import {
   ListItem
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-
 const useStyles = makeStyles({
   root: {
     border: 0,
@@ -18,7 +17,6 @@ const useStyles = makeStyles({
     padding: "0 30px",
   }
 });
-
 const Settings = inject("generalStore")(
   observer(props => {
     const [name, setName] = useState("");
@@ -27,17 +25,12 @@ const Settings = inject("generalStore")(
     const [synced, setSynced] = useState(
       props.generalStore.products.length > 0 ? true : false
     );
-
     useEffect(() => {
         props.generalStore.products.length > 0 ? setSynced(true) : setSynced(false)
     },[props.generalStore.products])
-    
-
-    
     const handleNameChange = e => {
       setName(e.target.value);
     };
-    
     const addEmployee = () => {
       if(name.length > 1){
         props.generalStore.addEmployee(name);
@@ -67,7 +60,6 @@ const Settings = inject("generalStore")(
         isSuccessfull ? setSynced(true) : alert("sync failed");
     };
     const classes = useStyles();
-  
     return (
       <div id="settings-page">
         <div className="employees-settings">
@@ -136,5 +128,9 @@ const Settings = inject("generalStore")(
     );
   })
 );
-
 export default Settings;
+
+
+
+
+

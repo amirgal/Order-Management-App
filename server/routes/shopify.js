@@ -88,7 +88,8 @@ const shopify = function() {
               name: address.name,
               phone: address.phone
             },
-            adminId : adminId
+            adminId : adminId,
+            locationId : item.origin_location.id
           })
           await order.save()
           if(board){ 
@@ -101,7 +102,22 @@ const shopify = function() {
       }
     }
   }
-  return { getOrdersFromShopify, getProductsFromShopify }
+
+  const fulfill = async (adminId,shopifyId) => {
+    const admin = await Admin.findOne({_id : adminId})
+    const url = `https://${admin.apiKey}:${admin.storePassword}@${admin.storeName}.myshopify.com/admin/api/2020-04/orders/${shopifyId}/fulfillments.json`
+    const response = await axios.post(url, {
+          "fulfillment": {
+            "location_id": 44014174340,
+            "notify_customer": true
+          }
+        }
+  )
+  console.log(response);
+  
+}
+
+  return { getOrdersFromShopify, getProductsFromShopify ,fulfill }
 }
 
 module.exports = shopify

@@ -40,6 +40,11 @@ export default class GeneralStore {
       this.customers.splice(customerIndex, 1, socketData.customer)
     }
   }
+  @action fulfill = async (shopifyId) => {
+    const res = await axios.post(`http://localhost:4000/api/fulfill`,{adminId : this.adminId,shopifyId})
+    console.log(res.data);
+    
+  }
 
   @action getBoards = async optionalBoards => {
     let boards = optionalBoards || [];

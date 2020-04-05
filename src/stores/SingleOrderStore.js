@@ -25,6 +25,7 @@ export default class SingleOrder {
      this.numStages = numStages
      this.isReadyToShip = order.isReadyToShip
      this.trackingNumber = order.trackingNumber
+     this.locationId = order.locationId
     }
     
     @action advanceStage = async () => {     

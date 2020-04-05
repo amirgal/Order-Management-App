@@ -167,4 +167,10 @@ router.post("/newuser", async function (req, res) {
   res.send(admin)
 })
 
+router.post('/fulfill',async function(req,res){
+  const {adminId,shopifyId} =  req.body
+  shopify.fulfill(adminId,shopifyId)
+  res.send('did it')
+})
+
 module.exports = router
