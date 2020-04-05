@@ -8,11 +8,8 @@ import {
   ListItem
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-<<<<<<< HEAD
-=======
 import {useHistory} from "react-router-dom"
 
->>>>>>> newMaster
 const useStyles = makeStyles({
   root: {
     border: 0,
@@ -34,15 +31,12 @@ const Settings = inject("generalStore")(
     useEffect(() => {
         props.generalStore.products.length > 0 ? setSynced(true) : setSynced(false)
     },[props.generalStore.products])
-<<<<<<< HEAD
-=======
     
     const logOut = () => {
       localStorage.removeItem("adminId")
       history.push('/login')
     }
 
->>>>>>> newMaster
     const handleNameChange = e => {
       setName(e.target.value);
     };
