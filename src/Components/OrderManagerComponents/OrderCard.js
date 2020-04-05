@@ -25,14 +25,13 @@ const OrderCard = inject("detailsWindowStore")(
             ? "order inProcess"
             : "order"
         }
-        data-id="order"
       >
-        <ExpansionPanelSummary
+        <ExpansionPanelSummary square='true'
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
         >
           <div className="order-card-header">
-            <div className="statusLight"></div> 
+            {/* <div className="statusLight"></div>  */}
               <h3>{props.order.product.name}</h3>
               <h3>{props.order.attributes}</h3>
           </div>
