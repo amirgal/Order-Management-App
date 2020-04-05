@@ -8,6 +8,7 @@ import {
   ListItem
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
+import {useHistory} from "react-router-dom"
 
 const useStyles = makeStyles({
   root: {
@@ -21,6 +22,7 @@ const useStyles = makeStyles({
 
 const Settings = inject("generalStore")(
   observer(props => {
+    const history = useHistory()
     const [name, setName] = useState("");
     const [employee, setEmployee] = useState("");
     const [inactiveEmployee, setInactiveEmployee] = useState("");
@@ -32,8 +34,11 @@ const Settings = inject("generalStore")(
         props.generalStore.products.length > 0 ? setSynced(true) : setSynced(false)
     },[props.generalStore.products])
     
+    const logOut = () => {
+      localStorage.removeItem("adminId")
+      history.push('/login')
+    }
 
-    
     const handleNameChange = e => {
       setName(e.target.value);
     };
@@ -129,6 +134,7 @@ const Settings = inject("generalStore")(
               <Button  onClick={makeSync} style={{margin : 10}} variant="contained">
                 ReSync With Store
               </Button>
+              <Button color="inherit" variant="contained" onClick={logOut}>LOGOUT</Button>
             </div>
           </div>
         </div>

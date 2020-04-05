@@ -1,14 +1,7 @@
 import React from "react"
 import { inject, observer } from "mobx-react"
-import { useHistory } from "react-router-dom"
 import { makeStyles } from "@material-ui/core/styles"
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-} from "@material-ui/core"
+import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Switch from "@material-ui/core/Switch"
 import MenuIcon from "@material-ui/icons/Menu"
@@ -29,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 const MyAppBar = inject("generalStore")(
   observer((props) => {
     const classes = useStyles()
-    const history = useHistory()
     const [state, setState] = React.useState({
       left: false,
     })
@@ -46,12 +38,6 @@ const MyAppBar = inject("generalStore")(
       }
       setState({ ...state, left: !state.left })
     }
-
-    const logOut = () => {
-      localStorage.removeItem("adminId")
-      history.push("/login")
-    }
-
     return (
       <div className={classes.root}>
         <AppBar position="sticky">
