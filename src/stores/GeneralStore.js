@@ -28,6 +28,19 @@ export default class GeneralStore {
     this.customers = response.data.customers;
   }
 
+  @action addWebhookOrder = (socketData) => {
+    const board = this.boards.find(b => b._id === socketData.boardId)
+    const newOrder = new SingleOrderStore(socketData.order,board.stages.length)
+    board.orders.push(newOrder)
+    this.orders.push(newOrder)
+    const customerIndex = this.customers.findIndex(c => c._id === socketData.customer._id)
+    if(customerIndex === -1) {
+      this.customers.push(socketData.customer)
+    } else {
+      this.customers.splice(customerIndex, 1, socketData.customer)
+    }
+  }
+
   @action getBoards = async optionalBoards => {
     let boards = optionalBoards || [];
     this.boards = boards.map(board => {

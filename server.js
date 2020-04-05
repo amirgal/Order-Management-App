@@ -7,6 +7,9 @@ const app = express()
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 dotenv.config()
+const server = require('http').createServer(app)
+const io = require('socket.io')(server);
+
 const port = process.env.port || 4000
 
 mongoose.connect("mongodb://localhost/OrderManager", {
@@ -36,10 +39,28 @@ app.use(
   })
 )
 
+app.use(function(req, res, next) {
+  req.io = io;
+  next();
+});
+
 app.use("/api", api)
 app.use("/shopify", shopify)
 app.use("/webhook", webhook)
 
-app.listen(port, function() {
+// io.on('connection', function(socket){
+//   console.log('a user connected');
+
+//   socket.on('disconnect',function(){
+//     console.log('a user disconnected')
+//   })
+// })
+
+// app.listen(port, function() {
+//   console.log(`Running server on port ${port}`)
+// })
+ 
+server.listen(port, function() {
   console.log(`Running server on port ${port}`)
+  
 })
