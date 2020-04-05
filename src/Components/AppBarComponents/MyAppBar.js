@@ -1,5 +1,4 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import {AppBar, Toolbar, Typography, Button, IconButton} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
@@ -20,7 +19,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function MyAppBar(props) {
   const classes = useStyles();
-  const history = useHistory()
   const [state, setState] = React.useState({
     left: false,
   });
@@ -31,11 +29,6 @@ export default function MyAppBar(props) {
     }
     setState({ ...state, left: !state.left });
   };
-
-  // const logOut = () => {
-  //   localStorage.removeItem("adminId")
-  //   history.push('/login')
-  // }
   
   return (
     <div className={classes.root}>
@@ -47,7 +40,6 @@ export default function MyAppBar(props) {
           <Typography variant="h6" className={classes.title} align="center">
             {props.headline}
           </Typography>
-          {/* <Button color="inherit" onClick={logOut}>LOGOUT</Button> */}
         </Toolbar>
       </AppBar>
       <DrawerMenu toggleDrawer={toggleDrawer} state={state}/>
