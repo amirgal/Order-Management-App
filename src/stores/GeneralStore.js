@@ -24,6 +24,13 @@ export default class GeneralStore {
     this.customers = response.data.customers;
   }
 
+  @action addWebhookOrder = (webhook) => {
+    const board = this.boards.find(b => b._id === webhook.boardId)
+    const newOrder = new SingleOrderStore(webhook.order,board.stages.length)
+    board.orders.push(newOrder)
+    this.orders.push(newOrder)
+  }
+
   @action getBoards = async optionalBoards => {
     let boards = optionalBoards || [];
     this.boards = boards.map(board => {

@@ -4,6 +4,7 @@ const Order = require("../models/Order")
 const Customer = require("../models/Customer")
 const Product = require("../models/Product")
 const Board = require("../models/board")
+const Admin = require('../models/admin');
 const mailer = require('./mailer')()
 const dotenv = require("dotenv")
 dotenv.config()
@@ -25,10 +26,11 @@ const validateWebhook = (req, res, next) => {
 }
 
 router.post("/orders/create", validateWebhook, async (req, res) => {
-  // console.log("We got an order!")
-  // const io = req.io;
-  // io.on('connection')
+  console.log('we got on order!')
+  const io = req.io;
   const result = await req.body
+  
+  const admin = await Admin.findOne({storeName:result.line_items[0].vendor})
   const cust = result.customer
   const foundCustomer = await Customer.find({ shopifyId: cust.id })
   if (foundCustomer.length == 0) {
@@ -37,9 +39,10 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
       name: cust.first_name + " " + cust.last_name,
       email: cust.email,
       phone: cust.default_address.phone,
-      orders: [result.id]
+      orders: [result.id],
+      adminId: admin._id
     })
-    await Admin.findOneAndUpdate({_id : adminId},{$push : {customers : customer._id}})
+    await Admin.findOneAndUpdate({_id : admin._id},{$push : {customers : customer._id}})
     await customer.save()
   } else {
     updatedOrders = foundCustomer[0].orders.push(result.id)
@@ -72,14 +75,17 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
         company: address.company,
         name: address.name,
         phone: address.phone
-      }
+      },
+      adminId: admin._id
     })
     await order.save()
     if(board){
-      const updatedBoard = await Board.updateOne(
-        {_id : board._id},{$push : {orders : order._id}},
-        {new: true}
+      await Board.updateOne(
+        {_id : board._id},{$push : {orders : order._id}}
       )
+      const webhookOrder = await Order.findOne({_id : order._id}).populate('product')
+      const webhook = {order: webhookOrder, boardId:board._id}
+      io.emit('webhook order',webhook)
     }
     mailer.sendEmail(result.id)
   }

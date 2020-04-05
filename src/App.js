@@ -45,11 +45,11 @@ const App = inject("generalStore")(
     if(props.generalStore.adminId) {
       props.generalStore.getAdminData()
     }
-
-    const socket = socketIOClient("http://127.0.0.1:4000");
-    socket.on('test',function(board){
-      console.log('test worked')
-      console.log(board.board)
+ 
+    const socket = socketIOClient("http://localhost:4000");
+    socket.on('webhook order',function(webhook){
+      console.log(webhook)
+      props.generalStore.addWebhookOrder(webhook)
     })
     return (
       <ThemeProvider theme={theme}>

@@ -128,13 +128,9 @@ const queryAdminData = async (adminId) => {
 }
 
 router.get("/getAdminData/:adminId", async (req, res) => {
-  const io = req.io;
-  console.log('io here',io.nsps)
-  io.on('connection',function(socket){
-    console.log('a user connected');
-    socket.emit('test',{board:'board'})
-  })
-
+  // const io = req.io;
+  // console.log('io here')
+  // io.emit('test',{board:'board'})
   const adminData = await queryAdminData(req.params.adminId)
   res.send(adminData)
 })
