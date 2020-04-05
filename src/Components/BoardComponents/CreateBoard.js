@@ -27,12 +27,17 @@ const CreateBoard = inject("generalStore")(
     const prevStep = () => {
       setStep(step - 1)
     }
-    const nameEntered = () => {
-      return name.length > 0
+    
+    const validateInputs = () => {
+      if(name.length < 1){
+        return true
+      }else if(productIds.length < 1){
+        return true
+      }else{
+        return false
+      }
     }
-    const productsChosen = () => {
-      return productIds.length > 0
-    }
+    
 
     switch (step) {
       case 1:
@@ -78,7 +83,7 @@ const CreateBoard = inject("generalStore")(
               <ListItem>
                 <Button
                   onClick={nextStep}
-                  disabled={(!nameEntered(), !productsChosen())}
+                  disabled={(validateInputs())}
                   variant="contained"
                 >
                   Next

@@ -4,57 +4,55 @@ import {useHistory} from 'react-router-dom'
 import { inject } from 'mobx-react';
 const axios = require('axios');
 
-const Part2 =inject('generalStore')((props) => {
+const Part2 =inject('generalStore','helpers')((props) => {
     const history = useHistory()
-    const [user, setUser] = useState({...props.user})
-
-    const routeChange = (path) => {
-        history.push(path);
-    }
 
     const handleInput = (e) => {
         const val = e.target.value
         const id = e.target.id
-        const updatedUser = {...user}
+        const updatedUser = {...props.user}
         updatedUser[id] = val
-        setUser(updatedUser)
+        props.setUser(updatedUser)
     }
 
-    // const login = async () => {
-    //     try{
-    //       const response = await axios.post('http://localhost:4000/api/user', user)
-    //       if(response.data.userId){
-    //         props.generalStore.adminId = response.data.userId
-    //         localStorage.adminId = response.data.userId
-    //         debugger
-    //         await props.generalStore.getAdminData()
-    //         routeChange('/order-manager')
-    //       }else {
-    //         alert(response.data.message)
-    //       }
-    //     }catch(err){
-    //       console.log(err)
-    //     }
-    //   }
+    const validateStep = () => {
+        if(!props.helpers.validateLength(props.user.apiKey)){
+            return 'Api key must be included'
+        }else if(!props.helpers.validateLength(props.user.storePassword)){
+            return 'Store password must be included'
+        }else if(!props.helpers.validateLength(props.user.storeName)){
+            return 'Store name value must be included '
+        }else if(!(props.helpers.validateLength(props.user.secretKey))){
+            return "Secret key value must be included"
+        }else{
+            return 'continue'
+        }
+    }
+
       
     const signUp = async () => {
-        props.signUp(user)
+        const message = validateStep()
+        if(message != 'continue'){
+            alert(message)
+        }else{
+            props.signUp()
+        }
     }
     
     return (
         <form autoComplete="off" noValidate className="signup form" >
             <List>
                 <ListItem>
-                    <TextField className="inputfield" id="apiKey" label="Api key" type="password" value={user.apiKey} onChange={handleInput}/>
+                    <TextField className="inputfield" id="apiKey" label="Api key" type="password" value={props.user.apiKey} onChange={handleInput}/>
                 </ListItem>
                 <ListItem>
-                    <TextField className="inputfield" id="storePassword" label=" Store password" type="password" value={user.storePassword} onChange={handleInput}/>
+                    <TextField className="inputfield" id="storePassword" label=" Store password" type="password" value={props.user.storePassword} onChange={handleInput}/>
                 </ListItem>
                 <ListItem>
-                    <TextField className="inputfield" id="storeName" label="Store name" type="text" value={user.storeName} onChange={handleInput}/>
+                    <TextField className="inputfield" id="storeName" label="Store name" type="text" value={props.user.storeName} onChange={handleInput}/>
                 </ListItem>
                 <ListItem>
-                    <TextField className="inputfield" id="secretKey" label="Secret key" type="password" value={user.secretKey} onChange={handleInput}/>
+                    <TextField className="inputfield" id="secretKey" label="Secret key" type="password" value={props.user.secretKey} onChange={handleInput}/>
                 </ListItem>
                 <Divider id="divider" />
                 <ListItem id="btns-list-item">
