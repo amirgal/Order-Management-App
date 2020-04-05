@@ -39,8 +39,6 @@ const SignUp =inject('generalStore')((props) => {
             <Part2 user={user} signUp={signUp} setUser={setUser}/>
         )
     }
-    
-    
 })
 
 export default SignUp

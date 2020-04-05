@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { observer } from "mobx-react"
 import { makeStyles } from "@material-ui/core/styles"
-import { Modal, Backdrop, Fade, Button } from "@material-ui/core"
+import { Modal, Backdrop, Fade, Button, TextField} from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -46,9 +46,10 @@ const ShipOrdersModal = observer(props => {
       >
         <Fade in={props.showModal}>
           <div id="ship-orders-modal">
-            <input placeholder="add tracking number" value={trackingNumber}
-            onChange={(e) => setTrackingNumber(e.target.value)}></input>
-            <Button variant="contained" onClick={shipItems}>Ship Items</Button>
+          <TextField vartian="outlined" label="Tracking Number" value={trackingNumber}
+            onChange={(e) => setTrackingNumber(e.target.value)}/>
+            <Button variant="contained" onClick={shipItems}
+            disabled={trackingNumber.length === 0}>Ship Items</Button>
           </div>
         </Fade>
       </Modal>

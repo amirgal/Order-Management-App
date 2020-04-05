@@ -20,7 +20,7 @@ const steps = [
   "Order is in production",
   "Order is in final stages of production",
   "Order is being packaged",
-  "Order had been shipped!"
+  "Order has been shipped!"
 ]
 
 const TrackingBar = props => {
