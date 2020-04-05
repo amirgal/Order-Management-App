@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { inject, observer } from "mobx-react"
+import React, {useState} from "react"
+import {observer} from "mobx-react"
 import { Button, TextField, List, ListItem } from "@material-ui/core"
 
 const NewStage = observer(props => {
@@ -9,9 +9,14 @@ const NewStage = observer(props => {
   const [validation, setValidation] = useState("")
   const [validations, setValidations] = useState([])
   const toggleModal = () => props.toggleModal()
+  
   const addNewStage = () => {
-    props.addNewStage({ name: stageName, notes: notes, validate: validations })
-    toggleModal()
+    if(stageName.length > 0){
+      props.addNewStage({ name: stageName, notes: notes, validate: validations })
+      toggleModal()
+    }else{
+      alert('Stage name must be filled')
+    }
   }
   const handleChange = e => {
     e.target.id === "stageNameInput"
@@ -21,12 +26,20 @@ const NewStage = observer(props => {
       : setValidation(e.target.value)
   }
   const addNote = () => {
-    setNotes([...notes, note])
-    setNote("")
+    if(note.length > 1){
+      setNotes([...notes, note])
+      setNote("")
+    }else{
+      alert('Note value must be filled')
+    }
   }
   const addValidation = () => {
-    setValidations([...validations, validation])
-    setValidation("")
+    if(validation.length > 1){
+      setValidations([...validations, validation])
+      setValidation("")
+    }else{
+      alert('Validation value must be filled')
+    }
   }
 
   return (
@@ -49,8 +62,8 @@ const NewStage = observer(props => {
           />
           <Button onClick={addNote}>Add Note</Button>
         </ListItem>
-        {notes.map(note => (
-          <ListItem>{note}</ListItem>
+        {notes.map((note,i) => (
+          <ListItem key={i}>{note}</ListItem>
         ))}
         <ListItem>
           <TextField
@@ -61,8 +74,8 @@ const NewStage = observer(props => {
           />
           <Button onClick={addValidation}>Add Validation</Button>
         </ListItem>
-        {validations.map(validation => (
-          <ListItem>{validation}</ListItem>
+        {validations.map((validation,i) => (
+          <ListItem key={i}>{validation}</ListItem>
         ))}
         <ListItem>
           <Button onClick={addNewStage}>Save</Button>

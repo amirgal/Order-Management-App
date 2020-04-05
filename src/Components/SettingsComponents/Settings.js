@@ -4,14 +4,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
   TextField,
-  Input,
-  IconButton,
-  Popper,
   List,
   ListItem
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import HelpIcon from "@material-ui/icons/Help";
 
 const useStyles = makeStyles({
   root: {
@@ -27,9 +23,7 @@ const Settings = inject("generalStore")(
   observer(props => {
     const [name, setName] = useState("");
     const [employee, setEmployee] = useState("");
-    const [apiKey, setApiKey] = useState("");
-    const [shopName, setShopName] = useState("");
-    const [password, setPassword] = useState("");
+    const [inactiveEmployee, setInactiveEmployee] = useState("");
     const [synced, setSynced] = useState(
       props.generalStore.products.length > 0 ? true : false
     );
@@ -37,50 +31,43 @@ const Settings = inject("generalStore")(
     useEffect(() => {
         props.generalStore.products.length > 0 ? setSynced(true) : setSynced(false)
     },[props.generalStore.products])
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    
 
-    const handleClick = event => {
-      setAnchorEl(anchorEl ? null : event.currentTarget);
-    };
-
+    
     const handleNameChange = e => {
       setName(e.target.value);
     };
-    const handleChange = e => {
-      e.target.name === "apiKey"
-        ? setApiKey(e.target.value)
-        : e.target.name === "password"
-        ? setPassword(e.target.value)
-        : setShopName(e.target.value);
-    };
-
+    
     const addEmployee = () => {
-      props.generalStore.addEmployee(name);
-      setName("");
-    };
-    const modifyEmployee = () => {
-      props.generalStore.modifyEmployee(employee);
-      setEmployee("");
-    };
-    const makeSync = async () => {
-      if (apiKey.length > 8 && password.length > 8 && shopName.length > 1) {
-        const isSuccessfull = await props.generalStore.makeSync({
-          apiKey,
-          password,
-          shopName
-        });
-        isSuccessfull ? setSynced(true) : alert("sync failed");
-        setApiKey("");
-        setPassword("");
-        setShopName("");
-      }else {
-          alert('Make sure you entered the correct parameters for your shop')
+      if(name.length > 1){
+        props.generalStore.addEmployee(name);
+        setName("");
+      }else{
+        alert('Employee must have a name')
       }
     };
+    const makeInactive = () => {
+      if(employee !== ""){
+        props.generalStore.modifyEmployee(employee);
+        setEmployee("");
+      }else{
+        alert('no available employee to modify')
+      }
+    };
+    const makeActive = () => {
+      if(inactiveEmployee !== ""){
+        props.generalStore.modifyEmployee(inactiveEmployee);
+        setInactiveEmployee("");
+      }else{
+        alert('no available employee to modify')
+      }
+    };
+    const makeSync = async () => {
+        const isSuccessfull = await props.generalStore.makeSync();
+        isSuccessfull ? setSynced(true) : alert("sync failed");
+    };
     const classes = useStyles();
-    const open = Boolean(anchorEl);
-    const id = open ? "simple-popper" : undefined;
-
+  
     return (
       <div id="settings-page">
         <div className="employees-settings">
@@ -106,27 +93,28 @@ const Settings = inject("generalStore")(
                 style={{ width: 300 }}
                 renderInput={params => (
                   <TextField
+                    value={employee}
                     {...params}
                     label="Select Employee"
                   />
                 )}
               />
-              <Button onClick={modifyEmployee} variant="contained" style={{width : 250}}>
+              <Button onClick={makeInactive} variant="contained" style={{width : 250}}>
                 remove from roster
               </Button>
             </ListItem>
             <ListItem>
               <Autocomplete
                 classes={classes}
-                onChange={(e, v) => setEmployee(v)}
+                onChange={(e, v) => setInactiveEmployee(v)}
                 options={props.generalStore.employees.filter(e => !e.isActive)}
                 getOptionLabel={option => option.name}
                 style={{ width: 300 }}
                 renderInput={params => (
-                  <TextField {...params} label="Select inActive Employee" />
+                  <TextField value={inactiveEmployee} {...params} label="Select inActive Employee" />
                 )}
               />
-              <Button onClick={modifyEmployee} variant="contained" style={{width : 250}}>
+              <Button onClick={makeActive} variant="contained" style={{width : 250}}>
                 add to roster
               </Button>
             </ListItem>
@@ -138,51 +126,8 @@ const Settings = inject("generalStore")(
           ) : null}
           <div>
             <div className="shop-details">
-              <IconButton onMouseEnter={handleClick} onMouseLeave={handleClick}>
-                <HelpIcon />
-              </IconButton>
-              <Popper
-                classes={classes}
-                id={id}
-                className="popper"
-                open={open}
-                anchorEl={anchorEl}
-              >
-                <div className="api-pop">
-                  you can find your apiKey, password and shop name under the
-                  "App" tab in your shopify's admin page.
-                </div>
-              </Popper>
-              <Input
-                classes={classes}
-                className="sync-input"
-                type="text"
-                name="apiKey"
-                placeholder="Enter Api key"
-                value={apiKey}
-                onChange={handleChange}
-              />
-              <Input
-                classes={classes}
-                className="sync-input"
-                id="standard-adornment-password"
-                type="text"
-                name="password"
-                placeholder="Enter shop password"
-                value={password}
-                onChange={handleChange}
-              />
-              <Input
-                classes={classes}
-                className="sync-input"
-                type="text"
-                name="shopName"
-                placeholder="Enter shop name"
-                value={shopName}
-                onChange={handleChange}
-              />
               <Button  onClick={makeSync} style={{margin : 10}} variant="contained">
-                Sync With Store
+                ReSync With Store
               </Button>
             </div>
           </div>
