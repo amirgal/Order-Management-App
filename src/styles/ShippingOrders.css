@@ -17,7 +17,7 @@
 
 .shipping-panel-header {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(4,1fr);
     width: -webkit-fill-available;
     text-align: center;
     font-weight: bold;
@@ -32,7 +32,7 @@
     margin-right: 10px;
     height:15px;
     width:15px;
-    margin-top:5px;
+    margin-top:7px;
 }
 
 .ready .statusLight {
@@ -45,9 +45,10 @@
 
 .shipping-panel-details{
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: 3fr 1fr 2fr;
     justify-items: center;
     align-items: center;
+    width: 100%;
 }
 
 .panel-details > h4{
@@ -56,6 +57,7 @@
 
 .shipping-details {
     display: flex;
+    flex-direction: column;
     text-align: center;
     flex-wrap: wrap;
 }

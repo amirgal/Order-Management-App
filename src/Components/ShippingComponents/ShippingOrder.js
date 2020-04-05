@@ -29,18 +29,19 @@ const ShippingOrder = inject("generalStore")(observer(props => {
           expandIcon={<ExpandMoreIcon />}
         >
             <div className={'shipping-panel-header'}>
+                <p>{props.orders[0].date.toDateString()}</p>
                 <p>ID: {props.orders[0].shopifyId}</p>
-                <p>Name: {customer.name}</p>
-                <p>Email: {customer.email}</p>
+                <p>{customer.name}</p>
+                <p>{customer.email}</p>
             </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
             <div className="shipping-panel-details">
-                <div className="shipping-order-info">
-                    <p>Total Price: {props.orders[0].price}</p>
-                    <p>Order Date: {props.orders[0].date.toDateString()}</p>
-                </div>
-                <ShippingDetails details={props.orders[0].shippingAddress}/> 
+                {/* <div className="shipping-order-info">
+                    <p>{props.orders[0].price} ₪</p>
+                    <p>{props.orders[0].date.toDateString()}</p>
+                </div> */}
+                <ShippingDetails price={props.orders[0].price} details={props.orders[0].shippingAddress}/> 
                 <div className="all-order-items">
                     {props.orders.map((o,i) => <OrderItem key={i} order={o}/>)}
                 </div>
