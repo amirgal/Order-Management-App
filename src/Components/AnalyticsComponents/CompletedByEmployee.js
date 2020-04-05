@@ -17,7 +17,7 @@ const CompletedByEmployee = inject("generalStore")(
         {perEmployee.length> 0 ? (
           <CompletedByChart data ={perEmployee}/>
         ) : (
-          <div>No completed Tasks yet</div>
+          null
         )}
       </div>
     );
