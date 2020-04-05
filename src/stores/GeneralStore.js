@@ -3,6 +3,8 @@ import axios from "axios"
 import SingleOrderStore from "./SingleOrderStore"
 import BoardStore from "./BoardStore"
 
+
+
 export default class GeneralStore {
   @observable boards = []
   @observable products = []
@@ -10,6 +12,8 @@ export default class GeneralStore {
   @observable customers = []
   @observable orders = []
   @observable adminId = ""
+  
+  
 
   @action getAdminData = async (optionalData) => {
     let response
@@ -74,10 +78,11 @@ export default class GeneralStore {
       }
     })
     this.products = updatedProducts
-    savedBoard.data.orders.map(
-      (o) => new SingleOrderStore(o, board.stages.length)
-    )
+    // savedBoard.data.orders.map(
+    //   (o) => new SingleOrderStore(o, board.stages.length)
+    // )
     this.boards.push(new BoardStore(savedBoard.data))
+    this.orders = [...this.orders,...this.boards[this.boards.length -1].orders]
   }
 
   @action addEmployee = async (name) => {
@@ -100,15 +105,9 @@ export default class GeneralStore {
     this.employees = updatedEmployees.data
   }
 
-  @action makeSync = async (paramsObj) => {
-    const ordersUrl = `https://${paramsObj.apiKey}:${paramsObj.password}@${paramsObj.shopName}.myshopify.com/admin/api/2020-01/orders.json`
-    const productsUrl = `https://${paramsObj.apiKey}:${paramsObj.password}@${paramsObj.shopName}.myshopify.com/admin/api/2020-01/products.json`
+  @action makeSync = async () => {
     const adminId = this.adminId
-    const response = await axios.post(`http://localhost:4000/api/sync/`, {
-      productsUrl,
-      ordersUrl,
-      adminId,
-    })
+    const response = await axios.post(`http://localhost:4000/api/sync/`, {adminId})
     if (response.data.products) {
       this.getBoards(response.data.boards)
       this.employees = response.data.employees

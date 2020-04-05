@@ -10,7 +10,7 @@ const CompletedTimePerProduct = inject("generalStore")(
       if (props.generalStore.orders.length > 0) {
         const tempTimePerProduct = props.generalStore.getTimePerProduct();        
         setTimePerProduct(tempTimePerProduct);
-      }}, [props.generalStore.orders]);
+      }}, [props.generalStore]);
     
     return (
       <div>

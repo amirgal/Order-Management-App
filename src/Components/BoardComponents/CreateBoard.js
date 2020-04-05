@@ -1,5 +1,5 @@
 import "../../styles/Analytics.css"
-import React, { useState, useEffect } from "react"
+import React, { useState} from "react"
 import { inject, observer } from "mobx-react"
 import { Button, TextField, Checkbox, List, ListItem } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
@@ -27,12 +27,17 @@ const CreateBoard = inject("generalStore")(
     const prevStep = () => {
       setStep(step - 1)
     }
-    const nameEntered = () => {
-      return name.length > 0
+    
+    const validateInputs = () => {
+      if(name.length < 1){
+        return true
+      }else if(productIds.length < 1){
+        return true
+      }else{
+        return false
+      }
     }
-    const productsChosen = () => {
-      return productIds.length > 0
-    }
+    
 
     switch (step) {
       case 1:
@@ -78,7 +83,7 @@ const CreateBoard = inject("generalStore")(
               <ListItem>
                 <Button
                   onClick={nextStep}
-                  disabled={(!nameEntered(), !productsChosen())}
+                  disabled={(validateInputs())}
                   variant="contained"
                 >
                   Next
@@ -91,6 +96,7 @@ const CreateBoard = inject("generalStore")(
         return (
           <AddStages name={name} productIds={productIds} prevStep={prevStep} />
         )
+      default: return null  
     }
   })
 )
