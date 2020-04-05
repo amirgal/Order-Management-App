@@ -1,29 +1,47 @@
-import React from 'react';
-import {useHistory} from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
-import {Drawer, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
-import {ViewList as ViewListIcon, DoneOutline as DoneOutlineIcon, Settings as SettingsIcon,
-  Equalizer as EqualizerIcon, LocalShipping as LocalShippingIcon} from '@material-ui/icons';
+import React from "react"
+import { useHistory } from "react-router-dom"
+import { makeStyles } from "@material-ui/core/styles"
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@material-ui/core"
+import {
+  ViewList as ViewListIcon,
+  DoneOutline as DoneOutlineIcon,
+  Settings as SettingsIcon,
+  Equalizer as EqualizerIcon,
+  LocalShipping as LocalShippingIcon,
+} from "@material-ui/icons"
 
 const useStyles = makeStyles({
   list: {
-    width: 'auto',
+    width: "auto",
   },
-});
+  MuiIcon: {
+    color: "#fff",
+  },
+})
 
 export default function DrawerMenu(props) {
   const history = useHistory()
-  const classes = useStyles();
+  const classes = useStyles()
 
   const menuItems = [
-    {text:'Order Manager', link:'/order-manager', icon:<ViewListIcon />},
-    {text:'Shipping',link:'/shipping',icon :<LocalShippingIcon/> },
-    {text:'Completed Orders', link:'/completed-orders', icon:<DoneOutlineIcon />},
-    {text:'Analytics',link:'/analytics',icon :<EqualizerIcon/> },
-    {text:'Settings', link:'/settings', icon:<SettingsIcon />}
+    { text: "Order Manager", link: "/order-manager", icon: <ViewListIcon /> },
+    { text: "Shipping", link: "/shipping", icon: <LocalShippingIcon /> },
+    {
+      text: "Completed Orders",
+      link: "/completed-orders",
+      icon: <DoneOutlineIcon />,
+    },
+    { text: "Analytics", link: "/analytics", icon: <EqualizerIcon /> },
+    { text: "Settings", link: "/settings", icon: <SettingsIcon /> },
   ]
 
-  const changeRoute = route => {
+  const changeRoute = (route) => {
     history.push(route)
   }
 
@@ -35,15 +53,15 @@ export default function DrawerMenu(props) {
       onKeyDown={props.toggleDrawer()}
     >
       <List>
-        {menuItems.map(op => (
-            <ListItem button key={op.text} onClick={() => changeRoute(op.link)}>
-              <ListItemIcon>{op.icon}</ListItemIcon>
-              <ListItemText primary={op.text} />
-            </ListItem>
+        {menuItems.map((op) => (
+          <ListItem button key={op.text} onClick={() => changeRoute(op.link)}>
+            <ListItemIcon>{op.icon}</ListItemIcon>
+            <ListItemText primary={op.text} />
+          </ListItem>
         ))}
       </List>
     </div>
-  );
+  )
 
   return (
     <div>
@@ -51,5 +69,5 @@ export default function DrawerMenu(props) {
         {sideList()}
       </Drawer>
     </div>
-  );
+  )
 }

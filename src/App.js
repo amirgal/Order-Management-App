@@ -1,5 +1,5 @@
 import "./App.css"
-import React, { Fragment } from "react"
+import React, { Fragment} from "react"
 import { observer, inject } from "mobx-react"
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import OrderManager from "./Components/OrderManagerComponents/OrderManager"
@@ -15,15 +15,10 @@ import { createMuiTheme } from "@material-ui/core/styles"
 import { ThemeProvider } from "@material-ui/core/styles"
 import ShippingOrders from "./Components/ShippingComponents/ShippingOrders"
 import SignUp from "./Components/SignUpComponents/SignUp"
-<<<<<<< HEAD
 import darkTheme from "./styles/darkTheme"
 import lightTheme from "./styles/lightTheme"
 import CssBaseline from "@material-ui/core/CssBaseline"
-=======
 import socketIOClient from "socket.io-client";
-
->>>>>>> newMaster
-
 // const theme = createMuiTheme({
 //   palette: {
 //     primary: {
@@ -51,13 +46,12 @@ const App = inject("generalStore")(
     if (props.generalStore.adminId) {
       props.generalStore.getAdminData()
     }
- 
     const socket = socketIOClient("http://localhost:4000");
     socket.on('webhook order',function(socketData){
       props.generalStore.addWebhookOrder(socketData)
     })
     return (
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <StylesProvider injectFirst>
           <Router>
