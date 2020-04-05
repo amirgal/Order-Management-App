@@ -1,23 +1,14 @@
-:root {
-  --light-grey: #b6b6bf;
-  --medium-grey: #615a62;
-  --dark-grey: #3b3c43;
-  --box-shadow: rgba(0, 0, 0, 0.3);
+#root {
+  height: 100vh;
 }
-body {
-  /* background-color: var(--dark-grey); */
-}
-#order-manager-page {
-  padding-top: 70px;
+.MuiToolbar-regular {
+  min-height: 45px;
 }
 #stages-container {
   display: grid;
   grid-gap: 10px;
 }
 .stage {
-  /* background-color: var(--medium-grey); */
-  height: fit-content;
-  border-radius: 5px;
   max-height: 80vh;
   overflow: scroll;
 }
@@ -27,17 +18,14 @@ body {
 #details-window {
   position: absolute;
   z-index: 2;
-  /* background-color: var(--light-grey); */
   border-radius: 5px;
   top: calc(50vh - 150px);
   left: calc(50vw - 150px);
 }
-
-.order-card-header{
+.order-card-header {
   display: flex;
   flex-wrap: wrap;
 }
-
 .order-card-header > h3 {
   margin-right: 10px;
 }
@@ -51,12 +39,7 @@ body {
   display: block;
   margin: 0;
 }
-.order .statusLight {
-  background-color: orange;
-}
-.inProcess .statusLight {
-  background-color: greenyellow;
-}
+
 .ready .statusLight {
   background-color: greenyellow;
 }
@@ -99,9 +82,9 @@ body {
   text-align: center;
 }
 
-.order-card-details{
+/* .order-card-details {
   font-weight: bold;
-}
+} */
 .tracker_page {
   display: grid;
   grid-gap: 20px;
@@ -124,8 +107,10 @@ body {
   text-align: center;
   padding: 0;
   width: 100%;
-  /* background-color: var(--light-grey); */
-  /* box-shadow: 2px 5px 5px var(--box-shadow); */
+  border-left: #3FD6BC 4px solid;
+}
+.inProcess {
+  border-left: rgb(214, 63, 96) 4px solid;
 }
 .sync-input {
   margin: 4px;
@@ -205,9 +190,9 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-gap: 10px;
 }
-.MuiStepIcon-root.MuiStepIcon-active{
+.MuiStepIcon-root.MuiStepIcon-active {
   color: rgb(14, 136, 79);
 }
-.MuiStepIcon-root.MuiStepIcon-completed{
+.MuiStepIcon-root.MuiStepIcon-completed {
   /* color: var(--light-grey); */
 }

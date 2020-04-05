@@ -3,8 +3,6 @@ import axios from "axios"
 import SingleOrderStore from "./SingleOrderStore"
 import BoardStore from "./BoardStore"
 
-
-
 export default class GeneralStore {
   @observable boards = []
   @observable products = []
@@ -12,45 +10,52 @@ export default class GeneralStore {
   @observable customers = []
   @observable orders = []
   @observable adminId = ""
-  
-  
+  @observable darkMode = localStorage.theme == 'light'? false : true
 
+  @action toggleDarkMode = () => {
+    localStorage.setItem("theme", this.darkMode ? "light" : "dark")
+    this.darkMode = !this.darkMode
+  }
   @action getAdminData = async (optionalData) => {
     let response
-    if(!optionalData){
-       response = await axios.get(`http://localhost:4000/api/getAdminData/${this.adminId}`)
-    }else{
+    if (!optionalData) {
+      response = await axios.get(
+        `http://localhost:4000/api/getAdminData/${this.adminId}`
+      )
+    } else {
       response = optionalData
     }
-    this.getBoards(response.data.boards);
-    this.employees = response.data.employees;
-    this.products = response.data.products;
-    this.customers = response.data.customers;
+    this.getBoards(response.data.boards)
+    this.employees = response.data.employees
+    this.products = response.data.products
+    this.customers = response.data.customers
   }
 
   @action addWebhookOrder = (socketData) => {
-    const board = this.boards.find(b => b._id === socketData.boardId)
-    const newOrder = new SingleOrderStore(socketData.order,board.stages.length)
+    const board = this.boards.find((b) => b._id === socketData.boardId)
+    const newOrder = new SingleOrderStore(socketData.order, board.stages.length)
     board.orders.push(newOrder)
     this.orders.push(newOrder)
-    const customerIndex = this.customers.findIndex(c => c._id === socketData.customer._id)
-    if(customerIndex === -1) {
+    const customerIndex = this.customers.findIndex(
+      (c) => c._id === socketData.customer._id
+    )
+    if (customerIndex === -1) {
       this.customers.push(socketData.customer)
     } else {
       this.customers.splice(customerIndex, 1, socketData.customer)
     }
   }
 
-  @action getBoards = async optionalBoards => {
-    let boards = optionalBoards || [];
-    this.boards = boards.map(board => {
-      return new BoardStore(board);
-    });
+  @action getBoards = async (optionalBoards) => {
+    let boards = optionalBoards || []
+    this.boards = boards.map((board) => {
+      return new BoardStore(board)
+    })
     for (let board of this.boards) {
       this.orders = [...this.orders, ...board.orders]
     }
   }
-  
+
   @action getSingleOrder = async (id) => {
     const response = await axios.get(
       `http://localhost:4000/api/singleOrder/${id}`
@@ -64,7 +69,6 @@ export default class GeneralStore {
     return response.data
   }
 
-
   @action createBoard = async (board) => {
     board.adminId = this.adminId
     const savedBoard = await axios.post(
@@ -72,8 +76,8 @@ export default class GeneralStore {
       board
     )
     const updatedProducts = [...this.products]
-    updatedProducts.forEach(p =>  { 
-      if(savedBoard.data.products.includes(p._id)){
+    updatedProducts.forEach((p) => {
+      if (savedBoard.data.products.includes(p._id)) {
         p.boardId = savedBoard.data._id
       }
     })
@@ -82,7 +86,10 @@ export default class GeneralStore {
     //   (o) => new SingleOrderStore(o, board.stages.length)
     // )
     this.boards.push(new BoardStore(savedBoard.data))
-    this.orders = [...this.orders,...this.boards[this.boards.length -1].orders]
+    this.orders = [
+      ...this.orders,
+      ...this.boards[this.boards.length - 1].orders,
+    ]
   }
 
   @action addEmployee = async (name) => {
@@ -107,7 +114,9 @@ export default class GeneralStore {
 
   @action makeSync = async () => {
     const adminId = this.adminId
-    const response = await axios.post(`http://localhost:4000/api/sync/`, {adminId})
+    const response = await axios.post(`http://localhost:4000/api/sync/`, {
+      adminId,
+    })
     if (response.data.products) {
       this.getBoards(response.data.boards)
       this.employees = response.data.employees

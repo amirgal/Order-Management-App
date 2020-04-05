@@ -15,13 +15,11 @@ import {
   Equalizer as EqualizerIcon,
   LocalShipping as LocalShippingIcon,
 } from "@material-ui/icons"
+import { styled } from "@material-ui/styles"
 
 const useStyles = makeStyles({
   list: {
     width: "auto",
-  },
-  MuiIcon: {
-    color: "#fff",
   },
 })
 
@@ -55,7 +53,7 @@ export default function DrawerMenu(props) {
       <List>
         {menuItems.map((op) => (
           <ListItem button key={op.text} onClick={() => changeRoute(op.link)}>
-            <ListItemIcon>{op.icon}</ListItemIcon>
+            <ListItemIcon >{op.icon}</ListItemIcon>
             <ListItemText primary={op.text} />
           </ListItem>
         ))}

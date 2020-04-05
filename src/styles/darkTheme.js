@@ -16,44 +16,21 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: "#3FD6BC",
-      // contrastText: "#E2E2E3",
     },
   },
-  // text: {
-  //   primary: "#000000",
-  //   secondary: "#000000",
-  //   tabsBar: "#b6b6bf",
-  // },
-  // background: {
-  //   paper: "#b6b6bf",
-  // },
-  //   },
-  // shape: {
-  //   borderRadius: 8,
-  // },
-  // overrides: {
-  //   MuiDrawer: {
-  //     paper: {
-  //       background: "#26a69a",
-  //     },
-  //     MuiIcon: {
-  //       root: {
-  //         background: "#fff",
-  //       },
-  //     },
-  //   },
-  // },
-  //     MuiButton: {
-  //       root: {
-  // fontWeight: "bold",
-  // backgroundColor: "#b6b6bf",
-  // margin: "10px",
-  // "&:hover": {
-  //   backgroundColor: "magenta",
-  //         },
-  //       },
-  //     },
-  // },
+
+  overrides: {
+    MuiDrawer: {
+      paper: {
+        color: "#3FD6BC",
+      },
+    },
+    MuiListItemIcon: {
+      root: {
+        color: "#3FD6BC",
+      },
+    },
+  },
 })
 
 export default theme

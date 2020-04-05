@@ -51,7 +51,7 @@ const App = inject("generalStore")(
       props.generalStore.addWebhookOrder(socketData)
     })
     return (
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={props.generalStore.darkMode? darkTheme: lightTheme}>
         <CssBaseline />
         <StylesProvider injectFirst>
           <Router>

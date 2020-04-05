@@ -1,55 +1,39 @@
 import { createMuiTheme } from "@material-ui/core/styles"
 
-
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: "#b6b6bf",
+      default: "#F7F8F9",
+      paper: "#E8F0F3",
     },
     text: {
-      primary: "#000",
+      primary: "#0B2027",
+      secondary: "#0B2027",
+    },
+    primary: {
+      main: "#E8F0F3",
+      contrastText: "#0B2027",
+    },
+    secondary: {
+      main: "#3AC3AB",
+      text: {
+        color: "#000",
+      },
     },
   },
-  // root: {background: 'black'},  
-  // palette: {
-  //     primary: {
-  //       main: "#3b3c43",
-  //       contrastText: "#000000",
-  //     }
-  // secondary: {
-  //   main: "#b6b6bf",
-  //   contrastText: "#000000",
-  // },
-  // text: {
-  //   primary: "#000000",
-  //   secondary: "#000000",
-  //   tabsBar: "#b6b6bf",
-  // },
-  // background: {
-  //   paper: "#b6b6bf",
-  // },
-  //   },
-  // shape: {
-  //   borderRadius: 8,
-  // },
-  //   overrides: {
-  //     MuiDrawer: {
-  //       paper: {
-  //         background: "#18202c",
-  //         "& *": { color: "#fff" },
-  //       },
-  //     },
-  //     MuiButton: {
-  //       root: {
-  // fontWeight: "bold",
-  // backgroundColor: "#b6b6bf",
-  // margin: "10px",
-  // "&:hover": {
-  //   backgroundColor: "magenta",
-  //         },
-  //       },
-  //     },
-    // },
+
+  overrides: {
+    MuiDrawer: {
+      paper: {
+        color: "#0B2027",
+      },
+    },
+  },
+  MuiListItemIcon: {
+    root: {
+      color: "#0B2027",
+    },
+  },
 })
 
 export default theme

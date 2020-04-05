@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Modal, Backdrop, Fade} from '@material-ui/core'
 import CompleteTask from './CompleteTask';
 import ClaimTask from './ClaimTask'
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -28,7 +29,7 @@ const StageDetailsModal = inject('detailsWindowStore')(observer((props) => {
     };
 
     return (
-    <div>
+    <Box>
         <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
@@ -53,7 +54,7 @@ const StageDetailsModal = inject('detailsWindowStore')(observer((props) => {
                 </div>
             </Fade>
         </Modal>
-    </div>
+    </Box>
     );
 }))
 
