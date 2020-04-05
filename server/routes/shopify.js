@@ -7,9 +7,7 @@ const Customer = require("../models/Customer")
 const Board = require("../models/board")
 const Admin = require("../models/admin")
 const dotenv = require("dotenv")
-  const mailer = require('./mailer')()
-
-
+const mailer = require('./mailer')()
 dotenv.config()
 // const ordersAPI = process.env.ordersAPI
 // const productsAPI = process.env.productsAPI
@@ -37,13 +35,13 @@ const shopify = function() {
     const ordersUrl = `https://${admin.apiKey}:${admin.storePassword}@${admin.storeName}.myshopify.com/admin/api/2020-01/orders.json`;
     const threeDays = 259200000
     let results = await axios.get(ordersUrl)
-    console.log(results.data)
+    
     for (let result of results.data.orders) {
       const foundOrder = await Order.find({ shopifyId: result.id })
       if (foundOrder.length == 0) {
         const cust = result.customer
-        const foundCustomer = await Customer.find({ shopifyId: cust.id })
-        if (foundCustomer.length == 0) {
+        const foundCustomer = await Customer.findOne({ shopifyId: cust.id })
+        if (!foundCustomer) {
           let customer = new Customer({
             shopifyId: cust.id,
             name: cust.first_name + " " + cust.last_name,
@@ -55,8 +53,9 @@ const shopify = function() {
           await customer.save()
           await Admin.findOneAndUpdate({_id : adminId},{$push : {customers : customer._id}})
         } else {
-          updatedOrders = foundCustomer[0].orders.push(result.id)
-          await Customer.updateOne(
+          foundCustomer.orders.push(result.id)
+          updatedOrders = foundCustomer.orders
+          await Customer.findOneAndUpdate(
             { shopifyId: cust.id },
             { orders: updatedOrders }
           )
