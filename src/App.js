@@ -44,7 +44,6 @@ import socketIOClient from "socket.io-client";
 const App = inject("generalStore","helpers")(
   observer((props) => {
     props.generalStore.adminId = localStorage.adminId
-<<<<<<< HEAD
 
     useEffect(()=>{
       if (props.generalStore.adminId) {
@@ -52,13 +51,6 @@ const App = inject("generalStore","helpers")(
       }
     },[])
     
-=======
-    useEffect(()=> {
-      if (props.generalStore.adminId) {
-        props.generalStore.getAdminData()
-      }
-    })
->>>>>>> newMaster
     const socket = socketIOClient("http://localhost:4000");
     socket.on('webhook order',function(socketData){
       props.generalStore.addWebhookOrder(socketData)
