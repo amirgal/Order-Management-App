@@ -75,13 +75,15 @@ const Settings = inject("generalStore")(
           <List>
             <ListItem>
               <TextField
+                color="secondary"
                 style={{width : 300}}
                 classes={classes}
                 placeholder="Add Employee Name"
                 value={name}
                 onChange={handleNameChange}
               />
-              <Button onClick={addEmployee} variant="contained" style={{width : 250}}>
+              <Button onClick={addEmployee} variant="contained"
+                color="secondary" style={{width : 250}}>
                 Add employee
               </Button>
             </ListItem>
@@ -93,14 +95,11 @@ const Settings = inject("generalStore")(
                 getOptionLabel={option => option.name}
                 style={{ width: 300 }}
                 renderInput={params => (
-                  <TextField
-                    value={employee}
-                    {...params}
-                    label="Select Employee"
-                  />
+                  <TextField color="secondary" value={employee}
+                    {...params} label="Select Employee"/>
                 )}
               />
-              <Button onClick={makeInactive} variant="contained" style={{width : 250}}>
+              <Button onClick={makeInactive} variant="contained" style={{width : 250}} color="secondary">
                 remove from roster
               </Button>
             </ListItem>
@@ -112,10 +111,10 @@ const Settings = inject("generalStore")(
                 getOptionLabel={option => option.name}
                 style={{ width: 300 }}
                 renderInput={params => (
-                  <TextField value={inactiveEmployee} {...params} label="Select inActive Employee" />
+                  <TextField value={inactiveEmployee} {...params} label="Select inActive Employee" color="secondary"/>
                 )}
               />
-              <Button onClick={makeActive} variant="contained" style={{width : 250}}>
+              <Button onClick={makeActive} variant="contained" style={{width : 250}} color="secondary">
                 add to roster
               </Button>
             </ListItem>
@@ -127,10 +126,10 @@ const Settings = inject("generalStore")(
           ) : null}
           <div>
             <div className="shop-details">
-              <Button  onClick={makeSync} style={{margin : 10}} variant="contained">
+              <Button  onClick={makeSync} style={{margin : 10}} variant="contained" color="secondary">
                 ReSync With Store
               </Button>
-              <Button color="inherit" variant="contained" onClick={logOut}>LOGOUT</Button>
+              <Button color="secondary" variant="contained" onClick={logOut}>LOGOUT</Button>
             </div>
           </div>
         </div>

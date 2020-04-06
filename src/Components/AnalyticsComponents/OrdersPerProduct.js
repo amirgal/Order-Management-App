@@ -11,7 +11,7 @@ const OrdersPerProduct = inject("generalStore")(
           const tempPerProduct = props.generalStore.getOrdersPerProduct();
           setPerProduct(tempPerProduct);
         }
-      }, [props.generalStore]);
+      }, [props.generalStore.orders]);
     
     return (
       <div>

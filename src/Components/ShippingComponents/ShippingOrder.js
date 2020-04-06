@@ -24,7 +24,7 @@ const ShippingOrder = inject("generalStore","helpers")(observer(props => {
     return (
     <div className={`shipping-order-panel ${ordersReady ? 'ready' : null}`}>
       <ExpansionPanel expanded={props.expanded === props.orders[0]._id}
-        onChange={props.handleChange(props.orders[0]._id)}>
+        onChange={props.handleChange(props.orders[0]._id)} square>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
         >
@@ -43,12 +43,12 @@ const ShippingOrder = inject("generalStore","helpers")(observer(props => {
                     {props.orders.map((o,i) => <OrderItem key={i} order={o}/>)}
                 </div>
                 <div className="buttons">
-                  <Button variant="contained" target="_blank" rel="noopener noreferrer"
+                  <Button variant="contained" target="_blank" rel="noopener noreferrer" color="secondary"
                     href={props.helpers.couriers[props.orders[0].shippingAddress.courier].link}>
                     Get Tracking Label
                   </Button>
                   <Button variant="contained" disabled={!ordersReady}
-                  onClick={openModalWithOrders}>
+                  onClick={openModalWithOrders} color="secondary">
                     Ship Items
                   </Button>
                 </div>

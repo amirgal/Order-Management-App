@@ -12,7 +12,7 @@ export default class BoardStore {
     constructor(board){
         this.name = board.name
         this.stages = board.stages
-        this.orders = board.orders.map(o => new SingleOrderStore(o, board.stages.length))
+        this.orders = board.orders.map(o => new SingleOrderStore(o, board.stages))
         this.stagesNum = board.stages.length
         this._id = board._id 
         this.productIds = board.products

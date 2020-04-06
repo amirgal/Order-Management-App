@@ -8,7 +8,7 @@ export default class SingleOrder {
     @observable stageEmployees 
     @observable isComplete
     
-    constructor(order,numStages){
+    constructor(order,stages){
      this._id = order._id   
      this.shopifyId = order.shopifyId   
      this.customerId = order.customerId   
@@ -22,10 +22,11 @@ export default class SingleOrder {
      this.shippingAddress = order.shippingAddress  
      this.date = new Date(order.date)
      this.endDate = order.endDate ? new Date(order.endDate) : null
-     this.numStages = numStages
+     this.numStages = stages.length
      this.isReadyToShip = order.isReadyToShip
      this.trackingNumber = order.trackingNumber
      this.locationId = order.locationId
+     this.stages = stages
     }
     
     @action advanceStage = async () => {     
@@ -39,7 +40,12 @@ export default class SingleOrder {
     }
     
     @action claimStage = async (employeeName) => {
-        this.stageEmployees[this.progress] = {name:employeeName, startDate : new Date(),endDate : null}
+        this.stageEmployees[this.progress] = {
+            stageName: this.stages[this.progress-1].name,
+            name:employeeName,
+            startDate : new Date(),
+            endDate : null
+        }
         this.inProcess = true
         await axios.put("http://localhost:4000/api/order",this)
     }

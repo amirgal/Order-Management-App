@@ -19,28 +19,31 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import socketIOClient from "socket.io-client"
 import MySnackBar from "./Components/AppBarComponents/MySnackBar"
 
-const App = inject("generalStore","helpers")(
+const App = inject("generalStore")(
   observer((props) => {
-    props.generalStore.adminId = localStorage.adminId
-
-    useEffect(()=>{
-      if (props.generalStore.adminId) {
-        props.generalStore.getAdminData()
-      }
-    },[])
-    
+    props.generalStore.adminId = localStorage.adminId;
+    useEffect(() => {
+      const getAdminData = async () => {
+        if (props.generalStore.adminId) {
+          try {
+            await props.generalStore.getAdminData();
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      };
+      getAdminData()
+    }, []);
     const socket = socketIOClient("http://localhost:4000");
-    socket.on('webhook order',function(socketData){
-      props.generalStore.addWebhookOrder(socketData)
-      props.helpers.openSnackBar('Recieved New Order !','info')
-    })
+    socket.on("webhook order", function (socketData) {
+      props.generalStore.addWebhookOrder(socketData);
+    });
     return (
       <ThemeProvider
         theme={props.generalStore.darkMode ? darkTheme : lightTheme}
       >
         <CssBaseline />
         <StylesProvider injectFirst>
-          <MySnackBar />
           <Router>
             <Route
               exact
@@ -132,8 +135,8 @@ const App = inject("generalStore","helpers")(
           </Router>
         </StylesProvider>
       </ThemeProvider>
-    )
+    );
   })
-)
+);
 
-export default App
+export default App;
