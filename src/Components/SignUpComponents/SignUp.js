@@ -24,7 +24,7 @@ const SignUp =inject('generalStore')((props) => {
             localStorage.adminId = response.data._id
             props.generalStore.adminId = response.data._id
             await props.generalStore.getAdminData(response)
-            routeChange('/order-manager')
+            routeChange('/settings')
         }catch(err){
             console.log(err)
         }

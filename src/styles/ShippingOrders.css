@@ -75,3 +75,7 @@
     grid-gap:10px;
     padding:10px 15px;
 }
+
+#shipping-modal {
+    padding:100px;
+}

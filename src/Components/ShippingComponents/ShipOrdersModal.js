@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { observer } from "mobx-react"
 import { makeStyles } from "@material-ui/core/styles"
-import { Modal, Backdrop, Fade, Button, TextField} from "@material-ui/core"
+import { Modal, Backdrop, Fade, Button, TextField, Box} from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -31,29 +31,28 @@ const ShipOrdersModal = observer(props => {
   }
 
   return (
-    <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={props.showModal}
-        onClose={setShowModal}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500
-        }}
-      >
-        <Fade in={props.showModal}>
-          <div id="ship-orders-modal">
+    
+    <Modal
+      aria-labelledby="transition-modal-title"
+      aria-describedby="transition-modal-description"
+      className={classes.modal}
+      open={props.showModal}
+      onClose={setShowModal}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500
+      }}
+    >
+      <Fade in={props.showModal}>
+        <Box bgcolor='background.paper' id="shipping-modal">
           <TextField vartian="outlined" label="Tracking Number" value={trackingNumber}
-            onChange={(e) => setTrackingNumber(e.target.value)}/>
-            <Button variant="contained" onClick={shipItems}
-            disabled={trackingNumber.length === 0}>Ship Items</Button>
-          </div>
-        </Fade>
-      </Modal>
-    </div>
+            onChange={(e) => setTrackingNumber(e.target.value)} color="secondary"/>
+          <Button variant="contained" onClick={shipItems} color="secondary"
+          disabled={trackingNumber.length === 0}>Ship Items</Button>
+        </Box>
+      </Fade>
+    </Modal>
   )
 })
 
