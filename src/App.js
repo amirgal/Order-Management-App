@@ -63,6 +63,7 @@ const App = inject("generalStore",'helpers')(
       props.generalStore.addWebhookOrder(socketData);
       props.helpers.openSnackBar('Recieved New Order !','info')
     });
+    
     return (
       <ThemeProvider
       theme={props.generalStore.darkMode ? darkTheme : lightTheme}
