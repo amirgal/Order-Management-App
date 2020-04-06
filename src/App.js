@@ -1,5 +1,5 @@
 import "./App.css"
-import React, { Fragment} from "react"
+import React, { Fragment, useEffect} from "react"
 import { observer, inject } from "mobx-react"
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import OrderManager from "./Components/OrderManagerComponents/OrderManager"
@@ -43,9 +43,11 @@ import socketIOClient from "socket.io-client";
 const App = inject("generalStore")(
   observer((props) => {
     props.generalStore.adminId = localStorage.adminId
-    if (props.generalStore.adminId) {
-      props.generalStore.getAdminData()
-    }
+    useEffect(()=> {
+      if (props.generalStore.adminId) {
+        props.generalStore.getAdminData()
+      }
+    })
     const socket = socketIOClient("http://localhost:4000");
     socket.on('webhook order',function(socketData){
       props.generalStore.addWebhookOrder(socketData)

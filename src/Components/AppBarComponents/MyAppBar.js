@@ -40,7 +40,7 @@ const MyAppBar = inject("generalStore")(
     }
     return (
       <div className={classes.root}>
-        <AppBar position="sticky">
+        <AppBar position="fixed">
           <Toolbar>
             <IconButton
               onClick={toggleDrawer()}
