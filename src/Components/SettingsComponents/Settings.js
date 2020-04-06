@@ -6,7 +6,8 @@ import {
   Button,
   TextField,
   List,
-  ListItem
+  ListItem,
+  Box
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import {useHistory} from "react-router-dom"
@@ -71,7 +72,7 @@ const Settings = inject("generalStore")(
     };
     const classes = useStyles();
     return (
-      <div id="settings-page">
+      <Box bgcolor='background.paper' id="settings-page">
         <div className="employees-settings">
           <List>
             <ListItem>
@@ -134,7 +135,7 @@ const Settings = inject("generalStore")(
             </div>
           </div>
         </div>
-      </div>
+      </Box>
     );
   })
 );
