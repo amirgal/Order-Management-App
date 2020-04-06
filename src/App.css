@@ -66,11 +66,11 @@ html {
   border-radius: 10px;
   /* box-shadow: 2px 2px 20px var(--box-shadow); */
 }
-.popper {
+/* .popper {
   margin-top: 15px;
   margin-left: 60px;
   color: rgb(184, 226, 233);
-}
+} */
 .employees-settings {
   display: grid;
   width: 600px;

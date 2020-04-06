@@ -1,0 +1,43 @@
+/* .form{
+    display: grid;
+    justify-items: center;
+    /* grid-template-columns: 1fr 1fr; */
+    
+ 
+.signup-list{
+    padding: 30px;
+    border-left: 4px solid #3fd6bc;
+    width: fit-content;
+    height: fit-content;
+    position: fixed;
+    margin: auto;
+    height: 80%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    box-shadow: 0 4px 8px 8px #00000014;
+}
+.login-list{
+     padding: 30px;
+    border-left: 4px solid #3fd6bc;
+    width: fit-content;
+    height: fit-content;
+    position: fixed;
+    margin: auto;
+    height: 60%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    box-shadow: 0 4px 8px 8px #00000014;
+}   
+#btns-list-item{
+    padding-left: 55px;
+}
+#btns-list-item1{
+    padding-left: 75px;
+}
+#btns-list-item2{
+    padding-left: 30px;
+}
