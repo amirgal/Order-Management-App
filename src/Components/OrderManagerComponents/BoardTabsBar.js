@@ -5,7 +5,7 @@ import SwipeableViews from "react-swipeable-views"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import { AppBar, Tabs, Tab, Typography, Box } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
-import Board from "../Board"
+import Board from './Board'
 import CreateBoard from "../BoardComponents/CreateBoard"
 
 function TabPanel(props) {
@@ -58,7 +58,7 @@ const BoardTabsBar = inject("generalStore")(
     }
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root}id="tabsBar">
         <AppBar position="static" color="primary">
           <Tabs
             value={value}

@@ -1,0 +1,141 @@
+#tabsBar {
+  padding-top: 45px;
+}
+.board {
+  max-width: fit-content;
+  display: grid;
+}
+.board::-webkit-scrollbar {
+  display: none;
+}
+.stage {
+  width: 250px;
+  max-height: 80vh;
+  overflow: scroll;
+}
+.stageTitle {
+  text-align: center;
+  margin: 0 5px;
+  padding: 5px 0;
+  height: fit-content;
+}
+.MuiListItem-gutters {
+  padding: 5px 5px;
+}
+.MuiExpansionPanelSummary-content.Mui-expanded {
+  margin: 0;
+}
+.MuiList-padding {
+  padding: 5px 0;
+}
+
+.stage::-webkit-scrollbar {
+  display: none;
+}
+.MuiExpansionPanelSummary-root {
+  padding: 0;
+}
+.MuiExpansionPanelDetails-root {
+  padding: 5px;
+  display: grid;
+}
+.order-card-header {
+  padding-left: 10px;
+  display: grid;
+  text-align: start;
+}
+.order-card-details {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  text-align: start;
+  margin-bottom: 5px;
+}
+.cardButton {
+  display: grid;
+  align-items: center;
+}
+.order {
+  text-align: center;
+  padding: 0 5px;
+  width: 100%;
+  border-left: #da344d 4px solid;
+}
+h4 {
+  margin: 0;
+}
+h5 {
+  margin: 0;
+}
+.inProcess {
+  border-left: #3fd6bc 4px solid;
+}
+#createBoard .MuiListItem-root {
+  display: grid;
+  justify-content: center;
+}
+#createBoard .MuiInputBase-input {
+  color: black;
+  width: 500px;
+}
+#addStagesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin: 0 auto;
+}
+.navButtons {
+  height: fit-content;
+  justify-self: center;
+  display: grid;
+  width: 150px;
+}
+.newBoardContainer {
+  display: grid;
+  grid-gap: 10px;
+  height: 8;
+  height: 50vh;
+}
+.stageBox {
+  display: grid;
+  text-align: center;
+  padding: 0;
+  height: fit-content;
+  min-height: 30%;
+  align-items: center;
+  cursor: pointer;
+}
+#newStage {
+  padding: 100px;
+}
+.newStagesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 10px;
+}
+.taskModal {
+  display: grid;
+  justify-items: center;
+}
+#details-window {
+  position: fixed;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  min-height: 250px;
+  width: 30%;
+}
+#details-window:focus {
+  outline: none;
+}
+#claimButton {
+  margin-top: 20px;
+}
+#details-window h3 h4 h5 {
+    margin: 0;
+  margin-top: 10px;
+  text-align: center;
+}
+#product-details{
+    display: grid;
+    text-align: center;
+}

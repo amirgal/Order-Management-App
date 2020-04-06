@@ -4,27 +4,6 @@
 .MuiToolbar-regular {
   min-height: 45px;
 }
-#order-manager-page {
-  padding-top: 45px;
-}
-#stages-container {
-  display: grid;
-  grid-gap: 10px;
-}
-.stage {
-  max-height: 80vh;
-  overflow: scroll;
-}
-.stage::-webkit-scrollbar {
-  display: none;
-}
-.order-card-header {
-  display: flex;
-  flex-wrap: wrap;
-}
-.order-card-header > h3 {
-  margin-right: 10px;
-}
 .ready .statusLight {
   background-color: greenyellow;
 }
@@ -55,10 +34,6 @@
   grid-gap: 1em;
   margin-bottom: 10px;
 }
-#details-window > h3 {
-  margin-top: 10px;
-  text-align: center;
-}
 .tracker_page {
   display: grid;
   grid-gap: 20px;
@@ -75,24 +50,6 @@
   width: 300px;
   margin: 0 auto;
 }
-.order {
-  text-align: center;
-  padding: 0;
-  width: 100%;
-  border-left: #3fd6bc 4px solid;
-}
-.order h3 {
-  margin: 0;
-  font-size: 16px;
-  margin-right: 10px;
-}
-.order p {
-  display: block;
-  margin: 0;
-}
-.inProcess {
-  border-left: rgb(214, 63, 96) 4px solid;
-}
 .sync-input {
   margin: 4px;
   width: 250px;
@@ -100,58 +57,6 @@
 #storeSynced {
   margin-left: 50px;
   color: greenyellow;
-}
-#details-window {
-  position: fixed;
-  left: calc(33% - 25px);
-  top: 15%;
-  width: 33%;
-  padding: 50px;
-}
-#details-window:focus {
-  outline: none;
-}
-#createBoard .MuiListItem-root {
-  display: grid;
-  justify-content: center;
-}
-#createBoard .MuiInputBase-input {
-  color: black;
-  width: 500px;
-}
-#addStagesContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  margin: 0 auto;
-}
-.navButtons {
-  height: fit-content;
-  justify-self: center;
-  display: grid;
-  width: 150px;
-}
-.newBoardContainer {
-  display: grid;
-  grid-gap: 10px;
-  height: 8;
-  height: 50vh;
-}
-.stageBox {
-  display: grid;
-  text-align: center;
-  padding: 0;
-  height: fit-content;
-  min-height: 30%;
-  align-items: center;
-  cursor: pointer;
-}
-#newStage {
-  padding: 100px;
-}
-.newStagesContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  grid-gap: 10px;
 }
 .MuiStepIcon-root.MuiStepIcon-active {
   color: rgb(14, 136, 79);

@@ -37,9 +37,8 @@ const theme = createMuiTheme({
     },
     MuiPaper: {
       root: {
-        elevation: 6,
+        // elevation: 24,
       },
-      
     },
     // MuiExpansionPanel:{
 
