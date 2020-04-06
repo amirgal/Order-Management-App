@@ -19,7 +19,7 @@ import { styled } from "@material-ui/styles"
 
 const useStyles = makeStyles({
   list: {
-    width: "auto",
+    width: "180px",
   },
 })
 
@@ -28,10 +28,10 @@ export default function DrawerMenu(props) {
   const classes = useStyles()
 
   const menuItems = [
-    { text: "Order Manager", link: "/order-manager", icon: <ViewListIcon /> },
+    { text: "Orders", link: "/order-manager", icon: <ViewListIcon /> },
     { text: "Shipping", link: "/shipping", icon: <LocalShippingIcon /> },
     {
-      text: "Completed Orders",
+      text: "Completed",
       link: "/completed-orders",
       icon: <DoneOutlineIcon />,
     },
@@ -53,7 +53,7 @@ export default function DrawerMenu(props) {
       <List>
         {menuItems.map((op) => (
           <ListItem button key={op.text} onClick={() => changeRoute(op.link)}>
-            <ListItemIcon >{op.icon}</ListItemIcon>
+            <ListItemIcon style={{"marginLeft":"15px"}}>{op.icon}</ListItemIcon>
             <ListItemText primary={op.text} />
           </ListItem>
         ))}
