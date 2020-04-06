@@ -158,11 +158,7 @@ router.post("/newuser", async function (req, res) {
   const user = req.body //username and pass
   const newUser = new Admin(user)
   await newUser.save()
-  console.log('here');
-  
   await shopify.getProductsFromShopify(newUser._id)
-  console.log('now');
-  
   await shopify.getOrdersFromShopify(newUser._id)
   const admin = await queryAdminData(newUser._id)
   res.send(admin)

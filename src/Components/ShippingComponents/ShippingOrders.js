@@ -35,7 +35,7 @@ const ShippingOrders = inject("generalStore")(observer(props => {
     };
 
     return (
-        <div id="completed-orders-page">
+        <div id="shipping-orders-page">
             <div id="completed-orders-table">
                 {Object.keys(shippingOrdersByID).map((id,i) =>
                     shippingOrdersByID[id] ? 

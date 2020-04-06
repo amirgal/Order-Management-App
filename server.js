@@ -38,27 +38,15 @@ app.use(
     }
   })
 )
+app.use("/api", api)
+app.use("/shopify", shopify)
 
 app.use(function(req, res, next) {
   req.io = io;
   next();
 });
 
-app.use("/api", api)
-app.use("/shopify", shopify)
 app.use("/webhook", webhook)
-
-// io.on('connection', function(socket){
-//   console.log('a user connected');
-
-//   socket.on('disconnect',function(){
-//     console.log('a user disconnected')
-//   })
-// })
-
-// app.listen(port, function() {
-//   console.log(`Running server on port ${port}`)
-// })
  
 server.listen(port, function() {
   console.log(`Running server on port ${port}`)
