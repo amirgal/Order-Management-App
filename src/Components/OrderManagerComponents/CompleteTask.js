@@ -2,7 +2,7 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import {Button, FormControlLabel, Checkbox, List, ListItem} from '@material-ui/core'
 
-const CompleteTask = inject('generalStore','detailsWindowStore')(observer((props) => {
+const CompleteTask = inject('generalStore','detailsWindowStore','helpers')(observer((props) => {
     const currOrder = props.detailsWindowStore.detailsWindowOrder
     const steps = props.detailsWindowStore.detailsWindowStage.validate
     
@@ -21,6 +21,9 @@ const CompleteTask = inject('generalStore','detailsWindowStore')(observer((props
       };
 
     const completeStage = () => {
+        if(currOrder.progress === currOrder.numStages){
+            props.helpers.openSnackBar('Order Moved To Shipping','success')
+        }
         currOrder.advanceStage()
         props.detailsWindowStore.toggleDetailsWindow()
     }

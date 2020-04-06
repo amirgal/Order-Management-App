@@ -1,5 +1,5 @@
 import "./App.css"
-import React, { Fragment} from "react"
+import React, { Fragment, useEffect} from "react"
 import { observer, inject } from "mobx-react"
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import OrderManager from "./Components/OrderManagerComponents/OrderManager"
@@ -10,6 +10,7 @@ import Tracker from "./Components/TrackerComponents/Tracker"
 import Analytics from "./Components/AnalyticsComponents/Analytics"
 import BoardTabsBar from "./Components/OrderManagerComponents/BoardTabsBar"
 import Login from "./Components/Login"
+import MySnackBar from "./Components/AppBarComponents/MySnackBar"
 import { StylesProvider } from "@material-ui/core/styles"
 import { createMuiTheme } from "@material-ui/core/styles"
 import { ThemeProvider } from "@material-ui/core/styles"
@@ -40,20 +41,26 @@ import socketIOClient from "socket.io-client";
 //   }
 // })
 
-const App = inject("generalStore")(
+const App = inject("generalStore","helpers")(
   observer((props) => {
     props.generalStore.adminId = localStorage.adminId
-    if (props.generalStore.adminId) {
-      props.generalStore.getAdminData()
-    }
+
+    useEffect(()=>{
+      if (props.generalStore.adminId) {
+        props.generalStore.getAdminData()
+      }
+    },[])
+    
     const socket = socketIOClient("http://localhost:4000");
     socket.on('webhook order',function(socketData){
       props.generalStore.addWebhookOrder(socketData)
+      props.helpers.openSnackBar('Recieved New Order !','info')
     })
     return (
       <ThemeProvider theme={props.generalStore.darkMode? darkTheme: lightTheme}>
         <CssBaseline />
         <StylesProvider injectFirst>
+          <MySnackBar />
           <Router>
             <Route
               exact
