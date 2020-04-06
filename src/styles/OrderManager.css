@@ -116,7 +116,8 @@ h5 {
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 10px;
+  gap: 10px;
+  min-width: fit-content;
 }
 .taskModal {
   display: grid;
