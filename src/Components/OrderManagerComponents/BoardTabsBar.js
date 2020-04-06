@@ -5,7 +5,7 @@ import SwipeableViews from "react-swipeable-views"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import { AppBar, Tabs, Tab, Typography, Box } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
-import Board from "../Board"
+import Board from "./Board"
 import CreateBoard from "../BoardComponents/CreateBoard"
 
 function TabPanel(props) {
@@ -28,24 +28,24 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 }
 
 function a11yProps(index) {
   return {
     id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`
+    "aria-controls": `full-width-tabpanel-${index}`,
   }
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100vw"
-  }
+    width: "100vw",
+  },
 }))
 
 const BoardTabsBar = inject("generalStore")(
-  observer(props => {
+  observer((props) => {
     const classes = useStyles()
     const theme = useTheme()
     const [value, setValue] = React.useState(0)
@@ -53,27 +53,28 @@ const BoardTabsBar = inject("generalStore")(
       setValue(newValue)
     }
 
-    const handleChangeIndex = index => {
+    const handleChangeIndex = (index) => {
       setValue(index)
     }
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} id="tabsBar">
         <AppBar position="static" color="primary">
           <Tabs
             value={value}
             onChange={handleChange}
             indicatorColor="secondary"
             textColor="secondary"
-            variant="fullWidth"
+            variant="scrollable"
+            scrollButtons="auto"
             aria-label="full width tabs example"
           >
             {props.generalStore.boards.map((b, i) => (
-              <Tab key={i} label={`${b.name}`} {...a11yProps(i)} />
+              <Tab style={{minWidth: 'fit-content'}}key={i} label={`${b.name}`} {...a11yProps(i)} />
             ))}
-            <Tab
-              label={<AddIcon />}
-              {...a11yProps(props.generalStore.boards.length)}
+            <Tab style={{minWidth: '25px'}}
+              icon={<AddIcon />}
+              // {...a11yProps(props.generalStore.boards.length)}
             />
           </Tabs>
         </AppBar>
@@ -95,6 +96,9 @@ const BoardTabsBar = inject("generalStore")(
             <CreateBoard />
           </TabPanel>
         </SwipeableViews>
+        {/* <IconButton aria-label="delete">
+          <AddIcon color="secondary" />
+        </IconButton> */}
       </div>
     )
   })
