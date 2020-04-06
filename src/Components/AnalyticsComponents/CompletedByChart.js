@@ -17,7 +17,7 @@ const CompletedByChart = inject("generalStore")(
       <h5>Number of tasks competed per Employee</h5>
     <BarChart 
     width={325} 
-    height={155} 
+    height={135} 
     data={props.data} 
     layout="vertical"
     margin={{top: 5, right: 30, left: 20, bottom: 5}}

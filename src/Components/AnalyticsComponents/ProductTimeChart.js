@@ -7,7 +7,7 @@ import { scaleOrdinal } from 'd3-scale';
 import { schemeDark2 } from 'd3-scale-chromatic';
 
 // const colors = scaleOrdinal(schemeDark2).range();
-const colors = ['#EAC435','#FE4E00','#F86624','#EAC435','#FFAE03','#EF8A17','#034732']
+const colors = ['#ED1C24','#FE4E00','#F86624','#EAC435','#FFAE03','#EF8A17','#034732']
   
   
   
@@ -19,7 +19,7 @@ const ProductTimeChart = inject("generalStore")(
       <h5>Average work time per product</h5>
     <AreaChart
       width={325}
-      height={155}
+      height={135}
       data={props.data}
       margin={{
         top: 0, right: 30, left: 0, bottom: 5,

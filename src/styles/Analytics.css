@@ -1,16 +1,22 @@
 .analytics{
     height: 70vh;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 4fr;
     padding-top: 50px;
     /* grid-gap:1em; */
     justify-items: center;
 }
-
-.analytics >div {
-    /* border: black 1px solid; */
-    padding-left: 4px;
-    justify-self: center;
+#pie-chart{
+    left: 30%;
+    top: 40%;
+    position: fixed;
+    width: fit-content;
 }
+
+h5{
+    margin-left: 25%;
+}
+
+
 

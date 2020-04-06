@@ -31,7 +31,7 @@ const TaskTimeChart = inject("generalStore")(
       <h5>Average time per Task</h5>
     <BarChart
       width={325}
-      height={155}
+      height={135}
       data={props.data}
       margin={{
         top: 5, right: 30, left: 20, bottom: 5,
