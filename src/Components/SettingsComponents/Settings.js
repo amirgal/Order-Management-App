@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
+import '../../styles/Settings.css'
 import { inject, observer } from "mobx-react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
   TextField,
   List,
-  ListItem
+  ListItem,
+  Box
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import {useHistory} from "react-router-dom"
@@ -70,7 +72,7 @@ const Settings = inject("generalStore")(
     };
     const classes = useStyles();
     return (
-      <div id="settings-page">
+      <Box bgcolor='background.paper' id="settings-page">
         <div className="employees-settings">
           <List>
             <ListItem>
@@ -122,18 +124,18 @@ const Settings = inject("generalStore")(
         </div>
         <div className="sync-shop">
           {synced ? (
-            <div id="storeSynced">Store already synced - you can re-sync if you wish</div>
+            <div id="storeSynced">Store synced - you can re-sync if you wish</div>
           ) : null}
           <div>
             <div className="shop-details">
               <Button  onClick={makeSync} style={{margin : 10}} variant="contained" color="secondary">
-                ReSync With Store
+                ReSync
               </Button>
-              <Button color="secondary" variant="contained" onClick={logOut}>LOGOUT</Button>
+              <Button id="logout-btn" color="secondary" variant="contained" onClick={logOut}>LOGOUT</Button>
             </div>
           </div>
         </div>
-      </div>
+      </Box>
     );
   })
 );
