@@ -5,7 +5,7 @@ import ShippingOrder from "./ShippingOrder";
 import ShipOrdersModal from "./ShipOrdersModal"
 
 const ShippingOrders = inject("generalStore")(observer(props => {
-
+    
     const [expanded, setExpanded] = useState(false);
     // const shippingOrdersByID = props.generalStore.rdyToShipOrdersById
     const [shippingOrdersByID, setShippingOrdersById] = useState(props.generalStore.rdyToShipOrdersById)
