@@ -49,7 +49,7 @@ const ShipOrdersModal = observer(props => {
           <TextField vartian="outlined" label="Tracking Number" value={trackingNumber}
             onChange={(e) => setTrackingNumber(e.target.value)} color="secondary"/>
           <Button variant="contained" onClick={shipItems} color="secondary"
-          disabled={trackingNumber.length === 0}>Ship Items</Button>
+          disabled={trackingNumber.length === 0}>Ship</Button>
         </Box>
       </Fade>
     </Modal>

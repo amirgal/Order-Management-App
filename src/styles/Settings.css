@@ -37,3 +37,12 @@
     margin-left: 50px;
     color: #3fd6bc;
   }
+
+  .shop-details {
+    margin-left: 8%;
+  }
+
+  #logout-btn{
+    margin-left:20px;
+    background-color: #e64166;;
+  }

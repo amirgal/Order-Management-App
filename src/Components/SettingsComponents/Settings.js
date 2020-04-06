@@ -124,14 +124,14 @@ const Settings = inject("generalStore")(
         </div>
         <div className="sync-shop">
           {synced ? (
-            <div id="storeSynced">Store already synced - you can re-sync if you wish</div>
+            <div id="storeSynced">Store synced - you can re-sync if you wish</div>
           ) : null}
           <div>
             <div className="shop-details">
               <Button  onClick={makeSync} style={{margin : 10}} variant="contained" color="secondary">
-                ReSync With Store
+                ReSync
               </Button>
-              <Button color="secondary" variant="contained" onClick={logOut}>LOGOUT</Button>
+              <Button id="logout-btn" color="secondary" variant="contained" onClick={logOut}>LOGOUT</Button>
             </div>
           </div>
         </div>
