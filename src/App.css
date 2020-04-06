@@ -59,29 +59,7 @@ html {
   margin-right: 15px;
   /* box-shadow: inset 1px 1px 6px var(--box-shadow); */
 }
-#settings-page {
-  /* background-color: var(--medium-grey); */
-  margin: 100px 40px;
-  padding: 30px;
-  border-radius: 10px;
-  /* box-shadow: 2px 2px 20px var(--box-shadow); */
-}
-.popper {
-  margin-top: 15px;
-  margin-left: 60px;
-  color: rgb(184, 226, 233);
-}
-.employees-settings {
-  display: grid;
-  width: 600px;
-  grid-gap: 2em;
-}
-.sync-shop {
-  margin-top: 1em;
-  display: grid;
-  grid-gap: 1em;
-  margin-bottom: 10px;
-}
+
 #details-window > h3 {
   margin-top: 10px;
   text-align: center;
@@ -117,14 +95,7 @@ html {
 .inProcess {
   border-left: rgb(214, 63, 96) 4px solid;
 }
-.sync-input {
-  margin: 4px;
-  width: 250px;
-}
-#storeSynced {
-  margin-left: 50px;
-  color: greenyellow;
-}
+
 #details-window {
   position: fixed;
   left: calc(33% - 25px);

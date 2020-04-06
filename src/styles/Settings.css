@@ -1,0 +1,39 @@
+#settings-page {
+    background-color: #323840;
+    padding: 30px;
+    border-left: 4px solid #3fd6bc;
+    width: fit-content;
+    height: fit-content;
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#settings-page .MuiButton-root{
+    size: inherit;
+}
+
+.employees-settings {
+    display: grid;
+    width: 600px;
+    grid-gap: 2em;
+  }
+
+  .sync-shop {
+    margin-top: 1em;
+    display: grid;
+    grid-gap: 1em;
+    margin-bottom: 10px;
+  }
+
+  .sync-input {
+    margin: 4px;
+    width: 250px;
+  }
+  #storeSynced {
+    margin-left: 50px;
+    color: greenyellow;
+  }

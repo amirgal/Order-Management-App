@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import '../../styles/Settings.css'
 import { inject, observer } from "mobx-react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
