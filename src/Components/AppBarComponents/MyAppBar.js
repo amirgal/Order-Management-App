@@ -43,6 +43,7 @@ const MyAppBar = inject("generalStore")(
         <AppBar position="fixed">
           <Toolbar>
             <IconButton
+              color="secondary"
               onClick={toggleDrawer()}
               edge="start"
               className={classes.menuButton}
