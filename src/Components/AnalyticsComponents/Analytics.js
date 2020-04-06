@@ -8,14 +8,14 @@ import CompletedByEmployee from './CompletedByEmployee';
 import CompletedTimePerProduct from './CompletedTimePerProduct';
 
 const Analytics = inject('generalStore')(observer((props) => {
-
+  
   
 
 return(
     <div className="analytics">
       <EmployeeTimeForTask/>
-      <CompletedByEmployee/>
       <CompletedTimePerProduct/>
+      <CompletedByEmployee/>
       <OrdersPerProduct/>
     </div>
 )

@@ -23,13 +23,11 @@ const Tracker = inject("generalStore")(
     }
     const findOrder = async () => {
       const order = await props.generalStore.getSingleOrder(orderId)
-      console.log(order.numStages);
       
       if (order) {
         const customer = await props.generalStore.getSingleCustomer(
           order.customerId
         )
-        debugger
         setCustomer(customer)
         setOrderObj(order)
         setActiveStep(order.progress)

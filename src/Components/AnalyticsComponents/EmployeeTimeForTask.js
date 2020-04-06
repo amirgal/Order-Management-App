@@ -10,7 +10,7 @@ const EmployeeTimeForTask = inject("generalStore")(
       if (props.generalStore.orders.length > 0 ) {
         const avgTImeArr = props.generalStore.getAverageTimeForTask();
         setAverageTime(avgTImeArr);
-      }}, [props.generalStore]);
+      }}, [props.generalStore.orders]);
     
     return (
       <div>
@@ -18,7 +18,7 @@ const EmployeeTimeForTask = inject("generalStore")(
         {averageTime.length> 0 ? (
           <TaskTimeChart data ={averageTime}/>
         ) : (
-          <div>No completed tasks yet</div>
+          null
         )}
       </div>
     );

@@ -10,14 +10,14 @@ const CompletedTimePerProduct = inject("generalStore")(
       if (props.generalStore.orders.length > 0) {
         const tempTimePerProduct = props.generalStore.getTimePerProduct();        
         setTimePerProduct(tempTimePerProduct);
-      }}, [props.generalStore]);
+      }}, [props.generalStore.orders]);
     
     return (
       <div>
         {timePerProduct.length> 0 ? (
           <ProductTimeChart data ={timePerProduct}/>
         ) : (
-            <div>No completed Orders yet</div>
+            null
         )}
       </div>
     );
