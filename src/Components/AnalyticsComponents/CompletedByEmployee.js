@@ -10,7 +10,7 @@ const CompletedByEmployee = inject("generalStore")(
       if (props.generalStore.orders.length > 0) {
         const tempPerEmployee = props.generalStore.getCompletedByEmployee(); 
         setPerEmployee(tempPerEmployee);
-      }}, [props.generalStore]);
+      }}, [props.generalStore.orders]);
     
     return (
       <div>

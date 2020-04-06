@@ -1,24 +1,23 @@
-import "./App.css"
-import React, { Fragment, useEffect} from "react"
-import { observer, inject } from "mobx-react"
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
-import OrderManager from "./Components/OrderManagerComponents/OrderManager"
-import MyAppBar from "./Components/AppBarComponents/MyAppBar"
-import Settings from "./Components/SettingsComponents/Settings"
-import CompletedOrders from "./Components/CompletedOrdersComponents/CompletedOrders"
-import Tracker from "./Components/TrackerComponents/Tracker"
-import Analytics from "./Components/AnalyticsComponents/Analytics"
-import BoardTabsBar from "./Components/OrderManagerComponents/BoardTabsBar"
-import Login from "./Components/Login"
-import MySnackBar from "./Components/AppBarComponents/MySnackBar"
-import { StylesProvider } from "@material-ui/core/styles"
-import { createMuiTheme } from "@material-ui/core/styles"
-import { ThemeProvider } from "@material-ui/core/styles"
-import ShippingOrders from "./Components/ShippingComponents/ShippingOrders"
-import SignUp from "./Components/SignUpComponents/SignUp"
-import darkTheme from "./styles/darkTheme"
-import lightTheme from "./styles/lightTheme"
-import CssBaseline from "@material-ui/core/CssBaseline"
+import "./App.css";
+import React, { Fragment, useEffect } from "react";
+import { observer, inject } from "mobx-react";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import OrderManager from "./Components/OrderManagerComponents/OrderManager";
+import MyAppBar from "./Components/AppBarComponents/MyAppBar";
+import Settings from "./Components/SettingsComponents/Settings";
+import CompletedOrders from "./Components/CompletedOrdersComponents/CompletedOrders";
+import Tracker from "./Components/TrackerComponents/Tracker";
+import Analytics from "./Components/AnalyticsComponents/Analytics";
+import BoardTabsBar from "./Components/OrderManagerComponents/BoardTabsBar";
+import Login from "./Components/Login";
+import { StylesProvider } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
+import ShippingOrders from "./Components/ShippingComponents/ShippingOrders";
+import SignUp from "./Components/SignUpComponents/SignUp";
+import darkTheme from "./styles/darkTheme";
+import lightTheme from "./styles/lightTheme";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import socketIOClient from "socket.io-client";
 // const theme = createMuiTheme({
 //   palette: {
@@ -41,26 +40,31 @@ import socketIOClient from "socket.io-client";
 //   }
 // })
 
-const App = inject("generalStore","helpers")(
+const App = inject("generalStore")(
   observer((props) => {
-    props.generalStore.adminId = localStorage.adminId
-
-    useEffect(()=>{
-      if (props.generalStore.adminId) {
-        props.generalStore.getAdminData()
-      }
-    },[])
-    
+    props.generalStore.adminId = localStorage.adminId;
+    useEffect(() => {
+      const getAdminData = async () => {
+        if (props.generalStore.adminId) {
+          try {
+            await props.generalStore.getAdminData();
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      };
+      getAdminData()
+    }, []);
     const socket = socketIOClient("http://localhost:4000");
-    socket.on('webhook order',function(socketData){
-      props.generalStore.addWebhookOrder(socketData)
-      props.helpers.openSnackBar('Recieved New Order !','info')
-    })
+    socket.on("webhook order", function (socketData) {
+      props.generalStore.addWebhookOrder(socketData);
+    });
     return (
-      <ThemeProvider theme={props.generalStore.darkMode? darkTheme: lightTheme}>
+      <ThemeProvider
+        theme={props.generalStore.darkMode ? darkTheme : lightTheme}
+      >
         <CssBaseline />
         <StylesProvider injectFirst>
-          <MySnackBar />
           <Router>
             <Route
               exact
@@ -152,8 +156,8 @@ const App = inject("generalStore","helpers")(
           </Router>
         </StylesProvider>
       </ThemeProvider>
-    )
+    );
   })
-)
+);
 
-export default App
+export default App;
