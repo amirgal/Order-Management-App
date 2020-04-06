@@ -79,7 +79,7 @@ router.post("/orders/create", validateWebhook, async (req, res) => {
         company: address.company,
         name: address.name,
         phone: address.phone,
-        courier:item.shipping_lines[0].title
+        courier:result.shipping_lines[0].title
       },
       adminId: admin._id
     })

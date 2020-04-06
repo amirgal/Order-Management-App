@@ -12,6 +12,12 @@ export default class Helpers {
       link:"https://www.fedex.com/fcl/;SHIPPINGSESSIONID=R1lMEgaGhIoid_R8IVPVQWaFRc0eEJZ_sW2GyXycNA9AiJKn76mL!363170146?appName=fclfsm&locale=il_en&step3URL=https%3A%2F%2Fwww.fedex.com%2Fshipping%2FshipEntryAction.do%3Fmethod%3DdoRegistration%26link%3D1%26locale%3Den_IL%26urlparams%3Dil_hebrew%26sType%3DF&returnurl=https%3A%2F%2Fwww.fedex.com%2Fshipping%2FshipEntryAction.do%3Fmethod%3DdoEntry%26link%3D1%26locale%3Den_IL%26urlparams%3Dil_hebrew%26sType%3DF&programIndicator=0",
       img:"https://cdn3.iconfinder.com/data/icons/payment-icons-2/128/fedex_express_128.png"}
     }
+  
+  @observable snackBar = {open:false, message:'', severity:'success'}
+
+  @action openSnackBar = (message,severity) => {
+    this.snackBar = {open:true , message , severity}
+  }
 
   @action validateEmail = value => {
     return validator.isEmail(value);
