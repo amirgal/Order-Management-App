@@ -1,6 +1,11 @@
-#root {
+html {
   height: 100vh;
 }
+
+#order-manager-page{
+  padding-top: 45px;
+}
+
 .MuiToolbar-regular {
   min-height: 45px;
 }

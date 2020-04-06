@@ -1,6 +1,5 @@
 #completed-orders-page {
-    /* background-color: #615a62; */
-    margin: 100px 40px;
+    margin: 50px 0px;
     border-radius: 10px;
     min-height: 65vh;
     display: flex;
@@ -17,9 +16,6 @@
     margin-left: 20px;
 }
 
-#completed-orders-table{
-    width: 90%;
-}
 .completed-order-panel{
     margin: 5px 0;
     box-shadow: 0 4px 8px 0 #00000073;
@@ -31,18 +27,42 @@
     width: -webkit-fill-available;
     text-align: center;
 }
+.order-info {
+    display: grid;
+    gap: 30px;
+    text-align: center;
+    grid-template-columns: 1fr 1fr 1fr;
+}
 
 p {
     margin: 0;
 }
 
 .panel-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 100%;
 }
 
 .order-workflow{
-    margin: 10px 0 ;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.workflow-item :first-child {
+    font-weight: bold;
+}
+
+.workflow-item {
+    text-align: center;
+    margin: 0 10px;
+}
+
+.completed-order-panel .MuiExpansionPanelDetails-root {
+    padding-bottom: 10px;
+    padding-top: 0px;
+}
+
+.completed-order-panel {
+    border-left: 4px solid turquoise;
 }
