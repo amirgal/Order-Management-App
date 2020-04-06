@@ -1,31 +1,43 @@
-.form{
+/* .form{
     display: grid;
     justify-items: center;
     /* grid-template-columns: 1fr 1fr; */
     
-}
-.MuiList-root{
-    /* margin-left: 40px; */
+ 
+.signup-list{
+    padding: 30px;
+    border-left: 4px solid #3fd6bc;
+    width: fit-content;
+    height: fit-content;
     position: fixed;
-    left : 0;
+    margin: auto;
+    height: 80%;
+    left: 0;
     right: 0;
-    margin-right: auto;
-    margin-left: auto;
-    width: 50%;
-    padding-left: 20px;
-    padding-right: 90px;
-    margin-top: 10px;
-    border-left: turquoise 4px solid;
-    /* border-right: turquoise 4px solid */
-    /* border-top: turquoise 4px solid; */
-    border-radius:3px ;
-    display: grid;
-     background-color: rgb(77, 77, 77);
-    max-width: 400px;
-    justify-items: center;
+    top: 0;
+    bottom: 0;
+    box-shadow: 0 4px 8px 8px #00000014;
 }
-
-..MuiList-root > {
-    background-color: '#323840';
-    padding-left: 40px;
+.login-list{
+     padding: 30px;
+    border-left: 4px solid #3fd6bc;
+    width: fit-content;
+    height: fit-content;
+    position: fixed;
+    margin: auto;
+    height: 60%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    box-shadow: 0 4px 8px 8px #00000014;
+}   
+#btns-list-item{
+    padding-left: 55px;
+}
+#btns-list-item1{
+    padding-left: 75px;
+}
+#btns-list-item2{
+    padding-left: 30px;
 }

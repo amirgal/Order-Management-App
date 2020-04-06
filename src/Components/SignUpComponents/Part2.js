@@ -17,11 +17,15 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   root: {
-    border: 0,
+    border: 20,
     borderRadius: 3,
-    color: "secondary",
+    color: "primary",
     height: 48,
-    padding: "0 30px",
+    margin:10,
+    top:"6px",
+    left:20,
+    position:"fixed",
+    
   }
 });
 
@@ -76,8 +80,7 @@ const Part2 = inject("generalStore","helpers")(props => {
   };
 
   return (
-    <form autoComplete="off" noValidate className="signup form">
-      <Box bgcolor="primary.main">
+      <Box className="signup-list" bgcolor="background.paper">
       <List>
         <ListItem>
           <TextField
@@ -103,7 +106,7 @@ const Part2 = inject("generalStore","helpers")(props => {
         </ListItem>
         <ListItem>
           <TextField
-            color='secondery'
+            color='secondary'
             className="inputfield"
             id="storeName"
             label="Store name"
@@ -126,18 +129,16 @@ const Part2 = inject("generalStore","helpers")(props => {
         <Divider id="divider" />
         <ListItem id="btns-list-item">
           <Button disabled={buttunStatus} color="secondary" variant="contained" onClick={signUp}>
-            SIGN UP
+            Signup
           </Button>
-        </ListItem>
-        <ListItem>
           <IconButton onMouseEnter={handleClick} onMouseLeave={handleClick}>
             <HelpIcon />
           </IconButton>
-          <Popper
+        </ListItem>
+      </List>
+      <Popper
             classes={classes.root}
-            color="secondary"
             id={id}
-            className="popper"
             open={open}
             anchorEl={anchorEl}
           >
@@ -146,10 +147,7 @@ const Part2 = inject("generalStore","helpers")(props => {
               tab in your shopify's admin page.
             </h4>
           </Popper>
-        </ListItem>
-      </List>
       </Box>
-    </form>
   );
 });
 

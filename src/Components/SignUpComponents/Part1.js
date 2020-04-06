@@ -56,9 +56,10 @@ const Part1 =inject('generalStore','helpers')((props) => {
 
     
     
+    {/* <form autoComplete="off" noValidate className="signup form" > */}
     return (
-        <form autoComplete="off" noValidate className="signup form" >
-            <List >
+        <Box className="signup-list" bgcolor="background.paper">
+            <List bgcolor="background.paper">
                 <ListItem color="#323840">
                     <TextField color="secondary" className="inputfield" id="username" label="Username"  type="text" value={props.user.username} onChange={handleInput}/>
                 </ListItem>
@@ -72,12 +73,12 @@ const Part1 =inject('generalStore','helpers')((props) => {
                 <TextField color="secondary" className="inputfield" id="email" label="Email" type="text" value={props.user.email} onChange={handleInput}/>
                 </ListItem>
                 <Divider id="divider" />
-                <ListItem id="btns-list-item">
-                    
-                    <Button disabled={buttunStatus} color="secondary" variant="contained" onClick={nextStep}>Next</Button>
+                <ListItem id="btns-list-item1">
+                    <Button  disabled={buttunStatus} color="secondary" variant="contained" onClick={nextStep}>Next</Button>
                 </ListItem>
             </List>
-        </form>
+            </Box>
+
             
     )
     
