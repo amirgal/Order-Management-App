@@ -15,8 +15,8 @@ const SearchBar = (props) => {
     return (
         <div id="completed-search-bar">
             <TextField id="outlined-basic" onChange={handleSearch}
-            value={input} label="Search" variant="outlined" />
-             <FormControl id="search-bar-filter">
+            value={input} label="Search" variant="outlined" color='secondary'/>
+             <FormControl id="search-bar-filter" color='secondary'>
                 <InputLabel>Search By</InputLabel>
                 <Select
                     value={searchParam}

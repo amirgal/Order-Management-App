@@ -17,11 +17,10 @@
     margin: 5px 0;
     box-shadow: 0 4px 8px 0 #00000073;
     border-left: 6px solid red;
-    border-radius: 6px;
 }
 
 .shipping-order-panel.ready{
-    border-left: 6px solid greenyellow;
+    border-left: 6px solid #3FD6BC;
 }
 
 .shipping-panel-header {
@@ -41,7 +40,7 @@
     margin-right: 10px;
     height:15px;
     width:15px;
-    margin-top:7px;
+    margin-top:3.5px;
 }
 
 .ready .statusLight {
@@ -61,7 +60,7 @@
 }
 
 .shipping-panel-details img {
-    max-width: 170px;
+    max-width: 140px;
 }
 
 .panel-details > h4{
@@ -72,15 +71,6 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-}
-
-.shipping-details p {
-    margin-right: 5px;
-}
-
-.all-order-items{
-    /* display: flex; */
-    /* margin: 5px 0; */
 }
 
 .buttons {
