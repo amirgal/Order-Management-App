@@ -30,6 +30,11 @@ const theme = createMuiTheme({
         color: "#3FD6BC",
       },
     },
+    // MuiInputLabel: {
+    //   outlined:{
+    //     color: "#3FD6BC"
+    //   }
+    // }
   },
 })
 

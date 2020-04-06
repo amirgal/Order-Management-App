@@ -36,13 +36,10 @@ export default class GeneralStore {
   };
 
   @action addWebhookOrder = (socketData) => {
-    const board = this.boards.find((b) => b._id === socketData.boardId);
-    const newOrder = new SingleOrderStore(
-      socketData.order,
-      board.stages.length
-    );
-    board.orders.push(newOrder);
-    this.orders.push(newOrder);
+    const board = this.boards.find((b) => b._id === socketData.boardId)
+    const newOrder = new SingleOrderStore(socketData.order, board.stages)
+    board.orders.push(newOrder)
+    this.orders.push(newOrder)
     const customerIndex = this.customers.findIndex(
       (c) => c._id === socketData.customer._id
     );
@@ -102,7 +99,7 @@ export default class GeneralStore {
     });
     this.products = updatedProducts;
     // savedBoard.data.orders.map(
-    //   (o) => new SingleOrderStore(o, board.stages.length)
+    //   (o) => new SingleOrderStore(o, board.stages)
     // )
     this.boards.push(new BoardStore(savedBoard.data));
     this.orders = [
