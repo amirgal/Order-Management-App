@@ -43,7 +43,7 @@ export default class SingleOrder {
         this.inProcess = true
         await axios.put("http://localhost:4000/api/order",this)
     }
-
+    
     @action completeOrder = async trackingNumber => {
         this.trackingNumber = trackingNumber
         this.isReadyToShip = false        

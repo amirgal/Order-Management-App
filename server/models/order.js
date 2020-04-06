@@ -20,7 +20,8 @@ const orderSchema = new Schema({
   endDate:Date,
   trackingNumber: String,
   adminId : String,
-  locationId : String
+  locationId : String,
+  numStages : Number
 })
 
 const Order = mongoose.model("Order", orderSchema)
