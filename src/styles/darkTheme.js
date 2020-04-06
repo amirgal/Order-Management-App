@@ -30,6 +30,20 @@ const theme = createMuiTheme({
         color: "#3FD6BC",
       },
     },
+    MuiFocused: {
+      root: {
+        color: "#3FD6BC",
+      },
+    },
+    MuiPaper: {
+      root: {
+        elevation: 6,
+      },
+      
+    },
+    // MuiExpansionPanel:{
+
+    // }
   },
 })
 

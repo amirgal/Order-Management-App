@@ -34,6 +34,11 @@ const theme = createMuiTheme({
       color: "#0B2027",
     },
   },
+  MuiFocused: {
+    root: {
+      color: "#E8F0F3",
+    },
+  },
 })
 
 export default theme
