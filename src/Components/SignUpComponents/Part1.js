@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
-import {List, ListItem, Button, Divider, TextField} from '@material-ui/core';
+import {List, ListItem, Button, Divider, TextField, Box} from '@material-ui/core';
+import '../../styles/SignUp.css'
 
 import { inject } from 'mobx-react';
 
@@ -57,26 +58,27 @@ const Part1 =inject('generalStore','helpers')((props) => {
     
     return (
         <form autoComplete="off" noValidate className="signup form" >
-            <List>
-                <ListItem>
-                    <TextField className="inputfield" id="username" label="Username" type="text" value={props.user.username} onChange={handleInput}/>
+            <List >
+                <ListItem color="#323840">
+                    <TextField color="secondary" className="inputfield" id="username" label="Username"  type="text" value={props.user.username} onChange={handleInput}/>
                 </ListItem>
                 <ListItem>
-                    <TextField className="inputfield" id="password" label="Password" type="password" value={props.user.password} onChange={handleInput}/>
+                    <TextField color="secondary" className="inputfield" id="password" label="Password" type="password" value={props.user.password} onChange={handleInput}/>
                 </ListItem>
                 <ListItem>
-                    <TextField className="inputfield" id="confirmPassword" label="Confirm password" type="password" value={props.user.confirmPassword} onChange={handleInput}/>
+                    <TextField color="secondary" className="inputfield" id="confirmPassword" label="Confirm password" type="password" value={props.user.confirmPassword} onChange={handleInput}/>
                 </ListItem>
                 <ListItem>
-                <TextField className="inputfield" id="email" label="Email" type="text" value={props.user.email} onChange={handleInput}/>
+                <TextField color="secondary" className="inputfield" id="email" label="Email" type="text" value={props.user.email} onChange={handleInput}/>
                 </ListItem>
                 <Divider id="divider" />
                 <ListItem id="btns-list-item">
                     
-                    <Button disabled={buttunStatus} color="primary" variant="contained" onClick={nextStep}>Next</Button>
+                    <Button disabled={buttunStatus} color="secondary" variant="contained" onClick={nextStep}>Next</Button>
                 </ListItem>
             </List>
         </form>
+            
     )
     
 })

@@ -1,4 +1,6 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
+import '../../styles/SignUp.css'
+
 import {
   List,
   ListItem,
@@ -6,7 +8,8 @@ import {
   Divider,
   TextField,
   IconButton,
-  Popper
+  Popper,
+  Box
 } from "@material-ui/core";
 import { inject } from "mobx-react";
 import HelpIcon from "@material-ui/icons/Help";
@@ -16,17 +19,23 @@ const useStyles = makeStyles({
   root: {
     border: 0,
     borderRadius: 3,
-    color: "white",
+    color: "secondary",
     height: 48,
-    padding: "0 30px"
+    padding: "0 30px",
   }
 });
 
-const Part2 = inject(
-  "generalStore",
-  "helpers"
-)(props => {
+const Part2 = inject("generalStore","helpers")(props => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [buttunStatus,setButtonStatus] = useState(true)
+
+    useEffect(()=>{
+        if(props.user.apiKey && props.user.storePassword && props.user.storeName && props.user.secretKey){
+            setButtonStatus(false)
+        }else{
+            setButtonStatus(true)
+        }
+    },[props.user])
 
   const handleClick = event => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -68,9 +77,11 @@ const Part2 = inject(
 
   return (
     <form autoComplete="off" noValidate className="signup form">
+      <Box bgcolor="primary.main">
       <List>
         <ListItem>
           <TextField
+            color="secondary"
             className="inputfield"
             id="apiKey"
             label="Api key"
@@ -81,6 +92,7 @@ const Part2 = inject(
         </ListItem>
         <ListItem>
           <TextField
+            color="secondary"
             className="inputfield"
             id="storePassword"
             label=" Store password"
@@ -91,6 +103,7 @@ const Part2 = inject(
         </ListItem>
         <ListItem>
           <TextField
+            color='secondery'
             className="inputfield"
             id="storeName"
             label="Store name"
@@ -101,6 +114,7 @@ const Part2 = inject(
         </ListItem>
         <ListItem>
           <TextField
+            color="secondary"
             className="inputfield"
             id="secretKey"
             label="Secret key"
@@ -111,7 +125,7 @@ const Part2 = inject(
         </ListItem>
         <Divider id="divider" />
         <ListItem id="btns-list-item">
-          <Button color="primary" variant="contained" onClick={signUp}>
+          <Button disabled={buttunStatus} color="secondary" variant="contained" onClick={signUp}>
             SIGN UP
           </Button>
         </ListItem>
@@ -120,19 +134,21 @@ const Part2 = inject(
             <HelpIcon />
           </IconButton>
           <Popper
-            classes={classes}
+            classes={classes.root}
+            color="secondary"
             id={id}
             className="popper"
             open={open}
             anchorEl={anchorEl}
           >
-            <div className="api-pop">
+            <h4>
               you can find your apiKey, password and shop name under the "App"
               tab in your shopify's admin page.
-            </div>
+            </h4>
           </Popper>
         </ListItem>
       </List>
+      </Box>
     </form>
   );
 });
