@@ -1,8 +1,16 @@
 .analytics{
+    height: 70vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    padding-top: 100px;
-    grid-gap:1em;
+    padding-top: 50px;
+    /* grid-gap:1em; */
+    justify-items: center;
+}
+
+.analytics >div {
+    /* border: black 1px solid; */
+    padding-left: 4px;
+    justify-self: center;
 }
 
