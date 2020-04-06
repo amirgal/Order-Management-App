@@ -7,14 +7,14 @@ import SearchBar from "./SearchBar";
 const CompletedOrders = inject("generalStore")(observer(props => {
     const [expanded, setExpanded] = useState(false);
     const [completedOrders,setCompletedOrders] = useState(props.generalStore.orders.
-        filter(o => o.isComplete)).sort((a, b) => b.date - a.date)
+        filter(o => o.isComplete)).sort((a, b) => b.endDate - a.endDate)
     const [relevantOrders, setRelevantOrders] = useState(completedOrders)
 
     useEffect(()=>{
         setCompletedOrders(props.generalStore.orders
-            .filter(o => o.isComplete).sort((a, b) => b.date - a.date))
+            .filter(o => o.isComplete).sort((a, b) => b.endDate - a.endDate))
         setRelevantOrders(props.generalStore.orders
-            .filter(o => o.isComplete).sort((a, b) => b.date - a.date))
+            .filter(o => o.isComplete).sort((a, b) => b.endDate - a.endDate))
     },[props.generalStore.orders])
   
     const handleChange = (panel) => (event, isExpanded) => {
