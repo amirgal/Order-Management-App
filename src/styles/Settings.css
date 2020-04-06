@@ -1,0 +1,48 @@
+#settings-page {
+    padding: 30px;
+    border-left: 4px solid #3fd6bc;
+    width: fit-content;
+    height: fit-content;
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    box-shadow: 0 4px 8px 8px #00000014;
+}
+
+#settings-page .MuiButton-root{
+    size: inherit;
+}
+
+.employees-settings {
+    display: grid;
+    width: 600px;
+    grid-gap: 2em;
+  }
+
+  .sync-shop {
+    margin-top: 1em;
+    display: grid;
+    grid-gap: 1em;
+    margin-bottom: 10px;
+  }
+
+  .sync-input {
+    margin: 4px;
+    width: 250px;
+  }
+  #storeSynced {
+    margin-left: 50px;
+    color: #3fd6bc;
+  }
+
+  .shop-details {
+    margin-left: 8%;
+  }
+
+  #logout-btn{
+    margin-left:20px;
+    background-color: #e64166;;
+  }

@@ -114,7 +114,7 @@ const shopify = function() {
         }
   )
       }catch(error){
-        console.log(error);
+        console.log('already fullfilled');
         
       }
 }
