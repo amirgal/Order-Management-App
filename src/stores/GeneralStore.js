@@ -62,8 +62,10 @@ export default class GeneralStore {
     this.boards = boards.map((board) => {
       return new BoardStore(board);
     });
-    for (let board of this.boards) {
-      this.orders = [...this.orders, ...board.orders];
+    if(this.orders.length === 0){
+      for (let board of this.boards) {
+        this.orders = [...this.orders, ...board.orders];
+      }
     }
   };
 

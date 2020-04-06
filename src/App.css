@@ -2,7 +2,7 @@ html {
   height: 100vh;
 }
 
-#order-manager-page{
+#order-manager-page {
   padding-top: 45px;
 }
 
@@ -17,27 +17,6 @@ html {
   width: 22px;
   border-radius: 50%;
   margin-right: 15px;
-}
-#settings-page {
-  margin: 100px 40px;
-  padding: 30px;
-  border-radius: 10px;
-}
-.popper {
-  margin-top: 15px;
-  margin-left: 60px;
-  color: rgb(184, 226, 233);
-}
-.employees-settings {
-  display: grid;
-  width: 600px;
-  grid-gap: 2em;
-}
-.sync-shop {
-  margin-top: 1em;
-  display: grid;
-  grid-gap: 1em;
-  margin-bottom: 10px;
 }
 .tracker_page {
   display: grid;
@@ -54,14 +33,6 @@ html {
 .trackInput {
   width: 300px;
   margin: 0 auto;
-}
-.sync-input {
-  margin: 4px;
-  width: 250px;
-}
-#storeSynced {
-  margin-left: 50px;
-  color: greenyellow;
 }
 .MuiStepIcon-root.MuiStepIcon-active {
   color: rgb(14, 136, 79);

@@ -1,7 +1,9 @@
 import React, { useState} from 'react';
-import {List, ListItem, Button, Divider, TextField} from '@material-ui/core';
+import {List, ListItem, Button, Divider, TextField, Box} from '@material-ui/core';
 import {useHistory} from 'react-router-dom'
 import { inject } from 'mobx-react';
+import '../styles/SignUp.css'
+
 const axios = require('axios');
 
 const Login =inject('generalStore')((props) => {
@@ -38,21 +40,23 @@ const Login =inject('generalStore')((props) => {
       
     
     return (
-        <form autoComplete="off" noValidate className="login form" >
+        <Box className="login-list" bgcolor="background.paper">
             <List>
                 <ListItem>
-                    <TextField className="inputfield" id="username" label="Username" type="text" value={user.username} onChange={handleInput}/>
+                    <TextField color="secondary" className="inputfield" id="username" label="Username" type="text" value={user.username} onChange={handleInput}/>
                 </ListItem>
                 <ListItem>
-                    <TextField className="inputfield" id="password" label="Password" type="password" value={user.password} onChange={handleInput}/>
+                    <TextField color="secondary" className="inputfield" id="password" label="Password" type="password" value={user.password} onChange={handleInput}/>
                 </ListItem>
                 <Divider id="divider" />
-                <ListItem id="btns-list-item">
-                    <Button color="primary" variant="contained" onClick={login}>LOGIN</Button>
-                    <Button color="primary" variant="contained" onClick={()=> routeChange('/signup')}>SIGN UP</Button>
+                <ListItem id="btns-list-item2">
+                    <div className="login-btns">
+                    <Button className="login-btn" color="primary" variant="contained" onClick={login}>Login</Button>
+                    <Button className="login-btn" color="primary" variant="contained" onClick={()=> routeChange('/signup')}>Signup</Button>
+                    </div>
                 </ListItem>
             </List>
-        </form>
+            </Box>
     )
     
 })
