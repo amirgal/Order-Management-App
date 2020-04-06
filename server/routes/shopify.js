@@ -9,8 +9,6 @@ const Admin = require("../models/admin")
 const dotenv = require("dotenv")
 const mailer = require('./mailer')()
 dotenv.config()
-// const ordersAPI = process.env.ordersAPI
-// const productsAPI = process.env.productsAPI
 
 const shopify = function() {
   const getProductsFromShopify = async (adminId) => {

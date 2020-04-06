@@ -17,7 +17,7 @@ const PerProductChart = inject("generalStore")(
 
   return (
     <div>
-      <h6>Number of orders per Product</h6>
+      <h5>Number of orders per Product</h5>
     <PieChart width={325} height={155} margin={{top: 0, right: 5, left: 20, bottom: 5,}}>
     <Pie dataKey="number" isAnimationActive={true} data={props.data}  cx="50%" cy="50%" outerRadius={75} innerRadius={25} margin={{top: 0, right: 5, left: 20, bottom: 5,}} fill="#889E86" >
     {

@@ -28,7 +28,7 @@ const TaskTimeChart = inject("generalStore")(
   
   return (
     <div>
-      <h6>Average time per Task</h6>
+      <h5>Average time per Task</h5>
     <BarChart
       width={325}
       height={155}
@@ -41,7 +41,7 @@ const TaskTimeChart = inject("generalStore")(
       <XAxis dataKey="name" />
       <YAxis dataKey="average"  />
       <Tooltip/>
-      <Bar type="monotone" shape={<TriangleBar/>} dataKey="average"  barSize={15} >
+      <Bar isAnimationActive={true} type="monotone" shape={<TriangleBar/>} dataKey="average"  barSize={15} >
       {
             props.data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index % 20]} />

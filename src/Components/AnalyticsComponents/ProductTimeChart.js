@@ -16,7 +16,7 @@ const ProductTimeChart = inject("generalStore")(
   
   return (
     <div>
-      <h6>Average work time per product</h6>
+      <h5>Average work time per product</h5>
     <AreaChart
       width={325}
       height={155}
@@ -29,7 +29,7 @@ const ProductTimeChart = inject("generalStore")(
       <XAxis dataKey="name"/>
       <YAxis dataKey="average"  />
       <Tooltip />
-      <Area barSize={15} type="monotone" dataKey="average" fill={colors[5]}  >
+      <Area isAnimationActive={true} barSize={15} type="monotone" dataKey="average" fill={colors[5]}  >
       {
             props.data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index % 20]} />

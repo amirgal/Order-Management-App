@@ -43,29 +43,6 @@ router.put("/board", async (req, res) => {
   res.send(response)
 })
 
-// router.get(`/boards/`, async (req, res) => {
-//   const boards = await Board.find({}).populate({
-//     path:'orders',
-//     populate:{
-//       path:'product'
-//     }
-//   })
-//   res.send(boards)
-// })
-
-// router.get(`/completed/`, async (req, res) => {
-//   const orders = await Order.find({isComplete : true}).populate("product")
-//   res.send(orders)
-// })
-
-// router.get(`/customers/`, async (req, res) => {
-//   const customers = await Customer.find({})
-//   res.send(customers)
-// })
-// router.get(`/employees/`, async (req, res) => {
-//   const employees = await Employee.find({})
-//   res.send(employees)
-// })
 router.get(`/singleOrder/:id`, async (req, res) => {
   const id = req.params.id
   const singleOrder = await Order.findOne({ shopifyId: id })

@@ -15,7 +15,7 @@ const CompletedByChart = inject("generalStore")(
 
   return (
     <div>
-      <h6>Number of tasks competed per Employee</h6>
+      <h5>Number of tasks competed per Employee</h5>
     <BarChart 
     width={325} 
     height={155} 
@@ -28,7 +28,7 @@ const CompletedByChart = inject("generalStore")(
     <YAxis type="category" dataKey="name" />
     <XAxis type="number" dataKey="amount"  />
   <Tooltip />
-    <Bar type="monotone"   dataKey="amount" fill="#776274" barSize={15}>
+    <Bar isAnimationActive={true} type="monotone"   dataKey="amount" fill="#776274" barSize={15}>
     {
             props.data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index % 20]} />
