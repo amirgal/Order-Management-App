@@ -1,7 +1,5 @@
-const Product = require("../models/Product")
-const Order = require("../models/Order")
-const Customer = require("../models/Customer")
-const Board = require("../models/board")
+const Order = require("../models/order")
+const Customer = require("../models/customer")
 const nodemailer = require('nodemailer');
 
 const mailer = function(){
