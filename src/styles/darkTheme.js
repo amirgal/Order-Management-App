@@ -1,6 +1,10 @@
 import { createMuiTheme } from "@material-ui/core/styles"
 
 const theme = createMuiTheme({
+  typography: {
+    fontFamily: ["Montserrat"].join(","),
+    fontSize: 13,
+  },
   palette: {
     background: { default: "#222831", paper: "#323840" },
     text: { primary: "#E2E2E3", secondary: "#E2E2E3" },
@@ -11,7 +15,7 @@ const theme = createMuiTheme({
     MuiDrawer: { paper: { color: "#3FD6BC" } },
     MuiListItemIcon: { root: { color: "#3FD6BC" } },
     MuiFocused: { root: { color: "#3FD6BC" } },
-    MuiInputBase: {root: {color: '#fff'}}
+    MuiInputBase: { root: { color: "#fff" } },
   },
 })
 

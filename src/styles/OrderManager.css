@@ -115,7 +115,7 @@ h5 {
 .newStagesContainer {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, 220px);
   gap: 10px;
   min-width: fit-content;
 }
@@ -147,7 +147,6 @@ h3 {
 }
 h4 {
   margin: 0;
-  margin-top: 10px;
 }
 h5 {
   margin: 0;

@@ -35,9 +35,7 @@ const TrackingBar = props => {
         : percent > 0.2 && percent < 0.7
         ? 2
         : 1
-        console.log(props.order)
     if (props.order.isComplete) {
-      console.log(props.order.isComplete);
       
       activeStep = 5
     }

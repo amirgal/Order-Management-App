@@ -1,11 +1,9 @@
 html {
   height: 100vh;
 }
-
 #order-manager-page {
   padding-top: 45px;
 }
-
 .MuiToolbar-regular {
   min-height: 45px;
 }
@@ -35,6 +33,9 @@ html {
   margin: 0 auto;
 }
 .MuiStepIcon-root.MuiStepIcon-active {
-  color: rgb(14, 136, 79);
+  color: #da344d;
+}
+.MuiStepIcon-root.MuiStepIcon-completed {
+  color: #3FD6BC;
 }
 

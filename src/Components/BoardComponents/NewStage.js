@@ -93,7 +93,7 @@ const NewStage = observer(props => {
           <NotesPopup notes={validations} anchor={anchor} id={"validations"}/>}
         </ListItem>
       </List>
-          <Button onClick={addNewStage} variant="contained" color="secondary" id="save-stage-btn">Save</Button>
+          <Button disabled={stageName.length == 0} onClick={addNewStage} variant="contained" color="secondary" id="save-stage-btn">Save</Button>
     </Box>
   )
 })

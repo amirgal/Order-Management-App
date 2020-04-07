@@ -1,41 +1,62 @@
-/* .form{
+.signup-list {
     display: grid;
+    position: fixed;
+    top: 20%;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 25px;
+    width: 40%;
+    text-align: center;
+    border-left: 4px solid #3fd6bc;
+    box-shadow: 0 4px 8px 8px #00000014;
+    gap: 25px;
     justify-items: center;
-    /* grid-template-columns: 1fr 1fr; */
-    
- 
-.signup-list{
-    padding: 30px;
-    border-left: 4px solid #3fd6bc;
+}
+.signup-inputs{
+ display: grid;
+ align-content: center;
+ gap: 15px;
+}
+.signup-list button{
     width: fit-content;
-    height: fit-content;
-    position: fixed;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    box-shadow: 0 4px 8px 8px #00000014;
+    padding: 10px 20px;
 }
-.login-list{
-     padding: 30px;
-    border-left: 4px solid #3fd6bc;
-    width: fit-content;
-    height: fit-content;
-    position: fixed;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    box-shadow: 0 4px 8px 8px #00000014;
-}   
-#btns-list-item{
-    padding-left: 55px;
+.login-list {
+  position: fixed;
+  top: 20%;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  min-height: 280px;
+  padding: 25px;
+  width: 40%;
+  text-align: center;
+  border-left: 4px solid #3fd6bc;
+  height: fit-content;
+  box-shadow: 0 4px 8px 8px #00000014;
 }
-#btns-list-item1{
-    padding-left: 75px;
+.login-inputs {
+  display: grid;
+  justify-content: center;
 }
-#btns-list-item2{
-    padding-left: 30px;
+#username {
+  width: 50%;
+}
+.login-btns {
+  justify-content: center;
+  margin-top: 40px;
+  display: grid;
+  gap: 15px;
+}
+#simple-popper{
+    background-color: #3FD6BC;
+    padding: 0 20px;
+    padding-bottom: 10px;
+    color: black;
+    top: 100px;
+    left: 10px;
+    width: 300px;
 }
