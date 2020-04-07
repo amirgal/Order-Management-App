@@ -70,11 +70,10 @@ const PerProductChart = inject("generalStore")(
 
   return (
     <div id="pie-chart">
-      
-      
-    <PieChart width={625} height={300} margin={{top: 0, right: 30, left: 20, bottom: 0}}>
+    <h5 style={{marginLeft : '85px'}}>Number of orders per Product</h5>
+    <PieChart width={525} height={200} margin={{top: 0, right: 30, left: 20, bottom: 0}}>
     <Pie   activeIndex={activeIndex}
-          activeShape={renderActiveShape} dataKey="number" isAnimationActive={true} data={props.data}  cx="30%" cy="50%" outerRadius={65} innerRadius={25} margin={{top: 0, right: 5, left: 20, bottom: 5,}} fill="#889E86" onMouseEnter={onPieEnter} >
+          activeShape={renderActiveShape} dataKey="number" isAnimationActive={true} data={props.data}  cx="30%" cy="50%" outerRadius={65} innerRadius={35} margin={{top: 0, right: 5, left: 20, bottom: 5,}} fill="#889E86" onMouseEnter={onPieEnter} >
     {
             props.data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index % 20]} />
@@ -83,7 +82,6 @@ const PerProductChart = inject("generalStore")(
       </Pie>
     {/* <Tooltip /> */}
     </PieChart>
-    <h5>Number of orders per Product</h5>
     </div>
   );
 }))

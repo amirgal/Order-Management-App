@@ -1,17 +1,17 @@
 .analytics{
-    height: 70vh;
+    height: 80vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 1fr 6fr;
     padding-top: 50px;
     /* grid-gap:1em; */
     justify-items: center;
 }
 #pie-chart{
-    left: 30%;
-    top: 40%;
+    left: 35%;
+    top: 45%;
     position: fixed;
-    width: fit-content;
+    /* width:   fit-content; */
 }
 
 h5{
