@@ -33,19 +33,19 @@ const CompleteTask = inject('generalStore','detailsWindowStore','helpers')(obser
     }
 
     return (
-        <div id="complete-task">
+        <div id="complete-task" className="taskModal">
             <List>
                 {steps.map((s,i) => 
                     <ListItem key={i}>
                         <FormControlLabel
                             control={<Checkbox checked={state[`step_${i}`]} 
-                            onChange={handleChange} name={`step_${i}`} color="primary" />}
+                            onChange={handleChange} name={`step_${i}`} color="secondary" />}
                             label={s}
                         />
                     </ListItem>
                 )}
                 <ListItem>
-                    <Button variant='contained' disabled={!checkCompletion()}
+                    <Button color="secondary" variant='contained' disabled={!checkCompletion()}
                     onClick={completeStage}>Complete</Button>
                 </ListItem>
             </List>

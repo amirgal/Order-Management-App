@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import {observer} from "mobx-react"
-import { Button, TextField, List, ListItem } from "@material-ui/core"
+import { Button, TextField, List, ListItem, Box } from "@material-ui/core"
 
 const NewStage = observer(props => {
   const [stageName, setStageName] = useState("")
@@ -43,7 +43,7 @@ const NewStage = observer(props => {
   }
 
   return (
-    <div id="newStage">
+    <Box bgcolor="background.paper"id="newStage">
       <List>
         <ListItem>
           <TextField
@@ -81,7 +81,7 @@ const NewStage = observer(props => {
           <Button onClick={addNewStage}>Save</Button>
         </ListItem>
       </List>
-    </div>
+    </Box>
   )
 })
 

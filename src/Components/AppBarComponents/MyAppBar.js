@@ -39,10 +39,11 @@ const MyAppBar = inject("generalStore")(
       setState({ ...state, left: !state.left })
     }
     return (
-      <div className={classes.root}>
+      <div className={classes.root} id="appBar">
         <AppBar position="fixed">
           <Toolbar>
             <IconButton
+              color="secondary"
               onClick={toggleDrawer()}
               edge="start"
               className={classes.menuButton}
