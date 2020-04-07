@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { inject, observer } from "mobx-react"
-import { Button, TextField } from "@material-ui/core"
+import { Button, TextField, Box } from "@material-ui/core"
 import { useParams } from "react-router"
 import TrackingBar from "./OrderTracker"
 
@@ -39,8 +39,9 @@ const Tracker = inject("generalStore")(
     }
 
     return (
-      <div className="tracker_page">
+      <Box className="tracker_page" bgcolor="background.paper" square="true">
         <TextField
+          color="secondary"
           className="trackInput"
           id="outlined-basic"
           label="Order Number"
@@ -62,7 +63,7 @@ const Tracker = inject("generalStore")(
             />
           ) : null}
         </div>
-      </div>
+      </Box>
     )
   })
 )

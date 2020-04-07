@@ -84,7 +84,7 @@ const Settings = inject("generalStore")(
                 value={name}
                 onChange={handleNameChange}
               />
-              <Button onClick={addEmployee} variant="contained"
+              <Button onClick={addEmployee}
                 color="secondary" style={{width : 250}}>
                 Add employee
               </Button>
@@ -101,7 +101,7 @@ const Settings = inject("generalStore")(
                     {...params} label="Select Employee"/>
                 )}
               />
-              <Button onClick={makeInactive} variant="contained" style={{width : 250}} color="secondary">
+              <Button onClick={makeInactive} style={{width : 250}} color="secondary">
                 remove from roster
               </Button>
             </ListItem>
@@ -116,7 +116,7 @@ const Settings = inject("generalStore")(
                   <TextField value={inactiveEmployee} {...params} label="Select inActive Employee" color="secondary"/>
                 )}
               />
-              <Button onClick={makeActive} variant="contained" style={{width : 250}} color="secondary">
+              <Button onClick={makeActive} style={{width : 250}} color="secondary">
                 add to roster
               </Button>
             </ListItem>
@@ -124,14 +124,14 @@ const Settings = inject("generalStore")(
         </div>
         <div className="sync-shop">
           {synced ? (
-            <div id="storeSynced">Store synced - you can re-sync if you wish</div>
+            <div id="storeSynced">Store synced</div>
           ) : null}
           <div>
             <div className="shop-details">
               <Button  onClick={makeSync} style={{margin : 10}} variant="contained" color="secondary">
                 ReSync
               </Button>
-              <Button id="logout-btn" color="secondary" variant="contained" onClick={logOut}>LOGOUT</Button>
+              <Button id="logout-btn" onClick={logOut}>LOGOUT</Button>
             </div>
           </div>
         </div>

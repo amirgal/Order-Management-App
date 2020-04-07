@@ -47,7 +47,6 @@ const CreateBoard = inject("generalStore")(
               value={name}
               onChange={handleNameChange}
               color="secondary"
-              inputProps="secondary"
             />
             <Autocomplete
               multiple

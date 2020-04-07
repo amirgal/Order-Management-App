@@ -1,6 +1,8 @@
 import React, {useState} from "react"
 import {observer} from "mobx-react"
 import { Button, TextField, List, ListItem, Box } from "@material-ui/core"
+import NotesPopup from "./NotesPopup"
+import NotesIcon from '@material-ui/icons/Notes';
 
 const NewStage = observer(props => {
   const [stageName, setStageName] = useState("")
@@ -9,6 +11,16 @@ const NewStage = observer(props => {
   const [validation, setValidation] = useState("")
   const [validations, setValidations] = useState([])
   const toggleModal = () => props.toggleModal()
+ 
+  const [anchor,setAnchor] = useState({openedPopoverId: null , anchorEl: null})
+  
+  const handlePopoverOpen = (event,id) => {
+    setAnchor({openedPopoverId: id , anchorEl: event.target});
+  };
+
+  const handlePopoverClose = () => {
+    setAnchor({openedPopoverId: null , anchorEl: null});
+  };
   
   const addNewStage = () => {
     if(stageName.length > 0){
@@ -43,9 +55,9 @@ const NewStage = observer(props => {
   }
 
   return (
-    <Box bgcolor="background.paper"id="newStage">
+    <Box bgcolor="background.paper" id="newStage">
       <List>
-        <ListItem>
+        <ListItem id="stageNameInput-item">
           <TextField
             id="stageNameInput"
             placeholder="Stage Name"
@@ -54,33 +66,34 @@ const NewStage = observer(props => {
           />
         </ListItem>
         <ListItem>
+          <NotesIcon onMouseEnter={(e) => handlePopoverOpen(e,"notes")}
+          onMouseLeave={handlePopoverClose} className="popup"/>
           <TextField
             id="noteInput"
             placeholder="Notes?"
             value={note}
             onChange={handleChange}
+            autoComplete={null}
           />
-          <Button onClick={addNote}>Add Note</Button>
+          <Button onClick={addNote} color="secondary">Add Note</Button>
+          {notes.length === 0 ? null :
+          <NotesPopup notes={notes} anchor={anchor} id={"notes"} />}
         </ListItem>
-        {notes.map((note,i) => (
-          <ListItem key={i}>{note}</ListItem>
-        ))}
         <ListItem>
+          <NotesIcon onMouseEnter={(e) => handlePopoverOpen(e,"validations")}
+          onMouseLeave={handlePopoverClose} className="popup"/>
           <TextField
             id="validationInput"
             placeholder="Stage Validation?"
             value={validation}
             onChange={handleChange}
           />
-          <Button onClick={addValidation}>Add Validation</Button>
-        </ListItem>
-        {validations.map((validation,i) => (
-          <ListItem key={i}>{validation}</ListItem>
-        ))}
-        <ListItem>
-          <Button onClick={addNewStage}>Save</Button>
+          <Button onClick={addValidation} color="secondary">Add Validation</Button>
+          {validations.length === 0 ? null :
+          <NotesPopup notes={validations} anchor={anchor} id={"validations"}/>}
         </ListItem>
       </List>
+          <Button onClick={addNewStage} variant="contained" color="secondary" id="save-stage-btn">Save</Button>
     </Box>
   )
 })
