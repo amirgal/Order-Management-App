@@ -36,7 +36,7 @@ export default class SingleOrder {
         if(this.progress === this.numStages + 1){          
             this.isReadyToShip = true
         } 
-        await axios.put("http://localhost:4000/api/order",this)
+        await axios.put("/api/order",this)
     }
     
     @action claimStage = async (employeeName) => {
@@ -47,7 +47,7 @@ export default class SingleOrder {
             endDate : null
         }
         this.inProcess = true
-        await axios.put("http://localhost:4000/api/order",this)
+        await axios.put("/api/order",this)
     }
     
     @action completeOrder = async trackingNumber => {
@@ -55,6 +55,6 @@ export default class SingleOrder {
         this.isReadyToShip = false        
         this.isComplete = true
         this.endDate = new Date()  
-        await axios.put("http://localhost:4000/api/order",this)
+        await axios.put("/api/order",this)
     }
 }

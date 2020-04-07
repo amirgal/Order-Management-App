@@ -20,7 +20,7 @@ export default class BoardStore {
 
     @action updateProducts = async (productIds) => {
     this.productIds = productIds
-    await axios.put('http://localhost:4000/api/board',this)
+    await axios.put('/api/board',this)
     }
 
     @action updateStage = async (stage,index) => {
@@ -29,7 +29,7 @@ export default class BoardStore {
         }else{
             this.stages[index] = stage
         }
-        await axios.put('http://localhost:4000/api/board',this)
+        await axios.put('/api/board',this)
     }
 
     @action getStageOrders = (stage) =>{

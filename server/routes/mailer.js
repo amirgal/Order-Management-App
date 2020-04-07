@@ -28,7 +28,7 @@ const transporter = nodemailer.createTransport({
       }else{
         textStr += ' : ' + orders[0].product.name
       }
-      textStr += `.Has been recived at our shop and is in the work! You can track your order via this link : http://localhost:4001/tracking/${shopifyOrderId}`
+      textStr += `.Has been recived at our shop and is in the work! You can track your order via this link : https://ordermanager-app.herokuapp.com/tracking/${shopifyOrderId}`
       return {
       from: 'ourproductionline@gmail.com',
       to: customer.email,

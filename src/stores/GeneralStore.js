@@ -21,7 +21,7 @@ export default class GeneralStore {
     try {
       if (!optionalData) {
         response = await axios.get(
-          `http://localhost:4000/api/getAdminData/${this.adminId}`
+          `/api/getAdminData/${this.adminId}`
         );
       } else {
         response = optionalData;
@@ -50,7 +50,7 @@ export default class GeneralStore {
     }
   };
   @action fulfill = async (shopifyId) => {
-    const res = await axios.post(`http://localhost:4000/api/fulfill`, {
+    const res = await axios.post(`/api/fulfill`, {
       adminId: this.adminId,
       shopifyId,
     });
@@ -72,7 +72,7 @@ export default class GeneralStore {
   @action getSingleOrder = async (id) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/singleOrder/${id}`
+        `/api/singleOrder/${id}`
       );
       return response.data;
     } catch (error) {
@@ -81,7 +81,7 @@ export default class GeneralStore {
   };
   @action getSingleCustomer = async (id) => {
     const response = await axios.get(
-      `http://localhost:4000/api/singleCustomer/${id}`
+      `/api/singleCustomer/${id}`
     );
     return response.data;
   };
@@ -89,7 +89,7 @@ export default class GeneralStore {
   @action createBoard = async (board) => {
     board.adminId = this.adminId;
     const savedBoard = await axios.post(
-      "http://localhost:4000/api/board",
+      "/api/board",
       board
     );
     const updatedProducts = [...this.products];
@@ -111,7 +111,7 @@ export default class GeneralStore {
 
   @action addEmployee = async (name) => {
     let updatedEmployees = await axios.post(
-      `http://localhost:4000/api/employees`,
+      `/api/employees`,
       { name, isActive: true, adminId: this.adminId }
     );
     if (typeof updatedEmployees.data === "string") {
@@ -123,7 +123,7 @@ export default class GeneralStore {
   @action modifyEmployee = async (employee) => {
     employee.isActive = !employee.isActive;
     let updatedEmployees = await axios.put(
-      "http://localhost:4000/api/employees",
+      "/api/employees",
       employee
     );
     this.employees = updatedEmployees.data;
@@ -131,7 +131,7 @@ export default class GeneralStore {
 
   @action makeSync = async () => {
     const adminId = this.adminId;
-    const response = await axios.post(`http://localhost:4000/api/sync/`, {
+    const response = await axios.post(`/api/sync/`, {
       adminId,
     });
     if (response.data.products) {
