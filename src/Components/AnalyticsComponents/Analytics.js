@@ -13,9 +13,9 @@ const Analytics = inject('generalStore')(observer((props) => {
 
 return(
     <div className="analytics">
-      <EmployeeTimeForTask/>
       <CompletedTimePerProduct/>
       <CompletedByEmployee/>
+      <EmployeeTimeForTask/>
       <OrdersPerProduct/>
     </div>
 )

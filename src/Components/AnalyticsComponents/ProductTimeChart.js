@@ -3,11 +3,8 @@ import {
   } from 'recharts';
 import React from 'react';
 import { inject, observer } from "mobx-react";
-import { scaleOrdinal } from 'd3-scale';
-import { schemeDark2 } from 'd3-scale-chromatic';
 
-const colors = scaleOrdinal(schemeDark2).range();
-// const colors = ['#E4572E','#F9C80E','#3FD6BC','#008148','#C6C013','#EF8A17','#034732']
+const colors = ['#FE4E00','#0090C1','#da344d','#3FD6BC', '#0267C1','#413F54']
   
   
   
@@ -16,10 +13,10 @@ const ProductTimeChart = inject("generalStore")(
   
   return (
     <div>
-      <h6>Average work time per product</h6>
+      <h5>Average work time per product</h5>
     <AreaChart
       width={325}
-      height={155}
+      height={135}
       data={props.data}
       margin={{
         top: 0, right: 30, left: 0, bottom: 5,
@@ -29,7 +26,7 @@ const ProductTimeChart = inject("generalStore")(
       <XAxis dataKey="name"/>
       <YAxis dataKey="average"  />
       <Tooltip />
-      <Area barSize={15} type="monotone" dataKey="average" fill={colors[5]}  >
+      <Area isAnimationActive={true} barSize={15} type="monotone" dataKey="average" fill={colors[5]}  >
       {
             props.data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index % 20]} />
