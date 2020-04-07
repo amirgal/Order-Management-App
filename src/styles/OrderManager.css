@@ -99,7 +99,7 @@ h5 {
   height: fit-content;
 }
 #newStage {
-  padding: 100px;
+  padding: 50px;
 }
 .newStageHeader {
   padding-left: 10px;
@@ -203,4 +203,17 @@ h6 {
 .saveBoard {
   width: fit-content;
   /* justify-self: end; */
+}
+
+#save-stage-btn {
+  margin-left: 37%;
+  margin-top: 20px;
+}
+
+#stageNameInput-item {
+  margin-left:34px;
+}
+
+#newStage .popup {
+  margin-right: 10px;
 }

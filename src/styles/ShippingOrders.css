@@ -16,11 +16,11 @@
 .shipping-order-panel{
     margin: 5px 0;
     box-shadow: 0 4px 8px 0 #00000073;
-    border-left: 6px solid red;
+    border-left: #da344d 4px solid;
 }
 
 .shipping-order-panel.ready{
-    border-left: 6px solid #3FD6BC;
+    border-left: 4px solid #3FD6BC;
 }
 
 .shipping-panel-header {
