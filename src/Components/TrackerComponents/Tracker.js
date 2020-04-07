@@ -11,7 +11,6 @@ const Tracker = inject("generalStore")(
     const [activeStep, setActiveStep] = useState(0)
     const [orderObj, setOrderObj] = useState(null)
     const [customer, setCustomer] = useState(null)
-    // const [trackingNum, setTrackingNum] = useState(null)
 
     const handleChange = (e) => {
       setOrderId(e.target.value)
@@ -50,7 +49,7 @@ const Tracker = inject("generalStore")(
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        <Button id="trackButton" onClick={findOrder} variant="contained">
+        <Button id="trackButton" color='secondary'onClick={findOrder} variant="contained">
           Track Order
         </Button>
         <div className="activeStep">

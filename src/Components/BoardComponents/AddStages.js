@@ -41,6 +41,7 @@ const AddStages = inject("generalStore")(
       <Box className="newBoardContainer">
         <Box className="navButtons">
           <Fab
+            disabled={stages.length == 0}
             variant="extended"
             color="secondary"
             aria-label="add"
@@ -56,7 +57,6 @@ const AddStages = inject("generalStore")(
             aria-label="add"
             className="addStageBtn"
             onClick={toggleModal}
-
           >
             Add Stage
             <AddIcon />
@@ -93,17 +93,6 @@ const AddStages = inject("generalStore")(
               </ExpansionPanelDetails>
             </ExpansionPanel>
           ))}
-          {/* <Box
-            bgcolor="background.paper"
-            id="addNewStage"
-            // className="stageBox"
-            onClick={toggleModal}
-            variant="contained"
-          > */}
-          {/* <Fab size="small" color="secondary" aria-label="add">
-              <AddIcon />
-            </Fab> */}
-          {/* </Box> */}
           {showModal ? (
             <AddsStageModal
               addNewStage={addNewStage}
@@ -112,11 +101,6 @@ const AddStages = inject("generalStore")(
             />
           ) : null}
         </Box>
-        {/* <Box className="navButtons">
-          <Button id="saveBoard" onClick={saveBoard} variant="contained">
-            Save Board
-          </Button>
-        </Box> */}
       </Box>
     )
   })
