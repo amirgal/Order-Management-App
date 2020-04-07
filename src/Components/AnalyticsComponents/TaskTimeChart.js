@@ -3,11 +3,8 @@ import {
   } from 'recharts';
 import React from 'react';
 import { inject, observer } from "mobx-react";
-import { scaleOrdinal } from 'd3-scale';
-import { schemeDark2 } from 'd3-scale-chromatic';
 
-const colors = scaleOrdinal(schemeDark2).range();
-// const colors = [,'#C6C013','#EF8A17','#034732','#E4572E','#F9C80E' , '#3FD6BC','#008148']
+const colors = ['#da344d','#0090C1','#022F40','#3FD6BC', '#0267C1','#413F54']
 const TriangleBar = (props) => {
   const {
     fill, x, y, width, height,
@@ -28,10 +25,10 @@ const TaskTimeChart = inject("generalStore")(
   
   return (
     <div>
-      <h6>Average time per Task</h6>
+      <h5>Average time per Task</h5>
     <BarChart
       width={325}
-      height={155}
+      height={135}
       data={props.data}
       margin={{
         top: 5, right: 30, left: 20, bottom: 5,
@@ -41,7 +38,7 @@ const TaskTimeChart = inject("generalStore")(
       <XAxis dataKey="name" />
       <YAxis dataKey="average"  />
       <Tooltip/>
-      <Bar type="monotone" shape={<TriangleBar/>} dataKey="average"  barSize={15} >
+      <Bar isAnimationActive={true} type="monotone" shape={<TriangleBar/>} dataKey="average"  barSize={15} >
       {
             props.data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index % 20]} />
