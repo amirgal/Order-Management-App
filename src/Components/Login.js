@@ -31,7 +31,7 @@ const Login = inject("generalStore")((props) => {
 
   const login = async () => {
     try {
-      const response = await axios.post("http://localhost:4000/api/user", user)
+      const response = await axios.post("/api/user", user)
       if (response.data.userId) {
         props.generalStore.adminId = response.data.userId
         localStorage.adminId = response.data.userId

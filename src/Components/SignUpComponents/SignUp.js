@@ -20,7 +20,7 @@ const SignUp =inject('generalStore')((props) => {
       
     const signUp = async () => {
         try{
-            const response = await axios.post(`http://localhost:4000/api/newuser`,user)
+            const response = await axios.post(`/api/newuser`,user)
             localStorage.adminId = response.data._id
             props.generalStore.adminId = response.data._id
             await props.generalStore.getAdminData(response)

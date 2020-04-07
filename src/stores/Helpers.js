@@ -24,7 +24,7 @@ export default class Helpers {
   };
 
   @action validatePassword = value => {
-    return validator.isLength(value, { min: 6, max: 10 });
+    return validator.isLength(value, { min: 6, max: 14 });
   };
   @action validateLength = value => {
     return validator.isLength(value, { min: 3, max: 45 });
