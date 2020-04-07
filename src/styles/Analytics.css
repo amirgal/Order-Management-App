@@ -3,13 +3,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 6fr;
-    padding-top: 50px;
-    /* grid-gap:1em; */
+    padding-top: 90px;
     justify-items: center;
 }
 #pie-chart{
     left: 35%;
-    top: 45%;
+    top: 50%;
     position: fixed;
     /* width:   fit-content; */
 }

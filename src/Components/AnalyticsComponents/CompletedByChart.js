@@ -3,11 +3,8 @@ import {
   } from 'recharts';
 import React from 'react';
 import { inject, observer } from "mobx-react";
-import { scaleOrdinal } from 'd3-scale';
-import { schemeDark2 } from 'd3-scale-chromatic';
 
-// const colors = scaleOrdinal(schemeDark2).range();
-const colors = ['#ED1C24','#EAC435','#FE4E00','#F86624','#FFAE03','#EF8A17','#034732']
+const colors = ['#0090C1','#da344d','#022F40','#3FD6BC', '#0267C1','#413F54']
   
 const CompletedByChart = inject("generalStore")(
   observer(props => { 
